@@ -171,7 +171,6 @@ def api_all_contents(request):
     
     return JsonResponse({'contents': contents_list})
 
-# content_detail fonksiyonunu güncelledim - login_required dekoratörünü kaldırdım
 def content_detail(request, content_id):
     """ İçerik detaylarını AJAX ile dönen view """
     content = get_object_or_404(RecommendedContent, id=content_id, is_active=True)
@@ -224,9 +223,6 @@ def content_detail(request, content_id):
         }
     
     return JsonResponse(data)
-
-# Bu işlemler için login_required dekoratörünü korunmalı
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def toggle_like_content(request, content_id):
