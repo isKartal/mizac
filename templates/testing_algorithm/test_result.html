@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR | Test Sonuçları{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="result-container">
+    <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
+    
+    <div class="result-content">
+      <div class="dominant-element-card {{ dominant_element.name|lower }}">
+        <div class="element-badge">
+          {% if dominant_element.name == "Ateş" %}
+            Sıcak + Kuru
+          {% elif dominant_element.name == "Hava" %}
+            Sıcak + Nemli
+          {% elif dominant_element.name == "Su" %}
+            Soğuk + Nemli
+          {% elif dominant_element.name == "Toprak" %}
+            Soğuk + Kuru
+          {% endif %}
+        </div>
+        
+        <div class="element-icon">
+          {% if dominant_element.name == "Ateş" %}
+            <i class="fas fa-fire"></i>
+          {% elif dominant_element.name == "Hava" %}
+            <i class="fas fa-wind"></i>
+          {% elif dominant_element.name == "Su" %}
+            <i class="fas fa-water"></i>
+          {% elif dominant_element.name == "Toprak" %}
+            <i class="fas fa-mountain"></i>
+          {% endif %}
+        </div>
+        
+        <div class="element-image-container">
+          {% if dominant_element.name == "Ateş" %}
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş Mizacı" class="element-image">
+          {% elif dominant_element.name == "Hava" %}
+            <img src="{% static 'images/air.jpg' %}" alt="Hava Mizacı" class="element-image">
+          {% elif dominant_element.name == "Su" %}
+            <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı" class="element-image">
+          {% elif dominant_element.name == "Toprak" %}
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak Mizacı" class="element-image">
+          {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+          {% endif %}
+        </div>
+        
+        <h2 class="element-title">{{ dominant_element.name }}</h2>
+      </div>
+      
+      <div class="element-details">
+        <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
+        <div class="element-description">{{ dominant_element.characteristics|linebreaks }}</div>
+      </div>
+    </div>
+    
+    <div class="element-recommendations">
+      <h3>Daha fazla öneri için profilinizi ziyaret edin!</h3>
+      <div class="button-container">
+        <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
+      </div>
+    </div>
+    
+    <div class="button-container">
+      <a href="{% url 'temperaments' %}" class="btn btn-accent">Tüm Mizaç Tipleri</a>
+      <a href="/" class="btn btn-secondary">Ana Sayfa</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

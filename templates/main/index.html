@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="mizac-nedir-title">Mizacınızı Keşfedin</h1>
+        <p class="mizac-nedir-text">
+            Mizaç, bir kişinin doğuştan gelen, hayata bakışını ve tepkilerini şekillendiren karakter özellikleridir.
+            4 ana mizaç tipinden hangisine sahip olduğunuzu öğrenmek için ücretsiz testimizi çözün.
+        </p>
+        <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
+    </div>
+</section>
+
+<section class="elements-section">
+    <div class="container">
+        <h2 class="section-title">Dört Temel Mizaç</h2>
+        <p class="section-description">Antik çağlardan günümüze kadar süregelen dört temel mizaç tipini tanıyın ve kendinizi keşfedin.</p>
+        
+        <div class="element-grid">
+            <!-- Ateş Elementi -->
+            <div class="element-card">
+                <div class="element-icon fire-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>ATEŞ</h3>
+                <p>Ateş mizaçlı kişiler enerjik, tutkulu ve liderlik özelliklerine sahiptir. Hızlı karar verme yetenekleri ve yenilikçi düşünce tarzları ile tanınırlar.</p>
+                <a href="{% url 'fire_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Hava Elementi -->
+            <div class="element-card">
+                <div class="element-icon air-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3>HAVA</h3>
+                <p>Hava mizaçlı kişiler iletişime açık, analitik ve sosyal yönleri güçlü kişilerdir. Farklı bakış açıları geliştirme ve analiz etme konusunda ustadırlar.</p>
+                <a href="{% url 'air_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Toprak Elementi -->
+            <div class="element-card">
+                <div class="element-icon earth-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>TOPRAK</h3>
+                <p>Toprak mizaçlı kişiler güvenilir, kararlı ve pratik düşünce yapısına sahiptirler. Organizasyon ve planlama konularında doğal yetenekleri vardır.</p>
+                <a href="{% url 'earth_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Su Elementi -->
+            <div class="element-card">
+                <div class="element-icon water-icon">
+                    <i class="fa-solid fa-fire-flame-simple"></i>
+                </div>
+                <h3>SU</h3>
+                <p>Su mizaçlı kişiler duygusal derinliğe, güçlü sezgilere ve empati yeteneğine sahiptir. İlişkiler konusunda hassas ve anlayışlı bir yaklaşım sergilerler.</p>
+                <a href="{% url 'water_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="advantage-section">
+    <div class="container">
+        <h2 class="section-title">Mizacınızı Bilmenin Avantajları</h2>
+        <p class="section-description">Kendinizi daha iyi tanımanın ve mizacınızı anlamanın size sağlayacağı faydaları keşfedin.</p>
+        <div class="advantage-grid">
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Kendinizi Anlama</h3>
+                <p>Davranışlarınızın ve tepkilerinizin arkasındaki nedenleri daha iyi anlayarak kendi potansiyelinizi keşfedin.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Daha İyi İlişkiler</h3>
+                <p>Kendi mizacınızı ve başkalarının mizaçlarını anlayarak daha sağlıklı ve anlamlı ilişkiler kurun.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Kariyer Gelişimi</h3>
+                <p>Mizacınıza uygun kariyer seçeneklerini belirleyerek çalışma hayatınızda daha başarılı ve mutlu olun.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Mizacınızı Keşfetmeye Hazır Mısınız?</h2>
+            <p>Ücretsiz mizaç testimiz ile kendinizi daha iyi tanıyın ve kişisel gelişiminize yön verin.</p>
+            <a href="{% url 'test_list' %}" class="cta-button">ŞİMDİ TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sayfa elementi görünürlüğü için IntersectionObserver kullanımı
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+    
+        // Animasyon eklenecek elementler
+        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
+            observer.observe(el);
+        });
+    
+        // Sectionlar için görünürlük animasyonu
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-section');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+    
+        document.querySelectorAll('.elements-section, .advantage-section, .cta-section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+    });
+</script>
+{% endblock %}

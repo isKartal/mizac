@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR | 4 Temel Mizaç{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Mizaç Bölümü -->
+<section class="temperaments-overview">
+  <div class="container">
+    <div class="temperament-header">
+      <h1 class="section-title">Temel Mizaç Tipleri</h1>
+      <p class="temperament-description">
+        Mizaç, bir kişinin doğuştan gelen, hayata bakışını ve tepkilerini şekillendiren karakter özellikleridir. Temel mizaç tiplerinden hangisine sahip olduğunuzu keşfedin.
+      </p>
+    </div>
+    
+    <div class="temperament-cards">
+      <div class="temperament-card-container">
+        <div class="flip-card fire">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle fire">
+                <i class="fas fa-fire"></i>
+              </div>
+              <h3>Ateş</h3>
+              <p>Enerjik, tutkulu, lider ruhlu</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Ateş Mizacı</h3>
+              <p>Dinamik, hırslı ve lider ruhuyla tanınan Ateş mizaçlı kişiler, hedeflerine odaklanır ve etraflarındaki insanlara ilham verirler.</p>
+              <a href="{% url 'fire_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="temperament-card-container">
+        <div class="flip-card air">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle air">
+                <i class="fas fa-wind"></i>
+              </div>
+              <h3>Hava</h3>
+              <p>İletişim, analitik, sosyal</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Hava Mizacı</h3>
+              <p>Hava mizacına sahip kişiler iletişim becerileri, analitik düşünme yetenekleri ve sosyal uyumlarıyla öne çıkarlar.</p>
+              <a href="{% url 'air_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="temperament-card-container">
+        <div class="flip-card water">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle water">
+                <i class="fas fa-water"></i>
+              </div>
+              <h3>Su</h3>
+              <p>Duygusal, empatik, sakin</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Su Mizacı</h3>
+              <p>Su mizaçlı kişiler, duygusal derinlik, güçlü empati ve içsel farkındalık özellikleriyle çevrelerinde huzur yaratırlar.</p>
+              <a href="{% url 'water_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="temperament-card-container">
+        <div class="flip-card earth">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle earth">
+                <i class="fas fa-mountain"></i>
+              </div>
+              <h3>Toprak</h3>
+              <p>Güvenilir, sabırlı, disiplinli</p>
+            </div>
+            <div class="flip-card-back">
+              <h3>Toprak Mizacı</h3>
+              <p>Toprak mizaçlı kişiler, güvenilirlik, sabır ve pratik yaklaşımlarıyla tanınır. Kararlı ve düzenli yapılarıyla dikkat çekerler.</p>
+              <a href="{% url 'earth_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer: temperament kartları ve avantajlar görünür olduğunda "appear" sınıfını ekle
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.temperament-card-container, .advantage-item').forEach(el => {
+      observer.observe(el);
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR - Toprak Mizacı{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Toprak Mizacının Kişilik Bölümü -->
+<section class="earth-personality">
+  <div class="container">
+    <div class="temperament-header">
+      <div class="element-badge earth">Toprak Mizacı</div>
+    </div>
+    
+    <div class="earth-personality-container">
+      <!-- Sol: Metin ve Bilgi Kartları -->
+      <div class="earth-personality-text">
+        <h1 class="temperament-title">Toprak Mizacının Gücü</h1>
+        <p class="earth-personality-desc">
+          Toprak mizacına sahip bireyler, güvenilir, sabırlı ve disiplinlidir. Sağlam temeller üzerine inşa edilmiş karakterleri sayesinde pratik çözümler sunar, istikrar ve denge sağlarlar. Sorumluluk sahibi ve düzenli yapıları ile dikkat çekerler.
+        </p>
+        <div class="earth-personality-cards">
+          <div class="earth-personality-card">
+            <i class="fas fa-handshake"></i>
+            <h3>Güven</h3>
+            <p>Sözüne sadık, güvenilir.</p>
+          </div>
+          <div class="earth-personality-card">
+            <i class="fas fa-tools"></i>
+            <h3>Pratiklik</h3>
+            <p>Her soruna mantıklı çözümler üretir.</p>
+          </div>
+          <div class="earth-personality-card">
+            <i class="fas fa-balance-scale"></i>
+            <h3>İstikrar</h3>
+            <p>Değişimlere karşı sabit ve kararlıdır.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Sağ: Görsel Bölümü -->
+      <div class="earth-personality-image">
+        <img src="{% static 'images/earth-personality.jpg' %}" alt="Toprak Mizacı">
+      </div>
+    </div>
+</section>
+
+<!-- Mizaç Önerileri Bölümü -->
+<section class="temperament-suggestions">
+  <div class="container">
+    <div class="suggestions-header">
+      <h2>{{ element_name }} Mizacı İçin Öneriler</h2>
+      <p>Mizacınıza özel olarak seçilmiş, size en uygun içerikler</p>
+    </div>
+    
+    <div class="suggestions-grid">
+      {% for content in element_suggestions %}
+        <div class="suggestion-card" data-content-id="{{ content.id }}">
+          {% if content.image %}
+            <div class="suggestion-image" style="background-image: url('{{ content.image.url }}')">
+              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% else %}
+            <div class="suggestion-image placeholder-image">
+              <i class="fas fa-book-open"></i>
+              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% endif %}
+          
+          <h3 class="suggestion-title">{{ content.title }}</h3>
+          <p class="suggestion-description">{{ content.short_description|truncatechars:80 }}</p>
+          
+          <div class="suggestion-actions">
+            <button class="suggestion-button like-button {% if content.is_liked %}liked{% endif %}" 
+                    data-content-id="{{ content.id }}">
+              <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+              <span class="like-count">{{ content.like_count }}</span>
+            </button>
+            <button class="suggestion-button read-more" data-content-id="{{ content.id }}">
+              <i class="fas fa-book-reader"></i> Devamını Oku
+            </button>
+          </div>
+        </div>
+      {% empty %}
+        <div class="empty-state">
+          <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+          <p class="empty-text">{{ element_name }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="suggestions-more">
+      <a href="{% url 'my_suggestions' %}" class="more-link">
+        Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- İçerik Detay Modalı -->
+<div class="content-modal" id="contentModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="modal-nav-button" id="prevModalContent"><i class="fas fa-chevron-left"></i></button>
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close-button" id="closeModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category" id="modalCategory"></div>
+      <div class="modal-content" id="modalContent">
+        <!-- İçerik buraya yüklenecek -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-actions">
+        <button class="modal-action-btn" id="modalLikeBtn">
+          <i class="far fa-heart"></i> Beğen
+        </button>
+        <button class="modal-action-btn" id="modalSaveBtn">
+          <i class="far fa-bookmark"></i> Kaydet
+        </button>
+      </div>
+      <div class="modal-element" id="modalElement"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/temperament_detail.js' %}"></script>
+{% endblock %}

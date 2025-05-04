@@ -1,0 +1,257 @@
+/* About sayfasına özel stil tanımları */
+
+/* Hakkında Bölümü */
+.about-section {
+  padding: 80px 0;
+}
+
+.about-content {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.about-image {
+  flex: 1;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: var(--transition);
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Takım Bölümü */
+.team-section {
+  padding: 80px 0;
+  background-color: var(--secondary-color);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.team-member {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+}
+
+.member-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.1);
+}
+
+.member-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.member-info h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.member-title {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.member-bio {
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-links a {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  color: var(--accent-color);
+}
+
+/* İletişim Bölümü */
+.contact-section {
+  padding: 80px 0;
+  background-color: var(--secondary-color);
+}
+
+.contact-content {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact-info, .contact-form {
+  flex: 1;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+.contact-item p {
+  font-size: 1.1rem;
+}
+
+.social-media {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.social-media a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.social-media a:hover {
+  background-color: var(--accent-color);
+  color: var(--light-text);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input, 
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(233, 180, 76, 0.2);
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background: var(--accent-color);
+  color: var(--light-text);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.contact-button:hover {
+  background: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+/* Bildirim Kutusu Stilleri */
+.success-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 1000;
+}
+
+.success-notification.show {
+  opacity: 1;
+}
+
+/* Responsive Ayarlar - About sayfasına özel */
+@media (max-width: 768px) {
+  .about-content, .contact-content {
+    flex-direction: column;
+  }
+  
+  .about-text p, .contact-item p {
+    font-size: 1rem;
+  }
+  
+  .contact-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

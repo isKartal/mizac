@@ -1,0 +1,918 @@
+/* Mizaç stilleri için temel ayarlar */
+:root {
+  --primary-color: #292321;
+  --secondary-color: #ece9e3;
+  --accent-color: #e9b44c;
+  --card-radius: 15px;
+  --border-radius: 8px;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+  --light-text: #ffffff;
+
+  /* Mizaç element renkleri */
+  --fire-color: #e74c3c;     /* Parlak kırmızı */
+  --fire-bg: rgba(231, 76, 60, 0.2);
+  --air-color: #78909c;      /* Gri-mavi */
+  --air-bg: rgba(120, 144, 156, 0.2);
+  --water-color: #2980b9;    /* Mavi */
+  --water-bg: rgba(41, 128, 185, 0.2);
+  --earth-color: #8d6e63;    /* Kahverengi */
+  --earth-bg: rgba(141, 110, 99, 0.2);
+}
+
+/* Bölüm stilleri */
+.section-description, .temperament-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.temperament-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.temperament-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Element rozetleri */
+.element-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.element-badge.fire {
+  background-color: var(--fire-bg);
+  color: var(--fire-color);
+}
+
+.element-badge.air {
+  background-color: var(--air-bg);
+  color: var(--air-color);
+}
+
+.element-badge.water {
+  background-color: var(--water-bg);
+  color: var(--water-color);
+}
+
+.element-badge.earth {
+  background-color: var(--earth-bg);
+  color: var(--earth-color);
+}
+
+/* Çevirilebilir kart stilleri */
+.flip-card {
+  background-color: transparent;
+  width: 260px;
+  height: 340px;
+  perspective: 1500px;
+  margin-bottom: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.flip-card-front {
+  background-color: white;
+}
+
+.flip-card-back {
+  color: white;
+  transform: rotateY(180deg);
+  text-align: center;
+}
+
+/* Element türüne göre çevirilebilir kart arkaplanları */
+.flip-card.fire .flip-card-back {
+  background: linear-gradient(135deg, var(--fire-color), #ff5252);
+}
+
+.flip-card.air .flip-card-back {
+  background: linear-gradient(135deg, var(--air-color), #b0bec5);
+}
+
+.flip-card.water .flip-card-back {
+  background: linear-gradient(135deg, var(--water-color), #64b5f6);
+}
+
+.flip-card.earth .flip-card-back {
+  background: linear-gradient(135deg, var(--earth-color), #bcaaa4);
+}
+
+/* Kart daireleri */
+.card-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.flip-card:hover .card-circle {
+  transform: scale(1.1);
+}
+
+.card-circle i {
+  font-size: 36px;
+}
+
+/* Element türüne göre kart daire stilleri */
+.card-circle.fire {
+  background-color: rgba(231, 76, 60, 0.15);
+}
+
+.card-circle.air {
+  background-color: rgba(120, 144, 156, 0.15);
+}
+
+.card-circle.water {
+  background-color: rgba(41, 128, 185, 0.15);
+}
+
+.card-circle.earth {
+  background-color: rgba(141, 110, 99, 0.15);
+}
+
+.card-circle.fire i {
+  color: var(--fire-color);
+}
+
+.card-circle.air i {
+  color: var(--air-color);
+}
+
+.card-circle.water i {
+  color: var(--water-color);
+}
+
+.card-circle.earth i {
+  color: var(--earth-color);
+}
+
+/* Kart metin stilleri */
+.flip-card-front h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.flip-card-front p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.flip-card-back h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.flip-card-back p {
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Kart bağlantısı */
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.card-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(5px);
+}
+
+/* Mizaç kartları konteyneri */
+.temperament-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.temperament-card-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+
+.temperament-card-container.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tüm elementler için kişilik konteynerleri */
+.water-personality-container,
+.fire-personality-container,
+.air-personality-container,
+.earth-personality-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  flex-wrap: wrap;
+}
+
+/* Kişilik metin bölümleri */
+.water-personality-text,
+.fire-personality-text,
+.air-personality-text,
+.earth-personality-text {
+  flex: 1 1 500px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+}
+
+.water-personality-desc,
+.fire-personality-desc,
+.air-personality-desc,
+.earth-personality-desc {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Kişilik kart konteynerleri */
+.water-personality-cards,
+.fire-personality-cards,
+.air-personality-cards,
+.earth-personality-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Bireysel kişilik kartları */
+.water-personality-card,
+.fire-personality-card,
+.air-personality-card,
+.earth-personality-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  padding: 20px;
+  flex: 1 1 150px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.water-personality-card:hover,
+.fire-personality-card:hover,
+.air-personality-card:hover,
+.earth-personality-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.water-personality-card i,
+.fire-personality-card i,
+.air-personality-card i,
+.earth-personality-card i {
+  font-size: 28px;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.water-personality-card h3,
+.fire-personality-card h3,
+.air-personality-card h3,
+.earth-personality-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.water-personality-card p,
+.fire-personality-card p,
+.air-personality-card p,
+.earth-personality-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Kişilik görselleri */
+.water-personality-image,
+.fire-personality-image,
+.air-personality-image,
+.earth-personality-image {
+  flex: 1 1 100px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+  text-align: center;
+}
+
+.water-personality-image img,
+.fire-personality-image img,
+.air-personality-image img,
+.earth-personality-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  transition: var(--transition);
+}
+
+.water-personality-image img:hover,
+.fire-personality-image img:hover,
+.air-personality-image img:hover,
+.earth-personality-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Animasyonlar */
+@keyframes flicker {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.fire-personality-card i {
+  animation: flicker 2s infinite;
+}
+
+/* Animasyonlar için görünür durumu */
+.appear {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Mizaç Önerileri Bileşeni */
+.temperament-suggestions {
+  margin: 70px 0;
+  padding: 40px 0;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+}
+
+.suggestions-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.suggestions-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.suggestions-header h2::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.suggestions-header p {
+  color: #666;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 0 5%;
+  margin-bottom: 30px;
+}
+
+.suggestion-card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.suggestion-card.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.suggestion-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.suggestion-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.placeholder-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.placeholder-image i {
+  font-size: 2.5rem;
+  color: #ccc;
+}
+
+.suggestion-element {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 5;
+  backdrop-filter: blur(5px);
+}
+
+.suggestion-element.ates, .suggestion-element.fire {
+  background-color: var(--fire-bg);
+  color: var(--fire-color);
+}
+
+.suggestion-element.hava, .suggestion-element.air {
+  background-color: var(--air-bg);
+  color: var(--air-color);
+}
+
+.suggestion-element.su, .suggestion-element.water {
+  background-color: var(--water-bg);
+  color: var(--water-color);
+}
+
+.suggestion-element.toprak, .suggestion-element.earth {
+  background-color: var(--earth-bg);
+  color: var(--earth-color);
+}
+
+.suggestion-category {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 20px 20px 10px;
+  line-height: 1.4;
+}
+
+.suggestion-description {
+  padding: 0 20px;
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.suggestion-actions {
+  display: flex;
+  padding: 15px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  justify-content: space-between;
+}
+
+.suggestion-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #777;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+.suggestion-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.suggestion-button.liked {
+  color: var(--fire-color);
+}
+
+.suggestion-button.saved {
+  color: var(--air-color);
+}
+
+.suggestions-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+}
+
+.more-link:hover {
+  background-color: #d9a43c;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(233, 180, 76, 0.4);
+}
+
+/* Duyarlı tasarım stilleri */
+@media (max-width: 992px) {
+  .temperament-cards {
+    gap: 20px;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .water-personality-container,
+  .fire-personality-container,
+  .air-personality-container,
+  .earth-personality-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .water-personality-text, .water-personality-image,
+  .fire-personality-text, .fire-personality-image,
+  .air-personality-text, .air-personality-image,
+  .earth-personality-text, .earth-personality-image {
+    flex: 1 1 100%;
+  }
+  
+  .water-personality-cards,
+  .fire-personality-cards,
+  .air-personality-cards,
+  .earth-personality-cards {
+    justify-content: center;
+  }
+  
+  .temperament-cards {
+    gap: 20px;
+  }
+  
+  .flip-card {
+    width: 230px;
+    height: 320px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.5rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.4rem;
+  }
+  
+  .card-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-circle i {
+    font-size: 28px;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .temperament-cards {
+    gap: 15px;
+  }
+  
+  .flip-card {
+    width: 100%;
+    max-width: 280px;
+    height: 300px;
+  }
+  
+  .suggestions-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .more-link {
+    width: 90%;
+  }
+}
+
+/* Modal & Dialog Stilleri */
+.content-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.content-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.4s forwards;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.content-modal.active .modal-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-header {
+  background-color: var(--primary-color);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.modal-nav-button, .modal-close-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.modal-nav-button:hover, .modal-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 30px;
+  overflow-y: auto;
+  max-height: calc(90vh - 150px);
+}
+
+.modal-body img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.modal-category {
+  display: inline-block;
+  padding: 5px 12px;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.modal-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.modal-footer {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: none;
+  border: 1px solid #ddd;
+  color: #666;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.modal-action-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-action-btn.liked {
+  color: var(--fire-color);
+  border-color: var(--fire-color);
+}
+
+.modal-action-btn.saved {
+  color: var(--air-color);
+  border-color: var(--air-color);
+}
+
+.modal-element {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  align-self: center;
+}
+
+.modal-element.ateş, .modal-element.fire {
+  background-color: var(--fire-bg);
+  color: var(--fire-color);
+}
+
+.modal-element.hava, .modal-element.air {
+  background-color: var(--air-bg);
+  color: var(--air-color);
+}
+
+.modal-element.su, .modal-element.water {
+  background-color: var(--water-bg);
+  color: var(--water-color);
+}
+
+.modal-element.toprak, .modal-element.earth {
+  background-color: var(--earth-bg);
+  color: var(--earth-color);
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR - Ateş Mizacı{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Ateş Mizacının Kişilik Bölümü -->
+<section class="fire-personality">
+  <div class="container">
+    <div class="temperament-header">
+      <div class="element-badge fire">Ateş Mizacı</div>
+    </div>
+    
+    <div class="fire-personality-container">
+      <!-- Sol: Metin ve Bilgi Kartları -->
+      <div class="fire-personality-text">
+        <h1 class="temperament-title">Ateş Mizacının Gücü</h1>
+        <p class="fire-personality-desc">
+          Ateş mizacına sahip bireyler, hırslı, lider ruhlu ve enerjik yapılarıyla öne çıkar. Dinamik, atılgan ve tutku dolu olan bu kişiler risk almayı sever ve yenilikçi çözümler üretirler.
+        </p>
+        <div class="fire-personality-cards">
+          <div class="fire-personality-card">
+            <i class="fas fa-bolt"></i>
+            <h3>Enerji</h3>
+            <p>Yüksek motivasyon ve canlılık.</p>
+          </div>
+          <div class="fire-personality-card">
+            <i class="fas fa-chess-king"></i>
+            <h3>Liderlik</h3>
+            <p>Önderlik etme ve yön verme yeteneği.</p>
+          </div>
+          <div class="fire-personality-card">
+            <i class="fas fa-fire-alt"></i>
+            <h3>Tutku</h3>
+            <p>İçten ve tutkulu yaklaşımlar.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Sağ: Görsel Bölümü -->
+      <div class="fire-personality-image">
+        <img src="{% static 'images/fire-personality.jpg' %}" alt="Ateş Mizacı">
+      </div>
+    </div>
+</section>
+
+<!-- Mizaç Önerileri Bölümü -->
+<section class="temperament-suggestions">
+  <div class="container">
+    <div class="suggestions-header">
+      <h2>{{ element_name }} Mizacı İçin Öneriler</h2>
+      <p>Mizacınıza özel olarak seçilmiş, size en uygun içerikler</p>
+    </div>
+    
+    <div class="suggestions-grid">
+      {% for content in element_suggestions %}
+        <div class="suggestion-card" data-content-id="{{ content.id }}">
+          {% if content.image %}
+            <div class="suggestion-image" style="background-image: url('{{ content.image.url }}')">
+              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% else %}
+            <div class="suggestion-image placeholder-image">
+              <i class="fas fa-book-open"></i>
+              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% endif %}
+          
+          <h3 class="suggestion-title">{{ content.title }}</h3>
+          <p class="suggestion-description">{{ content.short_description|truncatechars:80 }}</p>
+          
+          <div class="suggestion-actions">
+            <button class="suggestion-button like-button {% if content.is_liked %}liked{% endif %}" 
+                    data-content-id="{{ content.id }}">
+              <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+              <span class="like-count">{{ content.like_count }}</span>
+            </button>
+            <button class="suggestion-button read-more" data-content-id="{{ content.id }}">
+              <i class="fas fa-book-reader"></i> Devamını Oku
+            </button>
+          </div>
+        </div>
+      {% empty %}
+        <div class="empty-state">
+          <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+          <p class="empty-text">{{ element_name }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="suggestions-more">
+      <a href="{% url 'my_suggestions' %}" class="more-link">
+        Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- İçerik Detay Modalı -->
+<div class="content-modal" id="contentModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="modal-nav-button" id="prevModalContent"><i class="fas fa-chevron-left"></i></button>
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close-button" id="closeModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category" id="modalCategory"></div>
+      <div class="modal-content" id="modalContent">
+        <!-- İçerik buraya yüklenecek -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-actions">
+        <button class="modal-action-btn" id="modalLikeBtn">
+          <i class="far fa-heart"></i> Beğen
+        </button>
+        <button class="modal-action-btn" id="modalSaveBtn">
+          <i class="far fa-bookmark"></i> Kaydet
+        </button>
+      </div>
+      <div class="modal-element" id="modalElement"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/temperament_detail.js' %}"></script>
+{% endblock %}

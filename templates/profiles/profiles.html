@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}MİZAÇLAR | Profil Ayarlarım{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="profile-settings-container">
+    <div class="profile-header">
+      <h1>Profil Ayarlarım</h1>
+    </div>
+    
+    <div class="profile-card">
+      <div class="profile-info">
+        <div class="profile-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="profile-name">
+          <h2>{{ user.username }}</h2>
+          <p>{{ user.email }}</p>
+          <p class="member-since">Üyelik: {{ user.date_joined|date:"d F Y" }}</p>
+        </div>
+      </div>
+      
+      <div class="profile-sections">
+        <div class="section-card quick-links">
+          <div class="section-icon">
+            <i class="fas fa-link"></i>
+          </div>
+          <h3>Hızlı Erişim</h3>
+          <div class="quick-links-grid">
+            <a href="{% url 'my_temperament' %}" class="quick-link-item">
+              <i class="fas fa-star"></i>
+              <span>Mizacım</span>
+            </a>
+            <a href="{% url 'my_suggestions' %}" class="quick-link-item">
+              <i class="fas fa-lightbulb"></i>
+              <span>Önerilerim</span>
+            </a>
+            <a href="{% url 'temperaments' %}" class="quick-link-item">
+              <i class="fas fa-balance-scale"></i>
+              <span>Tüm Mizaçlar</span>
+            </a>
+            <a href="{% url 'about' %}" class="quick-link-item">
+              <i class="fas fa-info-circle"></i>
+              <span>Hakkında</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="section-card social-connections">
+          <div class="section-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Sosyal Hesap Bağlantılarım</h3>
+          {% if user.socialaccount_set.all %}
+            <div class="connection-list">
+              {% for account in user.socialaccount_set.all %}
+                <div class="connection-item">
+                  <i class="fab fa-{{ account.provider|lower }}"></i>
+                  <span class="connection-email">{{ account.extra_data.email }}</span>
+                </div>
+              {% endfor %}
+            </div>
+            <a href="{% url 'socialaccount_connections' %}" class="btn btn-outline">
+              <i class="fas fa-cog"></i> Bağlantıları Yönet
+            </a>
+          {% else %}
+            <p class="no-connections">Henüz bir sosyal hesap bağlanmamış.</p>
+            <a href="{% provider_login_url 'google' process='connect' %}" class="btn btn-primary">
+              <i class="fab fa-google"></i> Google Hesabımı Bağla
+            </a>
+          {% endif %}
+        </div>
+        
+        <div class="section-card test-actions">
+          <div class="section-icon">
+            <i class="fas fa-redo"></i>
+          </div>
+          <h3>Test İşlemleri</h3>
+          <p>Mizaç testinizi yeniden çözmek veya sonuçlarınızı sıfırlamak için buradaki seçenekleri kullanabilirsiniz.</p>
+          
+          <button id="restart-test-btn" class="btn btn-warning">
+            <i class="fas fa-redo-alt"></i> Mizaç Testini Yeniden Çöz
+          </button>
+        </div>
+      </div>
+      
+      <div class="account-stats">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Görüntülenen İçerikler</h4>
+            <p class="stat-value">{{ viewed_count|default:"0" }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Beğenilen İçerikler</h4>
+            <p class="stat-value">{{ liked_count|default:"0" }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-bookmark"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Kaydedilen İçerikler</h4>
+            <p class="stat-value">{{ saved_count|default:"0" }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="logout-section">
+        <a href="{% url 'logout' %}" class="btn btn-logout">
+          <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmation-dialog" class="confirmation-dialog" style="display: none;">
+  <div class="confirmation-content">
+    <div class="confirmation-header">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h4>Uyarı</h4>
+    </div>
+    <p>Testi yeniden çözmek istediğinize emin misiniz? Mevcut test sonuçlarınız silinecektir.</p>
+    <div class="confirmation-buttons">
+      <button id="cancel-restart" class="btn btn-outline">İptal</button>
+      <a href="{% url 'restart_test' %}" class="btn btn-danger">Evet, Testi Yeniden Çöz</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const restartTestBtn = document.getElementById('restart-test-btn');
+    const confirmationDialog = document.getElementById('confirmation-dialog');
+    const cancelRestartBtn = document.getElementById('cancel-restart');
+    
+    // Testi yeniden çöz butonuna tıklandığında onay diyaloğunu göster
+    restartTestBtn.addEventListener('click', function() {
+      confirmationDialog.style.display = 'flex';
+      // Arkaplan kaydırmayı engelle
+      document.body.style.overflow = 'hidden';
+    });
+    
+    // İptal butonuna tıklandığında onay diyaloğunu kapat
+    cancelRestartBtn.addEventListener('click', function() {
+      confirmationDialog.style.display = 'none';
+      // Arkaplan kaydırmayı tekrar etkinleştir
+      document.body.style.overflow = '';
+    });
+    
+    // Diyalog dışına tıklandığında diyaloğu kapat
+    confirmationDialog.addEventListener('click', function(event) {
+      if (event.target === confirmationDialog) {
+        confirmationDialog.style.display = 'none';
+        // Arkaplan kaydırmayı tekrar etkinleştir
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script>
+{% endblock %}
