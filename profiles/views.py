@@ -50,6 +50,10 @@ def my_temperament(request):
 @login_required
 def my_suggestions(request):
     """ Kullanıcıya önerilen içerikleri görüntüler """
+    # Debug bilgisi ekle
+    print("Session bilgileri:", dict(request.session))
+    print("test_completed session var mı:", 'test_completed' in request.session)
+    
     # Kullanıcının test sonucunu al
     test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
     
@@ -64,6 +68,9 @@ def my_suggestions(request):
     
     # Test sonucundan dominant element ismini al
     dominant_element_name = test_result.dominant_element.name
+    
+    # Element özelliklerini al (açıklama)
+    element_characteristics = test_result.dominant_element.characteristics
     
     # SADECE kullanıcının baskın elementine göre içerik önerilerini al
     # Popüler içerikleri dahil etmiyoruz, SADECE mizaç tipine uygun olanlar gösterilecek
@@ -104,10 +111,20 @@ def my_suggestions(request):
     # Tüm kategorileri al
     categories = ContentCategory.objects.all()
     
+    # Yeni eklenen bilgiler
+    recently_completed_test = False
+    if 'test_completed' in request.session:
+        recently_completed_test = True
+        print("Test tamamlandı bayrağı bulundu, kaldırılıyor")
+        del request.session['test_completed']
+        request.session.modified = True
+    
     context = {
         'contents': recommended_contents,  # Artık sadece kullanıcının mizacına ait içerikler var
         'categories': categories,
         'dominant_element': dominant_element_name,
+        'element_characteristics': element_characteristics,  # Element açıklaması eklendi
+        'recently_completed_test': recently_completed_test,  # Yeni tamamlanan test mi
     }
     
     # my_suggestions.html şablonunu kullanıyoruz

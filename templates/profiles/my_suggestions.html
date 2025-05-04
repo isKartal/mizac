@@ -12,6 +12,111 @@
 <div class="container">
   <div class="suggestions-container">
 
+    {% if recently_completed_test %}
+    <!-- Modern mizaç sonuç özeti -->
+    <div class="test-result-overview">
+      <div class="result-header">
+        <div class="result-title-section">
+          <span class="result-badge">Test Sonucu</span>
+          <h1 class="result-title">Mizaç Analiziniz Hazır</h1>
+          <p class="result-subtitle">Tebrikler! Mizaç testini tamamladınız ve sonuçlarınız hazır.</p>
+        </div>
+      </div>
+      
+      <div class="result-elements-grid">
+        <!-- Ana Element Kartı -->
+        <div class="element-result-card primary {{ dominant_element|lower }}">
+          <div class="result-card-header">
+            <div class="element-icon-container">
+              {% if dominant_element == "Ateş" %}
+                <i class="fas fa-fire"></i>
+              {% elif dominant_element == "Hava" %}
+                <i class="fas fa-wind"></i>
+              {% elif dominant_element == "Su" %}
+                <i class="fas fa-water"></i>
+              {% elif dominant_element == "Toprak" %}
+                <i class="fas fa-mountain"></i>
+              {% endif %}
+            </div>
+            <div class="element-meta">
+              <span class="element-properties">
+                {% if dominant_element == "Ateş" %}
+                  Sıcak + Kuru
+                {% elif dominant_element == "Hava" %}
+                  Sıcak + Nemli
+                {% elif dominant_element == "Su" %}
+                  Soğuk + Nemli
+                {% elif dominant_element == "Toprak" %}
+                  Soğuk + Kuru
+                {% endif %}
+              </span>
+              <h2 class="dominant-title">{{ dominant_element }}</h2>
+              <span class="dominant-label">Baskın Mizacınız</span>
+            </div>
+          </div>
+          
+          <div class="element-details">
+            <div class="element-description">
+              {{ element_characteristics|truncatewords:60 }}
+              <a href="{% url 'temperaments' %}" class="read-more-link">Detaylı bilgi</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Özellikler Kartı -->
+        <div class="element-result-card traits {{ dominant_element|lower }}">
+          <h3 class="traits-title">
+            <i class="fas fa-list-ul"></i> Temel Mizaç Özellikleri
+          </h3>
+          <ul class="traits-list">
+            {% if dominant_element == "Ateş" %}
+              <li><i class="fas fa-check-circle"></i> İleri görüşlü ve vizyoner</li>
+              <li><i class="fas fa-check-circle"></i> Tutkulu ve kararlı</li>
+              <li><i class="fas fa-check-circle"></i> Cesur ve girişimci</li>
+              <li><i class="fas fa-check-circle"></i> Değişime açık ve yenilikçi</li>
+              <li><i class="fas fa-check-circle"></i> Hızlı düşünen ve hızlı hareket eden</li>
+            {% elif dominant_element == "Hava" %}
+              <li><i class="fas fa-check-circle"></i> Sosyal ve iletişimci</li>
+              <li><i class="fas fa-check-circle"></i> Yaratıcı ve fikir üretici</li>
+              <li><i class="fas fa-check-circle"></i> Sezgisel ve anlayışlı</li>
+              <li><i class="fas fa-check-circle"></i> Uyumlu ve esnek</li>
+              <li><i class="fas fa-check-circle"></i> İyimser ve neşeli</li>
+            {% elif dominant_element == "Su" %}
+              <li><i class="fas fa-check-circle"></i> Duygusal ve empatik</li>
+              <li><i class="fas fa-check-circle"></i> Sakin ve huzur verici</li>
+              <li><i class="fas fa-check-circle"></i> İçgörülü ve sezgisel</li>
+              <li><i class="fas fa-check-circle"></i> Şefkatli ve yardımsever</li>
+              <li><i class="fas fa-check-circle"></i> Dinleyici ve anlayışlı</li>
+            {% elif dominant_element == "Toprak" %}
+              <li><i class="fas fa-check-circle"></i> Güvenilir ve kararlı</li>
+              <li><i class="fas fa-check-circle"></i> Pratik ve gerçekçi</li>
+              <li><i class="fas fa-check-circle"></i> Sabırlı ve dayanıklı</li>
+              <li><i class="fas fa-check-circle"></i> Organize ve sistemli</li>
+              <li><i class="fas fa-check-circle"></i> Sorumluluk sahibi ve güvenilir</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="result-what-next">
+        <h3 class="what-next-title">Mizacınıza Göre Öneriler</h3>
+        <p class="what-next-text">
+          {{ dominant_element }} mizacına sahip olarak, aşağıda size özel hazırlanmış içerik önerilerini bulabilirsiniz. 
+          Bu içerikler, kişisel gelişiminizi desteklemek ve mizacınızın güçlü yönlerinden faydalanmanıza yardımcı olmak için tasarlanmıştır.
+        </p>
+      </div>
+      
+      <div class="explore-more-section">
+        <a href="{% url 'temperaments' %}" class="explore-button">
+          <i class="fas fa-compass"></i> Tüm Mizaçları Keşfet
+        </a>
+        <a href="{% url 'profiles' %}" class="explore-button">
+          <i class="fas fa-user"></i> Profilim
+        </a>
+      </div>
+    </div>
+    {% endif %}
+
     <!-- YOUR PERSONALIZED CONTENT SECTION - Değişen bir şey yok -->
     <div class="content-section element-section {{ dominant_element|lower }}">
       <div class="section-title-wrapper">

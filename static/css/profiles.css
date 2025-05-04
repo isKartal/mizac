@@ -1209,3 +1209,301 @@
   }
 }
 
+/* Modern test sonucu özet kartı için stiller */
+.test-result-overview {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.result-header {
+  padding: 25px 30px;
+  background: linear-gradient(135deg, #292321, #4a3c38);
+  color: white;
+}
+
+.result-badge {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+}
+
+.result-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.result-subtitle {
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+.result-elements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  padding: 30px;
+}
+
+.element-result-card {
+  background-color: var(--secondary-color);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  height: 100%;
+}
+
+.element-result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.element-result-card.primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.element-result-card.primary.ateş {
+  background: linear-gradient(135deg, #faf9f8, #faf9f8), linear-gradient(135deg, var(--ates-bg), var(--ates-bg));
+  background-blend-mode: soft-light;
+  border-left: 5px solid var(--ates-color);
+}
+
+.element-result-card.primary.hava {
+  background: linear-gradient(135deg, #faf9f8, #faf9f8), linear-gradient(135deg, var(--hava-bg), var(--hava-bg));
+  background-blend-mode: soft-light;
+  border-left: 5px solid var(--hava-color);
+}
+
+.element-result-card.primary.su {
+  background: linear-gradient(135deg, #faf9f8, #faf9f8), linear-gradient(135deg, var(--su-bg), var(--su-bg));
+  background-blend-mode: soft-light;
+  border-left: 5px solid var(--su-color);
+}
+
+.element-result-card.primary.toprak {
+  background: linear-gradient(135deg, #faf9f8, #faf9f8), linear-gradient(135deg, var(--toprak-bg), var(--toprak-bg));
+  background-blend-mode: soft-light;
+  border-left: 5px solid var(--toprak-color);
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.element-icon-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.ateş .element-icon-container {
+  background-color: var(--ates-bg);
+  color: var(--ates-color);
+}
+
+.hava .element-icon-container {
+  background-color: var(--hava-bg);
+  color: var(--hava-color);
+}
+
+.su .element-icon-container {
+  background-color: var(--su-bg);
+  color: var(--su-color);
+}
+
+.toprak .element-icon-container {
+  background-color: var(--toprak-bg);
+  color: var(--toprak-color);
+}
+
+.element-meta {
+  flex: 1;
+}
+
+.element-properties {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.ateş .element-properties {
+  background-color: var(--ates-bg);
+  color: var(--ates-color);
+}
+
+.hava .element-properties {
+  background-color: var(--hava-bg);
+  color: var(--hava-color);
+}
+
+.su .element-properties {
+  background-color: var(--su-bg);
+  color: var(--su-color);
+}
+
+.toprak .element-properties {
+  background-color: var(--toprak-bg);
+  color: var(--toprak-color);
+}
+
+.dominant-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 5px 0;
+  color: var(--primary-color);
+}
+
+.dominant-label {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.element-description {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.read-more-link:hover {
+  text-decoration: underline;
+}
+
+.traits-title {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+
+.traits-title i {
+  margin-right: 10px;
+  opacity: 0.7;
+}
+
+.traits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.traits-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+}
+
+.traits-list li i {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.ateş .traits-list li i {
+  color: var(--ates-color);
+}
+
+.hava .traits-list li i {
+  color: var(--hava-color);
+}
+
+.su .traits-list li i {
+  color: var(--su-color);
+}
+
+.toprak .traits-list li i {
+  color: var(--toprak-color);
+}
+
+.result-what-next {
+  padding: 0 30px 20px;
+}
+
+.what-next-title {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.what-next-text {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.explore-more-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 0 30px 30px;
+}
+
+.explore-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: var(--secondary-color);
+  border-radius: 30px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.explore-button i {
+  margin-right: 8px;
+}
+
+.explore-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(233, 180, 76, 0.3);
+}
+
+/* Responsive ayarlar */
+@media (max-width: 768px) {
+  .result-elements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .explore-more-section {
+    flex-direction: column;
+  }
+  
+  .result-title {
+    font-size: 1.6rem;
+  }
+}

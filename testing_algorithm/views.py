@@ -152,7 +152,7 @@ def take_test(request, test_id, question_index=0):
                 
                 dominant_element = ElementType.objects.filter(name=element_name).first()
                 
-                # TestResult oluştur
+               # TestResult oluşturup veritabanına kaydettikten sonra
                 result = TestResult(
                     user=request.user,
                     test=test,
@@ -166,7 +166,11 @@ def take_test(request, test_id, question_index=0):
                     dominant_element=dominant_element
                 )
                 result.save()
-                
+
+                # Test tamamlandı işaretlendi - BURAYI EKLEYİN
+                request.session['test_completed'] = True
+                request.session.modified = True
+
                 # Detay kayıtları oluştur
                 for question_id, choice_id in answers.items():
                     choice = get_object_or_404(Choice, id=choice_id)
@@ -253,47 +257,9 @@ def take_test(request, test_id, question_index=0):
 def test_result(request, result_id):
     result = get_object_or_404(TestResult, id=result_id, user=request.user)
     
-    # Net skorlar
-    net_warm_score = result.warm_score  # Zaten net değer saklanıyor
-    net_moist_score = result.moist_score  # Zaten net değer saklanıyor
+    # Session'a test_completed bayrağını ekle
+    request.session['test_completed'] = True
+    request.session.modified = True
     
-    # Ham skorlar
-    raw_warm_score = result.raw_warm_score
-    raw_cold_score = result.raw_cold_score
-    raw_moist_score = result.raw_moist_score
-    raw_dry_score = result.raw_dry_score
-    
-    # Sıcaklık ve nem özelliklerini metin olarak belirle
-    warmth_text = "Sıcak" if net_warm_score >= 0 else "Soğuk"
-    moisture_text = "Nemli" if net_moist_score >= 0 else "Kuru"
-    
-    # Skorların mutlak değerlerini şiddet göstergesi olarak kullan (0-10 arasında normalize et)
-    max_intensity = 10  # Maksimum yoğunluk değeri
-    
-    # Sıcaklık yoğunluğu (pozitif değer olarak)
-    warmth_intensity = min(abs(net_warm_score), max_intensity)
-    
-    # Nem yoğunluğu (pozitif değer olarak)
-    moisture_intensity = min(abs(net_moist_score), max_intensity)
-    
-    # Ölçek boyutunu 10 üzerinden hesapla
-    scale_percentage_warmth = int((warmth_intensity / max_intensity) * 100)
-    scale_percentage_moisture = int((moisture_intensity / max_intensity) * 100)
-    
-    context = {
-        'result': result,
-        'dominant_element': result.dominant_element,
-        'warmth_text': warmth_text,
-        'moisture_text': moisture_text,
-        'warmth_intensity': warmth_intensity,
-        'moisture_intensity': moisture_intensity,
-        'scale_percentage_warmth': scale_percentage_warmth,
-        'scale_percentage_moisture': scale_percentage_moisture,
-        # Ham skorları da gönder
-        'raw_warm_score': raw_warm_score,
-        'raw_cold_score': raw_cold_score,
-        'raw_moist_score': raw_moist_score,
-        'raw_dry_score': raw_dry_score,
-    }
-    
-    return render(request, 'testing_algorithm/test_result.html', context)
+    # Öneriler sayfasına yönlendir
+    return redirect('my_suggestions')
