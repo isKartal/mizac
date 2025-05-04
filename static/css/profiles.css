@@ -1236,17 +1236,6 @@
   box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
 }
 
-.result-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.result-subtitle {
-  opacity: 0.8;
-  font-size: 1.1rem;
-}
-
 .result-elements-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
