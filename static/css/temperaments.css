@@ -916,3 +916,128 @@
     opacity: 1;
   }
 }
+
+/* Çevirilebilir kart stilleri - responsive ayarları ile */
+.flip-card {
+  background-color: transparent;
+  width: 260px;
+  height: 340px;
+  perspective: 1500px;
+  margin-bottom: 20px;
+}
+
+/* Duyarlı tasarım stilleri - geliştirilmiş */
+@media (max-width: 1200px) {
+  .temperament-cards {
+    gap: 25px;
+    padding: 0 15px;
+  }
+  
+  .flip-card {
+    width: 240px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 992px) {
+  .temperament-cards {
+    gap: 20px;
+  }
+  
+  .flip-card {
+    width: 220px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .temperament-cards {
+    gap: 15px;
+  }
+  
+  .flip-card {
+    width: 200px;
+    height: 300px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.4rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.3rem;
+  }
+  
+  .card-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-circle i {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .temperament-cards {
+    gap: 15px;
+    justify-content: space-around;
+  }
+  
+  .flip-card {
+    width: 45%;  /* Yüzde ile genişlik vererek daha esnek olmasını sağlıyoruz */
+    min-width: 160px;
+    height: 280px;
+  }
+  
+  .flip-card-front, .flip-card-back {
+    padding: 20px 15px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.3rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.2rem;
+  }
+  
+  .flip-card-back p {
+    font-size: 0.85rem;
+  }
+  
+  .card-circle {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .card-circle i {
+    font-size: 24px;
+  }
+  
+  .card-link {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .temperament-cards {
+    gap: 10px;
+  }
+  
+  .flip-card {
+    width: 100%;  /* Çok küçük ekranlarda tam genişlik */
+    max-width: 280px;
+    height: 270px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.2rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.1rem;
+  }
+}
