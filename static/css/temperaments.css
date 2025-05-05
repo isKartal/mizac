@@ -1041,3 +1041,290 @@
     font-size: 1.1rem;
   }
 }
+
+/* Flip Card ve Temperament Cards için geliştirilen responsive düzenlemeler */
+
+/* Temel flip card stilleri */
+.flip-card {
+  background-color: transparent;
+  width: 260px;
+  height: 340px;
+  perspective: 1500px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Mizaç kartları konteyneri - daha iyi duyarlı tasarım için */
+.temperament-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+  padding: 0 15px;
+}
+
+/* Mizaç kartları için geliştirilmiş responsive düzen */
+
+/* Temel mizaç kartları konteyner düzeni */
+.temperament-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+  padding: 0 15px;
+}
+
+.temperament-card-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+
+.temperament-card-container.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Temel flip card stilleri */
+.flip-card {
+  background-color: transparent;
+  width: 260px;
+  height: 340px;
+  perspective: 1500px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/* ===== GELİŞTİRİLMİŞ RESPONSIVE AYARLAR ===== */
+
+/* Büyük masaüstü ekranlar için (1200px+) */
+@media (min-width: 1200px) {
+  .temperament-cards {
+    gap: 30px;
+  }
+  
+  .flip-card {
+    width: 260px;
+    height: 340px;
+  }
+}
+
+/* Orta masaüstü ekranlar için (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .temperament-cards {
+    gap: 25px;
+  }
+  
+  .flip-card {
+    width: 230px;
+    height: 320px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.6rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.5rem;
+  }
+  
+  .card-circle {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Küçük masaüstü ve büyük tablet için (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .temperament-cards {
+    gap: 20px;
+  }
+  
+  .flip-card {
+    width: 200px;
+    height: 300px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.5rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.4rem;
+  }
+  
+  .flip-card-back p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .card-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-circle i {
+    font-size: 28px;
+  }
+  
+  .card-link {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet ve büyük mobil için (576px - 767px) - 2x2 düzende */
+@media (max-width: 767px) {
+  .temperament-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-items: center;
+  }
+  
+  .temperament-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .flip-card {
+    width: 100%;
+    max-width: 220px;
+    height: 280px;
+  }
+  
+  .flip-card-front, 
+  .flip-card-back {
+    padding: 15px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+  }
+  
+  .flip-card-front p {
+    font-size: 0.85rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .flip-card-back p {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .card-circle {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .card-circle i {
+    font-size: 24px;
+  }
+  
+  .card-link {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Küçük mobil ekranlar için (400px - 575px) - 2x2 düzende daha küçük */
+@media (max-width: 575px) {
+  .temperament-cards {
+    gap: 12px;
+  }
+  
+  .flip-card {
+    max-width: 180px;
+    height: 250px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.1rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.05rem;
+  }
+  
+  .flip-card-back p {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-circle {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .card-circle i {
+    font-size: 20px;
+  }
+  
+  .card-link {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+  
+  /* Bölüm başlıkları küçültülür */
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .temperament-description {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+}
+
+/* Çok küçük ekranlar için (400px altı) - 2x2 düzende en küçük boyutlar */
+@media (max-width: 399px) {
+  .temperament-cards {
+    gap: 10px;
+  }
+  
+  .flip-card {
+    max-width: 160px;
+    height: 220px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 0.95rem;
+  }
+  
+  .flip-card-back p {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  
+  .card-circle {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 8px;
+  }
+  
+  .card-circle i {
+    font-size: 18px;
+  }
+  
+  .card-link {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}
