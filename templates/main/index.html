@@ -3,9 +3,98 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% if has_test_result %}
+<link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+{% endif %}
 {% endblock %}
 
 {% block content %}
+{% if has_test_result %}
+<!-- Kullanıcı Önerileri Bölümü (giriş yapmış ve test sonucu olan kullanıcılar için) -->
+<section class="temperament-suggestions">
+  <div class="container">
+    <div class="suggestions-header">
+      <h2>{{ user_element.name }} Mizacınıza Özel Öneriler</h2>
+      <p>Mizacınıza özel olarak seçilmiş, size en uygun içerikler</p>
+    </div>
+    
+    <div class="suggestions-grid">
+      {% for content in user_suggestions %}
+        <div class="suggestion-card" data-content-id="{{ content.id }}">
+          {% if content.image %}
+            <div class="suggestion-image" style="background-image: url('{{ content.image.url }}')">
+              <div class="suggestion-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% else %}
+            <div class="suggestion-image placeholder-image">
+              <i class="fas fa-book-open"></i>
+              <div class="suggestion-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
+              <div class="suggestion-category">{{ content.category.name }}</div>
+            </div>
+          {% endif %}
+          
+          <h3 class="suggestion-title">{{ content.title }}</h3>
+          <p class="suggestion-description">{{ content.short_description|truncatechars:80 }}</p>
+          
+          <div class="suggestion-actions">
+            <button class="suggestion-button like-button {% if content.is_liked %}liked{% endif %}" 
+                    data-content-id="{{ content.id }}">
+              <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+              <span class="like-count">{{ content.like_count }}</span>
+            </button>
+            <button class="suggestion-button read-more" data-content-id="{{ content.id }}">
+              <i class="fas fa-book-reader"></i> Devamını Oku
+            </button>
+          </div>
+        </div>
+      {% empty %}
+        <div class="empty-state">
+          <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+          <p class="empty-text">{{ user_element.name }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="suggestions-more">
+      <a href="{% url 'my_suggestions' %}" class="more-link">
+        Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- İçerik Detay Modalı -->
+<div class="content-modal" id="contentModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="modal-nav-button" id="prevModalContent"><i class="fas fa-chevron-left"></i></button>
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close-button" id="closeModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-category" id="modalCategory"></div>
+      <div class="modal-content" id="modalContent">
+        <!-- İçerik buraya yüklenecek -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-actions">
+        <button class="modal-action-btn" id="modalLikeBtn">
+          <i class="far fa-heart"></i> Beğen
+        </button>
+        <button class="modal-action-btn" id="modalSaveBtn">
+          <i class="far fa-bookmark"></i> Kaydet
+        </button>
+      </div>
+      <div class="modal-element" id="modalElement"></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if not has_test_result %}
+<!-- Orijinal Hero Bölümü (giriş yapmamış veya test sonucu olmayan kullanıcılar için) -->
 <section class="hero-section">
     <div class="hero-content">
         <h1 class="mizac-nedir-title">Mizacınızı Keşfedin</h1>
@@ -16,6 +105,7 @@
         <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
     </div>
 </section>
+{% endif %}
 
 <section class="elements-section">
     <div class="container">
@@ -96,6 +186,7 @@
     </div>
 </section>
 
+{% if not has_test_result %}
 <section class="cta-section">
     <div class="container">
         <div class="cta-content">
@@ -105,6 +196,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}
@@ -122,7 +214,7 @@
         });
     
         // Animasyon eklenecek elementler
-        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
+        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description, .suggestion-card').forEach(el => {
             observer.observe(el);
         });
     
@@ -137,9 +229,38 @@
             threshold: 0.1
         });
     
-        document.querySelectorAll('.elements-section, .advantage-section, .cta-section').forEach(section => {
+        document.querySelectorAll('.elements-section, .advantage-section, .cta-section, .temperament-suggestions').forEach(section => {
             sectionObserver.observe(section);
         });
+        
+        // İçerik modalı için olay dinleyicileri (giriş yapmış kullanıcılar için)
+        {% if has_test_result %}
+        const contentModal = document.getElementById('contentModal');
+        const closeModal = document.getElementById('closeModal');
+        const readMoreButtons = document.querySelectorAll('.read-more');
+        
+        // Modal kapatma
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                contentModal.classList.remove('active');
+            });
+        }
+        
+        // "Devamını Oku" butonları
+        if (readMoreButtons.length > 0) {
+            readMoreButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const contentId = this.getAttribute('data-content-id');
+                    // Burada AJAX ile içerik detaylarını getirme kodu olacak
+                    // fetchContentDetails(contentId); // Bu fonksiyonu temperament_detail.js dosyasından alabilirsiniz
+                    contentModal.classList.add('active');
+                });
+            });
+        }
+        {% endif %}
     });
 </script>
+{% if has_test_result %}
+<script src="{% static 'js/temperament_detail.js' %}"></script>
+{% endif %}
 {% endblock %}
