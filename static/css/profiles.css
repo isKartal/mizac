@@ -1496,3 +1496,465 @@
     font-size: 1.6rem;
   }
 }
+
+/* ===== RESPONSIVE DESIGN IMPROVEMENTS ===== */
+
+/* ÖNERILERIM RESPONSIVE FIXES */
+@media (max-width: 768px) {
+  /* Fix filter container to scroll horizontally instead of stacking */
+  .filter-container .filter-bar {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling for iOS */
+    scrollbar-width: thin; /* for Firefox */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .filter-container .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Adjust filter groups layout */
+  .filter-container .filter-group {
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* Keep filter options on same row */
+  .filter-container .filter-options {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+
+  /* Make option buttons smaller */
+  .filter-container .filter-option {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Make element tabs scrollable */
+  .secondary-filter-container .element-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .secondary-filter-container .element-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Adjust test result overview spacing */
+  .test-result-overview {
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
+  .result-elements-grid {
+    padding: 20px;
+    gap: 15px;
+  }
+}
+
+/* Small mobile improvements */
+@media (max-width: 480px) {
+  /* Smaller filter buttons */
+  .filter-container .filter-option {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .filter-container .filter-label {
+    font-size: 0.85rem;
+  }
+}
+
+/* PROFILE SETTINGS RESPONSIVE FIXES */
+
+/* Medium screens - tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Improve profile sections layout */
+  .profile-sections {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens - phone landscape */
+@media (max-width: 767px) {
+  /* Keep stats side-by-side */
+  .account-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .stat-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 10px;
+  }
+  
+  .stat-icon {
+    margin: 0 auto 10px;
+  }
+  
+  /* Make card padding more compact */
+  .profile-card {
+    padding: 25px 20px;
+  }
+  
+  /* Improve quick links layout */
+  .quick-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .quick-link-item {
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  /* Section cards adjustments */
+  .section-card {
+    padding: 20px;
+  }
+}
+
+/* Extra small screens - phone portrait */
+@media (max-width: 480px) {
+  /* Stack stats for very small screens but keep them horizontal */
+  .account-stats {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .stat-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 15px;
+  }
+  
+  .stat-icon {
+    margin: 0 15px 0 0;
+  }
+  
+  /* Fix section title alignment */
+  .section-card h3 {
+    font-size: 1.2rem;
+    text-align: left;
+    padding-bottom: 10px;
+  }
+  
+  .section-card h3::after {
+    left: 0;
+    transform: none;
+  }
+  
+  /* Better icon positioning */
+  .section-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .section-icon i {
+    font-size: 18px;
+  }
+}
+
+/* ===== ENHANCED MOBILE SPECIFIC FIXES ===== */
+
+/* Small mobile device fixes - targeting devices like Galaxy S9, iPhone 8, etc. */
+@media screen and (max-width: 375px) {
+  /* ÖNERILERIM PAGE FIXES */
+  
+  /* Make the filter options more compact */
+  .filter-container {
+    padding: 0;
+    margin-bottom: 15px;
+  }
+  
+  .filter-container .filter-bar {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  /* Smaller buttons with less padding */
+  .filter-container .filter-option {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    border-radius: 15px;
+  }
+  
+  /* Reduce spacing in filter groups */
+  .filter-container .filter-group {
+    gap: 5px;
+  }
+  
+  /* Smaller labels */
+  .filter-container .filter-label {
+    font-size: 0.75rem;
+  }
+  
+  /* Make the element tabs more compact */
+  .secondary-filter-container {
+    margin-bottom: 15px;
+  }
+  
+  .element-tabs {
+    padding: 5px !important;
+    gap: 5px !important;
+  }
+  
+  .element-tabs .filter-option {
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+    gap: 3px !important;
+  }
+  
+  /* Fix content grid for very small screens */
+  .content-grid {
+    gap: 15px;
+  }
+  
+  .content-card {
+    margin-bottom: 0;
+  }
+  
+  .content-title {
+    font-size: 1rem;
+    margin: 15px 15px 5px;
+  }
+  
+  .content-description {
+    padding: 0 15px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+  
+  .content-actions {
+    padding: 10px 15px;
+  }
+  
+  .action-button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+  
+  /* Fix test result overview for very small screens */
+  .result-header {
+    padding: 20px;
+  }
+  
+  .result-elements-grid {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .element-result-card {
+    padding: 15px;
+  }
+  
+  .element-icon-container {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .dominant-title {
+    font-size: 1.3rem;
+  }
+  
+  .element-properties {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  
+  /* PROFILE PAGE FIXES */
+  
+  /* More compact profile card */
+  .profile-card {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Fix profile info section */
+  .profile-info {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+  
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .profile-avatar i {
+    font-size: 30px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.3rem;
+  }
+  
+  .profile-name p {
+    font-size: 0.9rem;
+  }
+  
+  .member-since {
+    font-size: 0.8rem;
+  }
+  
+  /* Fix section cards */
+  .section-card {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .section-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Quick links */
+  .quick-links-grid {
+    gap: 8px;
+  }
+  
+  .quick-link-item {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  
+  .quick-link-item i {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+  
+  /* Connection items */
+  .connection-item {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+  }
+  
+  .connection-email {
+    font-size: 0.8rem;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+  
+  /* Stats */
+  .account-stats {
+    padding-top: 15px;
+    margin: 20px 0;
+  }
+  
+  .stat-item {
+    padding: 10px;
+  }
+  
+  .stat-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+  
+  .stat-icon i {
+    font-size: 14px;
+  }
+  
+  .stat-info h4 {
+    font-size: 0.75rem;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+  }
+}
+
+/* Extra small mobile device fixes - targeting smaller phones like iPhone 5/SE */
+@media screen and (max-width: 320px) {
+  /* ÖNERILERIM PAGE FIXES */
+  
+  /* Ultra compact filter options */
+  .filter-container .filter-option {
+    padding: 3px 6px;
+    font-size: 0.65rem;
+  }
+  
+  .filter-container .filter-label {
+    font-size: 0.7rem;
+  }
+  
+  /* Fix element tabs further */
+  .element-tabs .filter-option {
+    padding: 3px 6px !important;
+    font-size: 0.65rem !important;
+  }
+  
+  .element-tabs .filter-option i {
+    display: none; /* Hide icons to save space */
+  }
+  
+  /* Even smaller content cards */
+  .content-title {
+    font-size: 0.95rem;
+    margin: 12px 12px 5px;
+  }
+  
+  .content-description {
+    padding: 0 12px;
+    font-size: 0.8rem;
+  }
+  
+  /* PROFILE PAGE FIXES */
+  
+  /* Even more compact profile */
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.2rem;
+  }
+  
+  /* Adjust quick links */
+  .quick-links-grid {
+    grid-template-columns: 1fr; /* Stack in one column for very small screens */
+  }
+  
+  .quick-link-item {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  
+  /* Make stats more readable */
+  .stat-item {
+    padding: 8px;
+  }
+  
+  .stat-value {
+    font-size: 1rem;
+  }
+}
