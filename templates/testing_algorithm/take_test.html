@@ -46,3 +46,31 @@
   </div>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    // Test sırasında geri düğmesini kullanmayı engelle
+    (function() {
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, null, window.location.href);
+            alert("Test sırasında geri düğmesini kullanamazsınız. Lütfen sorulara sırayla cevap verin.");
+        };
+    })();
+    
+    // Sayfanın yeniden yüklenmesini engelle (form gönderildiğinde)
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.test-form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                // Form gönderildikten sonra düğmeleri devre dışı bırak
+                var buttons = document.querySelectorAll('button[type="submit"]');
+                buttons.forEach(function(button) {
+                    button.disabled = true;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İşleniyor...';
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}

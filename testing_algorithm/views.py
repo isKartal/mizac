@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.views.decorators.cache import never_cache
 from .models import Test, Choice, Question, TestResult, ElementType, TestResultDetail
 
 def direct_to_test(request):
@@ -44,9 +45,20 @@ def test_intro(request, test_id):
         'warm_questions_count': warm_questions_count,
         'moist_questions_count': max(warm_moist_questions_count, cold_moist_questions_count)
     })
+
+@never_cache
 @login_required
 def take_test(request, test_id, question_index=0):
     test = get_object_or_404(Test, id=test_id)
+    
+    # Kullanıcı önceki bir soruya erişmeye çalışıyorsa, mevcut konumuna yönlendir
+    current_position = request.session.get('current_question_index', 0)
+    if question_index < current_position:
+        return redirect('take_test', test_id=test_id, question_index=current_position)
+    
+    # Mevcut konumu oturumda sakla
+    request.session['current_question_index'] = question_index
+    request.session.modified = True
 
     # Kullanıcı daha önce bu testi tamamlamış mı kontrol et
     # Bu kontrol artık oturum bilgisine bakacak, veritabanına değil
@@ -66,20 +78,6 @@ def take_test(request, test_id, question_index=0):
     # İkinci aşama soruları (Mizaç tipine göre ayrı Kuru/Nemli soruları)
     warm_moist_questions = list(test.questions.filter(question_type='WARM_MOIST').order_by('order'))
     cold_moist_questions = list(test.questions.filter(question_type='COLD_MOIST').order_by('order'))
-    
-    
-    # Test oturumunu başlat
-    if 'test_phase' not in request.session:
-        request.session['test_phase'] = 'WARM'
-        # Sıcak/soğuk puanları
-        request.session['warm_score'] = 0
-        request.session['cold_score'] = 0
-        # Nemli/kuru puanları
-        request.session['moist_score'] = 0
-        request.session['dry_score'] = 0
-        # Cevapları sakla
-        request.session['test_answers'] = {}
-        request.session.modified = True
     
     # İlk aşamadan sonra ikinci aşama tipini belirle
     if question_index == warm_questions_count and request.session['test_phase'] == 'WARM':
@@ -204,7 +202,7 @@ def take_test(request, test_id, question_index=0):
                         )
                 
                 # Oturum verilerini temizle
-                for key in ['test_phase', 'warm_score', 'cold_score', 'moist_score', 'dry_score', 'test_answers']:
+                for key in ['test_phase', 'warm_score', 'cold_score', 'moist_score', 'dry_score', 'test_answers', 'current_question_index']:
                     if key in request.session:
                         del request.session[key]
                 
@@ -231,7 +229,8 @@ def take_test(request, test_id, question_index=0):
             
             request.session.modified = True
             
-            return redirect('take_test', test_id=test_id, question_index=question_index + 1)
+            # POST tamamlama sayfasına yönlendir
+            return redirect('post_completion', test_id=test_id, question_index=question_index)
     
     # İlerleme durumunu hesapla
     progress_percentage = int((question_index / total_questions) * 100) if total_questions > 0 else 0
@@ -243,7 +242,7 @@ def take_test(request, test_id, question_index=0):
         'COLD_MOIST': 'Soğuk Mizaçlar için Kuru/Nemli Özellikleri'
     }.get(current_phase, 'Test Soruları')
     
-    return render(request, 'testing_algorithm/take_test.html', {
+    context = {
         'test': test,
         'current_question': current_question,
         'choices': choices,
@@ -251,6 +250,21 @@ def take_test(request, test_id, question_index=0):
         'total_questions': total_questions,
         'progress_percentage': progress_percentage,
         'phase': phase_display
+    }
+    
+    response = render(request, 'testing_algorithm/take_test.html', context)
+    
+    # Önbelleğe alınmasını engelle
+    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response['Pragma'] = 'no-cache'
+    response['Expires'] = '0'
+    return response
+
+def post_completion(request, test_id, question_index):
+    """POST işlemi sonrası güvenlik için ara sayfa"""
+    return render(request, 'testing_algorithm/post_completion.html', {
+        'test_id': test_id,
+        'next_question_index': question_index + 1
     })
 
 @login_required

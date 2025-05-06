@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR | Test Devam Ediyor{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+<style>
+    .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+    }
+    
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(233, 180, 76, 0.2);
+        border-left-color: var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cevabınız kaydediliyor...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Sayfanın önbelleğe alınmasını engelle
+    document.addEventListener('DOMContentLoaded', function() {
+        // HTTP önbellek başlıklarını ekle
+        fetch(window.location.href, {
+            method: 'HEAD',
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
+        
+        // Kısa bir gecikme sonra bir sonraki soruya yönlendir
+        setTimeout(function() {
+            window.location.href = "{% url 'take_test' test_id=test_id question_index=next_question_index %}";
+        }, 500);
+    });
+</script>
+{% endblock %}
