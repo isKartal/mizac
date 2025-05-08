@@ -11,199 +11,200 @@
 {% block content %}
 <div class="container">
   <div class="suggestions-container">
-
-    {% if recently_completed_test %}
-    <!-- Modern mizaç sonuç özeti -->
-    <div class="test-result-overview">
-      <div class="result-header">
-        <div class="result-title-section">
-          <span class="result-badge">Test Sonucu</span>
-          <p class="result-subtitle">Tebrikler! Mizaç testini tamamladınız ve sonuçlarınız hazır.</p>
-        </div>
-      </div>
-      
-      <div class="result-elements-grid">
-        <!-- Ana Element Kartı -->
-        <div class="element-result-card primary {{ dominant_element|lower }}">
-          <div class="result-card-header">
-            <div class="element-icon-container">
-              {% if dominant_element == "Ateş" %}
-                <i class="fas fa-fire"></i>
-              {% elif dominant_element == "Hava" %}
-                <i class="fas fa-wind"></i>
-              {% elif dominant_element == "Su" %}
-                <i class="fas fa-water"></i>
-              {% elif dominant_element == "Toprak" %}
-                <i class="fas fa-mountain"></i>
-              {% endif %}
-            </div>
-            <div class="element-meta">
-              <span class="element-properties">
-                {% if dominant_element == "Ateş" %}
-                  Sıcak + Kuru
-                {% elif dominant_element == "Hava" %}
-                  Sıcak + Nemli
-                {% elif dominant_element == "Su" %}
-                  Soğuk + Nemli
-                {% elif dominant_element == "Toprak" %}
-                  Soğuk + Kuru
-                {% endif %}
-              </span>
-              <h2 class="dominant-title">{{ dominant_element }}</h2>
-              <span class="dominant-label">Baskın Mizacınız</span>
-            </div>
+    <!-- Modern mizaç sonuç özeti - Yeni kompakt tasarım -->
+    <div class="test-result-compact">
+      <div class="result-card-inner {{ dominant_element|lower }}">
+        <!-- Sol taraf - Mizaç bilgisi -->
+        <div class="result-card-left">
+          <div class="element-icon-compact">
+            {% if dominant_element == "Ateş" %}
+              <i class="fas fa-fire"></i>
+            {% elif dominant_element == "Hava" %}
+              <i class="fas fa-wind"></i>
+            {% elif dominant_element == "Su" %}
+              <i class="fas fa-water"></i>
+            {% elif dominant_element == "Toprak" %}
+              <i class="fas fa-mountain"></i>
+            {% endif %}
           </div>
           
-          <div class="element-details">
-            <div class="element-description">
-              {{ element_characteristics|truncatewords:60 }}
-              <a href="{% url 'temperaments' %}" class="read-more-link">Detaylı bilgi</a>
-            </div>
+          <div class="element-meta-compact">
+            <span class="element-properties-tag">
+              {% if dominant_element == "Ateş" %}
+                Sıcak + Kuru
+              {% elif dominant_element == "Hava" %}
+                Sıcak + Nemli
+              {% elif dominant_element == "Su" %}
+                Soğuk + Nemli
+              {% elif dominant_element == "Toprak" %}
+                Soğuk + Kuru
+              {% endif %}
+            </span>
+            <h2 class="dominant-title-compact">{{ dominant_element }}</h2>
+            <span class="dominant-label-compact">Baskın Mizacınız</span>
           </div>
         </div>
         
-        <!-- Özellikler Kartı -->
-        <div class="element-result-card traits {{ dominant_element|lower }}">
-          <h3 class="traits-title">
+        <!-- Sağ taraf - Mizaç özellikleri ve butonlar -->
+        <div class="result-card-right">
+          <h3 class="traits-title-compact">
             <i class="fas fa-list-ul"></i> Temel Mizaç Özellikleri
           </h3>
-          <ul class="traits-list">
+          
+          <div class="traits-grid">
             {% if dominant_element == "Ateş" %}
-              <li><i class="fas fa-check-circle"></i> İleri görüşlü ve vizyoner</li>
-              <li><i class="fas fa-check-circle"></i> Tutkulu ve kararlı</li>
-              <li><i class="fas fa-check-circle"></i> Cesur ve girişimci</li>
-              <li><i class="fas fa-check-circle"></i> Değişime açık ve yenilikçi</li>
-              <li><i class="fas fa-check-circle"></i> Hızlı düşünen ve hızlı hareket eden</li>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> İleri görüşlü ve vizyoner</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Tutkulu ve kararlı</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Cesur ve girişimci</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Değişime açık ve yenilikçi</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Hızlı düşünen ve hızlı hareket eden</div>
             {% elif dominant_element == "Hava" %}
-              <li><i class="fas fa-check-circle"></i> Sosyal ve iletişimci</li>
-              <li><i class="fas fa-check-circle"></i> Yaratıcı ve fikir üretici</li>
-              <li><i class="fas fa-check-circle"></i> Sezgisel ve anlayışlı</li>
-              <li><i class="fas fa-check-circle"></i> Uyumlu ve esnek</li>
-              <li><i class="fas fa-check-circle"></i> İyimser ve neşeli</li>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Sosyal ve iletişimci</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Yaratıcı ve fikir üretici</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Sezgisel ve anlayışlı</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Uyumlu ve esnek</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> İyimser ve neşeli</div>
             {% elif dominant_element == "Su" %}
-              <li><i class="fas fa-check-circle"></i> Duygusal ve empatik</li>
-              <li><i class="fas fa-check-circle"></i> Sakin ve huzur verici</li>
-              <li><i class="fas fa-check-circle"></i> İçgörülü ve sezgisel</li>
-              <li><i class="fas fa-check-circle"></i> Şefkatli ve yardımsever</li>
-              <li><i class="fas fa-check-circle"></i> Dinleyici ve anlayışlı</li>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Duygusal ve empatik</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Sakin ve huzur verici</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> İçgörülü ve sezgisel</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Şefkatli ve yardımsever</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Dinleyici ve anlayışlı</div>
             {% elif dominant_element == "Toprak" %}
-              <li><i class="fas fa-check-circle"></i> Güvenilir ve kararlı</li>
-              <li><i class="fas fa-check-circle"></i> Pratik ve gerçekçi</li>
-              <li><i class="fas fa-check-circle"></i> Sabırlı ve dayanıklı</li>
-              <li><i class="fas fa-check-circle"></i> Organize ve sistemli</li>
-              <li><i class="fas fa-check-circle"></i> Sorumluluk sahibi ve güvenilir</li>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Güvenilir ve kararlı</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Pratik ve gerçekçi</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Sabırlı ve dayanıklı</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Organize ve sistemli</div>
+              <div class="trait-item"><i class="fas fa-check-circle"></i> Sorumluluk sahibi ve güvenilir</div>
             {% endif %}
-          </ul>
+          </div>
+          
+          <div class="action-buttons-compact">
+            <a href="{% url 'temperaments' %}" class="compact-btn">
+              <i class="fas fa-compass"></i> Tüm Mizaçları Keşfet
+            </a>
+            <a href="{% url 'profiles' %}" class="compact-btn">
+              <i class="fas fa-user"></i> Profilim
+            </a>
+          </div>
         </div>
-      </div>
-      
-      <div class="result-what-next">
-        <h3 class="what-next-title">Mizacınıza Göre Öneriler</h3>
-        <p class="what-next-text">
-          {{ dominant_element }} mizacına sahip olarak, aşağıda size özel hazırlanmış içerik önerilerini bulabilirsiniz. 
-          Bu içerikler, kişisel gelişiminizi desteklemek ve mizacınızın güçlü yönlerinden faydalanmanıza yardımcı olmak için tasarlanmıştır.
-        </p>
-      </div>
-      
-      <div class="explore-more-section">
-        <a href="{% url 'temperaments' %}" class="explore-button">
-          <i class="fas fa-compass"></i> Tüm Mizaçları Keşfet
-        </a>
-        <a href="{% url 'profiles' %}" class="explore-button">
-          <i class="fas fa-user"></i> Profilim
-        </a>
       </div>
     </div>
-    {% endif %}
+  </div>
+</div>
 
-    <!-- YOUR PERSONALIZED CONTENT SECTION - Değişen bir şey yok -->
-    <div class="content-section element-section {{ dominant_element|lower }}">
-      <div class="section-title-wrapper">
-        <i class="fas fa-lightbulb"></i>
-        <div class="section-title-content">
-          <h2>{{ dominant_element }} Mizacınız İçin Öneriler</h2>
-          <p>Kişisel mizacınıza özel olarak seçilmiş içerikler</p>
-        </div>
-      </div>
-      
-      <!-- Filter Container - Yapışkan pozisyonlama ile -->
-    <div class="filter-container" id="filterContainer">
-      <div class="filter-bar">
-        <div class="filter-group">
-          <span class="filter-label"><i class="fas fa-layer-group"></i> Kategori:</span>
-          <div class="filter-options" id="categoryFilter">
-            <button class="filter-option active" data-category="all">Tümü</button>
-            {% for category in categories %}
-              <button class="filter-option" data-category="{{ category.id }}">{{ category.name }}</button>
-            {% endfor %}
+<!-- Size Özel İçerik Bölümü - Tam genişlik -->
+<div class="premium-content-section element-section {{ dominant_element|lower }}">
+  <div class="premium-content-background">
+    <div class="wave-top"></div>
+    
+    <!-- Premium Content Container -->
+    <div class="premium-content-container">
+      <!-- Bölüm Başlığı -->
+      <div class="container">
+        <div class="premium-section-title">
+          <i class="fas fa-lightbulb"></i>
+          <div class="section-title-content">
+            <h2>{{ dominant_element }} Mizacınız İçin Öneriler</h2>
+            <p>Kişisel mizacınıza özel olarak seçilmiş içerikler</p>
           </div>
         </div>
         
-        <div class="filter-group">
-          <span class="filter-label"><i class="fas fa-sort-amount-down"></i> Sırala:</span>
-          <div class="filter-options" id="sortFilter">
-            <button class="filter-option active" data-sort="newest">En Yeni</button>
-            <button class="filter-option" data-sort="popular">En Popüler</button>
+        <!-- Filtreleme Alanı -->
+        <div class="filter-container modern-filter" id="filterContainer">
+          <div class="filter-bar">
+            <!-- Kategori Filtresi -->
+            <div class="filter-group">
+              <span class="filter-label"><i class="fas fa-layer-group"></i> Kategori:</span>
+              <div class="filter-options" id="categoryFilter">
+                <button class="filter-option active" data-category="all">Tümü</button>
+                {% for category in categories %}
+                  <button class="filter-option" data-category="{{ category.id }}">{{ category.name }}</button>
+                {% endfor %}
+              </div>
+            </div>
+            
+            <!-- Sıralama Filtresi -->
+            <div class="filter-group">
+              <span class="filter-label"><i class="fas fa-sort-amount-down"></i> Sırala:</span>
+              <div class="filter-options" id="sortFilter">
+                <button class="filter-option active" data-sort="newest">En Yeni</button>
+                <button class="filter-option" data-sort="popular">En Popüler</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-      {% if contents %}
-        <div class="content-grid" id="personalizedContents">
-          {% for content in contents %}
-            <div class="content-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
-              {% if content.image %}
-                <div class="content-image" style="background-image: url('{{ content.image.url }}')">
-                  <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
-                  <div class="content-category">{{ content.category.name }}</div>
+      <!-- Kaydırmalı İçerik Slider - Tam genişlik -->
+      <div class="content-slider-wrapper">
+        {% if contents %}
+          <div class="content-slider-container">
+            <!-- Kaydırma Butonları -->
+            <button class="slider-nav-button prev-button glass-effect" id="prevSlideButton">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav-button next-button glass-effect" id="nextSlideButton">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- İçerik Slider -->
+            <div class="content-slider improved-slider" id="contentSlider">
+              {% for content in contents %}
+                <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                  <div class="premium-card-inner">
+                    {% if content.image %}
+                      <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
+                        <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
+                        <div class="content-category">{{ content.category.name }}</div>
+                      </div>
+                    {% else %}
+                      <div class="premium-card-image placeholder-image">
+                        <i class="fas fa-book-open"></i>
+                        <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
+                        <div class="content-category">{{ content.category.name }}</div>
+                      </div>
+                    {% endif %}
+                    
+                    <div class="premium-card-content">
+                      <h3 class="premium-card-title">{{ content.title }}</h3>
+                      <p class="premium-card-description">{{ content.short_description|truncatechars:80 }}</p>
+                    </div>
+                    
+                    <div class="premium-card-actions">
+                      <button class="premium-action-button like-button {% if content.is_liked %}liked{% endif %}" 
+                              data-content-id="{{ content.id }}">
+                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                        <span class="like-count">{{ content.like_count }}</span>
+                      </button>
+                      <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
+                              data-content-id="{{ content.id }}">
+                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              {% else %}
-                <div class="content-image placeholder-image">
-                  <i class="fas fa-book-open"></i>
-                  <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
-                  <div class="content-category">{{ content.category.name }}</div>
-                </div>
-              {% endif %}
-              
-              <h3 class="content-title">{{ content.title }}</h3>
-              <p class="content-description">{{ content.short_description|truncatechars:100 }}</p>
-              
-              <div class="content-actions">
-                <button class="action-button like-button {% if content.is_liked %}liked{% endif %}" 
-                        data-content-id="{{ content.id }}">
-                  <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                  <span class="like-count">{{ content.like_count }}</span>
-                </button>
-                <button class="action-button save-button {% if content.is_saved %}saved{% endif %}" 
-                        data-content-id="{{ content.id }}">
-                  <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                  <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
-                </button>
-              </div>
+              {% endfor %}
             </div>
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="empty-state">
-          <div class="empty-icon"><i class="fas fa-inbox"></i></div>
-          <p class="empty-text">{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
-        </div>
-      {% endif %}
-      
-      <!-- Pagination Controls - Değiştirildi: 3'ten fazla içerik olduğunda gösterilecek -->
-      {% if contents %}
-        <div class="pagination-controls" id="personalizedPagination" style="display: none;">
-          <button class="page-button" id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
-          <div class="page-numbers" id="pageNumbers">
-            <!-- Sayfa numaraları JS ile dinamik olarak oluşturulacak -->
           </div>
-          <button class="page-button" id="nextPage"><i class="fas fa-chevron-right"></i></button>
-        </div>
-      {% endif %}
+        {% else %}
+          <div class="container">
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+              <p class="empty-text">{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
     </div>
+    <div class="wave-bottom"></div>
+  </div>
+</div>
 
-    <!-- ALL TEMPERAMENTS CONTENT SECTION - İçerik aynı kalıyor, sadece element sekmeleri yukarı taşındı -->
+<div class="container">
+  <div class="suggestions-container">
+    <!-- Diğer Mizaçlar İçin İçerikler Bölümü -->
     <div class="content-section">
       <div class="section-title-wrapper">
         <i class="fas fa-compass"></i>
@@ -213,42 +214,43 @@
         </div>
       </div>
       
-      <!-- YENİ: Element sekmeleri için ikinci filtre konteyneri - yapışkan pozisyonlama ile -->
-    <div class="secondary-filter-container" id="secondaryFilterContainer">
-      <div class="element-tabs" id="elementTabs">
-        <button class="filter-option active" data-element="all">
-          <i class="fas fa-globe"></i> Tümü
-        </button>
-        <button class="filter-option" data-element="Ateş">
-          <i class="fas fa-fire"></i> Ateş
-        </button>
-        <button class="filter-option" data-element="Hava">
-          <i class="fas fa-wind"></i> Hava
-        </button>
-        <button class="filter-option" data-element="Su">
-          <i class="fas fa-water"></i> Su
-        </button>
-        <button class="filter-option" data-element="Toprak">
-          <i class="fas fa-mountain"></i> Toprak
-        </button>
+      <!-- Element Sekmesi Filtresi -->
+      <div class="secondary-filter-container" id="secondaryFilterContainer">
+        <div class="element-tabs modern-tabs" id="elementTabs">
+          <button class="filter-option active" data-element="all">
+            <i class="fas fa-globe"></i> Tümü
+          </button>
+          <button class="filter-option" data-element="Ateş">
+            <i class="fas fa-fire"></i> Ateş
+          </button>
+          <button class="filter-option" data-element="Hava">
+            <i class="fas fa-wind"></i> Hava
+          </button>
+          <button class="filter-option" data-element="Su">
+            <i class="fas fa-water"></i> Su
+          </button>
+          <button class="filter-option" data-element="Toprak">
+            <i class="fas fa-mountain"></i> Toprak
+          </button>
+        </div>
       </div>
-    </div>
       
-      <!-- Loading indicator - Değişen bir şey yok -->
+      <!-- Yükleniyor Göstergesi -->
       <div class="loading-indicator" id="loadingIndicator">
         <div class="loading-spinner"></div>
         <p class="loading-text">İçerikler yükleniyor...</p>
       </div>
       
-      <div class="content-grid" id="allElementsContents" style="display: none;">
-        <!-- Tüm içerikler JavaScript ile buraya yüklenecek -->
+      <!-- Diğer Mizaçlar İçerik Alanı -->
+      <div class="content-grid modern-grid" id="allElementsContents" style="display: none;">
+        <!-- İçerikler JavaScript ile yüklenecek -->
       </div>
       
-      <!-- All Temperaments Pagination Controls - Değişen bir şey yok -->
-      <div class="pagination-controls" id="allContentsPagination" style="display: none;">
+      <!-- Sayfalama Kontrolleri -->
+      <div class="pagination-controls modern-pagination" id="allContentsPagination" style="display: none;">
         <button class="page-button" id="allPrevPage" disabled><i class="fas fa-chevron-left"></i></button>
         <div class="page-numbers" id="allPageNumbers">
-          <!-- Sayfa numaraları JS ile dinamik olarak oluşturulacak -->
+          <!-- Sayfa numaraları JavaScript ile oluşturulacak -->
         </div>
         <button class="page-button" id="allNextPage"><i class="fas fa-chevron-right"></i></button>
       </div>
@@ -256,8 +258,8 @@
   </div>
 </div>
 
-<!-- Enhanced Content Detail Modal - Değişen bir şey yok -->
-<div class="content-modal" id="contentModal">
+<!-- İçerik Detay Modal -->
+<div class="content-modal modern-modal" id="contentModal">
   <div class="modal-container">
     <div class="modal-header">
       <button class="modal-nav-button" id="prevModalContent"><i class="fas fa-chevron-left"></i></button>
