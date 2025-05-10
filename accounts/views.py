@@ -22,7 +22,8 @@ def user_register(request):
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('login')
+                    messages.success(request, "Kayıt başarılı! Hoş geldiniz.")
+                    return redirect('index')  # Ana sayfaya yönlendir
                 else:
                     messages.error(request, "Kullanıcı doğrulaması yapılamadı.")
         else:

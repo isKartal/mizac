@@ -129,8 +129,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -155,14 +153,37 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
 
+# Authentication backends
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Site ID
 SITE_ID = 1
 
-# Provider specific settings
+# Allauth YENİ ayarları (deprecated olanların yerine)
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}  # Hem email hem username ile giriş yapılabilir
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']  # * = zorunlu alan
+
+# Diğer allauth ayarları
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_SIGNUP_FORM_CLASS = None
+ACCOUNT_SESSION_REMEMBER = True
+
+# Allauth template ayarları
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+
+# Yönlendirme ayarları
+LOGIN_REDIRECT_URL = '/'  # Giriş sonrası yönlendirilecek sayfa
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# Sosyal hesap ayarları
+SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -172,13 +193,11 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
+        # APP ayarları Django Admin'den yapılıyor, burada gerek yok
     }
 }
 
-LOGIN_REDIRECT_URL = '/'  # Giriş sonrası yönlendirilecek sayfa
-SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
-
+# Email ayarları
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

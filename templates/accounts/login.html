@@ -18,7 +18,7 @@
   {% endif %}
   <form class="auth-form" method="POST">
       {% csrf_token %}
-      <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+      <input type="text" name="login" placeholder="Kullanıcı Adı veya E-posta" required>
       <input type="password" name="password" placeholder="Şifre" required>
       <button type="submit">Giriş Yap</button>
   </form>
