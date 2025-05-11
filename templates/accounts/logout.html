@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+
+{% block title %}Çıkış Yap{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <h2>Çıkış Yap</h2>
+  
+  <p>Çıkış yapmak istediğinize emin misiniz?</p>
+  
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Çıkış Yap</button>
+    <a href="{% url 'index' %}" class="btn btn-secondary">İptal</a>
+  </form>
+</div>
+{% endblock %}

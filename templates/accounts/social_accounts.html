@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR | Sosyal Hesap Bağlantıları{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+<style>
+    .social-accounts-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    
+    .social-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .social-header h1 {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+    
+    .social-header p {
+        color: #666;
+    }
+    
+    .social-card {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        padding: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .connected-accounts {
+        margin-bottom: 40px;
+    }
+    
+    .account-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .account-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .account-icon {
+        font-size: 24px;
+        color: #db4437;
+    }
+    
+    .account-details h4 {
+        margin: 0;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+    }
+    
+    .account-details p {
+        margin: 5px 0 0 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    .disconnect-btn {
+        background-color: #ff4444;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .disconnect-btn:hover {
+        background-color: #d93636;
+        transform: translateY(-2px);
+    }
+    
+    .add-account {
+        text-align: center;
+        padding: 30px;
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+    }
+    
+    .add-account h3 {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+    
+    .connect-google-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background-color: white;
+        color: #666;
+        border: 1px solid #ddd;
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .connect-google-btn:hover {
+        background-color: #f9f9f9;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .connect-google-btn i {
+        font-size: 20px;
+        color: #db4437;
+    }
+    
+    .password-section {
+        margin-top: 40px;
+        padding: 30px;
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .password-section h3 {
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+    
+    .password-section p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    .set-password-btn {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: var(--transition);
+    }
+    
+    .set-password-btn:hover {
+        background-color: #d9a43c;
+        transform: translateY(-2px);
+    }
+    
+    .back-link {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="social-accounts-container">
+    <div class="social-header">
+        <h1>Sosyal Hesap Bağlantıları</h1>
+        <p>Hesabınıza bağlı sosyal medya hesaplarınızı yönetin</p>
+    </div>
+    
+    <div class="social-card">
+        <div class="connected-accounts">
+            <h2>Bağlı Hesaplar</h2>
+            
+            {% if social_accounts %}
+                {% for account in social_accounts %}
+                    <div class="account-item">
+                        <div class="account-info">
+                            <div class="account-icon">
+                                {% if account.provider == 'google' %}
+                                    <i class="fab fa-google"></i>
+                                {% endif %}
+                            </div>
+                            <div class="account-details">
+                                <h4>{{ account.provider|title }}</h4>
+                                <p>{{ account.email }}</p>
+                            </div>
+                        </div>
+                        
+                        {% if user.has_usable_password or social_accounts.count > 1 %}
+                            <a href="{% url 'disconnect_social' account.provider %}" 
+                               class="disconnect-btn"
+                               onclick="return confirm('Bu hesap bağlantısını kaldırmak istediğinize emin misiniz?')">
+                                Bağlantıyı Kaldır
+                            </a>
+                        {% else %}
+                            <span class="text-muted">Son giriş yöntemi</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Henüz bağlı bir sosyal hesabınız yok.</p>
+            {% endif %}
+        </div>
+
+        <div class="add-account">
+            <h3>Yeni Hesap Bağla</h3>
+            {% if not has_google %}
+                <a href="{% url 'connect_google' %}" class="connect-google-btn">
+                    <i class="fab fa-google"></i> Google Hesabı Bağla
+                </a>
+            {% else %}
+                <p>Tüm mevcut sosyal hesap türleri zaten bağlı.</p>
+            {% endif %}
+        </div>
+        
+        {% if not user.has_usable_password %}
+            <div class="password-section">
+                <h3>Şifre Belirle</h3>
+                <p>Sosyal hesap dışında normal giriş yapabilmek için bir şifre belirleyin.</p>
+                <a href="{% url 'set_password' %}" class="set-password-btn">
+                    Şifre Belirle
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="back-link">
+        <a href="{% url 'profiles' %}">← Profil Ayarlarına Dön</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MİZAÇLAR | Sosyal Hesap Bağlantıları{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="profile-settings-container">
+    <div class="profile-header">
+      <h1>Sosyal Hesap Bağlantıları</h1>
+    </div>
+    
+    <div class="profile-card">
+      <div class="section-card">
+        <h3>Bağlı Hesaplar</h3>
+        
+        {% if form.accounts %}
+          {% for base_account in form.accounts %}
+            {% with base_account.get_provider_account as account %}
+              <div class="connection-item">
+                <i class="fab fa-{{ account.get_provider.id }}"></i>
+                <span>{{ account }}</span>
+                <form method="post" action="{% url 'socialaccount_connections' %}" class="inline-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="account" value="{{ base_account.id }}">
+                  <button type="submit" name="action_remove" class="btn btn-danger btn-small">
+                    Bağlantıyı Kaldır
+                  </button>
+                </form>
+              </div>
+            {% endwith %}
+          {% endfor %}
+        {% else %}
+          <p>Henüz hiçbir sosyal hesap bağlanmamış.</p>
+        {% endif %}
+      </div>
+      
+      <div class="section-card">
+        <h3>Yeni Bağlantı Ekle</h3>
+        
+        <div class="provider-list">
+          {% for provider in socialaccount.providers %}
+            <a href="{% provider_login_url provider.id process='connect' %}" class="provider-link">
+              <i class="fab fa-{{ provider.id }}"></i> {{ provider.name }} ile Bağlan
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="button-container">
+        <a href="{% url 'profiles' %}" class="btn btn-secondary">
+          <i class="fas fa-arrow-left"></i> Profile Geri Dön
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

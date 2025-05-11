@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load socialaccount %}
 
 {% block title %}MİZAÇLAR | Giriş Yap{% endblock %}
 
@@ -18,7 +17,7 @@
   {% endif %}
   <form class="auth-form" method="POST">
       {% csrf_token %}
-      <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+      <input type="text" name="login" placeholder="Kullanıcı Adı veya E-posta" required>
       <input type="password" name="password" placeholder="Şifre" required>
       <button type="submit">Giriş Yap</button>
   </form>
@@ -26,7 +25,7 @@
   <!-- Google ile giriş butonu -->
   <div class="social-login">
       <p>veya</p>
-      <a href="{% provider_login_url 'google' %}" class="google-login-btn">
+      <a href="{% url 'google_login' %}" class="google-login-btn">
           <i class="fab fa-google"></i> Google ile Giriş Yap
       </a>
   </div>

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load socialaccount %}
 
 {% block title %}MİZAÇLAR | Profil Ayarlarım{% endblock %}
 
@@ -52,28 +51,28 @@
             </a>
           </div>
         </div>
-        
+
         <div class="section-card social-connections">
           <div class="section-icon">
             <i class="fas fa-users"></i>
           </div>
           <h3>Sosyal Hesap Bağlantılarım</h3>
-          {% if user.socialaccount_set.all %}
+          {% if user.social_accounts.all %}
             <div class="connection-list">
-              {% for account in user.socialaccount_set.all %}
+              {% for account in user.social_accounts.all %}
                 <div class="connection-item">
                   <i class="fab fa-{{ account.provider|lower }}"></i>
-                  <span class="connection-email">{{ account.extra_data.email }}</span>
+                  <span class="connection-email">{{ account.email }}</span>
                 </div>
               {% endfor %}
             </div>
-            <a href="{% url 'socialaccount_connections' %}" class="btn btn-outline">
+            <a href="{% url 'social_accounts' %}" class="btn btn-outline">
               <i class="fas fa-cog"></i> Bağlantıları Yönet
             </a>
           {% else %}
             <p class="no-connections">Henüz bir sosyal hesap bağlanmamış.</p>
-            <a href="{% provider_login_url 'google' process='connect' %}" class="btn btn-primary">
-              <i class="fab fa-google"></i> Google Hesabımı Bağla
+            <a href="{% url 'social_accounts' %}" class="btn btn-primary">
+              <i class="fab fa-google"></i> Sosyal Hesap Bağla
             </a>
           {% endif %}
         </div>
