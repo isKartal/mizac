@@ -94,16 +94,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# Statik dosyaların URL'i
+# Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'),
@@ -116,33 +107,33 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
 
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication backends
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1
-
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
-}
-
-LOGIN_REDIRECT_URL = '/'  # Giriş sonrası yönlendirilecek sayfa
-SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
-
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '4mizacinfo@gmail.com'   # Gmail adresiniz
-EMAIL_HOST_PASSWORD = 'ruht rhii mlnc yaow'        # Uygulama şifresi kullanmanız tavsiye edilir
+EMAIL_HOST_USER = '4mizacinfo@gmail.com'
+EMAIL_HOST_PASSWORD = 'ruht rhii mlnc yaow'
+
+# Google OAuth settings (django-allauth olmadan)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+GOOGLE_OAUTH_REDIRECT_URI = 'http://localhost:8000/accounts/google/callback/'
+
+# Login URLs
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -19,12 +19,21 @@
         {% csrf_token %}
         <input type="text" name="username" placeholder="Kullanıcı Adı" required>
         <input type="email" name="email" placeholder="E-Posta" required>
-        <input type="password" name="password1" placeholder="Şifre" required>
+        <input type="password" name="password" placeholder="Şifre" required>
         <input type="password" name="password2" placeholder="Şifreyi Tekrar Girin" required>
         <button type="submit">Kayıt Ol</button>
     </form>
+    
+    <!-- Google ile kayıt butonu -->
+    <div class="social-login">
+        <p>veya</p>
+        <a href="{% url 'google_login' %}" class="google-login-btn">
+            <i class="fab fa-google"></i> Google ile Kayıt Ol
+        </a>
+    </div>
+    
     <div class="auth-links">
-        <a href="{% url 'account_login' %}">Zaten hesabın var mı? Giriş Yap</a>
+        <a href="{% url 'login' %}">Zaten hesabın var mı? Giriş Yap</a>
     </div>
 </div>
 {% endblock %}

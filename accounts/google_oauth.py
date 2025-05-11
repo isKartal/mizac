@@ -1,5 +1,3 @@
-# accounts/google_oauth.py
-
 import os
 from django.conf import settings
 from google.oauth2 import id_token

@@ -159,3 +159,63 @@
     padding: 30px;
   }
 }
+
+/* Google ile giriş/kayıt butonu */
+.social-login {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.social-login p {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.social-login p::before {
+  left: 0;
+}
+
+.social-login p::after {
+  right: 0;
+}
+
+.google-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #757575;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  padding: 12px 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 80%;
+  max-width: 300px;
+}
+
+.google-login-btn i {
+  color: #DB4437;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.google-login-btn:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
