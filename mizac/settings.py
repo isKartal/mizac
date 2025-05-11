@@ -1,13 +1,15 @@
-# mizac/settings.py
-
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--7$tmakopcdtqrpjvl##@f-$qu&84)(&110&9+@#@-iey#5^hy'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure--7$tmakopcdtqrpjvl##@f-$qu&84)(&110&9+@#@-iey#5^hy')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,8 +32,6 @@ INSTALLED_APPS = [
     'nested_admin',
 ]
 
-# django-allauth'u kaldırdık
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,7 +48,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'templates')
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -121,16 +121,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '4mizacinfo@gmail.com'
-EMAIL_HOST_PASSWORD = 'ruht rhii mlnc yaow'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'ruht rhii mlnc yaow')
 
-# Google OAuth settings (django-allauth olmadan)
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+# Google OAuth settings
+GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 GOOGLE_OAUTH_REDIRECT_URI = 'http://localhost:8000/accounts/google/callback/'
 
 # Login URLs
