@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load socialaccount %}
 
 {% block title %}MİZAÇLAR | Giriş Yap{% endblock %}
 
@@ -26,7 +25,7 @@
   <!-- Google ile giriş butonu -->
   <div class="social-login">
       <p>veya</p>
-      <a href="{% provider_login_url 'google' %}" class="google-login-btn">
+      <a href="{% url 'google_login' %}" class="google-login-btn">
           <i class="fab fa-google"></i> Google ile Giriş Yap
       </a>
   </div>
