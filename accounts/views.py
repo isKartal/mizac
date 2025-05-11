@@ -1,5 +1,3 @@
-# accounts/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
@@ -27,7 +25,8 @@ def user_register(request):
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('login')
+                    messages.success(request, "Hesabınız başarıyla oluşturuldu!")
+                    return redirect('index')
                 else:
                     messages.error(request, "Kullanıcı doğrulaması yapılamadı.")
         else:
@@ -67,58 +66,7 @@ def google_login(request):
     
     return redirect(authorization_url)
 
-def google_callback(request):
-    """Google OAuth callback"""
-    # State kontrolü
-    state = request.session.get('oauth_state')
-    flow = get_google_auth_flow()
-    flow.fetch_token(authorization_response=request.build_absolute_uri())
-    
-    # Kullanıcı bilgilerini al
-    try:
-        credentials = flow.credentials
-        user_info = get_user_info(credentials)
-        
-        # Google'dan gelen bilgiler
-        email = user_info.get('email')
-        username = email.split('@')[0]  # Email'in @ öncesi kısmı
-        first_name = user_info.get('given_name', '')
-        last_name = user_info.get('family_name', '')
-        
-        # Kullanıcı var mı kontrol et
-        user = User.objects.filter(email=email).first()
-        
-        if user:
-            # Varsa giriş yap
-            login(request, user)
-            messages.success(request, f"Hoş geldiniz, {user.username}!")
-        else:
-            # Yoksa yeni kullanıcı oluştur
-            # Benzersiz username oluştur
-            base_username = username
-            counter = 1
-            while User.objects.filter(username=username).exists():
-                username = f"{base_username}{counter}"
-                counter += 1
-            
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                first_name=first_name,
-                last_name=last_name
-            )
-            user.set_unusable_password()  # Google ile giriş yaptığı için şifre yok
-            user.save()
-            
-            login(request, user)
-            messages.success(request, f"Hesabınız başarıyla oluşturuldu. Hoş geldiniz, {username}!")
-        
-        return redirect('index')
-    
-    except Exception as e:
-        messages.error(request, f"Google ile giriş yapılırken hata oluştu: {str(e)}")
-        return redirect('login')
-    
+
 def google_callback(request):
     """Google OAuth callback"""
     # State kontrolü
@@ -210,7 +158,8 @@ def google_callback(request):
                 )
                 
                 login(request, user)
-                messages.success(request, f"Hesabınız başarıyla oluşturuldu. Hoş geldiniz, {username}!")
+                messages.success(request, f"Hesabınız Google ile başarıyla oluşturuldu. Hoş geldiniz, {username}!")
+                messages.info(request, "İsterseniz daha sonra profil ayarlarından normal şifre de belirleyebilirsiniz.")
         
         # Test sonucu kontrolü
         from testing_algorithm.models import TestResult
@@ -224,7 +173,6 @@ def google_callback(request):
         messages.error(request, f"Google ile giriş yapılırken hata oluştu: {str(e)}")
         return redirect('login')
     
-
 @login_required
 def social_accounts(request):
     """Kullanıcının sosyal hesaplarını yönetme sayfası"""

@@ -7,3 +7,4 @@ echo "__pycache__/
 *.vscode/
 *.DS_Store
 " > .gitignore
+.env
