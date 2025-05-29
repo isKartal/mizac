@@ -219,3 +219,510 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
+
+/* ===========================================
+   ACCOUNTS SAYFALARI RESPONSIVE DÜZENLEMELERİ
+   Giriş, kayıt ve sosyal hesap sayfaları için mobil uyumluluk
+   =========================================== */
+
+/* Mevcut accounts.css'e eklenen responsive düzenlemeler */
+
+/* ===== AUTH CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .auth-container {
+    width: 90%;
+    max-width: 450px;
+    padding: 35px;
+    margin: 30px auto;
+  }
+  
+  .auth-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .auth-form input {
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+  
+  .auth-form button {
+    padding: 13px;
+    font-size: 15px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .auth-container {
+    width: 95%;
+    max-width: 100%;
+    padding: 25px 20px;
+    margin: 20px auto;
+  }
+  
+  .auth-container h2 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+  }
+  
+  .auth-form input {
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  
+  .auth-form button {
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .auth-links {
+    margin-top: 16px;
+  }
+  
+  .auth-links a {
+    font-size: 0.9rem;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .auth-container {
+    width: 98%;
+    padding: 20px 15px;
+    margin: 15px auto;
+  }
+  
+  .auth-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  
+  .auth-form input {
+    padding: 11px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  
+  .auth-form button {
+    padding: 11px;
+    font-size: 13px;
+  }
+}
+
+/* ===== GOOGLE LOGIN BUTTON RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .social-login {
+    margin-top: 25px;
+  }
+  
+  .social-login p {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+  }
+  
+  .google-login-btn {
+    width: 90%;
+    max-width: 320px;
+    padding: 11px 18px;
+    font-size: 0.95rem;
+  }
+  
+  .google-login-btn i {
+    font-size: 17px;
+    margin-right: 8px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .social-login {
+    margin-top: 20px;
+  }
+  
+  .social-login p {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+  }
+  
+  .social-login p::before,
+  .social-login p::after {
+    width: 35%;
+  }
+  
+  .google-login-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .google-login-btn i {
+    font-size: 16px;
+    margin-right: 7px;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .social-login p::before,
+  .social-login p::after {
+    width: 30%;
+  }
+  
+  .google-login-btn {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .google-login-btn i {
+    font-size: 15px;
+    margin-right: 6px;
+  }
+}
+
+/* ===== SOSYAL HESAPLAR SAYFASI RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .social-accounts-container {
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+  
+  .social-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  
+  .social-header p {
+    font-size: 0.95rem;
+  }
+  
+  .social-card {
+    padding: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .account-item {
+    padding: 16px;
+    margin-bottom: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .account-info {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .disconnect-btn {
+    align-self: flex-end;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .add-account {
+    padding: 25px;
+  }
+  
+  .connect-google-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+  
+  .password-section {
+    margin-top: 30px;
+    padding: 25px;
+  }
+  
+  .set-password-btn {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .social-accounts-container {
+    padding: 0 10px;
+    margin: 20px auto;
+  }
+  
+  .social-header {
+    margin-bottom: 30px;
+  }
+  
+  .social-header h1 {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+  
+  .social-header p {
+    font-size: 0.9rem;
+  }
+  
+  .social-card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .account-item {
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .account-info {
+    gap: 10px;
+  }
+  
+  .account-icon {
+    font-size: 20px;
+  }
+  
+  .account-details h4 {
+    font-size: 1rem;
+  }
+  
+  .account-details p {
+    font-size: 0.85rem;
+  }
+  
+  .disconnect-btn {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .add-account {
+    padding: 20px;
+  }
+  
+  .add-account h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  
+  .connect-google-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 9px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .connect-google-btn i {
+    font-size: 18px;
+  }
+  
+  .password-section {
+    margin-top: 25px;
+    padding: 20px;
+  }
+  
+  .password-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .password-section p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .set-password-btn {
+    padding: 7px 16px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .back-link {
+    margin-top: 25px;
+  }
+  
+  .back-link a {
+    font-size: 0.9rem;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .social-accounts-container {
+    padding: 0 8px;
+    margin: 15px auto;
+  }
+  
+  .social-header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .social-card {
+    padding: 16px;
+  }
+  
+  .account-item {
+    padding: 12px;
+  }
+  
+  .account-details h4 {
+    font-size: 0.95rem;
+  }
+  
+  .account-details p {
+    font-size: 0.8rem;
+  }
+  
+  .add-account,
+  .password-section {
+    padding: 16px;
+  }
+  
+  .connect-google-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .set-password-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ===== ŞİFRE BELIRLEME SAYFASI RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .auth-container p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .auth-container p {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* ===== ERROR MESSAGES RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .error-message {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .error-message {
+    padding: 7px;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+}
+
+/* ===== FORM VALIDATION RESPONSIVE ===== */
+
+/* Mobil cihazlarda form validation mesajları için */
+@media (max-width: 480px) {
+  .auth-form input:invalid {
+    border-color: #ff4444;
+  }
+  
+  .auth-form input:valid {
+    border-color: #44ff44;
+  }
+  
+  .auth-form input:focus:invalid {
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+  }
+  
+  .auth-form input:focus:valid {
+    box-shadow: 0 0 5px rgba(68, 255, 68, 0.3);
+  }
+}
+
+/* ===== ACCESSIBILITY İYİLEŞTİRMELERİ ===== */
+
+/* Touch cihazlar için minimum dokunma alanı */
+@media (max-width: 768px) {
+  .auth-form button,
+  .google-login-btn,
+  .connect-google-btn,
+  .disconnect-btn,
+  .set-password-btn {
+    min-height: 44px;
+  }
+  
+  .auth-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 4px;
+  }
+}
+
+/* Focus stilleri mobil için */
+@media (max-width: 768px) {
+  .auth-form input:focus,
+  .auth-form button:focus,
+  .google-login-btn:focus,
+  .connect-google-btn:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+}
+
+/* ===== LANDSCAPE MOBİL DÜZENLEMELERİ ===== */
+
+/* Mobil landscape (yatay) görünüm */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .auth-container {
+    width: 85%;
+    max-width: 600px;
+    padding: 20px 25px;
+    margin: 15px auto;
+  }
+  
+  .auth-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  
+  .auth-form input {
+    padding: 8px 12px;
+    margin-bottom: 10px;
+  }
+  
+  .auth-form button {
+    padding: 8px;
+    font-size: 13px;
+  }
+  
+  .social-login {
+    margin-top: 12px;
+  }
+  
+  .auth-links {
+    margin-top: 10px;
+  }
+}

@@ -676,3 +676,718 @@
     margin-bottom: 10px;
   }
 }
+
+/* ===========================================
+   TEST SAYFALARI RESPONSIVE DÜZENLEMELERİ
+   Test intro, test alma ve sonuç sayfaları için mobil uyumluluk
+   =========================================== */
+
+/* Mevcut test.css'e eklenen responsive düzenlemeler */
+
+/* ===== TEST INTRO CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .test-intro-container {
+    max-width: 100%;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+  }
+  
+  .test-intro-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+  
+  .intro-card,
+  .test-instructions,
+  .time-estimate {
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .intro-card h2,
+  .test-instructions h2,
+  .time-estimate h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .test-instructions ul {
+    padding-left: 1.2rem;
+  }
+  
+  .test-instructions li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .start-test-btn {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.5rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .test-intro-container {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+  
+  .test-intro-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  
+  .intro-card,
+  .test-instructions,
+  .time-estimate {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .intro-card h2,
+  .test-instructions h2,
+  .time-estimate h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+  }
+  
+  .intro-card p,
+  .time-estimate p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .test-instructions ul {
+    padding-left: 1rem;
+  }
+  
+  .test-instructions li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+  
+  .start-test-btn {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .test-intro-container {
+    padding: 0.8rem;
+  }
+  
+  .test-intro-container h1 {
+    font-size: 1.3rem;
+  }
+  
+  .intro-card,
+  .test-instructions,
+  .time-estimate {
+    padding: 0.8rem;
+  }
+  
+  .intro-card h2,
+  .test-instructions h2,
+  .time-estimate h2 {
+    font-size: 1.1rem;
+  }
+  
+  .start-test-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* ===== TEST CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .test-container {
+    max-width: 100%;
+    padding: 25px;
+    margin: 20px auto;
+  }
+  
+  .test-container h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+  
+  .test-description {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+  
+  .test-progress {
+    margin-bottom: 25px;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    margin-bottom: 6px;
+  }
+  
+  .progress-text {
+    font-size: 0.85rem;
+  }
+  
+  .question-text {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+  
+  .choices-container {
+    gap: 12px;
+  }
+  
+  .choice-label {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  
+  .choice-label input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.1);
+  }
+  
+  .choice-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .form-buttons {
+    margin-top: 25px;
+  }
+  
+  .form-buttons .btn {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .test-container {
+    padding: 20px;
+    margin: 15px auto;
+  }
+  
+  .test-container h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  
+  .test-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  
+  .phase-badge {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .test-progress {
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .progress-text {
+    font-size: 0.8rem;
+  }
+  
+  .question-container {
+    margin-bottom: 25px;
+  }
+  
+  .question-text {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  
+  .choices-container {
+    gap: 10px;
+  }
+  
+  .choice-label {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .choice-label input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1);
+  }
+  
+  .choice-text {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+  
+  .form-buttons {
+    margin-top: 20px;
+  }
+  
+  .form-buttons .btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .test-container {
+    padding: 16px;
+  }
+  
+  .test-container h1 {
+    font-size: 1.2rem;
+  }
+  
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+  
+  .choice-label {
+    padding: 8px 9px;
+    font-size: 0.85rem;
+  }
+  
+  .choice-text {
+    font-size: 0.85rem;
+  }
+  
+  .form-buttons .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== RESULT CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .result-container {
+    max-width: 100%;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+  }
+  
+  .result-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .result-summary {
+    padding: 18px;
+    margin-bottom: 25px;
+  }
+  
+  .element-properties h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  
+  .property-item {
+    gap: 6px;
+  }
+  
+  .property-label {
+    font-size: 0.95rem;
+  }
+  
+  .property-value {
+    padding: 2px 8px;
+    font-size: 0.9rem;
+  }
+  
+  .intensity-bar {
+    height: 8px;
+  }
+  
+  .raw-scores {
+    font-size: 0.8rem;
+  }
+  
+  .raw-score {
+    padding: 1px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .result-container {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+  
+  .result-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  
+  .result-summary {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .element-properties {
+    gap: 16px;
+  }
+  
+  .element-properties h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .property-item {
+    gap: 5px;
+  }
+  
+  .property-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .property-label {
+    font-size: 0.9rem;
+  }
+  
+  .property-value {
+    padding: 2px 7px;
+    font-size: 0.85rem;
+    align-self: flex-start;
+  }
+  
+  .intensity-bar {
+    height: 6px;
+  }
+  
+  .raw-scores {
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  
+  .raw-score {
+    padding: 1px 5px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ===== DOMINANT ELEMENT CARD RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .dominant-element-card {
+    padding: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .element-image-container {
+    margin: 20px auto;
+    max-width: 400px;
+  }
+  
+  .element-image {
+    height: 220px;
+  }
+  
+  .element-badge {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  
+  .element-icon {
+    font-size: 30px;
+    top: 16px;
+    right: 16px;
+  }
+  
+  .element-title {
+    font-size: 1.8rem;
+    margin-top: 16px;
+  }
+  
+  .no-image-text {
+    padding: 30px;
+    font-size: 1rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .dominant-element-card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .element-image-container {
+    margin: 16px auto;
+    max-width: 100%;
+  }
+  
+  .element-image {
+    height: 180px;
+  }
+  
+  .element-badge {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .element-icon {
+    font-size: 24px;
+    top: 12px;
+    right: 12px;
+  }
+  
+  .element-title {
+    font-size: 1.5rem;
+    margin-top: 12px;
+  }
+  
+  .no-image-text {
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== ELEMENT DETAILS RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .element-details,
+  .element-recommendations {
+    padding: 20px;
+    margin: 25px 0;
+  }
+  
+  .element-details h3,
+  .element-recommendations h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .element-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .recommendations-list {
+    gap: 12px;
+  }
+  
+  .recommendation-item {
+    gap: 12px;
+  }
+  
+  .recommendation-number {
+    width: 24px;
+    height: 24px;
+    font-size: 0.9rem;
+  }
+  
+  .recommendation-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .element-details,
+  .element-recommendations {
+    padding: 16px;
+    margin: 20px 0;
+  }
+  
+  .element-details h3,
+  .element-recommendations h3 {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+  
+  .element-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .recommendations-list {
+    gap: 10px;
+  }
+  
+  .recommendation-item {
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .recommendation-number {
+    width: 22px;
+    height: 22px;
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+  
+  .recommendation-text {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+}
+
+/* ===== BUTTON CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 25px;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .button-container {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    max-width: 100%;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== NO RESULT CONTAINER RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .no-result-container {
+    padding: 35px 18px;
+    margin: 25px 0;
+  }
+  
+  .no-result-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  
+  .no-result-text {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .no-result-container {
+    padding: 30px 15px;
+    margin: 20px 0;
+  }
+  
+  .no-result-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+  
+  .no-result-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+}
+
+/* ===== LANDSCAPE MOBİL DÜZENLEMELERİ ===== */
+
+/* Mobil landscape (yatay) görünüm */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .test-intro-container,
+  .test-container,
+  .result-container {
+    margin: 10px auto;
+    padding: 15px;
+  }
+  
+  .test-intro-container h1,
+  .test-container h1,
+  .result-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .intro-card,
+  .test-instructions,
+  .time-estimate {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  
+  .choices-container {
+    gap: 8px;
+  }
+  
+  .choice-label {
+    padding: 6px 8px;
+  }
+  
+  .element-image {
+    height: 140px;
+  }
+  
+  .dominant-element-card {
+    padding: 15px;
+  }
+}

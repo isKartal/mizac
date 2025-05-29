@@ -255,3 +255,514 @@
     font-size: 0.9rem;
   }
 }
+
+/* ===========================================
+   ABOUT SAYFASI RESPONSIVE DÜZENLEMELERİ
+   Hakkında sayfası için mobil uyumluluk
+   =========================================== */
+
+/* Mevcut about.css'e eklenen responsive düzenlemeler */
+
+/* ===== ABOUT SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 0;
+  }
+  
+  .about-content {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+  
+  .about-text {
+    flex: none;
+    max-width: 100%;
+  }
+  
+  .about-text p {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  
+  .about-image {
+    flex: none;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .about-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .about-section {
+    padding: 40px 0;
+  }
+  
+  .about-content {
+    gap: 20px;
+  }
+  
+  .about-text p {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  
+  .about-image {
+    max-width: 100%;
+  }
+}
+
+/* ===== TEAM SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .team-section {
+    padding: 60px 0;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .team-member {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .member-image {
+    height: 220px;
+  }
+  
+  .member-info {
+    padding: 18px;
+  }
+  
+  .member-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  
+  .member-title {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  
+  .member-bio {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  
+  .social-links {
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .social-links a {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .team-section {
+    padding: 40px 0;
+  }
+  
+  .team-grid {
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .team-member {
+    max-width: 100%;
+  }
+  
+  .member-image {
+    height: 200px;
+  }
+  
+  .member-info {
+    padding: 16px;
+  }
+  
+  .member-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+  
+  .member-title {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .member-bio {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  
+  .social-links {
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .social-links a {
+    font-size: 1rem;
+  }
+}
+
+/* ===== CONTACT SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+  
+  .contact-content {
+    flex-direction: column;
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .contact-info,
+  .contact-form {
+    flex: none;
+    width: 100%;
+  }
+  
+  .contact-item {
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  
+  .contact-item i {
+    font-size: 1.3rem;
+    margin-top: 2px;
+  }
+  
+  .contact-item p {
+    font-size: 1rem;
+  }
+  
+  .social-media {
+    margin-top: 25px;
+    justify-content: center;
+  }
+  
+  .social-media a {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+  
+  .form-group {
+    margin-bottom: 18px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 11px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .contact-button {
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 40px 0;
+  }
+  
+  .contact-content {
+    gap: 25px;
+    max-width: 100%;
+  }
+  
+  .contact-item {
+    margin-bottom: 16px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .contact-item i {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  
+  .contact-item p {
+    font-size: 0.95rem;
+  }
+  
+  .social-media {
+    margin-top: 20px;
+    gap: 12px;
+  }
+  
+  .social-media a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+  }
+  
+  .contact-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .contact-item {
+    margin-bottom: 14px;
+  }
+  
+  .contact-item i {
+    font-size: 1.3rem;
+  }
+  
+  .contact-item p {
+    font-size: 0.9rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 9px 11px;
+    font-size: 0.85rem;
+  }
+  
+  .contact-button {
+    padding: 9px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ===== SUCCESS NOTIFICATION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .success-notification {
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-radius: 8px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .success-notification {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+}
+
+/* ===== FORM VALIDATION RESPONSIVE ===== */
+
+/* Mobil cihazlarda form validation görsel ipuçları */
+@media (max-width: 480px) {
+  .form-group input:invalid,
+  .form-group textarea:invalid {
+    border-color: #ff6b6b;
+  }
+  
+  .form-group input:valid,
+  .form-group textarea:valid {
+    border-color: #51cf66;
+  }
+  
+  .form-group input:focus:invalid,
+  .form-group textarea:focus:invalid {
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+  }
+  
+  .form-group input:focus:valid,
+  .form-group textarea:focus:valid {
+    box-shadow: 0 0 0 2px rgba(81, 207, 102, 0.2);
+  }
+}
+
+/* ===== ACCESSIBILITY İYİLEŞTİRMELERİ ===== */
+
+/* Touch cihazlar için minimum dokunma alanı */
+@media (max-width: 768px) {
+  .contact-button,
+  .social-links a,
+  .social-media a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    min-height: 44px;
+  }
+}
+
+/* Focus stilleri mobil için */
+@media (max-width: 768px) {
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .contact-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+  
+  .social-links a:focus,
+  .social-media a:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 50%;
+  }
+}
+
+/* ===== LANDSCAPE MOBİL DÜZENLEMELERİ ===== */
+
+/* Mobil landscape (yatay) görünüm */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .about-section,
+  .team-section,
+  .contact-section {
+    padding: 40px 0;
+  }
+  
+  .about-content {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .about-text {
+    flex: 1;
+  }
+  
+  .about-image {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+  }
+  
+  .member-image {
+    height: 160px;
+  }
+  
+  .member-info {
+    padding: 12px;
+  }
+  
+  .contact-content {
+    flex-direction: row;
+    gap: 25px;
+  }
+  
+  .contact-info,
+  .contact-form {
+    flex: 1;
+  }
+  
+  .contact-item {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Animasyonları mobilde optimize et */
+@media (max-width: 768px) {
+  .team-member {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-5px);
+  }
+  
+  .contact-button {
+    transition: all 0.2s ease;
+  }
+  
+  .social-links a,
+  .social-media a {
+    transition: all 0.2s ease;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .social-links,
+  .social-media,
+  .contact-form,
+  .success-notification {
+    display: none !important;
+  }
+  
+  .about-section,
+  .team-section,
+  .contact-section {
+    padding: 20px 0 !important;
+  }
+  
+  .contact-info {
+    page-break-inside: avoid;
+  }
+  
+  .team-member {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+}
