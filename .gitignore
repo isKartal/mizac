@@ -1,10 +1,27 @@
-echo "__pycache__/
-*.pyc
+# Python derleme dosyaları
+__pycache__/
+*.py[cod]
 *.pyo
+
+# Ortam dosyaları
 .env
+*.env
+
+# Sanal ortam klasörü
+venv/
+
+# Django static ve media dosyaları (deployment yapmıyorsan)
+staticfiles/
+media/
+
+# VS Code ayarları (isteğe bağlı)
+.vscode/
+
+# Mac ve Linux sistem dosyaları
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Log dosyaları (varsa)
 *.log
-*.idea/
-*.vscode/
-*.DS_Store
-" > .gitignore
-.env

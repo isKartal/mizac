@@ -2875,3 +2875,442 @@
     font-size: 1rem;
   }
 }
+
+/* ===========================================
+   PROFİLES SAYFASI TAŞMA SORUNU DÜZELTMESİ
+   Gmail adresi ve diğer içeriklerin taşmasını önleme
+   =========================================== */
+
+/* Mevcut profiles.css'e eklenen/güncellenecek responsive düzenlemeler */
+
+/* ===== PROFİL SECTIONS RESPONSIVE DÜZELTMELERİ ===== */
+
+/* Tablet görünüm - 768px özel düzeltmeleri */
+@media (max-width: 768px) {
+  .profile-sections {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .section-card {
+    padding: 20px;
+    margin-bottom: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .section-card h3 {
+    text-align: left;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .section-card h3::after {
+    left: 0;
+    transform: none;
+  }
+  
+  .section-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
+  
+  .section-icon i {
+    font-size: 18px;
+  }
+}
+
+/* ===== SOSYAl HESAPLAR BÖLÜMÜ ÖZELLEŞTİRMELERİ ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .connection-list {
+    margin: 15px 0;
+  }
+  
+  .connection-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .connection-item i {
+    margin-right: 8px;
+    margin-bottom: 4px;
+    align-self: center;
+  }
+  
+  .connection-email {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    max-width: 100%;
+    word-break: break-all;
+    text-align: center;
+    align-self: center;
+  }
+  
+  .no-connections {
+    padding: 12px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px auto;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: block;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .profile-sections {
+    gap: 15px;
+  }
+  
+  .section-card {
+    padding: 16px;
+  }
+  
+  .section-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    padding-right: 50px; /* İkon için yer bırak */
+  }
+  
+  .section-icon {
+    top: 12px;
+    right: 12px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .section-icon i {
+    font-size: 16px;
+  }
+  
+  .connection-item {
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+  
+  .connection-email {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  
+  .no-connections {
+    padding: 10px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  
+  .btn {
+    max-width: 100%;
+    padding: 9px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Çok küçük mobil */
+@media (max-width: 360px) {
+  .section-card {
+    padding: 14px;
+  }
+  
+  .section-card h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-right: 45px;
+  }
+  
+  .section-icon {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .section-icon i {
+    font-size: 14px;
+  }
+  
+  .connection-email {
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ===== QUICK LINKS RESPONSIVE DÜZELTMELERİ ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .quick-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+  }
+  
+  .quick-link-item {
+    padding: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 40px;
+    word-wrap: break-word;
+  }
+  
+  .quick-link-item i {
+    font-size: 1rem;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  
+  .quick-link-item span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .quick-link-item {
+    padding: 10px;
+    font-size: 0.9rem;
+    justify-content: flex-start;
+    text-align: left;
+    min-height: 44px;
+  }
+  
+  .quick-link-item i {
+    margin-right: 8px;
+  }
+  
+  .quick-link-item span {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
+
+/* ===== ACCOUNT STATS RESPONSIVE DÜZELTMELERİ ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .account-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+    padding-top: 15px;
+  }
+  
+  .stat-item {
+    padding: 12px 8px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stat-icon {
+    margin: 0 auto 8px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .stat-icon i {
+    font-size: 14px;
+  }
+  
+  .stat-info h4 {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  
+  .stat-value {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .account-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .stat-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 12px;
+  }
+  
+  .stat-icon {
+    margin: 0 12px 0 0;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .stat-icon i {
+    font-size: 16px;
+  }
+  
+  .stat-info h4 {
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+  
+  .stat-value {
+    font-size: 1.4rem;
+  }
+}
+
+/* ===== PROFİL INFO RESPONSIVE DÜZELTMELERİ ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 15px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .profile-avatar i {
+    font-size: 40px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+  
+  .profile-name p {
+    font-size: 1rem;
+    word-break: break-all;
+    line-height: 1.3;
+  }
+  
+  .member-since {
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 12px;
+  }
+  
+  .profile-avatar i {
+    font-size: 35px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.4rem;
+    margin-bottom: 3px;
+  }
+  
+  .profile-name p {
+    font-size: 0.9rem;
+  }
+  
+  .member-since {
+    font-size: 0.85rem;
+    margin-top: 3px;
+  }
+}
+
+/* ===== LOGOUT SECTION RESPONSIVE ===== */
+
+/* Tablet ve mobil görünüm */
+@media (max-width: 768px) {
+  .logout-section {
+    margin-top: 20px;
+  }
+  
+  .btn-logout {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-logout {
+    max-width: 100%;
+    padding: 9px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ===== ÖZEL TEXT OVERFLOW FİXLERİ ===== */
+
+/* Tüm metin içerikleri için overflow koruması */
+.profile-card *,
+.section-card *,
+.connection-item *,
+.quick-link-item * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Email adresleri için özel overflow koruması */
+.connection-email,
+.profile-name p[type="email"],
+input[type="email"] {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* Uzun metin içerikleri için genel koruma */
+.section-card p,
+.section-card span,
+.connection-item span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  line-height: 1.4;
+}

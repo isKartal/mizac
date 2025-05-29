@@ -964,3 +964,401 @@ footer {
     margin-top: 10px;
   }
 }
+
+/* ===========================================
+   RESPONSIVE DÜZENLEMELER - BASE.CSS
+   Site görünümünü koruyarak mobil uyumluluğu artırma
+   =========================================== */
+
+/* Mevcut stillerin üzerine eklenen responsive düzenlemeler */
+
+/* ===== HEADER VE NAVİGASYON RESPONSIVE DÜZENLEMELERİ ===== */
+
+/* Tablet ve Mobil için navigasyon düzenlemeleri */
+@media (max-width: 991px) {
+  .nav-container {
+    padding: 12px 4%;
+  }
+  
+  .nav-links, .profile-container, .login-button {
+    display: none;
+  }
+  
+  .hamburger-button {
+    display: block;
+  }
+  
+  .logo-img {
+    height: 42px;
+  }
+}
+
+/* Küçük tablet ve büyük mobil */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 10px 3%;
+  }
+  
+  .logo-img {
+    height: 38px;
+  }
+  
+  .hamburger-button {
+    font-size: 22px;
+  }
+  
+  /* Side menu genişlik ayarı */
+  .side-menu {
+    width: 280px;
+  }
+  
+  /* Footer responsive düzenlemesi */
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-logo-img {
+    height: 55px;
+    max-width: 200px;
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .footer-social {
+    width: 100%;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* Küçük mobil cihazlar */
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  .nav-container {
+    padding: 8px 3%;
+  }
+  
+  .logo-img {
+    height: 35px;
+  }
+  
+  .side-menu {
+    width: 260px;
+  }
+  
+  /* Footer mobil düzeni */
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .footer-logo-img {
+    height: 50px;
+  }
+  
+  .footer-bottom {
+    font-size: 13px;
+    padding: 20px 10px;
+  }
+  
+  /* Butonlar */
+  .btn {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Çok küçük mobil cihazlar */
+@media (max-width: 360px) {
+  .container {
+    width: 96%;
+    padding: 8px;
+  }
+  
+  .nav-container {
+    padding: 6px 2%;
+  }
+  
+  .logo-img {
+    height: 32px;
+  }
+  
+  .side-menu {
+    width: 240px;
+  }
+  
+  .hamburger-button {
+    font-size: 20px;
+  }
+}
+
+/* ===== SECTION VE İÇERİK RESPONSIVE DÜZENLEMELERİ ===== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .section-description {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .main-content {
+    min-height: calc(100vh - 250px);
+    padding: 15px 0;
+  }
+}
+
+/* Mobil */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .section-title::after {
+    width: 60px;
+    height: 2px;
+  }
+  
+  .section-description {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .main-content {
+    padding: 10px 0;
+  }
+}
+
+/* ===== DROPDOWN VE MODAL RESPONSIVE DÜZENLEMELERİ ===== */
+
+@media (max-width: 768px) {
+  .dropdown-content {
+    right: -10px;
+    min-width: 220px;
+  }
+  
+  .dropdown-content a {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown-content {
+    right: -20px;
+    min-width: 200px;
+  }
+  
+  .dropdown-content a {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .dropdown-username {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== GENEL RESPONSIVE TEXT VE SPACING DÜZENLEMELERİ ===== */
+
+/* Tablet için text boyutları */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.3rem; }
+  h4 { font-size: 1.2rem; }
+  
+  p {
+    line-height: 1.5;
+  }
+}
+
+/* Mobil için text boyutları */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.1rem; }
+  
+  p {
+    line-height: 1.4;
+  }
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+
+/* Mobilde gizle */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Masaüstünde gizle */
+@media (min-width: 769px) {
+  .hide-desktop {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* Tablet ve altında göster */
+@media (max-width: 768px) {
+  .show-mobile {
+    display: block !important;
+  }
+  
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+/* ===== PERFORMANCE VE ACCESSIBILITY İYİLEŞTİRMELERİ ===== */
+
+/* Touch cihazlar için hover efektlerini devre dışı bırak */
+@media (hover: none) {
+  .nav-item:hover::after,
+  .login-button:hover::after {
+    width: 0;
+  }
+  
+  .nav-item:hover,
+  .login-button:hover,
+  .profile-button:hover {
+    background-color: transparent;
+    transform: none;
+  }
+}
+
+/* Animasyonları azalt (kullanıcı tercihi) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode desteği */
+@media (prefers-color-scheme: dark) {
+  /* Şimdilik mevcut light tema korunuyor */
+  /* İleride dark mode eklenebilir */
+}
+
+/* ===== LANDSCAPE MOBİL DÜZENLEMELERİ ===== */
+
+/* Mobil landscape (yatay) görünüm */
+@media (max-width: 768px) and (orientation: landscape) {
+  .nav-container {
+    padding: 6px 3%;
+  }
+  
+  .logo-img {
+    height: 32px;
+  }
+  
+  .main-content {
+    min-height: calc(100vh - 200px);
+  }
+  
+  .hero-section {
+    height: auto;
+    min-height: 70vh;
+    padding: 80px 5%;
+  }
+}
+
+/* ===== HİGH DPI SCREEN DESTEĞİ ===== */
+
+/* Retina ekranlar için görsel optimizasyonu */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo-img,
+  .footer-logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ===== KEYBOARD NAVİGASYON DESTEĞİ ===== */
+
+/* Tab navigation için focus stilleri */
+.nav-item:focus,
+.login-button:focus,
+.profile-button:focus,
+.hamburger-button:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .nav-container,
+  .hamburger-button,
+  .side-menu,
+  .menu-overlay,
+  footer {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+  
+  * {
+    color: black !important;
+    background: white !important;
+  }
+}
