@@ -21,14 +21,8 @@ def user_register(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user.save()
-                # Kullanıcıyı authenticate ederek backend bilgisini ekliyoruz
-                user = authenticate(request, username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    messages.success(request, "Hesabınız başarıyla oluşturuldu!")
-                    return redirect('index')
-                else:
-                    messages.error(request, "Kullanıcı doğrulaması yapılamadı.")
+                messages.success(request, "Hesabınız başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.")
+                return redirect('login')  # Profil ayarları yerine login sayfasına yönlendir
         else:
             messages.error(request, "Şifreler uyuşmuyor.")
     
@@ -42,7 +36,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('profiles')
+            return redirect('index')  # Ana sayfaya yönlendir
         else:
             messages.error(request, "Kullanıcı adı veya şifre yanlış.")
 
@@ -161,13 +155,8 @@ def google_callback(request):
                 messages.success(request, f"Hesabınız Google ile başarıyla oluşturuldu. Hoş geldiniz, {username}!")
                 messages.info(request, "İsterseniz daha sonra profil ayarlarından normal şifre de belirleyebilirsiniz.")
         
-        # Test sonucu kontrolü
-        from testing_algorithm.models import TestResult
-        if TestResult.objects.filter(user=user).exists():
-            return redirect('profiles')
-        else:
-            # Test sonucu yoksa test sayfasına yönlendir
-            return redirect('test_list')
+        # Test sonucu kontrolü - Hem test sonucu olan hem olmayan kullanıcıları ana sayfaya yönlendir
+        return redirect('index')  # Ana sayfaya yönlendir
     
     except Exception as e:
         messages.error(request, f"Google ile giriş yapılırken hata oluştu: {str(e)}")
