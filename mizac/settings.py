@@ -132,3 +132,7 @@ GOOGLE_OAUTH_REDIRECT_URI = 'http://localhost:8000/accounts/google/callback/'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Zaman dilimi ayarları
+USE_TZ = True
+TIME_ZONE = 'Europe/Istanbul'  # Türkiye için
