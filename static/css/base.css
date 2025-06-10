@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TÜM TIKLAMA EFEKTLERİNİ KALDIR - Mobile ve Desktop için
+   TÜM TIKLAMA EFEKTLERİNİ KALDIR - Mobile ve Desktop için (Düzeltilmiş Versiyon)
    ========================================================================== */
 
 /* Tüm elementler için outline ve focus efektlerini kaldır */
@@ -11,12 +11,8 @@
 *:hover {
   outline: none !important;
   -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  -khtml-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
+  -webkit-touch-callout: none !important; /* iOS uzun basma menüsünü kaldırır */
+  /* user-select kaldırıldı - normal seçim ve kaydırma için */
 }
 
 /* Mobil cihazlarda tıklama vurgularını kaldır */
@@ -41,11 +37,8 @@ a,
   outline: none !important;
   border: none !important;
   -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
+  -webkit-touch-callout: none !important; /* iOS uzun basma menüsünü kaldırır */
+  /* user-select kaldırıldı - normal seçim ve kaydırma için */
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
@@ -90,7 +83,7 @@ a:focus {
   outline: none !important;
   text-decoration: none !important;
   -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none !important;
+  -webkit-touch-callout: none !important; /* iOS uzun basma menüsünü kaldırır */
 }
 
 /* Input alanları için */
@@ -128,15 +121,15 @@ input[type="radio"] {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* Mobil'de text selection'ı engelle */
-body {
+/* Mobil'de text selection'ı engelle (Kaldırıldı - aşağıdaki kural ile sadece belirli alanlarda izin verilir) */
+/* body {
   -webkit-touch-callout: none !important;
   -webkit-user-select: none !important;
   -khtml-user-select: none !important;
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   user-select: none !important;
-}
+} */
 
 /* Sadece text alanlarında selection'a izin ver */
 input[type="text"],
@@ -154,7 +147,7 @@ textarea,
   user-select: text !important;
 }
 
-/* Mobil cihazlarda zoom'u engelle */
+/* Mobil cihazlarda zoom'u engelle (font-size ile) */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -166,7 +159,7 @@ textarea {
   font-size: 16px !important; /* iOS'ta zoom'u engeller */
 }
 
-/* WebKit scrollbar'ları kaldır */
+/* WebKit scrollbar'ları kaldır (İsteğe bağlı, kaydırma çubuklarını gizler) */
 ::-webkit-scrollbar {
   width: 0px !important;
   background: transparent !important;
@@ -176,35 +169,35 @@ textarea {
   background: transparent !important;
 }
 
-/* Firefox için scrollbar kaldır */
+/* Firefox için scrollbar kaldır (İsteğe bağlı, kaydırma çubuklarını gizler) */
 html {
   scrollbar-width: none !important;
 }
 
-/* Mobil'de pull-to-refresh'i engelle */
+/* Mobil'de pull-to-refresh'i engelle (İsteğe bağlı, sayfayı aşağı çekerken olan efekti kaldırır) */
 body {
   overscroll-behavior: none !important;
   overscroll-behavior-y: none !important;
 }
 
-/* iOS Safari'de bounce effect'i kaldır */
+/* iOS Safari'de bounce effect'i kaldır (İsteğe bağlı, sayfa sınırlarına geldiğinde olan zıplama efekti) */
 html,
 body {
   -webkit-overflow-scrolling: touch !important;
   overflow-scrolling: touch !important;
 }
 
-/* Mobil'de long press menu'yu engelle */
+/* Mobil'de long press menu'yu engelle (İsteğe bağlı, bazı elementlerde uzun basma menüsünü kaldırır) */
 img,
 a,
 button,
 [role="button"] {
   -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  pointer-events: auto !important;
+  /* -webkit-user-select: none !important; kaldırıldı */
+  pointer-events: auto !important; /* Önemli: Elementlerin tıklanabilir olmasını sağlar */
 }
 
-/* Dragging'i engelle */
+/* Dragging'i engelle (Sadece görsel elementlerde, pointer-events kaldırıldı) */
 img,
 svg,
 canvas {
@@ -213,7 +206,7 @@ canvas {
   -moz-user-drag: none !important;
   -o-user-drag: none !important;
   user-drag: none !important;
-  pointer-events: none !important;
+  /* pointer-events: none !important; kaldırıldı - sağ tık ve etkileşim için */
 }
 
 /* Clickable elementler için pointer events'i geri aç */
