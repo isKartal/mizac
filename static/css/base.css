@@ -1,3 +1,275 @@
+/* ==========================================================================
+   TÜM TIKLAMA EFEKTLERİNİ KALDIR - Mobile ve Desktop için
+   ========================================================================== */
+
+/* Tüm elementler için outline ve focus efektlerini kaldır */
+*,
+*:before,
+*:after,
+*:focus,
+*:active,
+*:hover {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Mobil cihazlarda tıklama vurgularını kaldır */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Tüm butonlar için */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a,
+.btn,
+.button,
+[role="button"] {
+  outline: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Focus durumları için */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+a:focus,
+.btn:focus,
+[tabindex]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Active durumları için */
+button:active,
+input:active,
+textarea:active,
+select:active,
+a:active,
+.btn:active,
+[role="button"]:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transform: none !important;
+}
+
+/* Link'ler için özel */
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  outline: none !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Input alanları için */
+input,
+textarea,
+select {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Mobil Safari için özel ayarlar */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Checkbox ve Radio için */
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Mobil'de text selection'ı engelle */
+body {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Sadece text alanlarında selection'a izin ver */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+[contenteditable="true"],
+.selectable {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Mobil cihazlarda zoom'u engelle */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+  font-size: 16px !important; /* iOS'ta zoom'u engeller */
+}
+
+/* WebKit scrollbar'ları kaldır */
+::-webkit-scrollbar {
+  width: 0px !important;
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+/* Firefox için scrollbar kaldır */
+html {
+  scrollbar-width: none !important;
+}
+
+/* Mobil'de pull-to-refresh'i engelle */
+body {
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+}
+
+/* iOS Safari'de bounce effect'i kaldır */
+html,
+body {
+  -webkit-overflow-scrolling: touch !important;
+  overflow-scrolling: touch !important;
+}
+
+/* Mobil'de long press menu'yu engelle */
+img,
+a,
+button,
+[role="button"] {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  pointer-events: auto !important;
+}
+
+/* Dragging'i engelle */
+img,
+svg,
+canvas {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+  pointer-events: none !important;
+}
+
+/* Clickable elementler için pointer events'i geri aç */
+button,
+a,
+input,
+textarea,
+select,
+[role="button"],
+[onclick],
+.btn,
+.clickable {
+  pointer-events: auto !important;
+}
+
+/* Tüm webkit ve moz outline'ları kaldır */
+*::-moz-focus-inner {
+  border: 0 !important;
+  outline: none !important;
+}
+
+*::-webkit-input-placeholder {
+  color: inherit !important;
+}
+
+*::-moz-placeholder {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+*::placeholder {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* Modern CSS için focus-visible kullan (accessibility için) */
+*:focus-visible {
+  outline: none !important;
+}
+
+/* Sadece keyboard navigation için görünür focus */
+.keyboard-navigation *:focus {
+  outline: 2px solid #007bff !important;
+  outline-offset: 2px !important;
+}
+
+/* ==========================================================================
+   ÖZEL DURUMLAR - Bu elementler için efektler kalabilir
+   ========================================================================== */
+
+/* Eğer bazı elementlerde focus görünür olmasını istiyorsanız: */
+/*.important-input:focus {
+  outline: 2px solid var(--accent-color) !important;
+  outline-offset: 2px !important;
+}*/
+
 /* Reset */
 * {
   margin: 0;
