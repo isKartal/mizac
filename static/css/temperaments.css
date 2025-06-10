@@ -862,16 +862,44 @@
     max-width: 200px;
   }
 
-  /* Öneri Kartları - Tek Sütun */
+  /* Öneri Kartları - 2 Sütun (Güzel Oranlar) */
   .temperament-suggestions { margin: 50px 0; padding: 30px 0; }
   .suggestions-header h2 { font-size: 1.6rem; }
   .suggestions-header p { font-size: 0.95rem; }
   .suggestions-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 3%;
-    max-width: 450px;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 4%;
+  }
+  .suggestion-card {
+    border-radius: 12px;
+    height: auto;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+  .suggestion-image { 
+    height: 140px; 
+    border-radius: 12px 12px 0 0;
+    flex-shrink: 0;
+  }
+  .suggestion-title { 
+    font-size: 1rem; 
+    margin: 16px 16px 8px; 
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+  .suggestion-description { 
+    font-size: 0.85rem; 
+    padding: 0 16px; 
+    margin-bottom: 12px; 
+    line-height: 1.4;
+    flex: 1;
+  }
+  .suggestion-actions { 
+    padding: 12px 16px; 
+    margin-top: auto;
+    flex-shrink: 0;
   }
 
   /* Modal Pencere */
@@ -885,7 +913,13 @@
   /* Animasyon ve Performans Optimizasyonu */
   .flip-card-inner { transition: transform 0.6s ease; }
   .suggestion-card:hover, .water-personality-card:hover, .fire-personality-card:hover, .air-personality-card:hover, .earth-personality-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Hover efektlerini mobilde daha hafif yap */
+  .suggestion-card {
+    transition: all 0.2s ease;
   }
 }
 
@@ -922,10 +956,44 @@
     max-width: 280px;
   }
 
-  /* Öneri Kartları */
+  /* Öneri Kartları - 2 Sütun (Optimize Edilmiş) */
   .temperament-suggestions { padding: 25px 0; }
-  .suggestions-header h2 { font-size: 1.4rem; }
-  .suggestion-image { height: 140px; }
+  .suggestions-header h2 { font-size: 1.5rem; }
+  .suggestions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 3%;
+  }
+  .suggestion-card {
+    border-radius: 10px;
+    min-height: 260px;
+  }
+  .suggestion-image { 
+    height: 120px; 
+    border-radius: 10px 10px 0 0;
+  }
+  .suggestion-title { 
+    font-size: 0.95rem; 
+    margin: 14px 14px 6px; 
+    line-height: 1.2;
+  }
+  .suggestion-description { 
+    font-size: 0.8rem; 
+    padding: 0 14px; 
+    margin-bottom: 10px; 
+    line-height: 1.3;
+  }
+  .suggestion-actions { 
+    padding: 10px 14px; 
+  }
+  .suggestion-button { 
+    font-size: 0.8rem; 
+    padding: 6px 10px; 
+  }
+  .suggestion-element, .suggestion-category { 
+    font-size: 0.7rem; 
+    padding: 4px 8px; 
+  }
 
   /* Modal Pencere */
   .modal-container { width: 98%; max-height: 90vh; }
@@ -941,6 +1009,7 @@
    Küçük Telefonlar (max-width: 360px)
    -------------------------------------------------------------------------- */
 @media (max-width: 360px) {
+  /* Flip Kartlar */
   .temperament-cards { gap: 12px; }
   .flip-card { height: 220px; }
   .flip-card-front, .flip-card-back { padding: 12px 8px; }
@@ -950,11 +1019,51 @@
   .card-circle { width: 50px; height: 50px; margin-bottom: 10px; }
   .card-circle i { font-size: 20px; }
   .card-link { padding: 5px 10px; font-size: 0.7rem; }
+  
+  /* Öneri Kartları - 2 Sütun (Güzel Görünüm) */
+  .temperament-suggestions { padding: 20px 0; }
+  .suggestions-header h2 { font-size: 1.4rem; }
+  .suggestions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 3%;
+  }
+  .suggestion-card {
+    border-radius: 8px;
+    min-height: 240px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  .suggestion-image { 
+    height: 110px; 
+    border-radius: 8px 8px 0 0;
+  }
+  .suggestion-title { 
+    font-size: 0.9rem; 
+    margin: 12px 12px 6px; 
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .suggestion-description { 
+    font-size: 0.75rem; 
+    padding: 0 12px; 
+    margin-bottom: 8px; 
+    line-height: 1.3;
+    color: #666;
+  }
+  .suggestion-actions { 
+    padding: 8px 12px; 
+  }
+  .suggestion-button { 
+    font-size: 0.75rem; 
+    padding: 5px 8px; 
+    border-radius: 15px;
+  }
+  .suggestion-element, .suggestion-category { 
+    font-size: 0.65rem; 
+    padding: 3px 6px; 
+    border-radius: 10px;
+  }
 }
-
-/* ==========================================================================
-   8. ÖZEL DURUM VE OPTİMİZASYONLAR
-   ========================================================================== */
 
 /* --------------------------------------------------------------------------
    Yatay Moddaki Telefonlar
@@ -964,5 +1073,3 @@
     max-height: calc(95vh - 80px);
   }
 }
-
-
