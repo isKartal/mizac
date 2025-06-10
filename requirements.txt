@@ -5,7 +5,7 @@ python-dotenv==1.1.0
 python-monkey-business==1.1.0
 sqlparse==0.5.3
 tzdata==2025.2
-google-auth
-google-auth-oauthlib
 google-api-python-client
 Pillow
+google-auth>=2.3.2
+google-auth-oauthlib>=0.5.0
