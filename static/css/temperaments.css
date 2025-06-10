@@ -959,16 +959,4 @@
   }
 }
 
-/* --------------------------------------------------------------------------
-   Dokunmatik Cihazlar için Hover Optimizasyonu
-   -------------------------------------------------------------------------- */
-@media (hover: none) {
-  /* Hover ile dönme efektini devre dışı bırak */
-  .flip-card:hover .flip-card-inner {
-    transform: none;
-  }
-  /* Dokunma (active) ile dönme efekti eklenebilir. */
-  .flip-card:active .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-}
+
