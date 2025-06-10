@@ -144,7 +144,7 @@
 
     <script>
         // ==========================================================================
-        // TIKLAMA EFEKTLERİNİ JAVASCRIPT İLE KALDIR
+        // TIKLAMA EFEKTLERİNİ JAVASCRIPT İLE KALDIR (Düzeltilmiş Versiyon)
         // ==========================================================================
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -162,15 +162,7 @@
                     
                     // Webkit tap highlight'ı kaldır
                     element.style.webkitTapHighlightColor = 'transparent';
-                    element.style.webkitTouchCallout = 'none';
-                    
-                    // User select'i kaldır (text selection hariç)
-                    if (!element.matches('input[type="text"], input[type="email"], input[type="password"], textarea, [contenteditable="true"]')) {
-                        element.style.webkitUserSelect = 'none';
-                        element.style.mozUserSelect = 'none';
-                        element.style.msUserSelect = 'none';
-                        element.style.userSelect = 'none';
-                    }
+                    element.style.webkitTouchCallout = 'none'; // iOS uzun basma menüsünü kaldırır
                 });
             }
             
@@ -232,36 +224,7 @@
                 document.body.classList.remove('keyboard-navigation');
             });
             
-            // Mobile zoom'u engelle
-            document.addEventListener('touchmove', function(e) {
-                if (e.scale !== 1) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // Context menu'yu engelle (long press)
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-            
-            // Text selection'ı belirli elementler dışında engelle
-            document.addEventListener('selectstart', function(e) {
-                if (!e.target.matches('input[type="text"], input[type="email"], input[type="password"], textarea, [contenteditable="true"], .selectable')) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-            // Drag'i engelle
-            document.addEventListener('dragstart', function(e) {
-                if (e.target.matches('img, svg, canvas')) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-            console.log('Tıklama efektleri kaldırıldı');
+            console.log('Tıklama efektleri kaldırıldı (Düzeltilmiş Versiyon)');
         });
 
         // CSS ile kaldırılamayan durumlar için ek fonksiyon
