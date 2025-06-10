@@ -76,7 +76,7 @@
 
 /* Element Bölümü */
 .elements-section {
-  padding: 120px 0;
+  padding: 10px 0;
   opacity: 0;
   transform: translateY(30px);
   transition: var(--transition);
