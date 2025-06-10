@@ -1,4 +1,7 @@
-/* Mizaç stilleri için temel ayarlar */
+/* ==========================================================================
+   1. TEMEL STİLLER (DEĞİŞKENLER, GENEL ELEMANLAR)
+   ========================================================================== */
+
 :root {
   --primary-color: #292321;
   --secondary-color: #ece9e3;
@@ -20,7 +23,10 @@
   --earth-bg: rgba(141, 110, 99, 0.2);
 }
 
-/* Bölüm stilleri */
+/* ==========================================================================
+   2. BÖLÜM VE BAŞLIK STİLLERİ
+   ========================================================================== */
+
 .section-description, .temperament-description {
   text-align: center;
   max-width: 800px;
@@ -64,7 +70,6 @@
   border-radius: 2px;
 }
 
-/* Element rozetleri */
 .element-badge {
   display: inline-block;
   padding: 8px 20px;
@@ -74,27 +79,35 @@
   margin-bottom: 15px;
 }
 
-.element-badge.fire {
-  background-color: var(--fire-bg);
-  color: var(--fire-color);
+.element-badge.fire { background-color: var(--fire-bg); color: var(--fire-color); }
+.element-badge.air { background-color: var(--air-bg); color: var(--air-color); }
+.element-badge.water { background-color: var(--water-bg); color: var(--water-color); }
+.element-badge.earth { background-color: var(--earth-bg); color: var(--earth-color); }
+
+
+/* ==========================================================================
+   3. ÇEVİRİLEBİLİR KART (FLIP CARD) STİLLERİ
+   ========================================================================== */
+.temperament-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+  padding: 0 15px;
 }
 
-.element-badge.air {
-  background-color: var(--air-bg);
-  color: var(--air-color);
+.temperament-card-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
 }
 
-.element-badge.water {
-  background-color: var(--water-bg);
-  color: var(--water-color);
+.temperament-card-container.appear {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.element-badge.earth {
-  background-color: var(--earth-bg);
-  color: var(--earth-color);
-}
-
-/* Çevirilebilir kart stilleri */
 .flip-card {
   background-color: transparent;
   width: 260px;
@@ -141,24 +154,11 @@
   text-align: center;
 }
 
-/* Element türüne göre çevirilebilir kart arkaplanları */
-.flip-card.fire .flip-card-back {
-  background: linear-gradient(135deg, var(--fire-color), #ff5252);
-}
+.flip-card.fire .flip-card-back { background: linear-gradient(135deg, var(--fire-color), #ff5252); }
+.flip-card.air .flip-card-back { background: linear-gradient(135deg, var(--air-color), #b0bec5); }
+.flip-card.water .flip-card-back { background: linear-gradient(135deg, var(--water-color), #64b5f6); }
+.flip-card.earth .flip-card-back { background: linear-gradient(135deg, var(--earth-color), #bcaaa4); }
 
-.flip-card.air .flip-card-back {
-  background: linear-gradient(135deg, var(--air-color), #b0bec5);
-}
-
-.flip-card.water .flip-card-back {
-  background: linear-gradient(135deg, var(--water-color), #64b5f6);
-}
-
-.flip-card.earth .flip-card-back {
-  background: linear-gradient(135deg, var(--earth-color), #bcaaa4);
-}
-
-/* Kart daireleri */
 .card-circle {
   width: 90px;
   height: 90px;
@@ -179,40 +179,16 @@
   font-size: 36px;
 }
 
-/* Element türüne göre kart daire stilleri */
-.card-circle.fire {
-  background-color: rgba(231, 76, 60, 0.15);
-}
+.card-circle.fire { background-color: var(--fire-bg); }
+.card-circle.air { background-color: var(--air-bg); }
+.card-circle.water { background-color: var(--water-bg); }
+.card-circle.earth { background-color: var(--earth-bg); }
 
-.card-circle.air {
-  background-color: rgba(120, 144, 156, 0.15);
-}
+.card-circle.fire i { color: var(--fire-color); }
+.card-circle.air i { color: var(--air-color); }
+.card-circle.water i { color: var(--water-color); }
+.card-circle.earth i { color: var(--earth-color); }
 
-.card-circle.water {
-  background-color: rgba(41, 128, 185, 0.15);
-}
-
-.card-circle.earth {
-  background-color: rgba(141, 110, 99, 0.15);
-}
-
-.card-circle.fire i {
-  color: var(--fire-color);
-}
-
-.card-circle.air i {
-  color: var(--air-color);
-}
-
-.card-circle.water i {
-  color: var(--water-color);
-}
-
-.card-circle.earth i {
-  color: var(--earth-color);
-}
-
-/* Kart metin stilleri */
 .flip-card-front h3 {
   font-size: 1.8rem;
   margin-bottom: 10px;
@@ -238,7 +214,6 @@
   line-height: 1.5;
 }
 
-/* Kart bağlantısı */
 .card-link {
   display: inline-flex;
   align-items: center;
@@ -257,27 +232,10 @@
   transform: translateX(5px);
 }
 
-/* Mizaç kartları konteyneri */
-.temperament-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin: 60px 0;
-}
+/* ==========================================================================
+   4. KİŞİLİK ÖZELLİKLERİ BÖLÜMLERİ
+   ========================================================================== */
 
-.temperament-card-container {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.5s ease;
-}
-
-.temperament-card-container.appear {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Tüm elementler için kişilik konteynerleri */
 .water-personality-container,
 .fire-personality-container,
 .air-personality-container,
@@ -287,12 +245,11 @@
   justify-content: space-between;
   gap: 40px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 60px auto;
   padding: 0 5%;
   flex-wrap: wrap;
 }
 
-/* Kişilik metin bölümleri */
 .water-personality-text,
 .fire-personality-text,
 .air-personality-text,
@@ -313,7 +270,6 @@
   line-height: 1.6;
 }
 
-/* Kişilik kart konteynerleri */
 .water-personality-cards,
 .fire-personality-cards,
 .air-personality-cards,
@@ -323,7 +279,6 @@
   flex-wrap: wrap;
 }
 
-/* Bireysel kişilik kartları */
 .water-personality-card,
 .fire-personality-card,
 .air-personality-card,
@@ -355,6 +310,16 @@
   margin-bottom: 10px;
 }
 
+@keyframes flicker {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.fire-personality-card i {
+  animation: flicker 2s infinite;
+}
+
 .water-personality-card h3,
 .fire-personality-card h3,
 .air-personality-card h3,
@@ -373,7 +338,6 @@
   line-height: 1.4;
 }
 
-/* Kişilik görselleri */
 .water-personality-image,
 .fire-personality-image,
 .air-personality-image,
@@ -404,24 +368,16 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Animasyonlar */
-@keyframes flicker {
-  0% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-
-.fire-personality-card i {
-  animation: flicker 2s infinite;
-}
-
-/* Animasyonlar için görünür durumu */
 .appear {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
-/* Mizaç Önerileri Bileşeni */
+
+/* ==========================================================================
+   5. MİZAÇ ÖNERİLERİ BİLEŞENİ
+   ========================================================================== */
+
 .temperament-suggestions {
   margin: 70px 0;
   padding: 40px 0;
@@ -536,25 +492,10 @@
   backdrop-filter: blur(5px);
 }
 
-.suggestion-element.ates, .suggestion-element.fire {
-  background-color: var(--fire-bg);
-  color: var(--fire-color);
-}
-
-.suggestion-element.hava, .suggestion-element.air {
-  background-color: var(--air-bg);
-  color: var(--air-color);
-}
-
-.suggestion-element.su, .suggestion-element.water {
-  background-color: var(--water-bg);
-  color: var(--water-color);
-}
-
-.suggestion-element.toprak, .suggestion-element.earth {
-  background-color: var(--earth-bg);
-  color: var(--earth-color);
-}
+.suggestion-element.ates, .suggestion-element.fire { background-color: var(--fire-bg); color: var(--fire-color); }
+.suggestion-element.hava, .suggestion-element.air { background-color: var(--air-bg); color: var(--air-color); }
+.suggestion-element.su, .suggestion-element.water { background-color: var(--water-bg); color: var(--water-color); }
+.suggestion-element.toprak, .suggestion-element.earth { background-color: var(--earth-bg); color: var(--earth-color); }
 
 .suggestion-category {
   position: absolute;
@@ -608,17 +549,9 @@
   transition: var(--transition);
 }
 
-.suggestion-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.suggestion-button.liked {
-  color: var(--fire-color);
-}
-
-.suggestion-button.saved {
-  color: var(--air-color);
-}
+.suggestion-button:hover { background-color: rgba(0, 0, 0, 0.05); }
+.suggestion-button.liked { color: var(--fire-color); }
+.suggestion-button.saved { color: var(--air-color); }
 
 .suggestions-more {
   text-align: center;
@@ -645,92 +578,10 @@
   box-shadow: 0 8px 20px rgba(233, 180, 76, 0.4);
 }
 
-/* Duyarlı tasarım stilleri */
-@media (max-width: 992px) {
-  .temperament-cards {
-    gap: 20px;
-  }
-  
-  .suggestions-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-}
+/* ==========================================================================
+   6. MODAL (POP-UP) PENCERE STİLLERİ
+   ========================================================================== */
 
-@media (max-width: 768px) {
-  .water-personality-container,
-  .fire-personality-container,
-  .air-personality-container,
-  .earth-personality-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .water-personality-text, .water-personality-image,
-  .fire-personality-text, .fire-personality-image,
-  .air-personality-text, .air-personality-image,
-  .earth-personality-text, .earth-personality-image {
-    flex: 1 1 100%;
-  }
-  
-  .water-personality-cards,
-  .fire-personality-cards,
-  .air-personality-cards,
-  .earth-personality-cards {
-    justify-content: center;
-  }
-  
-  .temperament-cards {
-    gap: 20px;
-  }
-  
-  .flip-card {
-    width: 230px;
-    height: 320px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.5rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.4rem;
-  }
-  
-  .card-circle {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .card-circle i {
-    font-size: 28px;
-  }
-  
-  .suggestions-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .temperament-cards {
-    gap: 15px;
-  }
-  
-  .flip-card {
-    width: 100%;
-    max-width: 280px;
-    height: 300px;
-  }
-  
-  .suggestions-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  .more-link {
-    width: 90%;
-  }
-}
-
-/* Modal & Dialog Stilleri */
 .content-modal {
   position: fixed;
   top: 0;
@@ -763,9 +614,9 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  animation: modalFadeIn 0.4s forwards;
   transform: translateY(20px);
   opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .content-modal.active .modal-container {
@@ -812,7 +663,7 @@
 .modal-body {
   padding: 30px;
   overflow-y: auto;
-  max-height: calc(90vh - 150px);
+  max-height: calc(90vh - 150px); /* Header ve footer yüksekliği kadar boşluk */
 }
 
 .modal-body img {
@@ -864,19 +715,9 @@
   transition: var(--transition);
 }
 
-.modal-action-btn:hover {
-  background-color: #f0f0f0;
-}
-
-.modal-action-btn.liked {
-  color: var(--fire-color);
-  border-color: var(--fire-color);
-}
-
-.modal-action-btn.saved {
-  color: var(--air-color);
-  border-color: var(--air-color);
-}
+.modal-action-btn:hover { background-color: #f0f0f0; }
+.modal-action-btn.liked { color: var(--fire-color); border-color: var(--fire-color); }
+.modal-action-btn.saved { color: var(--air-color); border-color: var(--air-color); }
 
 .modal-element {
   padding: 5px 12px;
@@ -886,691 +727,112 @@
   align-self: center;
 }
 
-.modal-element.ateş, .modal-element.fire {
-  background-color: var(--fire-bg);
-  color: var(--fire-color);
-}
+.modal-element.ateş, .modal-element.fire { background-color: var(--fire-bg); color: var(--fire-color); }
+.modal-element.hava, .modal-element.air { background-color: var(--air-bg); color: var(--air-color); }
+.modal-element.su, .modal-element.water { background-color: var(--water-bg); color: var(--water-color); }
+.modal-element.toprak, .modal-element.earth { background-color: var(--earth-bg); color: var(--earth-color); }
 
-.modal-element.hava, .modal-element.air {
-  background-color: var(--air-bg);
-  color: var(--air-color);
-}
 
-.modal-element.su, .modal-element.water {
-  background-color: var(--water-bg);
-  color: var(--water-color);
-}
+/* ==========================================================================
+   7. RESPONSIVE TASARIM STİLLERİ (Masaüstünden Mobile)
+   ========================================================================== */
 
-.modal-element.toprak, .modal-element.earth {
-  background-color: var(--earth-bg);
-  color: var(--earth-color);
-}
-
-@keyframes modalFadeIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Çevirilebilir kart stilleri - responsive ayarları ile */
-.flip-card {
-  background-color: transparent;
-  width: 260px;
-  height: 340px;
-  perspective: 1500px;
-  margin-bottom: 20px;
-}
-
-/* Duyarlı tasarım stilleri - geliştirilmiş */
-@media (max-width: 1200px) {
-  .temperament-cards {
-    gap: 25px;
-    padding: 0 15px;
-  }
-  
-  .flip-card {
-    width: 240px;
-    height: 330px;
-  }
-}
-
-@media (max-width: 992px) {
-  .temperament-cards {
-    gap: 20px;
-  }
-  
-  .flip-card {
-    width: 220px;
-    height: 320px;
-  }
-}
-
-@media (max-width: 768px) {
-  .temperament-cards {
-    gap: 15px;
-  }
-  
-  .flip-card {
-    width: 200px;
-    height: 300px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.4rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.3rem;
-  }
-  
-  .card-circle {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .card-circle i {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 576px) {
-  .temperament-cards {
-    gap: 15px;
-    justify-content: space-around;
-  }
-  
-  .flip-card {
-    width: 45%;  /* Yüzde ile genişlik vererek daha esnek olmasını sağlıyoruz */
-    min-width: 160px;
-    height: 280px;
-  }
-  
-  .flip-card-front, .flip-card-back {
-    padding: 20px 15px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.3rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.2rem;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.85rem;
-  }
-  
-  .card-circle {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
-  }
-  
-  .card-circle i {
-    font-size: 24px;
-  }
-  
-  .card-link {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .temperament-cards {
-    gap: 10px;
-  }
-  
-  .flip-card {
-    width: 100%;  /* Çok küçük ekranlarda tam genişlik */
-    max-width: 280px;
-    height: 270px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.2rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.1rem;
-  }
-}
-
-/* Flip Card ve Temperament Cards için geliştirilen responsive düzenlemeler */
-
-/* Temel flip card stilleri */
-.flip-card {
-  background-color: transparent;
-  width: 260px;
-  height: 340px;
-  perspective: 1500px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-/* Mizaç kartları konteyneri - daha iyi duyarlı tasarım için */
-.temperament-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin: 60px 0;
-  padding: 0 15px;
-}
-
-/* Mizaç kartları için geliştirilmiş responsive düzen */
-
-/* Temel mizaç kartları konteyner düzeni */
-.temperament-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin: 60px 0;
-  padding: 0 15px;
-}
-
-.temperament-card-container {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.5s ease;
-}
-
-.temperament-card-container.appear {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Temel flip card stilleri */
-.flip-card {
-  background-color: transparent;
-  width: 260px;
-  height: 340px;
-  perspective: 1500px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-/* ===== GELİŞTİRİLMİŞ RESPONSIVE AYARLAR ===== */
-
-/* Büyük masaüstü ekranlar için (1200px+) */
-@media (min-width: 1200px) {
-  .temperament-cards {
-    gap: 30px;
-  }
-  
-  .flip-card {
-    width: 260px;
-    height: 340px;
-  }
-}
-
-/* Orta masaüstü ekranlar için (992px - 1199px) */
-@media (min-width: 992px) and (max-width: 1199px) {
+/* --------------------------------------------------------------------------
+   Orta Boy Masaüstü ve Küçük Laptoplar (max-width: 1199px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1199px) {
   .temperament-cards {
     gap: 25px;
   }
-  
   .flip-card {
     width: 230px;
     height: 320px;
   }
-  
   .flip-card-front h3 {
     font-size: 1.6rem;
   }
-  
   .flip-card-back h3 {
     font-size: 1.5rem;
   }
-  
   .card-circle {
     width: 80px;
     height: 80px;
   }
 }
 
-/* Küçük masaüstü ve büyük tablet için (768px - 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
+/* --------------------------------------------------------------------------
+   Tabletler (max-width: 991px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
   .temperament-cards {
     gap: 20px;
   }
-  
   .flip-card {
     width: 200px;
     height: 300px;
   }
-  
   .flip-card-front h3 {
     font-size: 1.5rem;
   }
-  
   .flip-card-back h3 {
     font-size: 1.4rem;
   }
-  
   .flip-card-back p {
     font-size: 0.9rem;
     margin-bottom: 15px;
   }
-  
   .card-circle {
     width: 70px;
     height: 70px;
   }
-  
   .card-circle i {
     font-size: 28px;
   }
-  
   .card-link {
     padding: 8px 15px;
     font-size: 0.9rem;
   }
+  .suggestions-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
 }
 
-/* Tablet ve büyük mobil için (576px - 767px) - 2x2 düzende */
+/* --------------------------------------------------------------------------
+   Büyük Telefonlar ve Dikey Tabletler (max-width: 767px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
-  .temperament-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    justify-items: center;
-  }
-  
-  .temperament-card-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .flip-card {
-    width: 100%;
-    max-width: 220px;
-    height: 280px;
-  }
-  
-  .flip-card-front, 
-  .flip-card-back {
-    padding: 15px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-  }
-  
-  .flip-card-front p {
-    font-size: 0.85rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.85rem;
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  
-  .card-circle {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
-  }
-  
-  .card-circle i {
-    font-size: 24px;
-  }
-  
-  .card-link {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-  }
-}
+  /* Genel Başlık ve Açıklamalar */
+  .temperament-header { margin-bottom: 30px; }
+  .temperament-title { font-size: 2rem; margin-bottom: 16px; }
+  .section-description, .temperament-description { font-size: 16px; margin-bottom: 30px; }
+  .element-badge { padding: 6px 16px; font-size: 0.85rem; margin-bottom: 12px; }
 
-/* Küçük mobil ekranlar için (400px - 575px) - 2x2 düzende daha küçük */
-@media (max-width: 575px) {
-  .temperament-cards {
-    gap: 12px;
-  }
-  
-  .flip-card {
-    max-width: 180px;
-    height: 250px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.1rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.05rem;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-  }
-  
-  .card-circle {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-  
-  .card-circle i {
-    font-size: 20px;
-  }
-  
-  .card-link {
-    padding: 5px 10px;
-    font-size: 0.8rem;
-  }
-  
-  /* Bölüm başlıkları küçültülür */
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .temperament-description {
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-  }
-}
-
-/* Çok küçük ekranlar için (400px altı) - 2x2 düzende en küçük boyutlar */
-@media (max-width: 399px) {
-  .temperament-cards {
-    gap: 10px;
-  }
-  
-  .flip-card {
-    max-width: 160px;
-    height: 220px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 0.95rem;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.75rem;
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
-  
-  .card-circle {
-    width: 45px;
-    height: 45px;
-    margin-bottom: 8px;
-  }
-  
-  .card-circle i {
-    font-size: 18px;
-  }
-  
-  .card-link {
-    padding: 4px 8px;
-    font-size: 0.75rem;
-  }
-}
-
-/* ===========================================
-   TEMPERAMENTS SAYFALARI RESPONSIVE DÜZENLEMELERİ
-   Mizaç sayfaları için mobil uyumluluk - tasarım korunarak
-   =========================================== */
-
-/* Mevcut temperaments.css'e eklenen responsive düzenlemeler */
-
-/* ===== TEMPERAMENT HEADER RESPONSIVE ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
-  .temperament-header {
-    margin-bottom: 30px;
-  }
-  
-  .temperament-title {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  
-  .section-description,
-  .temperament-description {
-    font-size: 16px;
-    margin-bottom: 30px;
-    max-width: 100%;
-  }
-  
-  .element-badge {
-    padding: 6px 16px;
-    font-size: 0.85rem;
-    margin-bottom: 12px;
-  }
-}
-
-/* Mobil görünüm */
-@media (max-width: 480px) {
-  .temperament-header {
-    margin-bottom: 25px;
-  }
-  
-  .temperament-title {
-    font-size: 1.7rem;
-    margin-bottom: 14px;
-    line-height: 1.3;
-  }
-  
-  .section-description,
-  .temperament-description {
-    font-size: 15px;
-    margin-bottom: 25px;
-    line-height: 1.5;
-  }
-  
-  .element-badge {
-    padding: 5px 14px;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-  }
-}
-
-/* ===== FLIP CARDS RESPONSIVE ===== */
-
-/* Büyük tablet için optimizasyon */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .temperament-cards {
-    gap: 25px;
-  }
-  
-  .flip-card {
-    width: 240px;
-    height: 320px;
-  }
-}
-
-/* Tablet görünüm - 2x2 düzen */
-@media (max-width: 768px) {
+  /* Flip Kartlar - 2'li Izgara Düzeni */
   .temperament-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     justify-items: center;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 0 10px;
   }
-  
-  .temperament-card-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
+  .temperament-card-container { width: 100%; display: flex; justify-content: center; }
   .flip-card {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
     height: 280px;
   }
-  
-  .flip-card-front,
-  .flip-card-back {
-    padding: 20px 15px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-  }
-  
-  .flip-card-front p {
-    font-size: 0.9rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.85rem;
-    margin-bottom: 15px;
-    line-height: 1.4;
-  }
-  
-  .card-circle {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 16px;
-  }
-  
-  .card-circle i {
-    font-size: 28px;
-  }
-  
-  .card-link {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
-}
+  .flip-card-front, .flip-card-back { padding: 20px 15px; }
+  .flip-card-front h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .flip-card-front p { font-size: 0.9rem; }
+  .flip-card-back h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .flip-card-back p { font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4; }
+  .card-circle { width: 70px; height: 70px; margin-bottom: 16px; }
+  .card-circle i { font-size: 28px; }
+  .card-link { padding: 8px 15px; font-size: 0.85rem; }
 
-/* Mobil görünüm - 2x2 düzen kompakt */
-@media (max-width: 480px) {
-  .temperament-cards {
-    gap: 15px;
-    max-width: 100%;
-    padding: 0 5px;
-  }
-  
-  .flip-card {
-    max-width: 160px;
-    height: 240px;
-  }
-  
-  .flip-card-front,
-  .flip-card-back {
-    padding: 15px 10px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.2rem;
-    margin-bottom: 6px;
-  }
-  
-  .flip-card-front p {
-    font-size: 0.8rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.75rem;
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-  
-  .card-circle {
-    width: 55px;
-    height: 55px;
-    margin-bottom: 12px;
-  }
-  
-  .card-circle i {
-    font-size: 22px;
-  }
-  
-  .card-link {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
-}
-
-/* Çok küçük mobil - 2x2 düzen en kompakt */
-@media (max-width: 360px) {
-  .temperament-cards {
-    gap: 12px;
-  }
-  
-  .flip-card {
-    max-width: 140px;
-    height: 220px;
-  }
-  
-  .flip-card-front,
-  .flip-card-back {
-    padding: 12px 8px;
-  }
-  
-  .flip-card-front h3 {
-    font-size: 1.1rem;
-  }
-  
-  .flip-card-back h3 {
-    font-size: 1rem;
-  }
-  
-  .flip-card-back p {
-    font-size: 0.7rem;
-    margin-bottom: 10px;
-  }
-  
-  .card-circle {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-  
-  .card-circle i {
-    font-size: 20px;
-  }
-  
-  .card-link {
-    padding: 5px 10px;
-    font-size: 0.7rem;
-  }
-}
-
-/* ===== PERSONALITY SECTIONS RESPONSIVE ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
+  /* Kişilik Bölümleri - Tek Sütun */
   .water-personality-container,
   .fire-personality-container,
   .air-personality-container,
@@ -1578,511 +840,134 @@
     flex-direction: column;
     text-align: center;
     gap: 25px;
-    padding: 0 3%;
+    margin-top: 40px;
   }
-  
-  .water-personality-text,
-  .fire-personality-text,
-  .air-personality-text,
-  .earth-personality-text {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-  
-  .water-personality-desc,
-  .fire-personality-desc,
-  .air-personality-desc,
-  .earth-personality-desc {
+  .water-personality-desc, .fire-personality-desc, .air-personality-desc, .earth-personality-desc {
     font-size: 16px;
-    margin-bottom: 30px;
-    line-height: 1.5;
+    margin-bottom: 25px;
   }
-  
-  .water-personality-cards,
-  .fire-personality-cards,
-  .air-personality-cards,
-  .earth-personality-cards {
+  .water-personality-cards, .fire-personality-cards, .air-personality-cards, .earth-personality-cards {
     justify-content: center;
     gap: 15px;
   }
-  
-  .water-personality-card,
-  .fire-personality-card,
-  .air-personality-card,
-  .earth-personality-card {
+  .water-personality-card, .fire-personality-card, .air-personality-card, .earth-personality-card {
     flex: 1 1 140px;
     max-width: 200px;
-    padding: 18px;
   }
-  
-  .water-personality-card i,
-  .fire-personality-card i,
-  .air-personality-card i,
-  .earth-personality-card i {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  
-  .water-personality-card h3,
-  .fire-personality-card h3,
-  .air-personality-card h3,
-  .earth-personality-card h3 {
-    font-size: 1rem;
-    margin-bottom: 6px;
-  }
-  
-  .water-personality-card p,
-  .fire-personality-card p,
-  .air-personality-card p,
-  .earth-personality-card p {
-    font-size: 0.85rem;
-    line-height: 1.3;
-  }
-  
-  .water-personality-image,
-  .fire-personality-image,
-  .air-personality-image,
-  .earth-personality-image {
-    flex: 1 1 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .water-personality-image img,
-  .fire-personality-image img,
-  .air-personality-image img,
-  .earth-personality-image img {
-    max-width: 100%;
-    height: auto;
-  }
-}
+  .water-personality-image { order: -1; } /* Resmi metnin üstüne al */
 
-/* Mobil görünüm */
-@media (max-width: 480px) {
-  .water-personality-container,
-  .fire-personality-container,
-  .air-personality-container,
-  .earth-personality-container {
-    gap: 20px;
-    padding: 0 2%;
-  }
-  
-  .water-personality-desc,
-  .fire-personality-desc,
-  .air-personality-desc,
-  .earth-personality-desc {
-    font-size: 15px;
-    margin-bottom: 25px;
-    line-height: 1.4;
-  }
-  
-  .water-personality-cards,
-  .fire-personality-cards,
-  .air-personality-cards,
-  .earth-personality-cards {
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .water-personality-card,
-  .fire-personality-card,
-  .air-personality-card,
-  .earth-personality-card {
-    flex: none;
-    width: 100%;
-    max-width: 280px;
-    padding: 15px;
-  }
-  
-  .water-personality-card i,
-  .fire-personality-card i,
-  .air-personality-card i,
-  .earth-personality-card i {
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-  
-  .water-personality-card h3,
-  .fire-personality-card h3,
-  .air-personality-card h3,
-  .earth-personality-card h3 {
-    font-size: 0.95rem;
-    margin-bottom: 5px;
-  }
-  
-  .water-personality-card p,
-  .fire-personality-card p,
-  .air-personality-card p,
-  .earth-personality-card p {
-    font-size: 0.8rem;
-    line-height: 1.2;
-  }
-}
-
-/* ===== SUGGESTIONS SECTION RESPONSIVE ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
-  .temperament-suggestions {
-    margin: 50px 0;
-    padding: 30px 0;
-  }
-  
-  .suggestions-header h2 {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-  }
-  
-  .suggestions-header p {
-    font-size: 0.95rem;
-    max-width: 100%;
-  }
-  
+  /* Öneri Kartları - Tek Sütun */
+  .temperament-suggestions { margin: 50px 0; padding: 30px 0; }
+  .suggestions-header h2 { font-size: 1.6rem; }
+  .suggestions-header p { font-size: 0.95rem; }
   .suggestions-grid {
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 0 3%;
-    max-width: 500px;
+    max-width: 450px;
     margin: 0 auto;
   }
-  
-  .suggestion-card {
-    margin: 0;
-  }
-  
-  .suggestion-image {
-    height: 160px;
-  }
-  
-  .suggestion-title {
-    font-size: 1.05rem;
-    margin: 16px 16px 8px;
-  }
-  
-  .suggestion-description {
-    padding: 0 16px;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-  }
-  
-  .suggestion-actions {
-    padding: 12px 16px;
-  }
-  
-  .suggestion-button {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
-  
-  .more-link {
-    max-width: 300px;
-    margin: 0 auto;
+
+  /* Modal Pencere */
+  .modal-container { width: 95%; max-height: 85vh; }
+  .modal-header { padding: 16px; }
+  .modal-header h2 { font-size: 1.3rem; }
+  .modal-body { padding: 20px; max-height: calc(85vh - 120px); }
+  .modal-content { font-size: 1rem; }
+  .modal-footer { padding: 12px 20px; flex-direction: column; align-items: center; gap: 12px; }
+
+  /* Animasyon ve Performans Optimizasyonu */
+  .flip-card-inner { transition: transform 0.6s ease; }
+  .suggestion-card:hover, .water-personality-card:hover, .fire-personality-card:hover, .air-personality-card:hover, .earth-personality-card:hover {
+    transform: translateY(-3px);
   }
 }
 
-/* Mobil görünüm */
+/* --------------------------------------------------------------------------
+   Standart Telefonlar (max-width: 480px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
-  .temperament-suggestions {
-    margin: 40px 0;
-    padding: 25px 0;
-  }
+  /* Genel Başlık ve Açıklamalar */
+  .temperament-title { font-size: 1.7rem; margin-bottom: 14px; }
+  .section-title { font-size: 1.5rem; }
+  .section-description, .temperament-description { font-size: 15px; }
+  .element-badge { padding: 5px 14px; font-size: 0.8rem; }
+  .more-link { width: 90%; }
   
-  .suggestions-header h2 {
-    font-size: 1.4rem;
-    margin-bottom: 6px;
-  }
-  
-  .suggestions-header p {
-    font-size: 0.9rem;
-  }
-  
-  .suggestions-grid {
-    gap: 15px;
-    padding: 0 2%;
-    max-width: 100%;
-  }
-  
-  .suggestion-image {
-    height: 140px;
-  }
-  
-  .suggestion-title {
-    font-size: 1rem;
-    margin: 14px 14px 6px;
-  }
-  
-  .suggestion-description {
-    padding: 0 14px;
-    font-size: 0.85rem;
-    margin-bottom: 14px;
-  }
-  
-  .suggestion-actions {
-    padding: 10px 14px;
-  }
-  
-  .suggestion-button {
-    padding: 5px 8px;
-    font-size: 0.8rem;
-  }
-  
-  .more-link {
-    width: 90%;
-    max-width: 100%;
-    font-size: 0.9rem;
-  }
-}
+  /* Flip Kartlar - 2'li Izgara (Kompakt) */
+  .temperament-cards { gap: 15px; padding: 0 5px; }
+  .flip-card { max-width: none; height: 240px; }
+  .flip-card-front, .flip-card-back { padding: 15px 10px; }
+  .flip-card-front h3 { font-size: 1.2rem; }
+  .flip-card-back h3 { font-size: 1.1rem; }
+  .flip-card-back p { font-size: 0.75rem; }
+  .card-circle { width: 55px; height: 55px; margin-bottom: 12px; }
+  .card-circle i { font-size: 22px; }
+  .card-link { padding: 6px 12px; font-size: 0.75rem; }
 
-/* ===== EMPTY STATE RESPONSIVE ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
-  .empty-state {
-    padding: 40px 25px;
-    margin-bottom: 25px;
-  }
-  
-  .empty-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
-  }
-  
-  .empty-text {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
-}
-
-/* Mobil görünüm */
-@media (max-width: 480px) {
-  .empty-state {
-    padding: 30px 20px;
-    margin-bottom: 20px;
-  }
-  
-  .empty-icon {
-    font-size: 2rem;
-    margin-bottom: 14px;
-  }
-  
-  .empty-text {
-    font-size: 1rem;
-    margin-bottom: 14px;
-    line-height: 1.4;
-  }
-}
-
-/* ===== CONTENT MODAL RESPONSIVE ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
-  .modal-container {
-    width: 95%;
-    max-width: 600px;
-    max-height: 85vh;
-  }
-  
-  .modal-header {
-    padding: 16px;
-  }
-  
-  .modal-header h2 {
-    font-size: 1.3rem;
-  }
-  
-  .modal-nav-button,
-  .modal-close-button {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .modal-body {
-    padding: 20px;
-    max-height: calc(85vh - 120px);
-  }
-  
-  .modal-content {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  
-  .modal-footer {
-    padding: 12px 20px;
+  /* Kişilik Bölümleri */
+  .water-personality-cards, .fire-personality-cards, .air-personality-cards, .earth-personality-cards {
     flex-direction: column;
+    gap: 12px;
     align-items: center;
-    gap: 12px;
   }
-  
-  .modal-actions {
-    gap: 10px;
+  .water-personality-card, .fire-personality-card, .air-personality-card, .earth-personality-card {
+    width: 100%;
+    max-width: 280px;
   }
-  
-  .modal-action-btn {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
+
+  /* Öneri Kartları */
+  .temperament-suggestions { padding: 25px 0; }
+  .suggestions-header h2 { font-size: 1.4rem; }
+  .suggestion-image { height: 140px; }
+
+  /* Modal Pencere */
+  .modal-container { width: 98%; max-height: 90vh; }
+  .modal-header { padding: 12px; }
+  .modal-header h2 { font-size: 1.1rem; }
+  .modal-body { padding: 15px; max-height: calc(90vh - 100px); }
+  .modal-content { font-size: 0.95rem; }
+  .modal-actions { flex-direction: column; width: 100%; gap: 8px; }
 }
 
-/* Mobil görünüm */
-@media (max-width: 480px) {
-  .modal-container {
-    width: 98%;
-    max-height: 90vh;
-  }
-  
-  .modal-header {
-    padding: 12px;
-  }
-  
-  .modal-header h2 {
-    font-size: 1.1rem;
-  }
-  
-  .modal-nav-button,
-  .modal-close-button {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .modal-body {
-    padding: 15px;
-    max-height: calc(90vh - 100px);
-  }
-  
-  .modal-category {
-    padding: 4px 10px;
-    font-size: 0.8rem;
-    margin-bottom: 15px;
-  }
-  
-  .modal-content {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  .modal-footer {
-    padding: 10px 15px;
-    gap: 10px;
-  }
-  
-  .modal-actions {
-    flex-direction: column;
-    width: 100%;
-    gap: 8px;
-  }
-  
-  .modal-action-btn {
-    width: 100%;
-    padding: 7px 10px;
-    font-size: 0.85rem;
-  }
-  
-  .modal-element {
-    padding: 4px 10px;
-    font-size: 0.8rem;
-  }
+
+/* --------------------------------------------------------------------------
+   Küçük Telefonlar (max-width: 360px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  .temperament-cards { gap: 12px; }
+  .flip-card { height: 220px; }
+  .flip-card-front, .flip-card-back { padding: 12px 8px; }
+  .flip-card-front h3 { font-size: 1.1rem; }
+  .flip-card-back h3 { font-size: 1rem; }
+  .flip-card-back p { font-size: 0.7rem; }
+  .card-circle { width: 50px; height: 50px; margin-bottom: 10px; }
+  .card-circle i { font-size: 20px; }
+  .card-link { padding: 5px 10px; font-size: 0.7rem; }
 }
 
-/* ===== LANDSCAPE MOBİL DÜZENLEMELERİ ===== */
+/* ==========================================================================
+   8. ÖZEL DURUM VE OPTİMİZASYONLAR
+   ========================================================================== */
 
-/* Mobil landscape (yatay) görünüm */
-@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
-  .temperament-cards {
-    gap: 12px;
-    margin: 30px 0;
-  }
-  
-  .flip-card {
-    max-width: 140px;
-    height: 200px;
-  }
-  
-  .flip-card-front,
-  .flip-card-back {
-    padding: 10px 8px;
-  }
-  
-  .flip-card-front h3,
-  .flip-card-back h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-  
-  .flip-card-front p,
-  .flip-card-back p {
-    font-size: 0.7rem;
-    margin-bottom: 8px;
-  }
-  
-  .card-circle {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 8px;
-  }
-  
-  .card-circle i {
-    font-size: 16px;
-  }
-  
-  .temperament-suggestions {
-    margin: 30px 0;
-    padding: 20px 0;
-  }
-  
-  .suggestions-grid {
-    gap: 10px;
-  }
-  
-  .suggestion-image {
-    height: 100px;
-  }
-  
-  .modal-container {
-    max-height: 95vh;
-  }
-  
+/* --------------------------------------------------------------------------
+   Yatay Moddaki Telefonlar
+   -------------------------------------------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
   .modal-body {
     max-height: calc(95vh - 80px);
   }
 }
 
-/* ===== PERFORMANCE OPTIMIZATIONS ===== */
-
-/* Animasyonları mobilde optimize et */
-@media (max-width: 768px) {
-  .flip-card-inner {
-    transition: transform 0.6s ease;
-  }
-  
-  .suggestion-card,
-  .water-personality-card,
-  .fire-personality-card,
-  .air-personality-card,
-  .earth-personality-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .suggestion-card:hover,
-  .water-personality-card:hover,
-  .fire-personality-card:hover,
-  .air-personality-card:hover,
-  .earth-personality-card:hover {
-    transform: translateY(-3px);
-  }
-}
-
-/* Touch cihazlar için hover efektlerini optimize et */
+/* --------------------------------------------------------------------------
+   Dokunmatik Cihazlar için Hover Optimizasyonu
+   -------------------------------------------------------------------------- */
 @media (hover: none) {
+  /* Hover ile dönme efektini devre dışı bırak */
   .flip-card:hover .flip-card-inner {
     transform: none;
   }
-  
-  .flip-card-inner {
-    transform: rotateY(0deg);
-  }
-  
-  /* Touch ile çevirme için alternatif eklenebilir */
+  /* Dokunma (active) ile dönme efekti eklenebilir. */
   .flip-card:active .flip-card-inner {
     transform: rotateY(180deg);
   }
