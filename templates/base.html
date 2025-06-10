@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}MİZAÇLAR | Kendini Keşfet{% endblock %}</title>
@@ -140,6 +141,153 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        // ==========================================================================
+        // TIKLAMA EFEKTLERİNİ JAVASCRIPT İLE KALDIR
+        // ==========================================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Tüm tıklama efektlerini kaldır
+            function removeClickEffects() {
+                // Tüm elementleri seç
+                const allElements = document.querySelectorAll('*');
+                
+                allElements.forEach(element => {
+                    // Outline'ı kaldır
+                    element.style.outline = 'none';
+                    element.style.outlineWidth = '0';
+                    element.style.outlineStyle = 'none';
+                    
+                    // Webkit tap highlight'ı kaldır
+                    element.style.webkitTapHighlightColor = 'transparent';
+                    element.style.webkitTouchCallout = 'none';
+                    
+                    // User select'i kaldır (text selection hariç)
+                    if (!element.matches('input[type="text"], input[type="email"], input[type="password"], textarea, [contenteditable="true"]')) {
+                        element.style.webkitUserSelect = 'none';
+                        element.style.mozUserSelect = 'none';
+                        element.style.msUserSelect = 'none';
+                        element.style.userSelect = 'none';
+                    }
+                });
+            }
+            
+            // Focus eventlerini yakala ve kaldır
+            document.addEventListener('focusin', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                }
+            });
+            
+            // Active eventlerini yakala ve kaldır
+            document.addEventListener('mousedown', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                }
+            });
+            
+            // Touch eventlerini yakala ve kaldır
+            document.addEventListener('touchstart', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                    e.target.style.webkitTapHighlightColor = 'transparent';
+                }
+            });
+            
+            // Sayfa yüklendiğinde çalıştır
+            removeClickEffects();
+            
+            // Dinamik içerik için observer
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        removeClickEffects();
+                    }
+                });
+            });
+            
+            // DOM değişikliklerini gözlemle
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            // Keyboard navigation tespiti (accessibility için)
+            let keyboardNavigation = false;
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    keyboardNavigation = true;
+                    document.body.classList.add('keyboard-navigation');
+                }
+            });
+            
+            document.addEventListener('mousedown', function() {
+                keyboardNavigation = false;
+                document.body.classList.remove('keyboard-navigation');
+            });
+            
+            // Mobile zoom'u engelle
+            document.addEventListener('touchmove', function(e) {
+                if (e.scale !== 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Context menu'yu engelle (long press)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Text selection'ı belirli elementler dışında engelle
+            document.addEventListener('selectstart', function(e) {
+                if (!e.target.matches('input[type="text"], input[type="email"], input[type="password"], textarea, [contenteditable="true"], .selectable')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+            // Drag'i engelle
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.matches('img, svg, canvas')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+            console.log('Tıklama efektleri kaldırıldı');
+        });
+
+        // CSS ile kaldırılamayan durumlar için ek fonksiyon
+        function forceRemoveOutlines() {
+            const style = document.createElement('style');
+            style.textContent = `
+                * { 
+                    outline: none !important; 
+                    -webkit-tap-highlight-color: transparent !important;
+                    -webkit-touch-callout: none !important;
+                }
+                *:focus { 
+                    outline: none !important; 
+                    box-shadow: none !important;
+                }
+                *:active { 
+                    outline: none !important; 
+                    box-shadow: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        window.addEventListener('load', forceRemoveOutlines);
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
