@@ -821,7 +821,7 @@
 .element-badge.ateş { background-color: var(--ates-bg); color: var(--ates-color); }
 .element-badge.hava { background-color: var(--hava-bg); color: var(--hava-color); }
 .element-badge.su { background-color: var(--su-bg); color: var(--su-color); }
-.element-badge.toprak { background-color: var(--toprak-bg); color: var(--toprak-color); }
+.element-badge.top.element-badge.toprak { background-color: var(--toprak-bg); color: var(--toprak-color); }
 .element-description {
   font-size: 1rem;
   color: #777;
@@ -997,7 +997,6 @@
   background-position: center;
   z-index: 1;
 }
-
 
 /* Mizaç elementlerine özel wave renkleri */
 .premium-content-section.ateş .wave-top,
@@ -1660,7 +1659,20 @@
   .modern-filter .filter-options::-webkit-scrollbar, .modern-tabs::-webkit-scrollbar { display: none; }
   .modern-tabs { justify-content: flex-start; padding: 6px; gap: 6px; }
   .modern-tabs .filter-option { white-space: nowrap; padding: 8px 15px; font-size: 0.85rem; }
-  .modern-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  
+  /* Keşfedilecek Diğer İçerikler - 2 Sütun */
+  .modern-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px; 
+  }
+  .modern-grid .content-card {
+    min-height: 280px;
+    border-radius: 12px;
+  }
+  .content-image { height: 140px; border-radius: 12px 12px 0 0; }
+  .content-title { font-size: 1rem; margin: 16px 16px 8px; line-height: 1.3; }
+  .content-description { font-size: 0.85rem; padding: 0 16px; margin-bottom: 12px; line-height: 1.4; }
+  .content-actions { padding: 12px 16px; }
   .slider-nav-button { width: 36px; height: 36px; }
   .prev-button { left: 0px; }
   .next-button { right: 0px; }
@@ -1675,10 +1687,35 @@
   .premium-card-image { height: 140px; }
   .premium-card-title { font-size: 1.1rem; }
   .premium-card-description { font-size: 0.85rem; }
-  .modern-grid { grid-template-columns: 1fr; }
+  
+  /* Keşfedilecek Diğer İçerikler - 2 Sütun (Optimize) */
+  .modern-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 14px; 
+  }
+  .modern-grid .content-card {
+    min-height: 260px;
+    border-radius: 10px;
+  }
+  .content-image { height: 120px; border-radius: 10px 10px 0 0; }
+  .content-title { font-size: 0.95rem; margin: 14px 14px 6px; line-height: 1.2; }
+  .content-description { font-size: 0.8rem; padding: 0 14px; margin-bottom: 10px; line-height: 1.3; }
+  .content-actions { padding: 10px 14px; }
+  .action-button { font-size: 0.8rem; padding: 6px 10px; }
+  .content-element, .content-category { font-size: 0.7rem; padding: 4px 8px; }
+  
   .modern-filter .filter-option, .modern-tabs .filter-option { padding: 6px 12px; font-size: 0.8rem; }
   .modern-tabs .filter-option i { display: none; }
   .slider-nav-button { width: 32px; height: 32px; font-size: 0.9rem; }
+  .modern-grid .content-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Mobil dostu hover efektleri */
+  .content-card {
+    transition: all 0.2s ease;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1700,6 +1737,42 @@
   .modal-header h2 { font-size: 1.2rem; }
   .modal-body { padding: 15px; }
   .modal-content { font-size: 1rem; }
+
+  /* Keşfedilecek Diğer İçerikler - 2 Sütun (Kompakt) */
+  .modern-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
+  }
+  .modern-grid .content-card {
+    min-height: 240px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  .content-image { height: 110px; border-radius: 8px 8px 0 0; }
+  .content-title { 
+    font-size: 0.9rem; 
+    margin: 12px 12px 6px; 
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .content-description { 
+    font-size: 0.75rem; 
+    padding: 0 12px; 
+    margin-bottom: 8px; 
+    line-height: 1.3;
+    color: #666;
+  }
+  .content-actions { padding: 8px 12px; }
+  .action-button { 
+    font-size: 0.75rem; 
+    padding: 5px 8px; 
+    border-radius: 15px;
+  }
+  .content-element, .content-category { 
+    font-size: 0.65rem; 
+    padding: 3px 6px; 
+    border-radius: 10px;
+  }
 
   .wave-top,
   .wave-bottom {
