@@ -795,6 +795,13 @@
   .suggestions-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
+  /* Küçük ekranlarda görselleri gizle */
+  .water-personality-image,
+  .fire-personality-image,
+  .air-personality-image,
+  .earth-personality-image {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -832,7 +839,7 @@
   .card-circle i { font-size: 28px; }
   .card-link { padding: 8px 15px; font-size: 0.85rem; }
 
-  /* Kişilik Bölümleri - Tek Sütun */
+   /* Kişilik Bölümleri - Tek Sütun */
   .water-personality-container,
   .fire-personality-container,
   .air-personality-container,
@@ -854,7 +861,6 @@
     flex: 1 1 140px;
     max-width: 200px;
   }
-  .water-personality-image { order: -1; } /* Resmi metnin üstüne al */
 
   /* Öneri Kartları - Tek Sütun */
   .temperament-suggestions { margin: 50px 0; padding: 30px 0; }
