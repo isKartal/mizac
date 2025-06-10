@@ -535,14 +535,13 @@
   
   /* Filter Bar */
   .filter-container {
-    top: 80px;
-    z-index: 50;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-    transition: box-shadow 0.3s ease;
-  }
+  z-index: 50;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px; /* Bu satırı bulun ve 15px yapın */
+  transition: box-shadow 0.3s ease;
+}
   
   .filter-container.scrolled {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -597,16 +596,16 @@
   }
 
   .secondary-filter-container {
-    display: flex;
-    justify-content: center;
-    top: 80px;
-    z-index: 50;
-    background-color: #ece9e3;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-    transition: box-shadow 0.3s ease;
-  }
+  display: flex;
+  justify-content: center;
+  top: 80px;
+  z-index: 50;
+  background-color: #ece9e3;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px; /* Bu satırı bulun ve 15px yapın */
+  transition: box-shadow 0.3s ease;
+}
   
   .secondary-filter-container.scrolled {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -1515,12 +1514,11 @@
     --toprak-gradient: linear-gradient(135deg, rgba(141, 110, 99, 0.05), rgba(141, 110, 99, 0.15));
   }
   
-  /* Premium Section Background and Waves */
-  .premium-content-section {
-    width: 100%;
-    margin: 60px 0;
-    position: relative;
-  }
+ .premium-content-section {
+  width: 100%;
+  margin: 0; /* Bu satırı bulun ve 20px 0 yapın */
+  position: relative;
+}
   
   .premium-content-background {
     position: relative;
@@ -1564,10 +1562,9 @@
     transform: rotate(180deg);
   }
   
-  .premium-content-container {
-    padding: 80px 0 60px;
-  }
-  
+ .premium-content-container {
+  padding: 20px 0 30px /* Bu satırı bulun ve 20px 0 30px yapın */
+}
   /* Premium Section Title */
   .premium-section-title {
     display: flex;
@@ -1772,9 +1769,9 @@
   /* İyileştirilmiş Slider Kontrolleri */
   .content-slider-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 0px;
   }
   
   .improved-slider {
@@ -1816,11 +1813,11 @@
   }
   
   .prev-button {
-    left: 5px;
+    left: -50px;
   }
   
   .next-button {
-    right: 5px;
+    right: -45px;
   }
   
   /* Modern Filtreleme Alanı Yenilemeleri */
