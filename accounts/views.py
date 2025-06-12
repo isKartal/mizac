@@ -155,8 +155,8 @@ def google_callback(request):
                 messages.success(request, f"Hesabınız Google ile başarıyla oluşturuldu. Hoş geldiniz, {username}!")
                 messages.info(request, "İsterseniz daha sonra profil ayarlarından normal şifre de belirleyebilirsiniz.")
         
-        # Test sonucu kontrolü - Hem test sonucu olan hem olmayan kullanıcıları ana sayfaya yönlendir
-        return redirect('index')  # Ana sayfaya yönlendir
+        # Ana sayfaya yönlendir
+        return redirect('index')
     
     except Exception as e:
         messages.error(request, f"Google ile giriş yapılırken hata oluştu: {str(e)}")
@@ -199,16 +199,27 @@ def disconnect_social(request, provider):
     from .models import SocialAccount
     
     # Kullanıcının en az bir giriş yöntemi olmalı
-    if not request.user.has_usable_password() and request.user.social_accounts.count() == 1:
+    if not request.user.has_usable_password() and request.user.social_accounts.count() <= 1:
         messages.error(request, "Son giriş yönteminizi kaldıramazsınız. Önce bir şifre belirleyin.")
         return redirect('social_accounts')
     
     try:
-        social_account = SocialAccount.objects.get(user=request.user, provider=provider)
-        social_account.delete()
-        messages.success(request, f"{provider.title()} hesap bağlantınız kaldırıldı.")
-    except SocialAccount.DoesNotExist:
-        messages.error(request, "Bu hesap bulunamadı.")
+        # Birden fazla kayıt olabilir, hepsini kaldır
+        social_accounts = SocialAccount.objects.filter(user=request.user, provider=provider)
+        
+        if social_accounts.exists():
+            count = social_accounts.count()
+            social_accounts.delete()
+            
+            if count == 1:
+                messages.success(request, f"{provider.title()} hesap bağlantınız kaldırıldı.")
+            else:
+                messages.success(request, f"{provider.title()} hesap bağlantılarınız ({count} adet) kaldırıldı.")
+        else:
+            messages.error(request, "Bu hesap bulunamadı.")
+            
+    except Exception as e:
+        messages.error(request, f"Hesap bağlantısı kaldırılırken bir hata oluştu: {str(e)}")
     
     return redirect('social_accounts')
 
