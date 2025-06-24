@@ -151,24 +151,24 @@
             <!-- İçerik Slider -->
             <div class="content-slider improved-slider" id="contentSlider">
               {% for content in contents %}
-                <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                <div class="slider-card content-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
                   {% if content.image %}
-                    <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
+                    <div class="content-image" style="background-image: url('{{ content.image.url }}')">
                       <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
                       <div class="content-category">{{ content.category.name }}</div>
                     </div>
                   {% else %}
-                    <div class="premium-card-image placeholder-image">
+                    <div class="content-image placeholder-image">
                       <i class="fas fa-book-open"></i>
                       <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
                       <div class="content-category">{{ content.category.name }}</div>
                     </div>
                   {% endif %}
                   
-                  <h3 class="premium-card-title">{{ content.title }}</h3>
+                  <h3 class="content-title">{{ content.title }}</h3>
                   
-                  <div class="premium-card-actions">
-                    <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
+                  <div class="content-actions">
+                    <button class="action-button save-button {% if content.is_saved %}saved{% endif %}" 
                             data-content-id="{{ content.id }}">
                       <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
                       <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
@@ -268,6 +268,7 @@
           <i class="far fa-bookmark"></i> Kaydet
         </button>
       </div>
+      <div class="modal-element" id="modalElement"></div>
     </div>
   </div>
 </div>

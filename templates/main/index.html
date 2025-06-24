@@ -36,12 +36,7 @@
               <span class="filter-label"><i class="fas fa-layer-group"></i> Kategori:</span>
               <div class="filter-options" id="categoryFilter">
                 <button class="filter-option active" data-category="all">Tümü</button>
-                {% comment %}
                 <!-- Kategoriler dinamik olarak yüklenecek -->
-                {% for category in categories %}
-                  <button class="filter-option" data-category="{{ category.id }}">{{ category.name }}</button>
-                {% endfor %}
-                {% endcomment %}
               </div>
             </div>
             
@@ -72,38 +67,28 @@
             <!-- İçerik Slider -->
             <div class="content-slider improved-slider" id="contentSlider">
               {% for content in user_suggestions %}
-                <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
-                  <div class="premium-card-inner">
-                    {% if content.image %}
-                      <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
-                        <div class="content-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
-                        <div class="content-category">{{ content.category.name }}</div>
-                      </div>
-                    {% else %}
-                      <div class="premium-card-image placeholder-image">
-                        <i class="fas fa-book-open"></i>
-                        <div class="content-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
-                        <div class="content-category">{{ content.category.name }}</div>
-                      </div>
-                    {% endif %}
-                    
-                    <div class="premium-card-content">
-                      <h3 class="premium-card-title">{{ content.title }}</h3>
-                      <p class="premium-card-description">{{ content.short_description|truncatechars:80 }}</p>
+                <div class="slider-card content-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                  {% if content.image %}
+                    <div class="content-image" style="background-image: url('{{ content.image.url }}')">
+                      <div class="content-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
+                      <div class="content-category">{{ content.category.name }}</div>
                     </div>
-                    
-                    <div class="premium-card-actions">
-                      <button class="premium-action-button like-button {% if content.is_liked %}liked{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ content.like_count }}</span>
-                      </button>
-                      <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
-                      </button>
+                  {% else %}
+                    <div class="content-image placeholder-image">
+                      <i class="fas fa-book-open"></i>
+                      <div class="content-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
+                      <div class="content-category">{{ content.category.name }}</div>
                     </div>
+                  {% endif %}
+                  
+                  <h3 class="content-title">{{ content.title }}</h3>
+                  
+                  <div class="content-actions">
+                    <button class="action-button save-button {% if content.is_saved %}saved{% endif %}" 
+                            data-content-id="{{ content.id }}">
+                      <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                      <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                    </button>
                   </div>
                 </div>
               {% endfor %}
@@ -148,9 +133,6 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <button class="modal-action-btn" id="modalLikeBtn">
-          <i class="far fa-heart"></i> Beğen
-        </button>
         <button class="modal-action-btn" id="modalSaveBtn">
           <i class="far fa-bookmark"></i> Kaydet
         </button>
@@ -280,12 +262,12 @@
         }, {
             threshold: 0.1
         });
-    
+
         // Animasyon eklenecek elementler
-        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description, .premium-card').forEach(el => {
+        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
             observer.observe(el);
         });
-    
+
         // Sectionlar için görünürlük animasyonu
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -296,17 +278,17 @@
         }, {
             threshold: 0.1
         });
-    
+
         document.querySelectorAll('.elements-section, .advantage-section, .cta-section, .premium-content-section').forEach(section => {
             sectionObserver.observe(section);
         });
-        
+
         {% if has_test_result %}
         // Premium içerik slider kontrolleri
         const contentSlider = document.getElementById('contentSlider');
         const prevSlideButton = document.getElementById('prevSlideButton');
         const nextSlideButton = document.getElementById('nextSlideButton');
-        
+
         // Slider kaydırma işlevi
         function scrollSlider(direction) {
             if (contentSlider) {
@@ -314,24 +296,23 @@
                 contentSlider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             }
         }
-        
+
         // Slider butonlarına olay ekle
         if (prevSlideButton) {
             prevSlideButton.addEventListener('click', function() {
                 scrollSlider('left');
             });
         }
-        
+
         if (nextSlideButton) {
             nextSlideButton.addEventListener('click', function() {
                 scrollSlider('right');
             });
         }
-        
+
         // Slider içeriklerini kaydırma olayını dinle ve butonları güncelle
         if (contentSlider) {
             contentSlider.addEventListener('scroll', function() {
-                // Kaydırma pozisyonlarını kontrol et
                 const scrollLeft = contentSlider.scrollLeft;
                 const maxScrollLeft = contentSlider.scrollWidth - contentSlider.clientWidth;
                 
@@ -354,71 +335,74 @@
             }, 100);
         }
         
-        // Filtreleme butonları
-        const categoryButtons = document.querySelectorAll('#categoryFilter .filter-option');
-        const sortButtons = document.querySelectorAll('#sortFilter .filter-option');
-        
-        // Kategori filtreleme
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Aktif butonu değiştir
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Animasyon efekti ekle
-                if (contentSlider) {
-                    contentSlider.style.opacity = '0';
-                    contentSlider.style.transform = 'translateY(15px)';
-                    
-                    setTimeout(() => {
-                        contentSlider.style.opacity = '1';
-                        contentSlider.style.transform = 'translateY(0)';
-                    }, 200);
+        // Kart tıklama olayları
+        const sliderCards = document.querySelectorAll('.slider-card');
+        sliderCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.action-button')) {
+                    openContentModal(this.dataset.contentId);
                 }
             });
         });
         
-        // Sıralama
-        sortButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Aktif butonu değiştir
-                sortButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Animasyon efekti ekle
-                if (contentSlider) {
-                    contentSlider.style.opacity = '0';
-                    contentSlider.style.transform = 'translateY(15px)';
-                    
-                    setTimeout(() => {
-                        contentSlider.style.opacity = '1';
-                        contentSlider.style.transform = 'translateY(0)';
-                    }, 200);
-                }
-            });
-        });
-        
-        // Modal kontrolleri
+        // Modal işlevleri
         const contentModal = document.getElementById('contentModal');
-        const closeModal = document.getElementById('closeModal');
+        
+        function openContentModal(contentId) {
+            // İçeriği AJAX ile çek
+            fetch(`/profiles/content/${contentId}/detail/`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('İçerik yüklenirken hata oluştu');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Modal içeriğini güncelle
+                    document.getElementById('modalTitle').textContent = data.title;
+                    document.getElementById('modalCategory').textContent = data.category;
+                    document.getElementById('modalContent').innerHTML = data.content;
+                    
+                    // Element bilgisini göster
+                    const modalElement = document.getElementById('modalElement');
+                    if (modalElement) {
+                        modalElement.textContent = data.related_element;
+                        modalElement.className = `modal-element ${data.related_element.toLowerCase()}`;
+                    }
+                    
+                    // Kaydetme durumunu güncelle
+                    const saveBtn = document.getElementById('modalSaveBtn');
+                    if (saveBtn) {
+                        saveBtn.dataset.contentId = contentId;
+                        saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
+                        saveBtn.innerHTML = data.saved ? 
+                            '<i class="fas fa-bookmark"></i> Kaydedildi' : 
+                            '<i class="far fa-bookmark"></i> Kaydet';
+                    }
+                    
+                    // Modalı göster
+                    contentModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                    alert('İçerik yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+                });
+        }
         
         // Modal kapatma
-        if (closeModal) {
-            closeModal.addEventListener('click', function() {
-                contentModal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
+        document.getElementById('closeModal').addEventListener('click', function() {
+            contentModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
         
         // Modal dışına tıklama ile kapatma
-        if (contentModal) {
-            contentModal.addEventListener('click', function(e) {
-                if (e.target === contentModal) {
-                    contentModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
+        contentModal.addEventListener('click', function(e) {
+            if (e.target === contentModal) {
+                contentModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
         
         // ESC tuşu ile modalı kapatma
         document.addEventListener('keydown', function(e) {
@@ -427,101 +411,6 @@
                 document.body.style.overflow = '';
             }
         });
-        
-        // Premium kart tıklama olayları
-        const premiumCards = document.querySelectorAll('.premium-card');
-        premiumCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (!e.target.closest('.premium-action-button')) {
-                    const contentId = this.dataset.contentId;
-                    openContentModal(contentId);
-                }
-            });
-        });
-        
-        // Beğenme butonları
-        const likeButtons = document.querySelectorAll('.like-button');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const contentId = this.dataset.contentId;
-                toggleLike(contentId, this);
-            });
-        });
-        
-        // Kaydetme butonları
-        const saveButtons = document.querySelectorAll('.save-button');
-        saveButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const contentId = this.dataset.contentId;
-                toggleSave(contentId, this);
-            });
-        });
-        
-        // Modal butonlarına olay ekle
-        document.getElementById('modalLikeBtn').addEventListener('click', function() {
-            const contentId = this.dataset.contentId;
-            toggleLike(contentId, this);
-        });
-        
-        document.getElementById('modalSaveBtn').addEventListener('click', function() {
-            const contentId = this.dataset.contentId;
-            toggleSave(contentId, this);
-        });
-        
-        // İçerik modalını açma fonksiyonu
-        function openContentModal(contentId) {
-            fetch(`/profiles/content/${contentId}/detail/`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('modalTitle').textContent = data.title;
-                    document.getElementById('modalCategory').textContent = data.category;
-                    document.getElementById('modalContent').innerHTML = data.content;
-                    document.getElementById('modalElement').textContent = data.related_element;
-                    document.getElementById('modalElement').className = `modal-element ${data.related_element.toLowerCase()}`;
-                    
-                    const likeBtn = document.getElementById('modalLikeBtn');
-                    likeBtn.dataset.contentId = contentId;
-                    likeBtn.className = `modal-action-btn${data.liked ? ' liked' : ''}`;
-                    likeBtn.innerHTML = data.liked ? 
-                        '<i class="fas fa-heart"></i> Beğenildi' : 
-                        '<i class="far fa-heart"></i> Beğen';
-                    
-                    const saveBtn = document.getElementById('modalSaveBtn');
-                    saveBtn.dataset.contentId = contentId;
-                    saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
-                    saveBtn.innerHTML = data.saved ? 
-                        '<i class="fas fa-bookmark"></i> Kaydedildi' : 
-                        '<i class="far fa-bookmark"></i> Kaydet';
-                    
-                    contentModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                    alert('İçerik yüklenirken bir hata oluştu.');
-                });
-        }
-        
-        // Beğenme işlevi
-        function toggleLike(contentId, button) {
-            fetch(`/profiles/content/${contentId}/toggle_like/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    updateLikeStatus(contentId, data.liked, data.like_count);
-                }
-            })
-            .catch(error => console.error('Hata:', error));
-        }
         
         // Kaydetme işlevi
         function toggleSave(contentId, button) {
@@ -542,36 +431,16 @@
             .catch(error => console.error('Hata:', error));
         }
         
-        // Beğenme durumunu güncelle
-        function updateLikeStatus(contentId, isLiked, likeCount) {
-            const likeButtons = document.querySelectorAll(`.like-button[data-content-id="${contentId}"]`);
-            likeButtons.forEach(btn => {
-                btn.classList.toggle('liked', isLiked);
-                const icon = btn.querySelector('i');
-                icon.className = isLiked ? 'fas fa-heart' : 'far fa-heart';
-                
-                const countSpan = btn.querySelector('.like-count');
-                if (countSpan) {
-                    countSpan.textContent = likeCount;
-                }
-            });
-            
-            const modalLikeBtn = document.getElementById('modalLikeBtn');
-            if (modalLikeBtn && modalLikeBtn.dataset.contentId === contentId) {
-                modalLikeBtn.classList.toggle('liked', isLiked);
-                modalLikeBtn.innerHTML = isLiked ? 
-                    '<i class="fas fa-heart"></i> Beğenildi' : 
-                    '<i class="far fa-heart"></i> Beğen';
-            }
-        }
-        
         // Kaydetme durumunu güncelle
         function updateSaveStatus(contentId, isSaved) {
+            // Kart butonlarını güncelle
             const saveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"]`);
             saveButtons.forEach(btn => {
                 btn.classList.toggle('saved', isSaved);
                 const icon = btn.querySelector('i');
-                icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+                if (icon) {
+                    icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+                }
                 
                 const textSpan = btn.querySelector('.save-text');
                 if (textSpan) {
@@ -579,6 +448,7 @@
                 }
             });
             
+            // Modal butonunu güncelle
             const modalSaveBtn = document.getElementById('modalSaveBtn');
             if (modalSaveBtn && modalSaveBtn.dataset.contentId === contentId) {
                 modalSaveBtn.classList.toggle('saved', isSaved);
@@ -603,6 +473,121 @@
             }
             return cookieValue;
         }
+        
+        // Kaydetme butonlarına olay ekle
+        document.querySelectorAll('.save-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSave(this.dataset.contentId, this);
+            });
+        });
+        
+        // Modal kaydetme butonuna olay ekle
+        const modalSaveBtn = document.getElementById('modalSaveBtn');
+        if (modalSaveBtn) {
+            modalSaveBtn.addEventListener('click', function() {
+                toggleSave(this.dataset.contentId, this);
+            });
+        }
+        
+        // Filtreleme işlevleri
+        const categoryButtons = document.querySelectorAll('#categoryFilter .filter-option');
+        const sortButtons = document.querySelectorAll('#sortFilter .filter-option');
+        
+        // Kategori filtreleme
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const activeCategory = this.dataset.category;
+                filterContent(activeCategory);
+            });
+        });
+        
+        // Sıralama
+        sortButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                sortButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const activeSort = this.dataset.sort;
+                sortContent(activeSort);
+            });
+        });
+        
+        function filterContent(category) {
+            const allCards = contentSlider.querySelectorAll('.slider-card');
+            
+            allCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Slider'ı başa sıfırla
+            contentSlider.scrollLeft = 0;
+            contentSlider.dispatchEvent(new Event('scroll'));
+        }
+        
+        function sortContent(sortType) {
+            // Sıralama için kartları yeniden düzenle
+            const cards = Array.from(contentSlider.querySelectorAll('.slider-card'));
+            
+            if (sortType === 'popular') {
+                // Popülerlik sıralaması (örnek - gerçek veri ile değiştirin)
+                cards.sort((a, b) => {
+                    // Burada gerçek popülerlik verisi kullanılabilir
+                    return Math.random() - 0.5; // Örnek rastgele sıralama
+                });
+            } else {
+                // En yeni sıralaması (varsayılan DOM sırası)
+                cards.sort((a, b) => {
+                    return parseInt(a.dataset.contentId) - parseInt(b.dataset.contentId);
+                });
+            }
+            
+            // Kartları yeniden sırala
+            cards.forEach(card => {
+                contentSlider.appendChild(card);
+            });
+            
+            // Slider'ı başa sıfırla
+            contentSlider.scrollLeft = 0;
+            contentSlider.dispatchEvent(new Event('scroll'));
+        }
+        
+        // Mobil cihazlar için kart boyutlarını ayarlama
+        function adjustCardSizes() {
+            if (!contentSlider) return;
+            
+            const cards = contentSlider.querySelectorAll('.slider-card');
+            if (!cards.length) return;
+            
+            // Ekran genişliğine göre kart genişliklerini ayarla
+            if (window.innerWidth <= 768) {
+                cards.forEach(card => {
+                    card.style.width = `calc(100% - 30px)`;
+                    card.style.maxWidth = '400px';
+                });
+            } else {
+                cards.forEach(card => {
+                    card.style.width = `calc(50% - 30px)`;
+                    card.style.maxWidth = '350px';
+                });
+            }
+            
+            // Kaydırma olayını tetikle
+            contentSlider.dispatchEvent(new Event('scroll'));
+        }
+        
+        // Pencere boyutu değiştiğinde kart boyutlarını ayarla
+        window.addEventListener('resize', adjustCardSizes);
+        
+        // Sayfa yüklendiğinde kart boyutlarını ayarla
+        window.addEventListener('load', adjustCardSizes);
         {% endif %}
     });
 </script>

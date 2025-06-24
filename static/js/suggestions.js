@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Sayfa yüklendiğinde butonları güncelle
     setTimeout(function() {
-      // Kaydırma olayını manuel tetikle
       contentSlider.dispatchEvent(new Event('scroll'));
     }, 100);
   }
@@ -517,13 +516,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // İçeriği göster
         document.getElementById('modalContent').innerHTML = data.content;
         
+        // Element bilgisini göster (eğer element elementi varsa)
+        const modalElement = document.getElementById('modalElement');
+        if (modalElement) {
+          modalElement.textContent = data.related_element;
+          modalElement.className = `modal-element ${data.related_element.toLowerCase()}`;
+        }
+        
         // Kaydetme durumunu güncelle
         const saveBtn = document.getElementById('modalSaveBtn');
-        saveBtn.dataset.contentId = contentId;
-        saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
-        saveBtn.innerHTML = data.saved ? 
-          '<i class="fas fa-bookmark"></i> Kaydedildi' : 
-          '<i class="far fa-bookmark"></i> Kaydet';
+        if (saveBtn) {
+          saveBtn.dataset.contentId = contentId;
+          saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
+          saveBtn.innerHTML = data.saved ? 
+            '<i class="fas fa-bookmark"></i> Kaydedildi' : 
+            '<i class="far fa-bookmark"></i> Kaydet';
+        }
+        
+        // Beğenme butonunu güncelle (eğer varsa)
+        const likeBtn = document.getElementById('modalLikeBtn');
+        if (likeBtn) {
+          likeBtn.dataset.contentId = contentId;
+          likeBtn.className = `modal-action-btn${data.liked ? ' liked' : ''}`;
+          likeBtn.innerHTML = data.liked ? 
+            '<i class="fas fa-heart"></i> Beğenildi' : 
+            '<i class="far fa-heart"></i> Beğen';
+        }
         
         // Modalı göster
         contentModal.classList.add('active');
@@ -558,11 +576,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Modal butonlarına olay ekle
-  document.getElementById('modalSaveBtn').addEventListener('click', function() {
-    toggleSave(this.dataset.contentId, this);
-  });
+  const modalSaveBtn = document.getElementById('modalSaveBtn');
+  if (modalSaveBtn) {
+    modalSaveBtn.addEventListener('click', function() {
+      toggleSave(this.dataset.contentId, this);
+    });
+  }
   
-  // ----- KAYDETME FONKSİYONLARI -----
+  const modalLikeBtn = document.getElementById('modalLikeBtn');
+  if (modalLikeBtn) {
+    modalLikeBtn.addEventListener('click', function() {
+      toggleLike(this.dataset.contentId, this);
+    });
+  }
+  
+  // ----- KAYDETME VE BEĞENİ FONKSİYONLARI -----
   // Kaydetme işlevi
   function toggleSave(contentId, button) {
     fetch(`/profiles/content/${contentId}/toggle_save/`, {
@@ -583,18 +611,42 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => console.error('Hata:', error));
   }
   
+  // Beğenme işlevi
+  function toggleLike(contentId, button) {
+    fetch(`/profiles/content/${contentId}/toggle_like/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Beğenme durumunu güncelle
+        updateLikeStatus(contentId, data.liked, data.like_count);
+      }
+    })
+    .catch(error => console.error('Hata:', error));
+  }
+  
   // Kaydetme durumunu güncelle
   function updateSaveStatus(contentId, isSaved) {
-    // Kart butonlarını güncelle
-    const saveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"]`);
+    // Kart butonlarını güncelle (hem slider hem de grid)
+    const saveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"], .premium-action-button[data-content-id="${contentId}"]`);
     saveButtons.forEach(btn => {
-      btn.classList.toggle('saved', isSaved);
-      const icon = btn.querySelector('i');
-      icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
-      
-      const textSpan = btn.querySelector('.save-text');
-      if (textSpan) {
-        textSpan.textContent = isSaved ? 'Kaydedildi' : 'Kaydet';
+      if (btn.classList.contains('save-button') || btn.classList.contains('premium-action-button')) {
+        btn.classList.toggle('saved', isSaved);
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+        }
+        
+        const textSpan = btn.querySelector('.save-text');
+        if (textSpan) {
+          textSpan.textContent = isSaved ? 'Kaydedildi' : 'Kaydet';
+        }
       }
     });
     
@@ -611,6 +663,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const contentIndex = allContents.findIndex(c => c.id == contentId);
     if (contentIndex !== -1) {
       allContents[contentIndex].is_saved = isSaved;
+    }
+  }
+  
+  // Beğenme durumunu güncelle  
+  function updateLikeStatus(contentId, isLiked, likeCount) {
+    // Kart butonlarını güncelle (hem slider hem de grid)
+    const likeButtons = document.querySelectorAll(`.like-button[data-content-id="${contentId}"], .premium-action-button[data-content-id="${contentId}"]`);
+    likeButtons.forEach(btn => {
+      if (btn.classList.contains('like-button') || btn.classList.contains('premium-action-button')) {
+        btn.classList.toggle('liked', isLiked);
+        const icon = btn.querySelector('i');
+        if (icon) {
+          icon.className = isLiked ? 'fas fa-heart' : 'far fa-heart';
+        }
+        
+        const countSpan = btn.querySelector('.like-count');
+        if (countSpan) {
+          countSpan.textContent = likeCount;
+        }
+      }
+    });
+    
+    // Modal butonunu güncelle
+    const modalLikeBtn = document.getElementById('modalLikeBtn');
+    if (modalLikeBtn && modalLikeBtn.dataset.contentId === contentId) {
+      modalLikeBtn.classList.toggle('liked', isLiked);
+      modalLikeBtn.innerHTML = isLiked ? 
+        '<i class="fas fa-heart"></i> Beğenildi' : 
+        '<i class="far fa-heart"></i> Beğen';
+    }
+    
+    // Tüm içerikler dizisinde ilgili içeriği güncelle
+    const contentIndex = allContents.findIndex(c => c.id == contentId);
+    if (contentIndex !== -1) {
+      allContents[contentIndex].is_liked = isLiked;
     }
   }
   
@@ -634,24 +721,29 @@ document.addEventListener('DOMContentLoaded', function() {
   // ----- SAYFA YÜKLEME OLAYLARI -----
   // Sayfayı hazırla
   function initPage() {
-    // Kişisel içerik kartlarına olay ekle
+    // Kişisel içerik kartlarına olay ekle (slider)
     if (contentSlider) {
       // Kartlara tıklama olayı ekle
-      const sliderCards = contentSlider.querySelectorAll('.slider-card');
+      const sliderCards = contentSlider.querySelectorAll('.slider-card, .premium-card');
       sliderCards.forEach(card => {
         card.addEventListener('click', function(e) {
-          if (!e.target.closest('.action-button')) {
+          if (!e.target.closest('.action-button') && !e.target.closest('.premium-action-button')) {
             openContentModal(this.dataset.contentId);
           }
         });
       });
       
-      // Kaydetme butonlarına olay ekle
-      contentSlider.querySelectorAll('.save-button').forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.stopPropagation();
-          toggleSave(this.dataset.contentId, this);
-        });
+      // Kaydetme butonlarına olay ekle (sadece kaydetme, beğeni yok)
+      contentSlider.querySelectorAll('.save-button, .premium-action-button').forEach(button => {
+        // Sadece kaydetme butonlarını dinle
+        if (button.classList.contains('save-button') || 
+            (button.classList.contains('premium-action-button') && 
+             button.querySelector('i').classList.contains('fa-bookmark'))) {
+          button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSave(this.dataset.contentId, this);
+          });
+        }
       });
       
       // Slider'ı başa sıfırla
