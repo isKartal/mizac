@@ -558,6 +558,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 .content-card:hover {
   transform: translateY(-10px);
@@ -625,25 +626,17 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--primary-color);
-  margin: 20px 20px 10px;
+  margin: 20px 20px;
   line-height: 1.4;
-}
-.content-description {
-  padding: 0 20px;
-  color: #777;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
   flex: 1;
 }
 .content-actions {
-  display: flex;
-  padding: 15px 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: #f9f9f9;
-  justify-content: space-between;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 .action-button {
-  background: none;
+  background: white;
   border: none;
   cursor: pointer;
   display: flex;
@@ -654,11 +647,21 @@
   padding: 8px 12px;
   border-radius: 20px;
   transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-.action-button:hover { background-color: rgba(0, 0, 0, 0.05); }
-.action-button.liked { color: var(--ates-color); }
-.action-button.saved { color: var(--hava-color); }
-.like-count { font-weight: 500; }
+.action-button:hover { 
+  background-color: #f0f0f0; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.action-button.saved { 
+  color: white; 
+  background-color: var(--hava-color); 
+}
+.action-button.saved:hover { 
+  background-color: var(--hava-color); 
+  opacity: 0.9;
+}
 .pagination-controls {
   display: flex;
   justify-content: center;
@@ -722,15 +725,16 @@
   opacity: 1;
 }
 .modal-header {
-  background-color: var(--primary-color);
-  padding: 20px;
+  background-color: white;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .modal-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin: 0;
   flex: 1;
@@ -743,18 +747,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.05);
   border: none;
-  color: white;
+  color: var(--primary-color);
   cursor: pointer;
   transition: var(--transition);
 }
 .modal-nav-button:hover, .modal-close-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
 }
 .modal-body {
-  padding: 30px;
+  padding: 20px;
   overflow-y: auto;
   max-height: calc(90vh - 150px);
 }
@@ -768,7 +772,7 @@
   padding: 5px 12px;
   background-color: var(--secondary-color);
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -778,9 +782,9 @@
   color: #333;
 }
 .modal-footer {
-  padding: 15px 30px;
+  padding: 15px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
 }
@@ -791,16 +795,23 @@
   gap: 8px;
   padding: 10px 15px;
   border-radius: 20px;
-  background: none;
+  background: white;
   border: 1px solid #ddd;
   color: #666;
   font-size: 0.95rem;
   cursor: pointer;
   transition: var(--transition);
 }
-.modal-action-btn:hover { background-color: #f0f0f0; }
-.modal-action-btn.liked { color: var(--ates-color); border-color: var(--ates-color); }
-.modal-action-btn.saved { color: var(--hava-color); border-color: var(--hava-color); }
+.modal-action-btn:hover { 
+  background-color: #f0f0f0; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.modal-action-btn.saved { 
+  color: white; 
+  background-color: var(--hava-color); 
+  border-color: var(--hava-color); 
+}
 .modal-element {
   padding: 5px 12px;
   border-radius: 20px;
@@ -821,7 +832,7 @@
 .element-badge.ateş { background-color: var(--ates-bg); color: var(--ates-color); }
 .element-badge.hava { background-color: var(--hava-bg); color: var(--hava-color); }
 .element-badge.su { background-color: var(--su-bg); color: var(--su-color); }
-.element-badge.top.element-badge.toprak { background-color: var(--toprak-bg); color: var(--toprak-color); }
+.element-badge.toprak { background-color: var(--toprak-bg); color: var(--toprak-color); }
 .element-description {
   font-size: 1rem;
   color: #777;

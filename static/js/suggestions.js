@@ -191,11 +191,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Sıralama
     if (activeSort === 'popular') {
-      filtered.sort((a, b) => {
-        const aLikes = parseInt(a.querySelector('.like-count').textContent) || 0;
-        const bLikes = parseInt(b.querySelector('.like-count').textContent) || 0;
-        return bLikes - aLikes;
-      });
+      // Beğeni butonu kaldırıldığı için sıralama özelliği kaldırıldı
+      // Kartlar doğal sıralarında kalacak
     }
     
     // Tüm kartları gizle
@@ -464,13 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="content-category">${content.category_name}</div>
         </div>
         <h3 class="content-title">${content.title}</h3>
-        <p class="content-description">${content.short_description ? content.short_description.substring(0, 100) + (content.short_description.length > 100 ? '...' : '') : ''}</p>
         <div class="content-actions">
-          <button class="action-button like-button ${content.is_liked ? 'liked' : ''}" 
-                  data-content-id="${content.id}">
-            <i class="${content.is_liked ? 'fas' : 'far'} fa-heart"></i>
-            <span class="like-count">${content.like_count || 0}</span>
-          </button>
           <button class="action-button save-button ${content.is_saved ? 'saved' : ''}" 
                   data-content-id="${content.id}">
             <i class="${content.is_saved ? 'fas' : 'far'} fa-bookmark"></i>
@@ -484,12 +475,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!e.target.closest('.action-button')) {
           openContentModal(content.id);
         }
-      });
-      
-      // Beğenme butonuna olay ekle
-      card.querySelector('.like-button').addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleLike(content.id, this);
       });
       
       // Kaydetme butonuna olay ekle
@@ -532,18 +517,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // İçeriği göster
         document.getElementById('modalContent').innerHTML = data.content;
         
-        // Element bilgisini göster
-        document.getElementById('modalElement').textContent = data.related_element;
-        document.getElementById('modalElement').className = `modal-element ${data.related_element.toLowerCase()}`;
-        
-        // Beğenme durumunu güncelle
-        const likeBtn = document.getElementById('modalLikeBtn');
-        likeBtn.dataset.contentId = contentId;
-        likeBtn.className = `modal-action-btn${data.liked ? ' liked' : ''}`;
-        likeBtn.innerHTML = data.liked ? 
-          '<i class="fas fa-heart"></i> Beğenildi' : 
-          '<i class="far fa-heart"></i> Beğen';
-        
         // Kaydetme durumunu güncelle
         const saveBtn = document.getElementById('modalSaveBtn');
         saveBtn.dataset.contentId = contentId;
@@ -585,35 +558,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Modal butonlarına olay ekle
-  document.getElementById('modalLikeBtn').addEventListener('click', function() {
-    toggleLike(this.dataset.contentId, this);
-  });
-  
   document.getElementById('modalSaveBtn').addEventListener('click', function() {
     toggleSave(this.dataset.contentId, this);
   });
   
-  // ----- BEĞENME/KAYDETME FONKSİYONLARI -----
-  // Beğenme işlevi
-  function toggleLike(contentId, button) {
-    fetch(`/profiles/content/${contentId}/toggle_like/`, {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': getCookie('csrftoken'),
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Beğenme durumunu güncelle
-        updateLikeStatus(contentId, data.liked, data.like_count);
-      }
-    })
-    .catch(error => console.error('Hata:', error));
-  }
-  
+  // ----- KAYDETME FONKSİYONLARI -----
   // Kaydetme işlevi
   function toggleSave(contentId, button) {
     fetch(`/profiles/content/${contentId}/toggle_save/`, {
@@ -632,38 +581,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .catch(error => console.error('Hata:', error));
-  }
-  
-  // Beğenme durumunu güncelle
-  function updateLikeStatus(contentId, isLiked, likeCount) {
-    // Kart butonlarını güncelle
-    const likeButtons = document.querySelectorAll(`.like-button[data-content-id="${contentId}"]`);
-    likeButtons.forEach(btn => {
-      btn.classList.toggle('liked', isLiked);
-      const icon = btn.querySelector('i');
-      icon.className = isLiked ? 'fas fa-heart' : 'far fa-heart';
-      
-      const countSpan = btn.querySelector('.like-count');
-      if (countSpan) {
-        countSpan.textContent = likeCount;
-      }
-    });
-    
-    // Modal butonunu güncelle
-    const modalLikeBtn = document.getElementById('modalLikeBtn');
-    if (modalLikeBtn && modalLikeBtn.dataset.contentId === contentId) {
-      modalLikeBtn.classList.toggle('liked', isLiked);
-      modalLikeBtn.innerHTML = isLiked ? 
-        '<i class="fas fa-heart"></i> Beğenildi' : 
-        '<i class="far fa-heart"></i> Beğen';
-    }
-    
-    // Tüm içerikler dizisinde ilgili içeriği güncelle
-    const contentIndex = allContents.findIndex(c => c.id == contentId);
-    if (contentIndex !== -1) {
-      allContents[contentIndex].is_liked = isLiked;
-      allContents[contentIndex].like_count = likeCount;
-    }
   }
   
   // Kaydetme durumunu güncelle
@@ -726,14 +643,6 @@ document.addEventListener('DOMContentLoaded', function() {
           if (!e.target.closest('.action-button')) {
             openContentModal(this.dataset.contentId);
           }
-        });
-      });
-      
-      // Beğenme butonlarına olay ekle
-      contentSlider.querySelectorAll('.like-button').forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.stopPropagation();
-          toggleLike(this.dataset.contentId, this);
         });
       });
       

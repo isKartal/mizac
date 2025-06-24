@@ -152,37 +152,27 @@
             <div class="content-slider improved-slider" id="contentSlider">
               {% for content in contents %}
                 <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
-                  <div class="premium-card-inner">
-                    {% if content.image %}
-                      <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
-                        <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
-                        <div class="content-category">{{ content.category.name }}</div>
-                      </div>
-                    {% else %}
-                      <div class="premium-card-image placeholder-image">
-                        <i class="fas fa-book-open"></i>
-                        <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
-                        <div class="content-category">{{ content.category.name }}</div>
-                      </div>
-                    {% endif %}
-                    
-                    <div class="premium-card-content">
-                      <h3 class="premium-card-title">{{ content.title }}</h3>
-                      <p class="premium-card-description">{{ content.short_description|truncatechars:80 }}</p>
+                  {% if content.image %}
+                    <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
+                      <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
+                      <div class="content-category">{{ content.category.name }}</div>
                     </div>
-                    
-                    <div class="premium-card-actions">
-                      <button class="premium-action-button like-button {% if content.is_liked %}liked{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ content.like_count }}</span>
-                      </button>
-                      <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
-                      </button>
+                  {% else %}
+                    <div class="premium-card-image placeholder-image">
+                      <i class="fas fa-book-open"></i>
+                      <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
+                      <div class="content-category">{{ content.category.name }}</div>
                     </div>
+                  {% endif %}
+                  
+                  <h3 class="premium-card-title">{{ content.title }}</h3>
+                  
+                  <div class="premium-card-actions">
+                    <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
+                            data-content-id="{{ content.id }}">
+                      <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                      <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                    </button>
                   </div>
                 </div>
               {% endfor %}
@@ -274,14 +264,10 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <button class="modal-action-btn" id="modalLikeBtn">
-          <i class="far fa-heart"></i> Beğen
-        </button>
         <button class="modal-action-btn" id="modalSaveBtn">
           <i class="far fa-bookmark"></i> Kaydet
         </button>
       </div>
-      <div class="modal-element" id="modalElement"></div>
     </div>
   </div>
 </div>
