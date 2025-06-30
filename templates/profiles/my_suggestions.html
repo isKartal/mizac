@@ -129,7 +129,6 @@
               <span class="filter-label"><i class="fas fa-sort-amount-down"></i> Sırala:</span>
               <div class="filter-options" id="sortFilter">
                 <button class="filter-option active" data-sort="newest">En Yeni</button>
-                <button class="filter-option" data-sort="popular">En Popüler</button>
               </div>
             </div>
           </div>
@@ -166,21 +165,13 @@
                       </div>
                     {% endif %}
                     
-                    <div class="premium-card-content">
-                      <h3 class="premium-card-title">{{ content.title }}</h3>
-                      <p class="premium-card-description">{{ content.short_description|truncatechars:80 }}</p>
-                    </div>
-                    
-                    <div class="premium-card-actions">
-                      <button class="premium-action-button like-button {% if content.is_liked %}liked{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ content.like_count }}</span>
-                      </button>
-                      <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
-                              data-content-id="{{ content.id }}">
+                    <!-- YENİ: Header Yapısı - Başlık ve Kaydet Butonu Yan Yana -->
+                    <div class="content-header">
+                      <h3 class="content-title">{{ content.title }}</h3>
+                      <button class="save-button-header {% if content.is_saved %}saved{% endif %}" 
+                              data-content-id="{{ content.id }}"
+                              title="{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}">
                         <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
                       </button>
                     </div>
                   </div>
@@ -215,7 +206,6 @@
       </div>
       
       <!-- Element Sekmesi Filtresi -->
-      <div class="secondary-filter-container" id="secondaryFilterContainer">
         <div class="element-tabs modern-tabs" id="elementTabs">
           <button class="filter-option active" data-element="all">
             <i class="fas fa-globe"></i> Tümü
@@ -274,9 +264,7 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <button class="modal-action-btn" id="modalLikeBtn">
-          <i class="far fa-heart"></i> Beğen
-        </button>
+        <!-- Beğeni butonu kaldırıldı -->
         <button class="modal-action-btn" id="modalSaveBtn">
           <i class="far fa-bookmark"></i> Kaydet
         </button>

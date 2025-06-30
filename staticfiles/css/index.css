@@ -1,800 +1,845 @@
-/* Temel Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary-color: #292321;
-    --secondary-color: #ece9e3;
-    --accent-color: #e9b44c;
-    --text-color: #292321;
-    --light-text: #fafafa;
-    --dark-bg: #1a1a1a;
-    --border-radius: 16px;
-    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    max-width: 100vw;
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-.container {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 5%;
-}
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* Header ve Navigasyon */
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background-color: #ece9e3;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: var(--transition);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-img {
-    height: 48px;
-    width: auto;
-    border-radius: 10px;
-    transition: var(--transition);
-}
-
-.logo-img:hover {
-    transform: scale(1.05);
-}
-
-.nav-links {
-    display: flex;
-    gap: 36px;
-}
-
-.nav-item, .login-button {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--primary-color);
-    padding: 8px 16px;
-    transition: var(--transition);
-    position: relative;
-    letter-spacing: 0.5px;
-}
-
-.nav-item::after, .login-button::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: var(--accent-color);
-    transition: var(--transition);
-    transform: translateX(-50%);
-}
-
-.nav-item:hover::after, .login-button:hover::after {
-    width: 70%;
-}
-
-.login-button {
-    border: 2px solid var(--accent-color);
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.login-button:hover {
-    background-color: var(--accent-color);
-    color: var(--light-text);
-}
-
-.login-button:hover::after {
-    width: 0;
-}
-
-/* Profil Dropdown */
-.profile-container {
-    position: relative;
-}
-
-.profile-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: var(--transition);
-    padding: 8px;
-}
-
-.profile-button:hover {
-    color: var(--accent-color);
-    transform: scale(1.05);
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    min-width: 220px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: var(--transition);
-}
-
-.dropdown-content.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.dropdown-content a {
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.dropdown-content a:hover {
-    background-color: var(--secondary-color);
-    color: var(--accent-color);
-}
-
-/* Hamburger Menü */
-.hamburger-button {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.hamburger-button:hover, .hamburger-button.active {
-    color: var(--accent-color);
-}
+/* Index sayfasına özel stil tanımları */
 
 /* Hero Bölümü */
 .hero-section {
-    position: relative;
-    height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5%;
-    background-image: url('../images/logom2.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  position: relative;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+  background-image: url('../images/logom2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
 .hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
 }
 
 .hero-content {
-    max-width: 850px;
-    text-align: center;
-    color: var(--light-text);
-    position: relative;
-    z-index: 10;
-    transform: translateY(-20px);
-    opacity: 0;
-    animation: fadeInUp 1s forwards 0.5s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  max-width: 850px;
+  text-align: center;
+  color: var(--light-text);
+  position: relative;
+  z-index: 10;
+  transform: translateY(-20px);
+  opacity: 0;
+  animation: fadeInUp 1s forwards 0.5s;
 }
 
 .mizac-nedir-title {
-    font-family: 'Poppins', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 800;
-    margin-bottom: 24px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: -0.5px;
+  font-family: 'Poppins', serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  margin-bottom: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.5px;
 }
 
 .mizac-nedir-text {
-    font-family: 'Lora', serif;
-    font-weight: 500;
-    font-size: clamp(18px, 2vw, 22px);
-    line-height: 1.6;
-    max-width: 740px;
-    margin: 0 auto 36px;
-    opacity: 0.95;
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.6;
+  max-width: 740px;
+  margin: 0 auto 36px;
+  opacity: 0.95;
 }
 
 .start-test-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background-color: var(--accent-color);
-    color: var(--light-text);
-    padding: 16px 36px;
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    font-size: 18px;
-    transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--accent-color);
+  color: var(--light-text);
+  padding: 16px 36px;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 18px;
+  transition: var(--transition);
 }
 
 .start-test-button:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Element Bölümü */
 .elements-section {
-    padding: 120px 0;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: var(--transition);
+  padding: 10px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
 }
 
 .elements-section.show-section {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(32px, 4vw, 44px);
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 15px;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
-}
-
-.section-description {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px;
-    font-size: 18px;
-    color: #666;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .element-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .element-card {
-    background-color: white;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-    padding: 40px 30px;
-    text-align: center;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: var(--transition);
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  padding: 40px 30px;
+  text-align: center;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: var(--transition);
 }
 
 .element-card.appear {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .element-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .element-icon {
-    font-size: 48px;
-    margin-bottom: 24px;
-    color: var(--accent-color);
-    display: inline-block;
-    padding: 20px;
-    border-radius: 50%;
-    background-color: rgba(233, 180, 76, 0.1);
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+/* Element kartları için özel renk tanımları */
+.fire-icon {
+  color: #e74c3c; /* Ateş için kırmızı */
+  background-color: rgba(231, 76, 60, 0.15);
+}
+
+.air-icon {
+  color: #78909c; /* Hava için gri */
+  background-color: rgba(120, 144, 156, 0.15);
+}
+
+.earth-icon {
+  color: #8d6e63; /* Toprak için kahverengi */
+  background-color: rgba(141, 110, 99, 0.15);
+}
+
+.water-icon {
+  color: #2980b9; /* Su için mavi */
+  background-color: rgba(41, 128, 185, 0.15);
 }
 
 .element-card h3 {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--primary-color);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--primary-color);
 }
 
 .element-card p {
-    font-size: 16px;
-    margin-bottom: 24px;
-    color: #666;
-    line-height: 1.7;
+  font-size: 16px;
+  margin-bottom: 24px;
+  color: #666;
+  line-height: 1.7;
 }
 
 .element-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--accent-color);
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
 }
 
 .element-link:hover {
-    color: var(--primary-color);
-    transform: translateX(5px);
+  color: var(--primary-color);
+  transform: translateX(5px);
 }
 
 /* Advantage Section */
 .advantage-section {
-    padding: 120px 0;
-    background-color: #f0ece5;
+  padding: 120px 0;
+  background-color: #f0ece5;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+}
+
+.advantage-section.show-section {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .advantage-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .advantage-card {
-    background-color: white;
-    border-radius: var(--border-radius);
-    padding: 40px 30px;
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-    transform: translateY(30px);
-    opacity: 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  transform: translateY(30px);
+  opacity: 0;
 }
 
 .advantage-card.appear {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .advantage-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .advantage-icon {
-    font-size: 36px;
-    color: var(--accent-color);
-    margin-bottom: 24px;
-    display: inline-block;
-    padding: 20px;
-    border-radius: 50%;
-    background-color: rgba(233, 180, 76, 0.1);
+  font-size: 36px;
+  color: var(--accent-color);
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 50%;
+  background-color: rgba(233, 180, 76, 0.1);
 }
 
 .advantage-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--primary-color);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--primary-color);
 }
 
 .advantage-card p {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.7;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.7;
 }
 
 /* CTA Bölümü */
 .cta-section {
-    background-color: var(--primary-color);
-    color: var(--light-text);
-    padding: 100px 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: var(--transition);
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  padding: 100px 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
 }
 
 .cta-section.show-section {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cta-content {
-    max-width: 800px;
-    margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .cta-content h2 {
-    font-size: clamp(32px, 4vw, 44px);
-    margin-bottom: 24px;
-    font-weight: 700;
+  font-size: clamp(32px, 4vw, 44px);
+  margin-bottom: 24px;
+  font-weight: 700;
 }
 
 .cta-content p {
-    font-size: 18px;
-    margin-bottom: 36px;
-    opacity: 0.9;
+  font-size: 18px;
+  margin-bottom: 36px;
+  opacity: 0.9;
 }
 
 .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background-color: var(--accent-color);
-    color: var(--light-text);
-    padding: 16px 36px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 18px;
-    transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--accent-color);
+  color: var(--light-text);
+  padding: 16px 36px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  transition: var(--transition);
 }
 
 .cta-button:hover {
-    background-color: var(--light-text);
-    color: var(--primary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: var(--light-text);
+  color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Footer */
-footer {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
-    padding: 80px 0 30px;
-    margin-top: auto;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-logo {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.footer-logo-img {
-    height: 60px;
-    border-radius: 10px;
-}
-
-.footer-logo p {
-    font-size: 16px;
-    opacity: 0.8;
-    margin-top: 10px;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-}
-
-.footer-column h3 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-.footer-column ul {
-    list-style: none;
-}
-
-.footer-column ul li {
-    margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-    color: var(--light-text);
-    text-decoration: none;
-    transition: var(--transition);
-    opacity: 0.8;
-}
-
-.footer-column ul li a:hover {
-    color: var(--accent-color);
-    opacity: 1;
-    transform: translateX(5px);
-}
-
-.footer-social h3 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-.social-icons {
-    display: flex;
-    gap: 16px;
-    margin-top: 15px;
-}
-
-.social-icons a {
-    color: var(--light-text);
-    font-size: 18px;
-    transition: var(--transition);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-icons a:hover {
-    color: var(--accent-color);
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    font-size: 14px;
-    opacity: 0.7;
-}
-
-/* Element özellikleri */
-.fire-icon {
-    color: #bc1823;
-    background-color: rgba(235, 67, 49, 0.1);
-}
-
-.air-icon {
-    color: #c9c9c6;
-    background-color: rgba(10, 14, 19, 0.1);
-}
-
-.earth-icon {
-    color: #6d412a;
-    background-color: rgba(39, 174, 96, 0.1);
-}
-
-.water-icon {
-    color: #145da0;
-    background-color: rgba(0, 172, 193, 0.1);
-}
-
-/* Animasyon sınıfları */
-.appear {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-    .element-grid, .advantage-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-      }
-      .footer-social {
-        grid-column: span 2;
-      }
-}
-
+/* Responsive Ayarlar - Index sayfasına özel */
 @media (max-width: 768px) {
-    .nav-container {
-        padding: 15px 5%;
-    }
-    
-    .hamburger-button {
-        display: block;
-    }
-    
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #ece9e3;
-        padding: 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        gap: 15px;
-        z-index: 999;
-    }
-    
-    .nav-links.open {
-        display: flex;
-    }
-    
-    .hero-section {
-        height: auto;
-        padding: 120px 5%;
-    }
-
-    .footer-logo-img {
-        height: auto;
-        border-radius: 1px;
-    }
-    
-    .advantage-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .element-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .footer-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        text-align: center;
-        padding: 0 20px;
-      }
-      .footer-logo, .footer-links, .footer-social {
-        width: 100%;
-      }
-      .footer-logo {
-        margin-bottom: 20px;
-      }
-      .footer-links {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      .footer-column {
-        margin-bottom: 15px;
-      }
-      .footer-column h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-      .footer-column ul {
-        padding: 0;
-        list-style: none;
-      }
-      .footer-column ul li {
-        margin: 8px 0;
-      }
-      .footer-column ul li a {
-        font-size: 16px;
-        color: var(--light-text);
-        opacity: 0.9;
-      }
-      .footer-social h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-      }
-      .social-icons a {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .footer-bottom {
-        margin-top: 20px;
-        font-size: 14px;
-      }
-    }
+  .hero-section {
+    height: auto;
+    padding: 120px 5%;
+  }
+  
+  .advantage-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .element-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
 
 @media (max-width: 480px) {
-    .element-card, .advantage-card {
-        padding: 30px 20px;
-    }
-    
-    .element-icon, .advantage-icon {
-        font-size: 36px;
-        padding: 15px;
-    }
-    
-    .element-card h3, .advantage-card h3 {
-        font-size: 20px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-    }
-    
-    .cta-content h2 {
-        font-size: 28px;
-    }
-    
-    .start-test-button, .cta-button {
-        padding: 14px 28px;
-        font-size: 16px;
-    }
-    .footer-column h3, 
-  .footer-social h3 {
+  .element-card, .advantage-card {
+    padding: 30px 20px;
+  }
+  
+  .element-icon, .advantage-icon {
+    font-size: 36px;
+    padding: 15px;
+  }
+  
+  .element-card h3, .advantage-card h3 {
+    font-size: 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: 28px;
+  }
+  
+  .start-test-button, .cta-button {
+    padding: 14px 28px;
     font-size: 16px;
   }
-  .footer-column ul li a {
+}
+
+/* ===========================================
+   INDEX SAYFASI RESPONSIVE DÜZENLEMELERİ
+   Mevcut tasarım korunarak mobil uyumluluk artırılıyor
+   =========================================== */
+
+/* Mevcut index.css'e eklenen responsive düzenlemeler */
+
+/* ===== HERO SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    min-height: 70vh;
+    padding: 100px 4% 80px;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  
+  .mizac-nedir-title {
+    font-size: clamp(32px, 7vw, 48px);
+    margin-bottom: 20px;
+  }
+  
+  .mizac-nedir-text {
+    font-size: clamp(16px, 3.5vw, 20px);
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  .start-test-button {
+    padding: 14px 28px;
+    font-size: 16px;
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 60vh;
+    padding: 80px 3% 60px;
+  }
+  
+  .hero-content {
+    padding: 0 5px;
+  }
+  
+  .mizac-nedir-title {
+    font-size: clamp(28px, 8vw, 40px);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  
+  .mizac-nedir-text {
+    font-size: clamp(14px, 4vw, 18px);
+    margin-bottom: 25px;
+    line-height: 1.4;
+  }
+  
+  .start-test-button {
+    padding: 12px 24px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* ===== ELEMENTS SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .elements-section {
+    padding: 80px 0;
+  }
+  
+  .element-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .element-card {
+    padding: 30px 25px;
+    margin: 0 10px;
+  }
+  
+  .element-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+    padding: 18px;
+  }
+  
+  .element-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  
+  .element-card p {
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .element-link {
     font-size: 14px;
   }
-  .footer-bottom {
-    font-size: 12px;
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .elements-section {
+    padding: 60px 0;
+  }
+  
+  .element-grid {
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .element-card {
+    padding: 25px 20px;
+    margin: 0 5px;
+  }
+  
+  .element-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    padding: 15px;
+  }
+  
+  .element-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .element-card p {
+    font-size: 14px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  
+  .element-link {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+}
+
+/* ===== ADVANTAGE SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .advantage-section {
+    padding: 80px 0;
+  }
+  
+  .advantage-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .advantage-card {
+    padding: 30px 25px;
+    margin: 0 10px;
+  }
+  
+  .advantage-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+    padding: 18px;
+  }
+  
+  .advantage-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .advantage-card p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .advantage-section {
+    padding: 60px 0;
+  }
+  
+  .advantage-grid {
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .advantage-card {
+    padding: 25px 20px;
+    margin: 0 5px;
+  }
+  
+  .advantage-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    padding: 15px;
+  }
+  
+  .advantage-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .advantage-card p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* ===== CTA SECTION RESPONSIVE ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 80px 0;
+  }
+  
+  .cta-content {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: clamp(28px, 5vw, 36px);
+    margin-bottom: 20px;
+  }
+  
+  .cta-content p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .cta-button {
+    padding: 14px 28px;
+    font-size: 16px;
+    min-width: 200px;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .cta-section {
+    padding: 60px 0;
+  }
+  
+  .cta-content {
+    padding: 0 15px;
+  }
+  
+  .cta-content h2 {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  
+  .cta-content p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* ===== ÖNERİLER SECTION RESPONSIVE (Giriş yapmış kullanıcılar için) ===== */
+
+/* Tablet görünüm */
+@media (max-width: 768px) {
+  .temperament-suggestions {
+    margin: 50px 0;
+    padding: 30px 0;
+  }
+  
+  .suggestions-header h2 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+  
+  .suggestions-header p {
+    font-size: 0.95rem;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .suggestion-card {
+    margin: 0 10px;
+  }
+  
+  .suggestion-image {
+    height: 160px;
+  }
+  
+  .suggestion-title {
+    font-size: 1.05rem;
+    margin: 16px 16px 8px;
+  }
+  
+  .suggestion-description {
+    padding: 0 16px;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .suggestion-actions {
+    padding: 12px 16px;
+  }
+  
+  .suggestion-button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobil görünüm */
+@media (max-width: 480px) {
+  .temperament-suggestions {
+    margin: 40px 0;
+    padding: 25px 0;
+  }
+  
+  .suggestions-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+  
+  .suggestions-header p {
+    font-size: 0.9rem;
+  }
+  
+  .suggestions-grid {
+    gap: 15px;
+    max-width: 100%;
+  }
+  
+  .suggestion-card {
+    margin: 0 5px;
+  }
+  
+  .suggestion-image {
+    height: 140px;
+  }
+  
+  .suggestion-title {
+    font-size: 1rem;
+    margin: 14px 14px 6px;
+  }
+  
+  .suggestion-description {
+    padding: 0 14px;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+  
+  .suggestion-actions {
+    padding: 10px 14px;
+  }
+  
+  .suggestion-button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .more-link {
+    width: 90%;
+    max-width: 280px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== LANDSCAPE MOBİL ÖZEL DÜZENLEMELERİ ===== */
+
+/* Mobil landscape (yatay) görünüm */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .hero-section {
+    min-height: 80vh;
+    padding: 60px 4% 50px;
+  }
+  
+  .mizac-nedir-title {
+    font-size: clamp(24px, 5vw, 36px);
+    margin-bottom: 12px;
+  }
+  
+  .mizac-nedir-text {
+    font-size: clamp(14px, 3vw, 18px);
+    margin-bottom: 20px;
+  }
+  
+  .start-test-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .elements-section,
+  .advantage-section,
+  .cta-section {
+    padding: 50px 0;
+  }
+}
+
+/* ===== ANİMASYON VE TRANSITION İYİLEŞTİRMELERİ ===== */
+
+/* Mobil cihazlarda performans için animasyonları optimize et */
+@media (max-width: 768px) {
+  .element-card,
+  .advantage-card,
+  .suggestion-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .element-card:hover,
+  .advantage-card:hover,
+  .suggestion-card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* ===== ACCESSIBILITY İYİLEŞTİRMELERİ ===== */
+
+/* Touch cihazlar için minimum dokunma alanı */
+@media (max-width: 768px) {
+  .start-test-button,
+  .cta-button,
+  .element-link,
+  .suggestion-button,
+  .more-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Focus stilleri mobil için */
+@media (max-width: 768px) {
+  .start-test-button:focus,
+  .cta-button:focus,
+  .element-link:focus,
+  .suggestion-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+}
+
+/* ===== SMALL SCREEN OPTIMIZATIONS ===== */
+
+/* Çok küçük ekranlar (320px ve altı) için özel düzenlemeler */
+@media (max-width: 320px) {
+  .hero-section {
+    padding: 60px 2% 50px;
+  }
+  
+  .mizac-nedir-title {
+    font-size: clamp(22px, 9vw, 32px);
+  }
+  
+  .mizac-nedir-text {
+    font-size: clamp(13px, 4.5vw, 16px);
+  }
+  
+  .element-card,
+  .advantage-card {
+    padding: 20px 15px;
+    margin: 0 2px;
+  }
+  
+  .element-icon,
+  .advantage-icon {
+    font-size: 28px;
+    padding: 12px;
+  }
+  
+  .start-test-button,
+  .cta-button {
+    width: 100%;
+    max-width: 260px;
+    font-size: 14px;
   }
 }
