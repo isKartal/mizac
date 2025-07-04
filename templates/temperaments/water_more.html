@@ -5,6 +5,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -44,58 +45,90 @@
 </section>
 
 <!-- Mizaç Önerileri Bölümü -->
-<section class="temperament-suggestions">
-  <div class="container">
-    <div class="suggestions-header">
-      <h2>{{ element_name }} Mizacı İçin Öneriler</h2>
-      <p>Mizacınıza özel olarak seçilmiş, size en uygun içerikler</p>
-    </div>
+<div class="premium-content-section element-section su">
+  <div class="premium-content-background">
+    <div class="wave-top"></div>
     
-    <div class="suggestions-grid">
-      {% for content in element_suggestions %}
-        <div class="suggestion-card" data-content-id="{{ content.id }}">
-          {% if content.image %}
-            <div class="suggestion-image" style="background-image: url('{{ content.image.url }}')">
-              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
-              <div class="suggestion-category">{{ content.category.name }}</div>
-            </div>
-          {% else %}
-            <div class="suggestion-image placeholder-image">
-              <i class="fas fa-book-open"></i>
-              <div class="suggestion-element {{ element_name|lower }}">{{ element_name }}</div>
-              <div class="suggestion-category">{{ content.category.name }}</div>
-            </div>
-          {% endif %}
-          
-          <h3 class="suggestion-title">{{ content.title }}</h3>
-          <p class="suggestion-description">{{ content.short_description|truncatechars:80 }}</p>
-          
-          <div class="suggestion-actions">
-            <button class="suggestion-button like-button {% if content.is_liked %}liked{% endif %}" 
-                    data-content-id="{{ content.id }}">
-              <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-              <span class="like-count">{{ content.like_count }}</span>
-            </button>
-            <button class="suggestion-button read-more" data-content-id="{{ content.id }}">
-              <i class="fas fa-book-reader"></i> Devamını Oku
-            </button>
+    <!-- Premium Content Container -->
+    <div class="premium-content-container">
+      <!-- Bölüm Başlığı -->
+      <div class="container">
+        <div class="premium-section-title">
+          <i class="fas fa-lightbulb"></i>
+          <div class="section-title-content">
+            <h2>{{ element_name }} Mizacı İçin Özel Öneriler</h2>
+            <p>Mizacınıza özel olarak seçilmiş içerikler</p>
           </div>
         </div>
-      {% empty %}
-        <div class="empty-state">
-          <div class="empty-icon"><i class="fas fa-inbox"></i></div>
-          <p class="empty-text">{{ element_name }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+      </div>
+
+      <!-- İçerik Grid/Slider - Responsive -->
+      <div class="content-slider-wrapper">
+        {% if element_suggestions %}
+          <div class="content-slider-container">
+            <!-- Kaydırma Butonları (sadece mobilde görünür) -->
+            <button class="slider-nav-button prev-button" id="prevSlideButton">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav-button next-button" id="nextSlideButton">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- İçerik Container (büyük ekranda grid, küçük ekranda slider) -->
+            <div class="content-slider improved-slider" id="contentSlider">
+              {% for content in element_suggestions %}
+                <div class="premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                  <div class="premium-card-inner">
+                    <!-- Kart Görseli -->
+                    {% if content.image %}
+                      <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
+                        <div class="content-element su">{{ element_name }}</div>
+                        <div class="content-category">{{ content.category.name }}</div>
+                      </div>
+                    {% else %}
+                      <div class="premium-card-image placeholder-image">
+                        <i class="fas fa-book-open"></i>
+                        <div class="content-element su">{{ element_name }}</div>
+                        <div class="content-category">{{ content.category.name }}</div>
+                      </div>
+                    {% endif %}
+                    
+                    <!-- Header Yapısı: Başlık ve Kaydet Butonu Yan Yana -->
+                    <div class="content-header">
+                      <h3 class="content-title">{{ content.title }}</h3>
+                      <button class="save-button-header {% if content.is_saved %}saved{% endif %}" 
+                              data-content-id="{{ content.id }}"
+                              title="{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}">
+                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="container">
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+              <p class="empty-text">{{ element_name }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Daha Fazla Öneriler Butonu -->
+      <div class="container">
+        <div class="suggestions-more">
+          <a href="{% url 'my_suggestions' %}" class="more-link">
+            Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
-      {% endfor %}
+      </div>
     </div>
-    
-    <div class="suggestions-more">
-      <a href="{% url 'my_suggestions' %}" class="more-link">
-        Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
+    <div class="wave-bottom"></div>
   </div>
-</section>
+</div>
 
 <!-- İçerik Detay Modalı -->
 <div class="content-modal" id="contentModal">
@@ -113,9 +146,7 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <button class="modal-action-btn" id="modalLikeBtn">
-          <i class="far fa-heart"></i> Beğen
-        </button>
+        <!-- Sadece kaydet butonu (beğeni butonu kaldırıldı) -->
         <button class="modal-action-btn" id="modalSaveBtn">
           <i class="far fa-bookmark"></i> Kaydet
         </button>
@@ -127,5 +158,262 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/temperament_detail.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Premium içerik kontrolleri
+    const contentSlider = document.getElementById('contentSlider');
+    const prevSlideButton = document.getElementById('prevSlideButton');
+    const nextSlideButton = document.getElementById('nextSlideButton');
+    
+    // Ekran boyutu kontrol fonksiyonu
+    function isMobile() {
+        return window.innerWidth <= 767;
+    }
+    
+    // Slider kaydırma işlevi - sadece mobilde çalışır
+    function scrollSlider(direction) {
+        if (contentSlider && isMobile()) {
+            const scrollAmount = direction === 'left' ? -300 : 300;
+            contentSlider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+    
+    // Slider butonlarının görünürlüğünü kontrol et
+    function updateSliderButtonsVisibility() {
+        if (prevSlideButton && nextSlideButton) {
+            if (isMobile()) {
+                prevSlideButton.style.display = 'flex';
+                nextSlideButton.style.display = 'flex';
+                updateSliderButtons();
+            } else {
+                prevSlideButton.style.display = 'none';
+                nextSlideButton.style.display = 'none';
+            }
+        }
+    }
+    
+    // Slider butonlarının aktiflik durumunu güncelle (sadece mobil için)
+    function updateSliderButtons() {
+        if (!contentSlider || !isMobile()) return;
+        
+        const scrollLeft = contentSlider.scrollLeft;
+        const maxScrollLeft = contentSlider.scrollWidth - contentSlider.clientWidth;
+        
+        // Sol butonu güncelle
+        if (prevSlideButton) {
+            prevSlideButton.style.opacity = scrollLeft <= 10 ? "0.5" : "1";
+            prevSlideButton.style.pointerEvents = scrollLeft <= 10 ? "none" : "all";
+        }
+        
+        // Sağ butonu güncelle
+        if (nextSlideButton) {
+            nextSlideButton.style.opacity = scrollLeft >= maxScrollLeft - 10 ? "0.5" : "1";
+            nextSlideButton.style.pointerEvents = scrollLeft >= maxScrollLeft - 10 ? "none" : "all";
+        }
+    }
+    
+    // Slider butonlarına olay ekle
+    if (prevSlideButton) {
+        prevSlideButton.addEventListener('click', function() {
+            scrollSlider('left');
+        });
+    }
+    
+    if (nextSlideButton) {
+        nextSlideButton.addEventListener('click', function() {
+            scrollSlider('right');
+        });
+    }
+    
+    // Slider scroll olayını dinle (sadece mobilde)
+    if (contentSlider) {
+        contentSlider.addEventListener('scroll', function() {
+            if (isMobile()) {
+                updateSliderButtons();
+            }
+        });
+        
+        // Sayfa yüklendiğinde butonları güncelle
+        setTimeout(function() {
+            updateSliderButtonsVisibility();
+        }, 100);
+    }
+    
+    // Pencere boyutu değişikliklerini dinle
+    window.addEventListener('resize', function() {
+        updateSliderButtonsVisibility();
+        
+        // Masaüstüne geçerken slider pozisyonunu sıfırla
+        if (!isMobile() && contentSlider) {
+            contentSlider.scrollLeft = 0;
+        }
+    });
+    
+    // Modal kontrolleri
+    const contentModal = document.getElementById('contentModal');
+    const closeModal = document.getElementById('closeModal');
+    
+    // Modal kapatma
+    if (closeModal) {
+        closeModal.addEventListener('click', function() {
+            contentModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Modal dışına tıklama ile kapatma
+    if (contentModal) {
+        contentModal.addEventListener('click', function(e) {
+            if (e.target === contentModal) {
+                contentModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // ESC tuşu ile modalı kapatma
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && contentModal.classList.contains('active')) {
+            contentModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Premium kart tıklama olayları
+    const premiumCards = document.querySelectorAll('.premium-card');
+    premiumCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Header kaydet butonunu kontrol et
+            if (!e.target.closest('.save-button-header')) {
+                const contentId = this.dataset.contentId;
+                openContentModal(contentId);
+            }
+        });
+    });
+    
+    // Header kaydet butonları
+    const headerSaveButtons = document.querySelectorAll('.save-button-header');
+    headerSaveButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const contentId = this.dataset.contentId;
+            toggleSave(contentId, this);
+        });
+    });
+    
+    // Modal kaydet butonu
+    const modalSaveBtn = document.getElementById('modalSaveBtn');
+    if (modalSaveBtn) {
+        modalSaveBtn.addEventListener('click', function() {
+            const contentId = this.dataset.contentId;
+            toggleSave(contentId, this);
+        });
+    }
+    
+    // İçerik modalını açma fonksiyonu
+    function openContentModal(contentId) {
+        fetch(`/profiles/content/${contentId}/detail/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').textContent = data.title;
+                document.getElementById('modalCategory').textContent = data.category;
+                document.getElementById('modalContent').innerHTML = data.content;
+                document.getElementById('modalElement').textContent = data.related_element;
+                document.getElementById('modalElement').className = `modal-element ${data.related_element.toLowerCase()}`;
+                
+                // Kaydet butonunu güncelle
+                const saveBtn = document.getElementById('modalSaveBtn');
+                if (saveBtn) {
+                    saveBtn.dataset.contentId = contentId;
+                    saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
+                    saveBtn.innerHTML = data.saved ? 
+                        '<i class="fas fa-bookmark"></i> Kaydedildi' : 
+                        '<i class="far fa-bookmark"></i> Kaydet';
+                }
+                
+                contentModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert('İçerik yüklenirken bir hata oluştu.');
+            });
+    }
+    
+    // Kaydetme işlevi
+    function toggleSave(contentId, button) {
+        fetch(`/profiles/content/${contentId}/toggle_save/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateSaveStatus(contentId, data.saved);
+            }
+        })
+        .catch(error => console.error('Hata:', error));
+    }
+    
+    // Kaydetme durumunu güncelle
+    function updateSaveStatus(contentId, isSaved) {
+        // Header kaydet butonlarını güncelle
+        const headerSaveButtons = document.querySelectorAll(`.save-button-header[data-content-id="${contentId}"]`);
+        headerSaveButtons.forEach(btn => {
+            btn.classList.toggle('saved', isSaved);
+            btn.title = isSaved ? 'Kaydedildi' : 'Kaydet';
+            
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+            }
+        });
+        
+        // Modal butonunu güncelle
+        const modalSaveBtn = document.getElementById('modalSaveBtn');
+        if (modalSaveBtn && modalSaveBtn.dataset.contentId === contentId) {
+            modalSaveBtn.classList.toggle('saved', isSaved);
+            modalSaveBtn.innerHTML = isSaved ? 
+                '<i class="fas fa-bookmark"></i> Kaydedildi' : 
+                '<i class="far fa-bookmark"></i> Kaydet';
+        }
+    }
+    
+    // CSRF token'ı almak için yardımcı fonksiyon
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    // Animasyon için IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('appear');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Animasyon için öğeleri gözlemle
+    const animatedElements = document.querySelectorAll('.premium-card, .water-personality-text, .water-personality-image');
+    
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+</script>
 {% endblock %}
