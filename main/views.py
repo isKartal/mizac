@@ -15,14 +15,14 @@ def index(request):
             # Test sonucundan kullanıcının elementini al
             user_element = test_result.dominant_element
             
-            # Kullanıcının mizacına uygun önerileri getir (en fazla 3 tane)
+            # Kullanıcının mizacına uygun önerileri getir (maksimum 3 tane)
             # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
             user_suggestions = RecommendedContent.objects.filter(
                 related_element_name=user_element.name,
                 is_active=True
             ).annotate(
                 like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-            ).order_by('-like_count', '-created_at')[:3]
+            ).order_by('-like_count', '-created_at')[:3]  # Maksimum 3 içerik
             
             # Kullanıcının etkileşimlerini al
             user_interactions = UserContentInteraction.objects.filter(user=request.user)
