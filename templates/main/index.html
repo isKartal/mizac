@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block content %}
+<!-- Size Özel İçerik Bölümü - Filtre Barı Kaldırılmış -->
 {% if has_test_result %}
-<!-- Size Özel İçerik Bölümü - Tam genişlik -->
 <div class="premium-content-section element-section {{ user_element.name|lower }}">
   <div class="premium-content-background">
     <div class="wave-top"></div>
@@ -27,52 +27,26 @@
             <p>Kişisel mizacınıza özel olarak seçilmiş içerikler</p>
           </div>
         </div>
-        
-        <!-- Filtreleme Alanı -->
-        <div class="filter-container modern-filter" id="filterContainer">
-          <div class="filter-bar">
-            <!-- Kategori Filtresi -->
-            <div class="filter-group">
-              <span class="filter-label"><i class="fas fa-layer-group"></i> Kategori:</span>
-              <div class="filter-options" id="categoryFilter">
-                <button class="filter-option active" data-category="all">Tümü</button>
-                {% comment %}
-                <!-- Kategoriler dinamik olarak yüklenecek -->
-                {% for category in categories %}
-                  <button class="filter-option" data-category="{{ category.id }}">{{ category.name }}</button>
-                {% endfor %}
-                {% endcomment %}
-              </div>
-            </div>
-            
-            <!-- Sıralama Filtresi -->
-            <div class="filter-group">
-              <span class="filter-label"><i class="fas fa-sort-amount-down"></i> Sırala:</span>
-              <div class="filter-options" id="sortFilter">
-                <button class="filter-option active" data-sort="newest">En Yeni</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- Kaydırmalı İçerik Slider - Tam genişlik -->
+      <!-- İçerik Grid/Slider - Responsive -->
       <div class="content-slider-wrapper">
         {% if user_suggestions %}
           <div class="content-slider-container">
-            <!-- Kaydırma Butonları -->
-            <button class="slider-nav-button prev-button glass-effect" id="prevSlideButton">
+            <!-- Kaydırma Butonları (sadece mobilde görünür) -->
+            <button class="slider-nav-button prev-button" id="prevSlideButton">
               <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="slider-nav-button next-button glass-effect" id="nextSlideButton">
+            <button class="slider-nav-button next-button" id="nextSlideButton">
               <i class="fas fa-chevron-right"></i>
             </button>
             
-            <!-- İçerik Slider -->
+            <!-- İçerik Container (büyük ekranda grid, küçük ekranda slider) -->
             <div class="content-slider improved-slider" id="contentSlider">
               {% for content in user_suggestions %}
-                <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                <div class="premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
                   <div class="premium-card-inner">
+                    <!-- Kart Görseli -->
                     {% if content.image %}
                       <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
                         <div class="content-element {{ user_element.name|lower }}">{{ user_element.name }}</div>
@@ -86,21 +60,13 @@
                       </div>
                     {% endif %}
                     
-                    <div class="premium-card-content">
-                      <h3 class="premium-card-title">{{ content.title }}</h3>
-                      <p class="premium-card-description">{{ content.short_description|truncatechars:80 }}</p>
-                    </div>
-                    
-                    <div class="premium-card-actions">
-                      <button class="premium-action-button like-button {% if content.is_liked %}liked{% endif %}" 
-                              data-content-id="{{ content.id }}">
-                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ content.like_count }}</span>
-                      </button>
-                      <button class="premium-action-button save-button {% if content.is_saved %}saved{% endif %}" 
-                              data-content-id="{{ content.id }}">
+                    <!-- Header Yapısı: Başlık ve Kaydet Butonu Yan Yana -->
+                    <div class="content-header">
+                      <h3 class="content-title">{{ content.title }}</h3>
+                      <button class="save-button-header {% if content.is_saved %}saved{% endif %}" 
+                              data-content-id="{{ content.id }}"
+                              title="{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}">
                         <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
                       </button>
                     </div>
                   </div>
@@ -120,7 +86,7 @@
       
       <!-- Daha Fazla Öneriler Butonu -->
       <div class="container">
-        <div class="suggestions-more" style="text-align: center; margin-top: 0px;">
+        <div class="suggestions-more">
           <a href="{% url 'my_suggestions' %}" class="more-link">
             Tüm Önerileri Görüntüle <i class="fas fa-arrow-right"></i>
           </a>
@@ -147,9 +113,7 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <button class="modal-action-btn" id="modalLikeBtn">
-          <i class="far fa-heart"></i> Beğen
-        </button>
+        <!-- Sadece kaydet butonu (beğeni butonu kaldırıldı) -->
         <button class="modal-action-btn" id="modalSaveBtn">
           <i class="far fa-bookmark"></i> Kaydet
         </button>
@@ -301,16 +265,55 @@
         });
         
         {% if has_test_result %}
-        // Premium içerik slider kontrolleri
+        // Premium içerik kontrolleri
         const contentSlider = document.getElementById('contentSlider');
         const prevSlideButton = document.getElementById('prevSlideButton');
         const nextSlideButton = document.getElementById('nextSlideButton');
         
-        // Slider kaydırma işlevi
+        // Ekran boyutu kontrol fonksiyonu
+        function isMobile() {
+            return window.innerWidth <= 767;
+        }
+        
+        // Slider kaydırma işlevi - sadece mobilde çalışır
         function scrollSlider(direction) {
-            if (contentSlider) {
+            if (contentSlider && isMobile()) {
                 const scrollAmount = direction === 'left' ? -300 : 300;
                 contentSlider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+        
+        // Slider butonlarının görünürlüğünü kontrol et
+        function updateSliderButtonsVisibility() {
+            if (prevSlideButton && nextSlideButton) {
+                if (isMobile()) {
+                    prevSlideButton.style.display = 'flex';
+                    nextSlideButton.style.display = 'flex';
+                    updateSliderButtons();
+                } else {
+                    prevSlideButton.style.display = 'none';
+                    nextSlideButton.style.display = 'none';
+                }
+            }
+        }
+        
+        // Slider butonlarının aktiflik durumunu güncelle (sadece mobil için)
+        function updateSliderButtons() {
+            if (!contentSlider || !isMobile()) return;
+            
+            const scrollLeft = contentSlider.scrollLeft;
+            const maxScrollLeft = contentSlider.scrollWidth - contentSlider.clientWidth;
+            
+            // Sol butonu güncelle
+            if (prevSlideButton) {
+                prevSlideButton.style.opacity = scrollLeft <= 10 ? "0.5" : "1";
+                prevSlideButton.style.pointerEvents = scrollLeft <= 10 ? "none" : "all";
+            }
+            
+            // Sağ butonu güncelle
+            if (nextSlideButton) {
+                nextSlideButton.style.opacity = scrollLeft >= maxScrollLeft - 10 ? "0.5" : "1";
+                nextSlideButton.style.pointerEvents = scrollLeft >= maxScrollLeft - 10 ? "none" : "all";
             }
         }
         
@@ -327,74 +330,28 @@
             });
         }
         
-        // Slider içeriklerini kaydırma olayını dinle ve butonları güncelle
+        // Slider scroll olayını dinle (sadece mobilde)
         if (contentSlider) {
             contentSlider.addEventListener('scroll', function() {
-                // Kaydırma pozisyonlarını kontrol et
-                const scrollLeft = contentSlider.scrollLeft;
-                const maxScrollLeft = contentSlider.scrollWidth - contentSlider.clientWidth;
-                
-                // Sol butonu güncelle
-                if (prevSlideButton) {
-                    prevSlideButton.style.opacity = scrollLeft <= 10 ? "0.5" : "1";
-                    prevSlideButton.style.pointerEvents = scrollLeft <= 10 ? "none" : "all";
-                }
-                
-                // Sağ butonu güncelle
-                if (nextSlideButton) {
-                    nextSlideButton.style.opacity = scrollLeft >= maxScrollLeft - 10 ? "0.5" : "1";
-                    nextSlideButton.style.pointerEvents = scrollLeft >= maxScrollLeft - 10 ? "none" : "all";
+                if (isMobile()) {
+                    updateSliderButtons();
                 }
             });
             
             // Sayfa yüklendiğinde butonları güncelle
             setTimeout(function() {
-                contentSlider.dispatchEvent(new Event('scroll'));
+                updateSliderButtonsVisibility();
             }, 100);
         }
         
-        // Filtreleme butonları
-        const categoryButtons = document.querySelectorAll('#categoryFilter .filter-option');
-        const sortButtons = document.querySelectorAll('#sortFilter .filter-option');
-        
-        // Kategori filtreleme
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Aktif butonu değiştir
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Animasyon efekti ekle
-                if (contentSlider) {
-                    contentSlider.style.opacity = '0';
-                    contentSlider.style.transform = 'translateY(15px)';
-                    
-                    setTimeout(() => {
-                        contentSlider.style.opacity = '1';
-                        contentSlider.style.transform = 'translateY(0)';
-                    }, 200);
-                }
-            });
-        });
-        
-        // Sıralama
-        sortButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Aktif butonu değiştir
-                sortButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Animasyon efekti ekle
-                if (contentSlider) {
-                    contentSlider.style.opacity = '0';
-                    contentSlider.style.transform = 'translateY(15px)';
-                    
-                    setTimeout(() => {
-                        contentSlider.style.opacity = '1';
-                        contentSlider.style.transform = 'translateY(0)';
-                    }, 200);
-                }
-            });
+        // Pencere boyutu değişikliklerini dinle
+        window.addEventListener('resize', function() {
+            updateSliderButtonsVisibility();
+            
+            // Masaüstüne geçerken slider pozisyonunu sıfırla
+            if (!isMobile() && contentSlider) {
+                contentSlider.scrollLeft = 0;
+            }
         });
         
         // Modal kontrolleri
@@ -431,26 +388,17 @@
         const premiumCards = document.querySelectorAll('.premium-card');
         premiumCards.forEach(card => {
             card.addEventListener('click', function(e) {
-                if (!e.target.closest('.premium-action-button')) {
+                // Header kaydet butonunu kontrol et
+                if (!e.target.closest('.save-button-header')) {
                     const contentId = this.dataset.contentId;
                     openContentModal(contentId);
                 }
             });
         });
         
-        // Beğenme butonları
-        const likeButtons = document.querySelectorAll('.like-button');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const contentId = this.dataset.contentId;
-                toggleLike(contentId, this);
-            });
-        });
-        
-        // Kaydetme butonları
-        const saveButtons = document.querySelectorAll('.save-button');
-        saveButtons.forEach(button => {
+        // Header kaydet butonları
+        const headerSaveButtons = document.querySelectorAll('.save-button-header');
+        headerSaveButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const contentId = this.dataset.contentId;
@@ -458,16 +406,14 @@
             });
         });
         
-        // Modal butonlarına olay ekle
-        document.getElementById('modalLikeBtn').addEventListener('click', function() {
-            const contentId = this.dataset.contentId;
-            toggleLike(contentId, this);
-        });
-        
-        document.getElementById('modalSaveBtn').addEventListener('click', function() {
-            const contentId = this.dataset.contentId;
-            toggleSave(contentId, this);
-        });
+        // Modal kaydet butonu
+        const modalSaveBtn = document.getElementById('modalSaveBtn');
+        if (modalSaveBtn) {
+            modalSaveBtn.addEventListener('click', function() {
+                const contentId = this.dataset.contentId;
+                toggleSave(contentId, this);
+            });
+        }
         
         // İçerik modalını açma fonksiyonu
         function openContentModal(contentId) {
@@ -480,19 +426,15 @@
                     document.getElementById('modalElement').textContent = data.related_element;
                     document.getElementById('modalElement').className = `modal-element ${data.related_element.toLowerCase()}`;
                     
-                    const likeBtn = document.getElementById('modalLikeBtn');
-                    likeBtn.dataset.contentId = contentId;
-                    likeBtn.className = `modal-action-btn${data.liked ? ' liked' : ''}`;
-                    likeBtn.innerHTML = data.liked ? 
-                        '<i class="fas fa-heart"></i> Beğenildi' : 
-                        '<i class="far fa-heart"></i> Beğen';
-                    
+                    // Kaydet butonunu güncelle
                     const saveBtn = document.getElementById('modalSaveBtn');
-                    saveBtn.dataset.contentId = contentId;
-                    saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
-                    saveBtn.innerHTML = data.saved ? 
-                        '<i class="fas fa-bookmark"></i> Kaydedildi' : 
-                        '<i class="far fa-bookmark"></i> Kaydet';
+                    if (saveBtn) {
+                        saveBtn.dataset.contentId = contentId;
+                        saveBtn.className = `modal-action-btn${data.saved ? ' saved' : ''}`;
+                        saveBtn.innerHTML = data.saved ? 
+                            '<i class="fas fa-bookmark"></i> Kaydedildi' : 
+                            '<i class="far fa-bookmark"></i> Kaydet';
+                    }
                     
                     contentModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -501,25 +443,6 @@
                     console.error('Hata:', error);
                     alert('İçerik yüklenirken bir hata oluştu.');
                 });
-        }
-        
-        // Beğenme işlevi
-        function toggleLike(contentId, button) {
-            fetch(`/profiles/content/${contentId}/toggle_like/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    updateLikeStatus(contentId, data.liked, data.like_count);
-                }
-            })
-            .catch(error => console.error('Hata:', error));
         }
         
         // Kaydetme işlevi
@@ -541,36 +464,28 @@
             .catch(error => console.error('Hata:', error));
         }
         
-        // Beğenme durumunu güncelle
-        function updateLikeStatus(contentId, isLiked, likeCount) {
-            const likeButtons = document.querySelectorAll(`.like-button[data-content-id="${contentId}"]`);
-            likeButtons.forEach(btn => {
-                btn.classList.toggle('liked', isLiked);
-                const icon = btn.querySelector('i');
-                icon.className = isLiked ? 'fas fa-heart' : 'far fa-heart';
+        // Kaydetme durumunu güncelle
+        function updateSaveStatus(contentId, isSaved) {
+            // Header kaydet butonlarını güncelle
+            const headerSaveButtons = document.querySelectorAll(`.save-button-header[data-content-id="${contentId}"]`);
+            headerSaveButtons.forEach(btn => {
+                btn.classList.toggle('saved', isSaved);
+                btn.title = isSaved ? 'Kaydedildi' : 'Kaydet';
                 
-                const countSpan = btn.querySelector('.like-count');
-                if (countSpan) {
-                    countSpan.textContent = likeCount;
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
                 }
             });
             
-            const modalLikeBtn = document.getElementById('modalLikeBtn');
-            if (modalLikeBtn && modalLikeBtn.dataset.contentId === contentId) {
-                modalLikeBtn.classList.toggle('liked', isLiked);
-                modalLikeBtn.innerHTML = isLiked ? 
-                    '<i class="fas fa-heart"></i> Beğenildi' : 
-                    '<i class="far fa-heart"></i> Beğen';
-            }
-        }
-        
-        // Kaydetme durumunu güncelle
-        function updateSaveStatus(contentId, isSaved) {
-            const saveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"]`);
-            saveButtons.forEach(btn => {
+            // Eski kaydet butonlarını da güncelle (geriye dönük uyumluluk)
+            const oldSaveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"], .premium-action-button[data-content-id="${contentId}"]`);
+            oldSaveButtons.forEach(btn => {
                 btn.classList.toggle('saved', isSaved);
                 const icon = btn.querySelector('i');
-                icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+                if (icon) {
+                    icon.className = isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
+                }
                 
                 const textSpan = btn.querySelector('.save-text');
                 if (textSpan) {
@@ -578,6 +493,7 @@
                 }
             });
             
+            // Modal butonunu güncelle
             const modalSaveBtn = document.getElementById('modalSaveBtn');
             if (modalSaveBtn && modalSaveBtn.dataset.contentId === contentId) {
                 modalSaveBtn.classList.toggle('saved', isSaved);
