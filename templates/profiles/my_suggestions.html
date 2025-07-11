@@ -18,13 +18,13 @@
         <div class="result-card-left">
           <div class="element-icon-compact">
             {% if dominant_element == "Ateş" %}
-              <i class="fas fa-fire"></i>
+              <img src="{% static 'images/fire-icon.png' %}" alt="Fire" class="fire-icon">
             {% elif dominant_element == "Hava" %}
-              <i class="fas fa-wind"></i>
+              <img src="{% static 'images/air-icon.png' %}" alt="Air" class="air-icon">
             {% elif dominant_element == "Su" %}
-              <i class="fas fa-water"></i>
+              <img src="{% static 'images/water-icon.png' %}" alt="Water" class="water-icon">
             {% elif dominant_element == "Toprak" %}
-              <i class="fas fa-mountain"></i>
+              <img src="{% static 'images/earth-icon.png' %}" alt="Earth" class="earth-icon">
             {% endif %}
           </div>
           
@@ -165,7 +165,7 @@
                       </div>
                     {% endif %}
                     
-                    <!-- YENİ: Header Yapısı - Başlık ve Kaydet Butonu Yan Yana -->
+                    <!-- Header Yapısı: Başlık ve Kaydet Butonu Yan Yana -->
                     <div class="content-header">
                       <h3 class="content-title">{{ content.title }}</h3>
                       <button class="save-button-header {% if content.is_saved %}saved{% endif %}" 
@@ -206,23 +206,22 @@
       </div>
       
       <!-- Element Sekmesi Filtresi -->
-        <div class="element-tabs modern-tabs" id="elementTabs">
-          <button class="filter-option active" data-element="all">
-            <i class="fas fa-globe"></i> Tümü
-          </button>
-          <button class="filter-option" data-element="Ateş">
-            <i class="fas fa-fire"></i> Ateş
-          </button>
-          <button class="filter-option" data-element="Hava">
-            <i class="fas fa-wind"></i> Hava
-          </button>
-          <button class="filter-option" data-element="Su">
-            <i class="fas fa-water"></i> Su
-          </button>
-          <button class="filter-option" data-element="Toprak">
-            <i class="fas fa-mountain"></i> Toprak
-          </button>
-        </div>
+      <div class="element-tabs modern-tabs" id="elementTabs">
+        <button class="filter-option active" data-element="all">
+          <i class="fas fa-globe"></i> Tümü
+        </button>
+        <button class="filter-option" data-element="Ateş">
+          <img src="{% static 'images/fire-icon.png' %}" alt="Fire" class="small-icon"> Ateş
+        </button>
+        <button class="filter-option" data-element="Hava">
+          <img src="{% static 'images/air-icon.png' %}" alt="Air" class="small-icon"> Hava
+        </button>
+        <button class="filter-option" data-element="Su">
+          <img src="{% static 'images/water-icon.png' %}" alt="Water" class="small-icon"> Su
+        </button>
+        <button class="filter-option" data-element="Toprak">
+          <img src="{% static 'images/earth-icon.png' %}" alt="Earth" class="small-icon"> Toprak
+        </button>
       </div>
       
       <!-- Yükleniyor Göstergesi -->
