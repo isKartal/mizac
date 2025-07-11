@@ -1627,3 +1627,361 @@ footer {
     background: white !important;
   }
 }
+.card-circle {
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;   /* Sabit genişlik */
+  height: 120px;  /* Sabit yükseklik */
+  margin: 0 auto 20px; /* Ortalama ve alt boşluk */
+  border-radius: 50%; /* Daire şekli */
+}
+
+/* ========== SADE İKON SİSTEMİ ========== */
+.element-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 210px;  /* PC için büyük boyut */
+  height: 210px;
+  transform: translate(-50%, -50%) translate(3px, -3px);
+  z-index: 15;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Büyük ikon için gölgeyi artırdım */
+  image-rendering: optimizeQuality;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  background: transparent !important;
+  object-fit: contain;
+}
+
+/* Element özel konumlandırma - büyük taşma efekti */
+.fire-icon {
+  transform: translate(-50%, -50%) translate(8px, -8px);
+}
+
+.water-icon {
+  transform: translate(-50%, -50%) translate(6px, -6px);
+}
+
+.air-icon {
+  transform: translate(-50%, -50%) translate(7px, -7px);
+}
+
+.earth-icon {
+  transform: translate(-50%, -50%) translate(6px, -8px);
+}
+
+/* Responsive boyutlar */
+@media (max-width: 1200px) {
+  .element-icon {
+    width: 190px;
+    height: 190px;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
+  }
+}
+
+@media (max-width: 992px) {
+  .element-icon {
+    width: 170px;
+    height: 170px;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.16));
+  }
+}
+
+@media (max-width: 768px) {
+  .element-icon {
+    width: 140px;
+    height: 140px;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+  }
+  
+  /* Tablet için taşma efektini azalt */
+  .fire-icon {
+    transform: translate(-50%, -50%) translate(5px, -5px);
+  }
+  
+  .water-icon {
+    transform: translate(-50%, -50%) translate(4px, -4px);
+  }
+  
+  .air-icon {
+    transform: translate(-50%, -50%) translate(4px, -4px);
+  }
+  
+  .earth-icon {
+    transform: translate(-50%, -50%) translate(4px, -5px);
+  }
+}
+
+@media (max-width: 480px) {
+  .element-icon {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+  
+  /* Mobil için taşma efektini daha da azalt */
+  .fire-icon {
+    transform: translate(-50%, -50%) translate(3px, -3px);
+  }
+  
+  .water-icon {
+    transform: translate(-50%, -50%) translate(2px, -2px);
+  }
+  
+  .air-icon {
+    transform: translate(-50%, -50%) translate(3px, -3px);
+  }
+  
+  .earth-icon {
+    transform: translate(-50%, -50%) translate(2px, -3px);
+  }
+}
+
+@media (max-width: 360px) {
+  .element-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* ========== İNDEX SAYFASI ÖZEL İKON SİSTEMİ ========== */
+
+/* Index sayfası için özel container */
+.index-page .card-circle {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Index sayfası için çok büyük ikonlar */
+.index-page .element-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%) translate(5px, -5px);
+  z-index: 15;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+  image-rendering: optimizeQuality;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  background: transparent !important;
+  object-fit: contain;
+}
+
+/* Index sayfası element kartları için üst boşluk */
+.index-page .element-card {
+  padding-top: 80px;
+  text-align: center;
+}
+
+/* Index sayfası özel taşma efektleri */
+.index-page .fire-icon {
+  transform: translate(-50%, -50%) translate(10px, -10px);
+}
+
+.index-page .water-icon {
+  transform: translate(-50%, -50%) translate(8px, -8px);
+}
+
+.index-page .air-icon {
+  transform: translate(-50%, -50%) translate(9px, -9px);
+}
+
+.index-page .earth-icon {
+  transform: translate(-50%, -50%) translate(8px, -10px);
+}
+
+/* Index sayfası responsive boyutlar */
+@media (max-width: 1200px) {
+  .index-page .element-icon {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .index-page .card-circle {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 992px) {
+  .index-page .element-icon {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .index-page .card-circle {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .index-page .element-card {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .index-page .element-icon {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .index-page .card-circle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .index-page .element-card {
+    padding-top: 60px;
+  }
+  
+  .index-page .fire-icon {
+    transform: translate(-50%, -50%) translate(6px, -6px);
+  }
+  
+  .index-page .water-icon {
+    transform: translate(-50%, -50%) translate(5px, -5px);
+  }
+  
+  .index-page .air-icon {
+    transform: translate(-50%, -50%) translate(5px, -5px);
+  }
+  
+  .index-page .earth-icon {
+    transform: translate(-50%, -50%) translate(5px, -6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .index-page .element-icon {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .index-page .card-circle {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .index-page .element-card {
+    padding-top: 50px;
+  }
+}
+
+/* GÜÇLÜ İKON DÜZELTMESİ - Mavi arkaplanı tamamen kaldır */
+.element-icon-compact,
+.element-icon-compact:before,
+.element-icon-compact:after,
+.result-card-left .element-icon-compact,
+.ateş .element-icon-compact,
+.hava .element-icon-compact, 
+.su .element-icon-compact,
+.toprak .element-icon-compact,
+.result-card-inner.ateş .element-icon-compact,
+.result-card-inner.hava .element-icon-compact,
+.result-card-inner.su .element-icon-compact,
+.result-card-inner.toprak .element-icon-compact {
+  position: absolute !important;
+  top: 60px !important;
+  left: 20px !important;
+  width: 360px !important;
+  height: 360px !important;
+  z-index: 10 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  flex: none !important;
+  color: transparent !important;
+}
+
+/* Container overflow aç */
+.result-card-left {
+  position: relative !important;
+  overflow: visible !important;
+  border-radius: 20px 0 0 20px !important;
+}
+.result-card-right {
+  border-radius: 0 20px 20px 0 !important; /* Sağ bölüm: sağ köşeler yuvarlatıldı, sol köşeler düz */
+}
+.test-result-compact {
+  overflow: visible !important;
+   border-radius: 20px !important;
+}
+
+.result-card-inner {
+  overflow: visible !important;
+  border-radius: 20px !important;
+}
+
+/* İkon resimlerini düzenle */
+.element-icon-compact img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  background: transparent !important;
+}
+
+/* Text alanını ikona göre ayarla */
+.element-meta-compact {
+  margin-left: 80px !important;
+  margin-top: 0 !important;
+}
+
+/* Küçük ikonlar için boyut ayarı */
+.small-icon {
+  width: 60px !important;
+  height: 60px !important;
+  margin-right: 8px !important;
+  vertical-align: middle !important;
+  object-fit: contain !important;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  .element-icon-compact,
+  .ateş .element-icon-compact,
+  .hava .element-icon-compact, 
+  .su .element-icon-compact,
+  .toprak .element-icon-compact {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .element-meta-compact {
+    margin-left: 70px !important;
+    margin-top: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .element-icon-compact,
+  .ateş .element-icon-compact,
+  .hava .element-icon-compact, 
+  .su .element-icon-compact,
+  .toprak .element-icon-compact {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .element-meta-compact {
+    margin-left: 65px !important;
+    margin-top: 10px !important;
+  }
+}
