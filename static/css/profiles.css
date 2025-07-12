@@ -1919,131 +1919,82 @@
 
 /* -------- Test Sonucu Kompakt -------- */
 .test-result-compact {
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background-color: transparent; /* white yerine transparent */
+  border-radius: 25px;
   margin-bottom: 40px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transition: var(--transition);
 }
 
 .test-result-compact:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
   transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
 
-.result-card-inner { 
-  display: flex; 
-  flex-direction: column; 
-}
 
-/* -------- Sonuç Kartı Sol Kısım -------- */
-.result-card-left {
+.result-card-inner {
   padding: 25px;
-  display: flex;
-  align-items: center;
   position: relative;
+  z-index: 2;
+  background: none; /* Mevcut background'u kaldırın */
+  border-radius: 25px;
   overflow: hidden;
 }
-
-.result-card-left::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(0,0,0,0.03)' fill-rule='evenodd'/%3E%3C/svg%3E");
-  opacity: 0.5;
-}
-
-.result-card-inner.ateş .result-card-left { 
-  border-left: 6px solid var(--ates-color); 
-  background-image: var(--ates-gradient); 
-}
-
-.result-card-inner.hava .result-card-left { 
-  border-left: 6px solid var(--hava-color); 
-  background-image: var(--hava-gradient); 
-}
-
-.result-card-inner.su .result-card-left { 
-  border-left: 6px solid var(--su-color); 
-  background-image: var(--su-gradient); 
-}
-
-.result-card-inner.toprak .result-card-left { 
-  border-left: 6px solid var(--toprak-color); 
-  background-image: var(--toprak-gradient); 
+/* -------- Sonuç Kartı Sol Kısım -------- */
+.result-card-left {
+ display: flex;
+  align-items: flex-start; /* Üst hizalama */
+  gap: 50px; /* İkon ve başlık arasında sabit 30px mesafe */
+  margin-bottom: 20px;
 }
 
 /* -------- Element İkon Kompakt -------- */
 .element-icon-compact {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  font-size: 24px;
-  flex-shrink: 0;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 2;
-}
-
-.ateş .element-icon-compact { 
-  background-color: white; 
-  color: var(--ates-color); 
-}
-
-.hava .element-icon-compact { 
-  background-color: white; 
-  color: var(--hava-color); 
-}
-
-.su .element-icon-compact { 
-  background-color: white; 
-  color: var(--su-color); 
-}
-
-.toprak .element-icon-compact { 
-  background-color: white; 
-  color: var(--toprak-color); 
+  position: absolute !important;
+  top: 60px !important;
+  left: 20px !important;
+  width: 360px !important;
+  height: 360px !important;
+  z-index: 10 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  flex: none !important;
+  color: transparent !important;
 }
 
 /* -------- Element Özellikleri Etiketi -------- */
-.element-properties-tag {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 30px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
 
 .dominant-title-compact {
-  font-size: 1.4rem;
+ font-size: 2.2rem;
   font-weight: 700;
-  margin: 8px 0 5px;
+  margin: 8px 0 4px 0;
   color: var(--primary-color);
 }
 
+
 .dominant-label-compact {
-  font-size: 0.85rem;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9rem;
+  color: #666;
   font-weight: 500;
 }
 
 /* -------- Sonuç Kartı Sağ Kısım -------- */
-.result-card-right { 
-  padding: 25px; 
-  background-color: white; 
+.result-card-right {
+  background-color: rgba(255, 255, 255, 0.1); /* Mevcut arka planı değiştirin */
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(15px); /* EKLE */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* EKLE */
 }
-
 .traits-title-compact {
   display: flex;
   align-items: center;
@@ -2070,6 +2021,39 @@
   margin-right: 10px; 
   opacity: 0.7; 
 }
+
+/* -------- Metin renkleri - Tutarlı -------- */
+.element-properties-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ates .element-properties-tag {
+  background-color: var(--ates-bg);
+  color: var(--ates-color);
+}
+
+.hava .element-properties-tag {
+  background-color: var(--hava-bg);
+  color: var(--hava-color);
+}
+
+.su .element-properties-tag {
+  background-color: var(--su-bg);
+  color: var(--su-color);
+}
+
+.toprak .element-properties-tag {
+  background-color: var(--toprak-bg);
+  color: var(--toprak-color);
+}
+
+
+
 
 /* -------- Özellikler Grid -------- */
 .traits-grid {
@@ -2134,344 +2118,8 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ==========================================================================
-   6. RESPONSIVE TASARIM STİLLERİ (Masaüstünden Mobile)
-   ========================================================================== */
 
-/* -------- Büyük Masaüstü ve Laptoplar (max-width: 1200px) -------- */
-@media (max-width: 1200px) {
-  .premium-card {
-    width: calc(50% - 30px);
-    min-width: 280px;
-  }
-  
-  .content-slider-container {
-    padding: 0 30px;
-  }
-}
 
-/* -------- Tabletler (max-width: 991px) -------- */
-@media (max-width: 991px) {
-  .profile-sections { 
-    grid-template-columns: 1fr 1fr; 
-  }
-  
-  .premium-section-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  
-  .premium-section-title i {
-    margin-right: 0;
-    width: 50px;
-    height: 50px;
-    font-size: 1.3rem;
-  }
-  
-  .premium-section-title h2 { 
-    font-size: 1.6rem; 
-  }
-  
-  .premium-content-container { 
-    padding: 60px 0 40px; 
-  }
-}
-
-/* -------- Büyük Telefonlar ve Dikey Tabletler (max-width: 767px) -------- */
-@media (max-width: 767px) {
-  /* Profil Ayarları */
-  .profile-info {
-    flex-direction: column;
-    text-align: center;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .profile-avatar {
-    margin-right: 0;
-    margin-bottom: 20px;
-    width: 80px;
-    height: 80px;
-  }
-  
-  .profile-avatar i { 
-    font-size: 40px; 
-  }
-  
-  .profile-name h2 { 
-    font-size: 1.6rem; 
-  }
-  
-  .profile-name p { 
-    font-size: 1rem; 
-  }
-  
-  .profile-sections, 
-  .quick-links-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .section-card {
-    padding: 25px 20px;
-  }
-  
-  .section-icon {
-    position: relative;
-    top: 0;
-    right: 0;
-    margin: 0 auto 20px;
-  }
-  
-  .section-card h3 { 
-    text-align: center; 
-  }
-  
-  .section-card h3::after { 
-    left: 50%; 
-    transform: translateX(-50%); 
-  }
-  
-  .connection-item { 
-    word-break: break-all; 
-  }
-  
-  .account-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .logout-section { 
-    margin-top: 20px; 
-  }
-  
-  .btn-logout { 
-    max-width: 250px; 
-    margin: 0 auto; 
-    display: block; 
-  }
-
-  /* Önerilerim Sayfası */
-  .filter-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .filter-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .filter-options {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
-  
-  .content-grid { 
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-  }
-  
-  .modal-actions, 
-  .modal-footer {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .element-tabs {
-    width: 100%;
-    justify-content: center;
-    overflow-x: auto;
-    padding-bottom: 5px;
-  }
-  
-  .element-tabs .filter-option { 
-    padding: 8px 15px; 
-    font-size: 0.85rem; 
-  }
-
-  /* Test Sonucu & Premium */
-  .result-elements-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .explore-more-section { 
-    flex-direction: column; 
-  }
-  
-  .premium-card {
-    width: calc(100% - 30px);
-    max-width: 400px;
-  }
-  
-  .premium-card-image { 
-    height: 160px; 
-  }
-  
-  .modern-filter .filter-bar { 
-    flex-direction: column; 
-    padding: 15px; 
-  }
-  
-  .modern-filter .filter-group { 
-    width: 100%; 
-    justify-content: space-between; 
-  }
-  
-  .modern-filter .filter-options, 
-  .modern-tabs {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    max-width: 100%;
-    padding-bottom: 5px;
-    scrollbar-width: none;
-  }
-  
-  .modern-filter .filter-options::-webkit-scrollbar, 
-  .modern-tabs::-webkit-scrollbar { 
-    display: none; 
-  }
-  
-  .modern-tabs { 
-    justify-content: flex-start; 
-    padding: 6px; 
-    gap: 6px; 
-  }
-  
-  .modern-tabs .filter-option { 
-    white-space: nowrap; 
-    padding: 8px 15px; 
-    font-size: 0.85rem; 
-  }
-  
-  .modern-grid { 
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-    gap: 20px; 
-  }
-  
-  .slider-nav-button { 
-    width: 36px; 
-    height: 36px; 
-  }
-  
-  .prev-button { 
-    left: 0px; 
-  }
-  
-  .next-button { 
-    right: 0px; 
-  }
-  
-  .wave-top,
-  .wave-bottom {
-    height: 60px;
-  }
-}
-
-/* -------- Standart Telefonlar (max-width: 576px) -------- */
-@media (max-width: 576px) {
-  .premium-section-title h2 { 
-    font-size: 1.4rem; 
-  }
-  
-  .premium-card { 
-    min-width: 240px; 
-  }
-  
-  .premium-card-image { 
-    height: 140px; 
-  }
-  
-  .premium-card-title { 
-    font-size: 1.1rem; 
-  }
-  
-  .premium-card-description { 
-    font-size: 0.85rem; 
-  }
-  
-  .modern-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .modern-filter .filter-option, 
-  .modern-tabs .filter-option { 
-    padding: 6px 12px; 
-    font-size: 0.8rem; 
-  }
-  
-  .modern-tabs .filter-option i { 
-    display: none; 
-  }
-  
-  .slider-nav-button { 
-    width: 32px; 
-    height: 32px; 
-    font-size: 0.9rem; 
-  }
-}
-
-/* -------- Küçük Telefonlar (max-width: 480px) -------- */
-@media (max-width: 480px) {
-  /* Profil Ayarları */
-  .profile-card { 
-    padding: 25px; 
-  }
-  
-  .profile-name h2 { 
-    font-size: 1.5rem; 
-  }
-  
-  .btn { 
-    width: 100%; 
-    margin-bottom: 10px; 
-  }
-  
-  .confirmation-content { 
-    padding: 20px; 
-  }
-  
-  .confirmation-buttons { 
-    flex-direction: column; 
-  }
-  
-  .account-stats { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .stat-item { 
-    flex-direction: row; 
-    text-align: left; 
-    padding: 15px; 
-  }
-  
-  .stat-icon { 
-    margin: 0 15px 0 0; 
-  }
-  
-  /* Önerilerim Sayfası */
-  .content-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .modal-header h2 { 
-    font-size: 1.2rem; 
-  }
-  
-  .modal-body { 
-    padding: 15px; 
-  }
-  
-  .modal-content { 
-    font-size: 1rem; 
-  }
-
-  .wave-top,
-  .wave-bottom {
-    height: 40px;
-  }
-}
 
 /* -------- Taşma Sorunları ve İnce Ayarlar -------- */
 .profile-card *, 
@@ -2500,3 +2148,847 @@ input[type="email"] {
   max-width: 100%;
   line-height: 1.4;
 }
+
+/* ==========================================================================
+   RESPONSIVE TASARIM STİLLERİ - KOMPLET
+   ========================================================================== */
+
+/* -------- DESKTOP - Varsayılan (1200px+) -------- */
+.result-card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.element-icon-compact {
+  width: 70px;
+  height: 70px;
+  font-size: 28px;
+}
+
+.dominant-title-compact {
+  font-size: 2.2rem;
+}
+
+/* -------- XL LAPTOPLAR (max-width: 1400px) -------- */
+@media (max-width: 1400px) {
+  .premium-content-container {
+    padding: 20px 30px 30px;
+  }
+  
+  .content-slider-container {
+    max-width: 1000px;
+  }
+}
+
+/* -------- BÜYÜK LAPTOPLAR (max-width: 1200px) -------- */
+@media (max-width: 1200px) {
+  .suggestions-container {
+    max-width: 1000px;
+    padding: 0 20px;
+  }
+  
+  .premium-card {
+    width: calc(50% - 20px);
+    min-width: 280px;
+    margin: 10px;
+  }
+  
+  .content-slider-container {
+    padding: 0 20px;
+  }
+  
+  .result-card-left {
+    gap: 35px;
+  }
+  
+  .premium-section-title h2 {
+    font-size: 1.7rem;
+  }
+}
+
+/* -------- KÜÇÜK LAPTOPLAR (max-width: 1024px) -------- */
+@media (max-width: 1024px) {
+  .suggestions-container {
+    padding: 0 15px;
+  }
+  
+  .result-card-left {
+    gap: 30px;
+  }
+  
+  .element-icon-compact {
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+  }
+  
+  .dominant-title-compact {
+    font-size: 2rem;
+  }
+  
+  .premium-card {
+    min-width: 260px;
+  }
+  
+  .slider-nav-button {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .prev-button {
+    left: -40px;
+  }
+  
+  .next-button {
+    right: -35px;
+  }
+}
+
+/* -------- TABLETLERİ (max-width: 991px) -------- */
+@media (max-width: 991px) {
+  /* Container & Layout */
+  .suggestions-container {
+    padding: 0 15px;
+  }
+  
+  .profile-sections {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  /* Premium İçerik */
+  .premium-section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    text-align: left;
+  }
+  
+  .premium-section-title i {
+    margin-right: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+  
+  .premium-section-title h2 {
+    font-size: 1.6rem;
+  }
+  
+  .premium-content-container {
+    padding: 40px 0 30px;
+  }
+  
+  /* Test Sonucu */
+  .result-card-inner {
+    padding: 20px;
+  }
+  
+  .result-card-left {
+    gap: 25px;
+  }
+  
+  .element-icon-compact {
+    width: 150px;
+    height: 150px;
+    font-size: 24px;
+  }
+  
+  .dominant-title-compact {
+    font-size: 1.9rem;
+  }
+  
+  .result-card-right {
+    padding: 18px;
+  }
+  
+  /* Premium Kartlar */
+  .premium-card {
+    width: calc(60% - 20px);
+    min-width: 240px;
+  }
+  
+  .premium-card-image {
+    height: 160px;
+  }
+  
+  /* Slider Navigation */
+  .slider-nav-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .prev-button {
+    left: -20px;
+  }
+  
+  .next-button {
+    right: -15px;
+  }
+  
+  /* Filtreler */
+  .modern-filter .filter-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .modern-filter .filter-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* -------- BÜYÜK TELEFONLAR VE DİKEY TABLETLERİ (max-width: 768px) -------- */
+@media (max-width: 768px) {
+  /* Container & Spacing */
+  .suggestions-container {
+    margin: 20px auto;
+    padding: 0 12px;
+  }
+  
+  .test-result-compact {
+    border-radius: 20px;
+    margin-bottom: 25px;
+  }
+  
+  /* Profil Ayarları */
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .profile-avatar i {
+    font-size: 40px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.6rem;
+  }
+  
+  .profile-name p {
+    font-size: 1rem;
+  }
+  
+  .profile-sections,
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-card {
+    padding: 25px 20px;
+  }
+  
+  .section-icon {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin: 0 auto 20px;
+  }
+  
+  .section-card h3 {
+    text-align: center;
+  }
+  
+  .section-card h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .account-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .logout-section {
+    margin-top: 20px;
+  }
+  
+  .btn-logout {
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  /* Test Sonucu Layout */
+  .result-card-inner {
+    padding: 18px;
+  }
+  
+  .result-card-left {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .element-icon-compact {
+    width: 300px !important;
+    height: 300px !important;
+    font-size: 22px;
+    margin-left: 50px !important; 
+      margin-top: 0px !important;
+  }
+  
+  .dominant-title-compact {
+    font-size: 1.7rem;
+  }
+  
+  .element-meta-compact {
+    text-align: center;
+  }
+  
+  .element-properties-tag {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+  }
+  
+  .dominant-label-compact {
+    font-size: 0.85rem;
+  }
+  
+  .result-card-right {
+    padding: 15px;
+  }
+  
+  .traits-title-compact {
+    font-size: 1.1rem;
+    justify-content: center;
+  }
+  
+  .traits-title-compact::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .trait-item {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+  
+  .trait-item i {
+    margin-right: 8px;
+    font-size: 0.8rem;
+  }
+  
+  /* Filtreler */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+  }
+  
+  .filter-group {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .filter-options {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  
+  .filter-options::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* İçerik Grid */
+  .content-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .modern-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+  }
+  
+  /* Premium Kartlar */
+  .premium-card {
+    width: calc(80% - 15px);
+    max-width: 350px;
+    min-width: 220px;
+    margin: 8px;
+  }
+  
+  .premium-card-image {
+    height: 140px;
+  }
+  
+  .premium-card-title {
+    font-size: 1.1rem;
+  }
+  
+  /* Element Tabs */
+  .element-tabs {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 6px;
+    gap: 6px;
+  }
+  
+  .element-tabs .filter-option {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  
+  .modern-tabs {
+    padding: 6px;
+    gap: 6px;
+  }
+  
+  .modern-tabs .filter-option {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  
+  /* Slider Navigation */
+  .slider-nav-button {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+  
+  .prev-button {
+    left: 5px;
+  }
+  
+  .next-button {
+    right: 5px;
+  }
+  
+  /* Modal */
+  .modal-actions,
+  .modal-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  /* Waves */
+  .wave-top,
+  .wave-bottom {
+    height: 60px;
+  }
+  
+  /* Background Optimization */
+  .test-result-compact .result-card-inner.ateş,
+  .test-result-compact .result-card-inner.hava,
+  .test-result-compact .result-card-inner.su,
+  .test-result-compact .result-card-inner.toprak {
+    background-attachment: scroll;
+  }
+  
+}
+
+/* -------- STANDART TELEFONLAR (max-width: 576px) -------- */
+@media (max-width: 576px) {
+  /* Container */
+  .suggestions-container {
+    padding: 0 10px;
+    margin: 15px auto;
+  }
+  
+  .test-result-compact {
+    margin-bottom: 20px;
+  }
+  
+  /* Test Sonucu */
+  .result-card-inner {
+    padding: 15px;
+  }
+  
+  .result-card-left {
+    gap: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .element-icon-compact {
+    width: 250px !important;
+    height: 250px !important;
+    font-size: 20px;
+    margin-left: 30px !important; 
+      margin-top: 0px !important;
+  }
+  
+  .dominant-title-compact {
+    font-size: 1.5rem;
+  }
+  
+  .element-properties-tag {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+  
+  .dominant-label-compact {
+    font-size: 0.8rem;
+  }
+  
+  .result-card-right {
+    padding: 12px;
+  }
+  
+  .traits-title-compact {
+    font-size: 1rem;
+  }
+  
+  .trait-item {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+  
+  .trait-item i {
+    margin-right: 6px;
+    font-size: 0.75rem;
+  }
+  
+  .traits-grid {
+    gap: 8px;
+  }
+  
+  /* Butonlar */
+  .compact-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+  
+  .action-buttons-compact {
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  /* Premium Section */
+  .premium-section-title h2 {
+    font-size: 1.4rem;
+  }
+  
+  .premium-section-title i {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  /* Premium Kartlar */
+  .premium-card {
+    width: calc(100% - 10px);
+    min-width: 200px;
+    margin: 5px;
+  }
+  
+  .premium-card-image {
+    height: 120px;
+  }
+  
+  .premium-card-title {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  
+  /* Content Grid */
+  .modern-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  /* Filtreler */
+  .modern-filter .filter-option,
+  .modern-tabs .filter-option {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .modern-tabs .filter-option i {
+    display: none;
+  }
+  
+  /* Slider */
+  .slider-nav-button {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  
+  .improved-slider {
+    padding: 15px 5px;
+    margin: 0 -5px;
+  }
+  
+  /* Modal */
+  .modal-body {
+    padding: 15px;
+  }
+  
+  .modal-content {
+    font-size: 1rem;
+  }
+  
+  /* Waves */
+  .wave-top,
+  .wave-bottom {
+    height: 40px;
+  }
+}
+
+/* -------- KÜÇÜK TELEFONLAR (max-width: 480px) -------- */
+@media (max-width: 480px) {
+  /* Container */
+  .suggestions-container {
+    padding: 0 8px;
+  }
+  
+  /* Profil Kartı */
+  .profile-card {
+    padding: 20px;
+  }
+  
+  .profile-name h2 {
+    font-size: 1.4rem;
+  }
+  
+  /* Test Sonucu */
+  .result-card-inner {
+    padding: 12px;
+  }
+  
+  .result-card-left {
+    gap: 12px;
+  }
+  
+    .element-icon-compact {
+    width: 250px !important;
+    height: 280px !important;
+    font-size: 20px;
+    margin-left: 30px !important; 
+      margin-top: 0px !important;
+  }
+  
+  .dominant-title-compact {
+    font-size: 2.3rem;
+  }
+  
+  .element-properties-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  
+  .dominant-label-compact {
+    font-size: 0.75rem;
+  }
+  
+  .result-card-right {
+    padding: 10px;
+  }
+  
+  .traits-title-compact {
+    font-size: 0.95rem;
+  }
+  
+  .trait-item {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+  
+  .traits-grid {
+    gap: 6px;
+  }
+  
+  /* Butonlar */
+  .compact-btn {
+    width: 100%;
+    margin-bottom: 6px;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 7px 12px;
+  }
+  
+  .action-buttons-compact {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  /* Premium */
+  .premium-section-title h2 {
+    font-size: 1.2rem;
+  }
+  
+  .premium-card-image {
+    height: 100px;
+  }
+  
+  .premium-card-title {
+    font-size: 0.95rem;
+  }
+  
+  /* Genel Butonlar */
+  .btn {
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  
+  /* Modal */
+  .confirmation-content {
+    padding: 15px;
+  }
+  
+  .confirmation-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  /* Stats */
+  .account-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 12px;
+  }
+  
+  .stat-icon {
+    margin: 0 12px 0 0;
+  }
+  
+  /* Slider */
+  .slider-nav-button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .prev-button {
+    left: 2px;
+  }
+  
+  .next-button {
+    right: 2px;
+  }
+  
+  /* Waves */
+  .wave-top,
+  .wave-bottom {
+    height: 30px;
+  }
+}
+
+/* -------- ÇOK KÜÇÜK TELEFONLAR (max-width: 360px) -------- */
+@media (max-width: 376px) {
+  .suggestions-container {
+    padding: 0 5px;
+  }
+  
+  .result-card-inner {
+    padding: 10px;
+  }
+  
+   .element-icon-compact {
+    width: 250px !important;
+    height: 250px !important;
+    font-size: 20px;
+    margin-left: 30px !important; 
+      margin-top: 0px !important;
+  }
+  
+  .dominant-title-compact {
+    font-size: 1.2rem;
+  }
+  
+  .premium-section-title h2 {
+    font-size: 1.1rem;
+  }
+  
+  .compact-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  
+  .slider-nav-button {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+}
+
+/* -------- OVERFLOW VE WORD WRAP DÜZELTMELERİ -------- */
+.profile-card *,
+.section-card *,
+.connection-item *,
+.quick-link-item *,
+.test-result-compact *,
+.premium-card * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.connection-email,
+.profile-name p[type="email"],
+input[type="email"] {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+.section-card p,
+.section-card span,
+.connection-item span,
+.trait-item,
+.compact-btn {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* -------- PERFORMANS İYİLEŞTİRMELERİ -------- */
+@media (max-width: 768px) {
+  .premium-card-image::before,
+  .premium-card-image::after,
+  .content-image::after {
+    will-change: transform;
+  }
+  
+  .slider-nav-button:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
+  
+  .wave-top,
+  .wave-bottom {
+    animation-duration: 8s;
+  }
+}
+
