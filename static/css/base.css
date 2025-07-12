@@ -1902,10 +1902,11 @@ footer {
   background: transparent !important;
 }
 
-/* Text alanını ikona göre ayarla */
 .element-meta-compact {
-  margin-left: 80px !important;
+  margin-left: 0 !important;
   margin-top: 0 !important;
+  text-align: left !important;
+  max-width: calc(100% - 320px); /* İkon alanını çıkar */
 }
 
 /* Küçük ikonlar için boyut ayarı */
