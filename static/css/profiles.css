@@ -1413,48 +1413,6 @@
   box-shadow: 0 8px 20px rgba(233, 180, 76, 0.3);
 }
 
-/* ==========================================================================
-   WAVE DESENLERI - PREMIUM CONTENT SECTIONS İÇİN
-   ========================================================================== */
-
-/* -------- Wave Top - Bölüm başlangıcında kullanılacak üst dalga -------- */
-.wave-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23f8f9fa'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23f8f9fa'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23f8f9fa'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-}
-
-/* -------- Mizaç elementlerine özel wave renkleri -------- */
-.premium-content-section.ateş .wave-top,
-.premium-content-section.ateş .wave-bottom {
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='rgba(231, 76, 60, 0.1)'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='rgba(231, 76, 60, 0.08)'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='rgba(231, 76, 60, 0.05)'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-}
-
-.premium-content-section.hava .wave-top,
-.premium-content-section.hava .wave-bottom {
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='rgba(120, 144, 156, 0.1)'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='rgba(120, 144, 156, 0.08)'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='rgba(120, 144, 156, 0.05)'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-}
-
-.premium-content-section.su .wave-top,
-.premium-content-section.su .wave-bottom {
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='rgba(41, 128, 185, 0.1)'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='rgba(41, 128, 185, 0.08)'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='rgba(41, 128, 185, 0.05)'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-}
-
-.premium-content-section.toprak .wave-top,
-.premium-content-section.toprak .wave-bottom {
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='rgba(141, 110, 99, 0.1)'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='rgba(141, 110, 99, 0.08)'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='rgba(141, 110, 99, 0.05)'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-}
-
 /* -------- Wave Animasyonları -------- */
 @keyframes wave-float {
   0%, 100% { 
@@ -1473,38 +1431,98 @@
   animation: wave-float 8s ease-in-out infinite reverse;
 }
 
-/* -------- Premium İçerik Bölümleri -------- */
+/* Mevcut kodunuzdaki bu bölümü güncelleyin */
 .premium-content-section {
-  width: 100%;
-  margin: 20px 0;
   position: relative;
+  border-radius: 20px;
+    overflow: hidden !important; /* Background taşmalarını engelle */
+
 }
 
-.premium-content-background {
+/* Sol taraftaki ana ikon */
+.premium-content-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3500px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  left: -50px;
+  right: auto;
+}
+
+/* Sağ taraftaki ikinci ikon (transparan) */
+.premium-content-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3500px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  right: -50px; /* Sağ tarafta */
+  left: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right center; /* Sağ ortada */
+}
+
+/* Ateş mizacı - Sol ve sağ */
+.premium-content-section.ateş::before {
+  background-image: url('/static/images/ates-background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.premium-content-section.ateş::after {
+  background-image: url('/static/images/fire-icon.png'); /* İkinci ateş görseli */
+}
+
+/* Hava mizacı - Sol ve sağ */
+.premium-content-section.hava::before {
+  background-image: url('/static/images/hava-background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.premium-content-section.hava::after {
+  background-image: url('/static/images/air-icon.png'); /* İkinci hava görseli */
+}
+
+/* Su mizacı - Sol ve sağ */
+.premium-content-section.su::before {
+  background-image: url('/static/images/water-back.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.premium-content-section.su::after {
+  background-image: url('/static/images/wate-back2.png'); /* İkinci su görseli */
+}
+
+/* Toprak mizacı - Sol ve sağ */
+.premium-content-section.toprak::before {
+  background-image: url('/static/images/toprak-background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.premium-content-section.toprak::after {
+  background-image: url('/static/images/earth-icon.png'); /* İkinci toprak görseli */
+}
+
+/* İçeriklerin ikonların üstünde kalması */
+.premium-content-container {
   position: relative;
-  overflow: hidden;
+  z-index: 2;
 }
-
-.premium-content-section.ateş .premium-content-background { 
-  background-image: var(--ates-gradient); 
-}
-
-.premium-content-section.hava .premium-content-background { 
-  background-image: var(--hava-gradient); 
-}
-
-.premium-content-section.su .premium-content-background { 
-  background-image: var(--su-gradient); 
-}
-
-.premium-content-section.toprak .premium-content-background { 
-  background-image: var(--toprak-gradient); 
-}
-
-.premium-content-container { 
-  padding: 20px 0 30px; 
-}
-
 /* -------- Premium Bölüm Başlığı -------- */
 .premium-section-title {
   display: flex;
@@ -1953,10 +1971,11 @@
 /* -------- Element İkon Kompakt -------- */
 .element-icon-compact {
   position: absolute !important;
-  top: 60px !important;
-  left: 20px !important;
-  width: 360px !important;
-  height: 360px !important;
+  top: 90px !important;
+  right: -80px !important;
+  left: auto !important;
+  width: 300px !important;
+  height: 300px !important;
   z-index: 10 !important;
   background: none !important;
   background-color: transparent !important;
@@ -1969,6 +1988,7 @@
   display: block !important;
   flex: none !important;
   color: transparent !important;
+  transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, right 0.3s ease !important;
 }
 
 /* -------- Element Özellikleri Etiketi -------- */
@@ -2161,11 +2181,6 @@ input[type="email"] {
   margin-bottom: 20px;
 }
 
-.element-icon-compact {
-  width: 70px;
-  height: 70px;
-  font-size: 28px;
-}
 
 .dominant-title-compact {
   font-size: 2.2rem;
@@ -2173,6 +2188,12 @@ input[type="email"] {
 
 /* -------- XL LAPTOPLAR (max-width: 1400px) -------- */
 @media (max-width: 1400px) {
+   .element-icon-compact {
+    top: 50px !important;
+    right: 30px !important;
+    width: 280px !important;
+    height: 280px !important;
+  }
   .premium-content-container {
     padding: 20px 30px 30px;
   }
@@ -2180,10 +2201,14 @@ input[type="email"] {
   .content-slider-container {
     max-width: 1000px;
   }
+   .element-meta-compact {
+    max-width: calc(100% - 310px);
+  }
 }
 
 /* -------- BÜYÜK LAPTOPLAR (max-width: 1200px) -------- */
 @media (max-width: 1200px) {
+  
   .suggestions-container {
     max-width: 1000px;
     padding: 0 20px;
@@ -2206,10 +2231,24 @@ input[type="email"] {
   .premium-section-title h2 {
     font-size: 1.7rem;
   }
+  .element-icon-compact {
+    top: 45px !important;
+    right: 25px !important;
+    width: 260px !important;
+    height: 260px !important;
+  }
+  
+  .element-meta-compact {
+    max-width: calc(100% - 285px);
+  }
+    .premium-content-section::before,
+  .premium-content-section::after {
+   width: 150vw !important; /* Viewport width'in 1.5 katı */  }
 }
 
 /* -------- KÜÇÜK LAPTOPLAR (max-width: 1024px) -------- */
 @media (max-width: 1024px) {
+  
   .suggestions-container {
     padding: 0 15px;
   }
@@ -2219,9 +2258,14 @@ input[type="email"] {
   }
   
   .element-icon-compact {
-    width: 65px;
-    height: 65px;
-    font-size: 26px;
+    top: 40px !important;
+    right: 20px !important;
+    width: 240px !important;
+    height: 240px !important;
+  }
+  
+  .element-meta-compact {
+    max-width: calc(100% - 260px);
   }
   
   .dominant-title-compact {
@@ -2244,6 +2288,12 @@ input[type="email"] {
   .next-button {
     right: -35px;
   }
+  .premium-content-section::before,
+  .premium-content-section::after {
+    width: 150vw !important;
+    opacity: 0.5 !important;
+  }
+  
 }
 
 /* -------- TABLETLERİ (max-width: 991px) -------- */
@@ -2290,9 +2340,14 @@ input[type="email"] {
   }
   
   .element-icon-compact {
-    width: 150px;
-    height: 150px;
-    font-size: 24px;
+    top: 35px !important;
+    right: 15px !important;
+    width: 220px !important;
+    height: 220px !important;
+  }
+  
+  .element-meta-compact {
+    max-width: calc(100% - 235px);
   }
   
   .dominant-title-compact {
@@ -2346,7 +2401,11 @@ input[type="email"] {
     margin: 20px auto;
     padding: 0 12px;
   }
-  
+    .premium-content-section::before,
+  .premium-content-section::after {
+    width: 120vw !important;
+    opacity: 0.3 !important;
+  }
   .test-result-compact {
     border-radius: 20px;
     margin-bottom: 25px;
@@ -2422,40 +2481,57 @@ input[type="email"] {
   .result-card-inner {
     padding: 18px;
   }
+
   
+
+/* Test sonucu kartında layout düzeltmesi */
   .result-card-left {
-    flex-direction: column;
-    text-align: center;
-    gap: 18px;
-    align-items: center;
-    margin-bottom: 15px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 20px !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
   }
   
-  .element-icon-compact {
-    width: 300px !important;
-    height: 300px !important;
-    font-size: 22px;
-    margin-left: 50px !important; 
-      margin-top: 0px !important;
-  }
-  
-  .dominant-title-compact {
-    font-size: 1.7rem;
-  }
-  
+  /* Element meta (yazılar) solda */
   .element-meta-compact {
-    text-align: center;
+    order: 1 !important;
+    flex: 1 !important;
+    text-align: left !important;
+    max-width: calc(100% - 120px) !important;
+  }
+  
+  /* Element icon sağda */
+  .element-icon-compact {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 100px !important;
+    height: 100px !important;
+    margin: 0 !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+    order: 2 !important;
+    z-index: 1 !important;
+  }
+  
+  /* Yazı hizalamaları solda */
+  .dominant-title-compact {
+    text-align: left !important;
+    font-size: 1.7rem !important;
   }
   
   .element-properties-tag {
-    font-size: 0.8rem;
-    padding: 5px 12px;
+    text-align: left !important;
+    margin-bottom: 8px !important;
   }
   
   .dominant-label-compact {
-    font-size: 0.85rem;
+    text-align: left !important;
   }
-  
   .result-card-right {
     padding: 15px;
   }
@@ -2620,33 +2696,21 @@ input[type="email"] {
   .result-card-inner {
     padding: 15px;
   }
-  
-  .result-card-left {
-    gap: 15px;
-    margin-bottom: 12px;
+    .element-icon-compact {
+    width: 80px !important;
+    height: 80px !important;
   }
   
-  .element-icon-compact {
-    width: 250px !important;
-    height: 250px !important;
-    font-size: 20px;
-    margin-left: 30px !important; 
-      margin-top: 0px !important;
+  .element-meta-compact {
+    max-width: calc(100% - 100px) !important;
   }
   
   .dominant-title-compact {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
   }
-  
-  .element-properties-tag {
-    font-size: 0.75rem;
-    padding: 4px 10px;
-  }
-  
   .dominant-label-compact {
-    font-size: 0.8rem;
+    text-align: center !important;
   }
-  
   .result-card-right {
     padding: 12px;
   }
@@ -2778,20 +2842,17 @@ input[type="email"] {
     padding: 12px;
   }
   
-  .result-card-left {
-    gap: 12px;
-  }
-  
-    .element-icon-compact {
-    width: 250px !important;
-    height: 280px !important;
-    font-size: 20px;
-    margin-left: 30px !important; 
-      margin-top: 0px !important;
+
+  .element-meta-compact {
+    max-width: calc(100% - 90px) !important;
   }
   
   .dominant-title-compact {
-    font-size: 2.3rem;
+    font-size: 1.4rem !important;
+  }
+  
+  .result-card-left {
+    gap: 15px !important;
   }
   
   .element-properties-tag {
@@ -2914,18 +2975,9 @@ input[type="email"] {
   .result-card-inner {
     padding: 10px;
   }
+
   
-   .element-icon-compact {
-    width: 250px !important;
-    height: 250px !important;
-    font-size: 20px;
-    margin-left: 30px !important; 
-      margin-top: 0px !important;
-  }
-  
-  .dominant-title-compact {
-    font-size: 1.2rem;
-  }
+
   
   .premium-section-title h2 {
     font-size: 1.1rem;
@@ -2990,5 +3042,167 @@ input[type="email"] {
   .wave-bottom {
     animation-duration: 8s;
   }
+}
+
+/* ==========================================================================
+  TEST SONUCU KARTI - İKON SAĞDA, BAŞLIK SOLDA (RESPONSİVE)
+  ========================================================================== */
+
+/* Desktop'ta mevcut düzen korunuyor - sadece responsive'de değişiyor */
+
+@media (max-width: 768px) {
+
+    .test-result-compact {
+    position: relative !important;
+    overflow: hidden !important; /* İkon container dışına çıkmasın */
+  }
+  
+.element-icon-compact {
+   width: 210px !important; /* İkon boyutu */
+   height: 210px !important; /* İkon boyutu */
+   top: 40px !important; /* İkon dikey konum */
+   right: -120px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+  position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+ 
+ .element-meta-compact {
+   max-width: calc(150% - 80px) !important;
+    margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
+    margin-top: 10px !important; /* Yazıyı 20px sağa kaydır */
+ }
+ 
+ .dominant-title-compact {
+   font-size: 1.3rem !important;
+ }
+ 
+ .element-properties-tag {
+   font-size: 0.75rem !important;
+   padding: 0px 0px !important;
+ }
+ 
+ .dominant-label-compact {
+   font-size: 0.8rem !important;
+ }
+ 
+ .result-card-left {
+   gap: 0px !important; /* İkon ile yazı arasındaki mesafe */
+    position: relative !important; /* İkon için referans nokta */
+    align-items: stretch !important; /* Hizalama sınırlaması kaldırıldı */
+    justify-content: flex-start !important; /* Yazıları sola yasla */
+ }
+}
+
+@media (max-width: 576px) {
+.element-icon-compact {
+   width: 190px !important; /* İkon boyutu */
+   height: 190px !important; /* İkon boyutu */
+   top: 40px !important; /* İkon dikey konum */
+   right: -120px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+      position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+ 
+ .element-meta-compact {
+   max-width: calc(150% - 80px) !important;
+    margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
+    margin-top: 10px !important; /* Yazıyı 20px sağa kaydır */
+ }
+ 
+ .dominant-title-compact {
+   font-size: 1.3rem !important;
+ }
+ 
+ .element-properties-tag {
+   font-size: 0.75rem !important;
+   padding: 0px 0px !important;
+ }
+ 
+ .dominant-label-compact {
+   font-size: 0.8rem !important;
+ }
+ 
+ .result-card-left {
+   gap: 0px !important; /* İkon ile yazı arasındaki mesafe */
+    position: relative !important; /* İkon için referans nokta */
+    align-items: stretch !important; /* Hizalama sınırlaması kaldırıldı */
+    justify-content: flex-start !important; /* Yazıları sola yasla */
+ }
+ }
+
+
+@media (max-width: 480px) {
+ .element-icon-compact {
+   width: 170px !important; /* İkon boyutu */
+   height: 170px !important; /* İkon boyutu */
+   top: 40px !important; /* İkon dikey konum */
+   right: -120px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+      position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+ 
+ .element-meta-compact {
+   max-width: calc(150% - 80px) !important;
+    margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
+    margin-top: 10px !important; /* Yazıyı 20px sağa kaydır */
+ }
+ 
+ .dominant-title-compact {
+   font-size: 1.3rem !important;
+ }
+ 
+ .element-properties-tag {
+   font-size: 0.75rem !important;
+   padding: 0px 0px !important;
+ }
+ 
+ .dominant-label-compact {
+   font-size: 0.8rem !important;
+ }
+ 
+ .result-card-left {
+   gap: 0px !important; /* İkon ile yazı arasındaki mesafe */
+    position: relative !important; /* İkon için referans nokta */
+    align-items: stretch !important; /* Hizalama sınırlaması kaldırıldı */
+    justify-content: flex-start !important; /* Yazıları sola yasla */
+ }
+ }
+
+
+@media (max-width: 360px) {
+ .element-icon-compact {
+   width: 150px !important; /* İkon boyutu */
+   height: 150px !important; /* İkon boyutu */
+   top: 40px !important; /* İkon dikey konum */
+   right: -100px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+      position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+ 
+ .element-meta-compact {
+   max-width: calc(150% - 80px) !important;
+    margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
+    margin-top: 10px !important; /* Yazıyı 20px sağa kaydır */
+ }
+ 
+ .dominant-title-compact {
+   font-size: 1.3rem !important;
+ }
+ 
+ .element-properties-tag {
+   font-size: 0.75rem !important;
+   padding: 0px 0px !important;
+ }
+ 
+ .dominant-label-compact {
+   font-size: 0.8rem !important;
+ }
+ 
+ .result-card-left {
+   gap: 0px !important; /* İkon ile yazı arasındaki mesafe */
+    position: relative !important; /* İkon için referans nokta */
+    align-items: stretch !important; /* Hizalama sınırlaması kaldırıldı */
+    justify-content: flex-start !important; /* Yazıları sola yasla */
+ }
 }
 
