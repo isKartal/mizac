@@ -417,6 +417,7 @@
   align-items: flex-start;
 }
 
+
 .recommendation-number {
   width: 28px;
   height: 28px;
@@ -429,6 +430,7 @@
   font-weight: 600;
   flex-shrink: 0;
 }
+
 
 .recommendation-text {
   flex: 1;
