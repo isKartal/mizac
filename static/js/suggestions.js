@@ -1,5 +1,5 @@
 // ==========================================================================
-// SAYFA YÜKLENDİĞİNDE ÇALIŞACAK ANA FONKSİYON
+// SAYFA YÜKLENDİĞİNDE ÇALIŞACAK ANA FONKSİYON - DÜZELTME
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,32 +38,96 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevSlideButton = document.getElementById('prevSlideButton');
   const nextSlideButton = document.getElementById('nextSlideButton');
   
+  // ---- YENİ: Dropdown Elementleri ----
+  const dropdownBtn = document.getElementById('categoryDropdownBtn');
+  const dropdown = document.getElementById('categoryDropdown');
+  const categoryOptions = document.querySelectorAll('.category-option');
+  const selectedCategorySpan = dropdownBtn?.querySelector('.selected-category');
+  
   // ========================================================================
-  // FİLTRE YAPIŞKAN DAVRANIŞI
+  // YENİ: DROPDOWN KATEGORİ FİLTRE SİSTEMİ
   // ========================================================================
   
   /**
-   * Sayfa kaydırıldığında filtrelerin yapışkan davranışını kontrol eder
+   * Dropdown kategori filtresini başlatır
    */
-  window.addEventListener('scroll', function() {
-    // Ana filtre konteyner için
-    if (filterContainer) {
-      if (window.scrollY > 300) {
-        filterContainer.classList.add('scrolled');
-      } else {
-        filterContainer.classList.remove('scrolled');
-      }
-    }
+  function initDropdownFilter() {
+    if (!dropdownBtn || !dropdown) return;
     
-    // İkincil filtre konteyner için
-    if (secondaryFilterContainer) {
-      if (window.scrollY > 700) {
-        secondaryFilterContainer.classList.add('scrolled');
-      } else {
-        secondaryFilterContainer.classList.remove('scrolled');
+    console.log('Dropdown filtre sistemi başlatılıyor...');
+    
+    // Çekmece açma/kapama
+    dropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+      dropdownBtn.classList.toggle('active');
+    });
+    
+    // Dışarı tıklayınca kapat
+    document.addEventListener('click', function() {
+      dropdown.classList.remove('open');
+      dropdownBtn.classList.remove('active');
+    });
+    
+    // Kategori seçimi
+    categoryOptions.forEach(option => {
+      option.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Aktif durumu güncelle
+        categoryOptions.forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Global değişkeni güncelle
+        activeCategory = this.dataset.category;
+        
+        // Buton metnini güncelle
+        if (selectedCategorySpan) {
+          selectedCategorySpan.textContent = this.querySelector('span').textContent;
+        }
+        
+        // Çekmeceyi kapat
+        dropdown.classList.remove('open');
+        dropdownBtn.classList.remove('active');
+        
+        // Ana filtreleme fonksiyonunu çağır
+        filterPersonalizedContents();
+        
+        console.log('Kategori değiştirildi:', activeCategory);
+      });
+    });
+    
+    // ESC tuşu ile kapat
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && dropdown.classList.contains('open')) {
+        dropdown.classList.remove('open');
+        dropdownBtn.classList.remove('active');
       }
-    }
-  });
+    });
+    
+    // Keyboard navigation
+    dropdown.addEventListener('keydown', function(e) {
+      const options = dropdown.querySelectorAll('.category-option');
+      const currentIndex = Array.from(options).findIndex(opt => opt === document.activeElement);
+      
+      switch(e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          const nextIndex = currentIndex < options.length - 1 ? currentIndex + 1 : 0;
+          options[nextIndex].focus();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          const prevIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+          options[prevIndex].focus();
+          break;
+        case 'Enter':
+          e.preventDefault();
+          document.activeElement.click();
+          break;
+      }
+    });
+  }
   
   // ========================================================================
   // KAYDIRMALI SLIDER FONKSİYONLARI
@@ -87,14 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
    * Slider butonlarına olay dinleyicilerini ekler
    */
   function initSliderButtons() {
-    // Sol kaydırma butonu
     if (prevSlideButton) {
       prevSlideButton.addEventListener('click', function() {
         scrollSlider('left');
       });
     }
     
-    // Sağ kaydırma butonu
     if (nextSlideButton) {
       nextSlideButton.addEventListener('click', function() {
         scrollSlider('right');
@@ -111,14 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollLeft = contentSlider.scrollLeft;
     const maxScrollLeft = contentSlider.scrollWidth - contentSlider.clientWidth;
     
-    // Sol butonu güncelle
     if (prevSlideButton) {
       const isAtStart = scrollLeft <= 10;
       prevSlideButton.style.opacity = isAtStart ? "0.5" : "1";
       prevSlideButton.style.pointerEvents = isAtStart ? "none" : "all";
     }
     
-    // Sağ butonu güncelle
     if (nextSlideButton) {
       const isAtEnd = scrollLeft >= maxScrollLeft - 10;
       nextSlideButton.style.opacity = isAtEnd ? "0.5" : "1";
@@ -134,59 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     contentSlider.addEventListener('scroll', updateSliderButtons);
     
-    // Sayfa yüklendiğinde butonları güncelle
     setTimeout(function() {
       updateSliderButtons();
     }, 100);
   }
   
   // ========================================================================
-  // FİLTRE BUTONLARI İÇİN OLAY DİNLEYİCİLERİ
+  // ELEMENT FİLTRE SİSTEMİ (Diğer Mizaçlar İçin)
   // ========================================================================
-  
-  /**
-   * Kategori filtre butonlarına olay dinleyicilerini ekler
-   */
-  function initCategoryFilters() {
-    const categoryButtons = document.querySelectorAll('#categoryFilter .filter-option');
-    
-    categoryButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        // Aktif butonu değiştir
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Filtreleme uygula
-        activeCategory = this.dataset.category;
-        filterPersonalizedContents();
-        
-        // Animasyon efekti ekle
-        addSliderAnimation();
-      });
-    });
-  }
-  
-  /**
-   * Sıralama filtre butonlarına olay dinleyicilerini ekler
-   */
-  function initSortFilters() {
-    const sortButtons = document.querySelectorAll('#sortFilter .filter-option');
-    
-    sortButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        // Aktif butonu değiştir
-        sortButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Sıralama uygula
-        activeSort = this.dataset.sort;
-        filterPersonalizedContents();
-        
-        // Animasyon efekti ekle
-        addSliderAnimation();
-      });
-    });
-  }
   
   /**
    * Element sekmesi filtre butonlarına olay dinleyicilerini ekler
@@ -196,15 +211,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     elementTabs.forEach(tab => {
       tab.addEventListener('click', function() {
-        // Aktif sekmeyi değiştir
         elementTabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         
-        // Element filtresini uygula
         activeElement = this.dataset.element;
         filterAllContents();
-        
-        // Animasyon efekti ekle
         addContentAnimation();
       });
     });
@@ -241,29 +252,39 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ========================================================================
-  // KİŞİSEL İÇERİKLERİ FİLTRELEME FONKSİYONU
+  // DÜZELTME: KİŞİSEL İÇERİKLERİ FİLTRELEME FONKSİYONU
   // ========================================================================
   
   /**
-   * Kişisel içerikleri filtreler ve gösterir
+   * Kişisel içerikleri filtreler ve gösterir (DÜZELTME)
    */
   function filterPersonalizedContents() {
     if (!contentSlider) return;
     
-    // Tüm kartları al
-    const allCards = Array.from(contentSlider.querySelectorAll('.slider-card'));
+    console.log('=== KİŞİSEL İÇERİK FİLTRELEME ===');
+    console.log('Aktif kategori:', activeCategory);
+    
+    // DÜZELTME: Doğru selector'ları kullan
+    const allCards = Array.from(contentSlider.querySelectorAll('.slider-card, .premium-card, [data-category]'));
+    
+    console.log('Toplam kart sayısı:', allCards.length);
     
     // Kategori filtreleme uygula
     let filteredCards = allCards;
     if (activeCategory !== 'all') {
-      filteredCards = allCards.filter(card => 
-        card.dataset.category === activeCategory
-      );
+      filteredCards = allCards.filter(card => {
+        const cardCategory = card.dataset.category;
+        console.log(`Kart kategori: ${cardCategory}, Hedef: ${activeCategory}`);
+        return cardCategory === activeCategory || cardCategory === activeCategory.toString();
+      });
     }
+    
+    console.log('Filtrelenmiş kart sayısı:', filteredCards.length);
     
     // Tüm kartları gizle
     allCards.forEach(card => {
       card.style.display = 'none';
+      card.style.opacity = '0';
     });
     
     // Mevcut boş mesajları temizle
@@ -272,9 +293,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Filtrelenmiş kartları göster
     if (filteredCards.length > 0) {
-      filteredCards.forEach(card => {
-        card.style.display = '';
-        contentSlider.appendChild(card); // Sıralamayı uygulamak için DOM'a tekrar ekle
+      filteredCards.forEach((card, index) => {
+        card.style.display = 'block';
+        card.style.opacity = '1';
+        
+        // Animasyon efekti
+        setTimeout(() => {
+          card.style.transform = 'scale(1)';
+        }, index * 50);
       });
     } else {
       // Hiç kart yoksa boş mesaj göster
@@ -285,7 +311,14 @@ document.addEventListener('DOMContentLoaded', function() {
     contentSlider.scrollLeft = 0;
     
     // Butonları güncelle
-    updateSliderButtons();
+    setTimeout(() => {
+      updateSliderButtons();
+    }, 300);
+    
+    // Animasyon efekti ekle
+    addSliderAnimation();
+    
+    console.log('=== FİLTRELEME TAMAMLANDI ===');
   }
   
   /**
@@ -294,11 +327,24 @@ document.addEventListener('DOMContentLoaded', function() {
   function showEmptySliderMessage() {
     const emptyMessage = document.createElement('div');
     emptyMessage.className = 'empty-slider-message';
+    emptyMessage.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+      color: #777;
+      background: white;
+      border-radius: 15px;
+      margin: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    `;
     emptyMessage.innerHTML = `
-      <div class="empty-icon">
+      <div class="empty-icon" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;">
         <i class="fas fa-search"></i>
       </div>
-      <p class="empty-text">Bu filtrelere uygun içerik bulunamadı.</p>
+      <p class="empty-text" style="margin: 0; font-size: 1.1rem;">Bu kategoride içerik bulunamadı.</p>
     `;
     contentSlider.appendChild(emptyMessage);
   }
@@ -311,10 +357,8 @@ document.addEventListener('DOMContentLoaded', function() {
    * Tüm mizaçlar için içerikleri filtreler
    */
   function filterAllContents() {
-    // Sayfalamayı sıfırla
     allCurrentPage = 1;
     
-    // Element filtreleme uygula
     if (activeElement === 'all') {
       filteredContents = [...allContents];
     } else {
@@ -323,13 +367,8 @@ document.addEventListener('DOMContentLoaded', function() {
       );
     }
     
-    // Toplam sayfa sayısını hesapla
     allTotalPages = Math.ceil(filteredContents.length / allItemsPerPage);
-    
-    // Filtrelenmiş içerikleri göster
     renderAllContents();
-    
-    // Sayfalama kontrollerini güncelle
     updateAllPageNumbers();
     updateAllPaginationButtons();
     updatePaginationVisibility();
@@ -350,61 +389,42 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ========================================================================
-  // SAYFALAMA FONKSİYONLARI
+  // SAYFALAMA FONKSİYONLARI (Değişiklik yok - mevcut kod korundu)
   // ========================================================================
   
-  /**
-   * Sayfa numaralarını günceller
-   */
   function updateAllPageNumbers() {
     const pageNumbers = document.getElementById('allPageNumbers');
     if (!pageNumbers) return;
     
     pageNumbers.innerHTML = '';
-    
     const maxVisiblePages = 5;
     
-    // Görünür sayfa aralığını hesapla
     let startPage = Math.max(1, allCurrentPage - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(allTotalPages, startPage + maxVisiblePages - 1);
     
-    // Görünür sayfa sayısını ayarla
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
     
-    // İlk sayfa bağlantısı ekle
     if (startPage > 1) {
       addPageButton(pageNumbers, 1);
-      
-      // Arada çok fazla sayfa varsa ... ekle
       if (startPage > 2) {
         addPageEllipsis(pageNumbers);
       }
     }
     
-    // Sayfa numaralarını oluştur
     for (let i = startPage; i <= endPage; i++) {
       addPageButton(pageNumbers, i, i === allCurrentPage);
     }
     
-    // Son sayfa bağlantısı ekle
     if (endPage < allTotalPages) {
-      // Arada çok fazla sayfa varsa ... ekle
       if (endPage < allTotalPages - 1) {
         addPageEllipsis(pageNumbers);
       }
-      
       addPageButton(pageNumbers, allTotalPages);
     }
   }
   
-  /**
-   * Sayfa butonu ekler
-   * @param {Element} container - Butonun ekleneceği konteyner
-   * @param {number} pageNumber - Sayfa numarası
-   * @param {boolean} isActive - Aktif sayfa olup olmadığı
-   */
   function addPageButton(container, pageNumber, isActive = false) {
     const pageButton = document.createElement('button');
     pageButton.className = `page-button${isActive ? ' active' : ''}`;
@@ -415,10 +435,6 @@ document.addEventListener('DOMContentLoaded', function() {
     container.appendChild(pageButton);
   }
   
-  /**
-   * Sayfa numaraları arasına üç nokta ekler
-   * @param {Element} container - Üç noktanın ekleneceği konteyner
-   */
   function addPageEllipsis(container) {
     const ellipsis = document.createElement('span');
     ellipsis.className = 'page-ellipsis';
@@ -426,9 +442,6 @@ document.addEventListener('DOMContentLoaded', function() {
     container.appendChild(ellipsis);
   }
   
-  /**
-   * Sayfalama butonlarını günceller
-   */
   function updateAllPaginationButtons() {
     const prevPageBtn = document.getElementById('allPrevPage');
     const nextPageBtn = document.getElementById('allNextPage');
@@ -442,23 +455,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  /**
-   * Belirtilen sayfaya gider
-   * @param {number} page - Gidilecek sayfa numarası
-   */
   function gotoAllPage(page) {
     if (page < 1 || page > allTotalPages) return;
     
     allCurrentPage = page;
-    
-    // İçerikleri göster
     renderAllContents();
-    
-    // Sayfalama kontrollerini güncelle
     updateAllPageNumbers();
     updateAllPaginationButtons();
     
-    // Sayfa başına kaydır
     if (allElementsContents) {
       allElementsContents.scrollIntoView({ 
         behavior: 'smooth', 
@@ -467,9 +471,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  /**
-   * Sayfalama butonlarına olay dinleyicilerini ekler
-   */
   function initPaginationButtons() {
     const allPrevPageBtn = document.getElementById('allPrevPage');
     const allNextPageBtn = document.getElementById('allNextPage');
@@ -488,12 +489,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ========================================================================
-  // AJAX İLE İÇERİK ALMA FONKSİYONLARI
+  // AJAX İLE İÇERİK ALMA FONKSİYONLARI (Değişiklik yok)
   // ========================================================================
   
-  /**
-   * AJAX ile tüm içerikleri getirir
-   */
   function fetchAllContents() {
     showLoadingIndicator();
     
@@ -506,11 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(data => {
         hideLoadingIndicator();
-        
-        // Tüm içerikleri diziye aktar
         allContents = data.contents;
-        
-        // Filtreleme yap ve içerikleri göster
         filterAllContents();
       })
       .catch(error => {
@@ -520,9 +514,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
   
-  /**
-   * Yükleniyor göstergesini gösterir
-   */
   function showLoadingIndicator() {
     if (loadingIndicator) {
       loadingIndicator.style.display = 'flex';
@@ -532,9 +523,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  /**
-   * Yükleniyor göstergesini gizler
-   */
   function hideLoadingIndicator() {
     if (loadingIndicator) {
       loadingIndicator.style.display = 'none';
@@ -549,9 +537,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  /**
-   * Hata mesajı gösterir
-   */
   function showErrorMessage() {
     if (allElementsContents) {
       allElementsContents.innerHTML = `
@@ -570,38 +555,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ========================================================================
-  // TÜM MİZAÇLAR İÇİN İÇERİKLERİ GÖSTERME
+  // TÜM MİZAÇLAR İÇİN İÇERİKLERİ GÖSTERME (Değişiklik yok)
   // ========================================================================
   
-  /**
-   * Tüm mizaçlar için içerikleri render eder
-   */
   function renderAllContents() {
     if (!allElementsContents) return;
     
     allElementsContents.innerHTML = '';
     
-    // İçerik yoksa boş durum mesajı göster
     if (filteredContents.length === 0) {
       showEmptyContentMessage();
       return;
     }
     
-    // Sayfalama için içerikleri filtrele
     const start = (allCurrentPage - 1) * allItemsPerPage;
     const end = start + allItemsPerPage;
     const pageContents = filteredContents.slice(start, end);
     
-    // Kartları oluştur ve ekle
     pageContents.forEach((content, index) => {
       const card = createContentCard(content, index);
       allElementsContents.appendChild(card);
     });
   }
   
-  /**
-   * Boş içerik mesajı gösterir
-   */
   function showEmptyContentMessage() {
     allElementsContents.innerHTML = `
       <div class="empty-state">
@@ -615,12 +591,6 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
   }
   
-  /**
-   * İçerik kartı oluşturur (Kaydet butonu başlık sağında)
-   * @param {Object} content - İçerik verisi
-   * @param {number} index - Kart sırası (animasyon için)
-   * @returns {Element} Oluşturulan kart elementi
-   */
   function createContentCard(content, index) {
     const card = document.createElement('div');
     card.className = 'content-card animated';
@@ -641,7 +611,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
       
-      <!-- Yeni Header Yapısı: Başlık ve Kaydet Butonu Yan Yana -->
       <div class="content-header">
         <h3 class="content-title">${content.title}</h3>
         <button class="save-button-header ${content.is_saved ? 'saved' : ''}" 
@@ -652,10 +621,8 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     `;
     
-    // Olay dinleyicilerini ekle
     addCardEventListeners(card, content);
     
-    // Animasyon için sınıf ekle
     setTimeout(() => {
       card.classList.add('visible');
     }, 50 * (index + 1));
@@ -663,20 +630,13 @@ document.addEventListener('DOMContentLoaded', function() {
     return card;
   }
   
-  /**
-   * Kart için olay dinleyicilerini ekler (Güncellenmiş versiyon)
-   * @param {Element} card - Kart elementi
-   * @param {Object} content - İçerik verisi
-   */
   function addCardEventListeners(card, content) {
-    // Karta tıklama olayı ekle (buton hariç)
     card.addEventListener('click', function(e) {
       if (!e.target.closest('.save-button-header')) {
         openContentModal(content.id);
       }
     });
     
-    // Kaydetme butonuna olay ekle
     const saveButton = card.querySelector('.save-button-header');
     if (saveButton) {
       saveButton.addEventListener('click', function(e) {
@@ -687,15 +647,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // ========================================================================
-  // İÇERİK DETAY MODALI FONKSİYONLARI
+  // MODAL VE KAYDETME FONKSİYONLARI (Değişiklik yok - mevcut kod korundu)
   // ========================================================================
   
   let currentModalContentId = null;
   
-  /**
-   * İçerik detay modalını açar
-   * @param {number} contentId - İçerik ID'si
-   */
   function openContentModal(contentId) {
     currentModalContentId = contentId;
     
@@ -716,46 +672,31 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
   
-  /**
-   * Modal içeriğini doldurur (BEĞENİ BUTONU KALDIRILMIŞ)
-   * @param {Object} data - İçerik verisi
-   * @param {number} contentId - İçerik ID'si
-   */
   function populateModal(data, contentId) {
-    // Modal başlığını ayarla
     const modalTitle = document.getElementById('modalTitle');
     if (modalTitle) {
       modalTitle.textContent = data.title;
     }
     
-    // Kategori bilgisini göster
     const modalCategory = document.getElementById('modalCategory');
     if (modalCategory) {
       modalCategory.textContent = data.category;
     }
     
-    // İçeriği göster
     const modalContent = document.getElementById('modalContent');
     if (modalContent) {
       modalContent.innerHTML = data.content;
     }
     
-    // Element bilgisini göster
     const modalElement = document.getElementById('modalElement');
     if (modalElement) {
       modalElement.textContent = data.related_element;
       modalElement.className = `modal-element ${data.related_element.toLowerCase()}`;
     }
     
-    // Sadece kaydetme durumunu güncelle (beğenme kaldırıldı)
     updateModalSaveButton(contentId, data.saved);
   }
   
-  /**
-   * Modal kaydetme butonunu günceller
-   * @param {number} contentId - İçerik ID'si
-   * @param {boolean} saved - Kaydetme durumu
-   */
   function updateModalSaveButton(contentId, saved) {
     const saveBtn = document.getElementById('modalSaveBtn');
     if (!saveBtn) return;
@@ -767,33 +708,22 @@ document.addEventListener('DOMContentLoaded', function() {
       '<i class="far fa-bookmark"></i> Kaydet';
   }
   
-  /**
-   * Modalı gösterir
-   */
   function showModal() {
     contentModal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
   
-  /**
-   * Modalı gizler
-   */
   function hideModal() {
     contentModal.classList.remove('active');
     document.body.style.overflow = '';
   }
   
-  /**
-   * Modal için olay dinleyicilerini ekler (BEĞENİ BUTONU KALDIRILMIŞ)
-   */
   function initModalEventListeners() {
-    // Kapatma butonu
     const closeModal = document.getElementById('closeModal');
     if (closeModal) {
       closeModal.addEventListener('click', hideModal);
     }
     
-    // Modal dışına tıklama ile kapatma
     if (contentModal) {
       contentModal.addEventListener('click', function(e) {
         if (e.target === contentModal) {
@@ -802,14 +732,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // ESC tuşu ile modalı kapatma
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && contentModal.classList.contains('active')) {
         hideModal();
       }
     });
     
-    // Sadece kaydetme butonuna olay ekle (beğeni butonu kaldırıldı)
     const modalSaveBtn = document.getElementById('modalSaveBtn');
     if (modalSaveBtn) {
       modalSaveBtn.addEventListener('click', function() {
@@ -818,15 +746,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // ========================================================================
-  // KAYDETME FONKSİYONLARI (BEĞENİ FONKSİYONLARI KALDIRILDI)
-  // ========================================================================
-  
-  /**
-   * İçeriği kaydetme/kaydetmeme işlemini yapar
-   * @param {number} contentId - İçerik ID'si
-   * @param {Element} button - Tıklanan buton elementi
-   */
   function toggleSave(contentId, button) {
     fetch(`/profiles/content/${contentId}/toggle_save/`, {
       method: 'POST',
@@ -847,13 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  /**
-   * Tüm kaydetme butonlarının durumunu günceller (Güncellenmiş versiyon)
-   * @param {number} contentId - İçerik ID'si
-   * @param {boolean} isSaved - Kaydetme durumu
-   */
   function updateSaveStatus(contentId, isSaved) {
-    // Header kaydet butonlarını güncelle
     const saveButtons = document.querySelectorAll(`.save-button-header[data-content-id="${contentId}"]`);
     saveButtons.forEach(btn => {
       btn.classList.toggle('saved', isSaved);
@@ -865,7 +778,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Eski save-button sınıfına sahip butonları da güncelle (geriye dönük uyumluluk)
     const oldSaveButtons = document.querySelectorAll(`.save-button[data-content-id="${contentId}"], .premium-action-button[data-content-id="${contentId}"]`);
     oldSaveButtons.forEach(btn => {
       btn.classList.toggle('saved', isSaved);
@@ -881,21 +793,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Modal butonunu güncelle
     const modalSaveBtn = document.getElementById('modalSaveBtn');
     if (modalSaveBtn && modalSaveBtn.dataset.contentId === contentId) {
       updateModalSaveButton(contentId, isSaved);
     }
     
-    // Veri dizisinde güncelle
     updateContentInArray(contentId, { is_saved: isSaved });
   }
   
-  /**
-   * İçerik dizisindeki belirli bir içeriği günceller
-   * @param {number} contentId - İçerik ID'si
-   * @param {Object} updates - Güncellenecek alanlar
-   */
   function updateContentInArray(contentId, updates) {
     const contentIndex = allContents.findIndex(c => c.id == contentId);
     if (contentIndex !== -1) {
@@ -907,11 +812,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // YARDIMCI FONKSİYONLAR
   // ========================================================================
   
-  /**
-   * CSRF token'ını alır
-   * @param {string} name - Cookie adı
-   * @returns {string|null} Cookie değeri
-   */
   function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -931,17 +831,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // ANIMASYON VE GÖRSELLİK FONKSİYONLARI
   // ========================================================================
   
-  /**
-   * Otomatik görünürlük animasyonları için gözlemci ekler
-   */
   function addAnimationObserver() {
-    // IntersectionObserver desteğini kontrol et
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Bir kez göründükten sonra gözlemlemeyi bırak
             observer.unobserve(entry.target);
           }
         });
@@ -949,41 +844,32 @@ document.addEventListener('DOMContentLoaded', function() {
         threshold: 0.1 
       });
       
-      // Tüm animasyonlu kartları gözlemle
       document.querySelectorAll('.animated').forEach(card => {
         observer.observe(card);
       });
     } else {
-      // IntersectionObserver desteklenmiyor - hepsini direkt göster
       document.querySelectorAll('.animated').forEach(card => {
         card.classList.add('visible');
       });
     }
   }
   
-  /**
-   * Mobil cihazlar için kart boyutlarını ayarlar
-   */
   function adjustCardSizes() {
     if (!contentSlider) return;
     
-    const cards = contentSlider.querySelectorAll('.premium-card');
+    const cards = contentSlider.querySelectorAll('.premium-card, .slider-card');
     if (!cards.length) return;
     
-    // Ekran genişliğine göre kart genişliklerini ayarla
     cards.forEach(card => {
       if (window.innerWidth <= 768) {
-        // Mobil görünüm: Her satırda 1 kart
         card.style.width = 'calc(100% - 30px)';
         card.style.maxWidth = '400px';
       } else {
-        // Tablet ve masaüstü görünüm: Her satırda 2 kart
         card.style.width = 'calc(50% - 30px)';
         card.style.maxWidth = '350px';
       }
     });
     
-    // Kaydırma olayını tetikle
     updateSliderButtons();
   }
   
@@ -991,24 +877,18 @@ document.addEventListener('DOMContentLoaded', function() {
   // SAYFA İNİSYALİZASYON FONKSİYONLARI
   // ========================================================================
   
-  /**
-   * Kişisel içerik kartlarına olay dinleyicilerini ekler (GÜNCELLENMIŞ VERSİYON)
-   */
   function initPersonalContentCards() {
     if (!contentSlider) return;
     
-    // Kartlara tıklama olayı ekle
-    const sliderCards = contentSlider.querySelectorAll('.slider-card');
+    const sliderCards = contentSlider.querySelectorAll('.slider-card, .premium-card');
     sliderCards.forEach(card => {
       card.addEventListener('click', function(e) {
-        // YENİ: save-button-header sınıfını da kontrol et
         if (!e.target.closest('.save-button-header') && !e.target.closest('.premium-action-button')) {
           openContentModal(this.dataset.contentId);
         }
       });
     });
     
-    // YENİ: Header kaydet butonlarına olay ekle
     const headerSaveButtons = contentSlider.querySelectorAll('.save-button-header');
     headerSaveButtons.forEach(button => {
       button.addEventListener('click', function(e) {
@@ -1017,7 +897,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // ESKİ: Eski kaydet butonlarına da olay ekle (geriye dönük uyumluluk)
     const saveButtons = contentSlider.querySelectorAll('.save-button, .premium-action-button');
     saveButtons.forEach(button => {
       button.addEventListener('click', function(e) {
@@ -1026,67 +905,71 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Slider'ı başa sıfırla
     contentSlider.scrollLeft = 0;
     
-    // Butonları güncelle
     setTimeout(() => {
       updateSliderButtons();
     }, 100);
   }
   
-  /**
-   * Pencere boyutu değişikliklerini dinler
-   */
   function initResizeListener() {
     window.addEventListener('resize', adjustCardSizes);
     window.addEventListener('load', adjustCardSizes);
   }
   
-  /**
-   * Sayfayı başlatır - tüm işlevleri çalıştırır
-   */
+  // ========================================================================
+  // SAYFA BAŞLATMA - TEK FONKSİYON
+  // ========================================================================
+  
   function initPage() {
-    // Slider işlevselliği
+    console.log('Sayfa başlatılıyor...');
+    
+    // 1. Dropdown filtre sistemi (YENİ)
+    initDropdownFilter();
+    
+    // 2. Slider işlevselliği
     initSliderButtons();
     initSliderScrollListener();
     
-    // Filtre işlevselliği
-    initCategoryFilters();
-    initSortFilters();
+    // 3. Element filtre işlevselliği (Diğer mizaçlar için)
     initElementFilters();
     
-    // Sayfalama işlevselliği
+    // 4. Sayfalama işlevselliği
     initPaginationButtons();
     
-    // Modal işlevselliği
+    // 5. Modal işlevselliği
     initModalEventListeners();
     
-    // Kişisel içerik kartları
+    // 6. Kişisel içerik kartları
     initPersonalContentCards();
     
-    // Responsive işlevsellik
+    // 7. Responsive işlevsellik
     initResizeListener();
     
-    // Tüm içerikleri getir ve göster
+    // 8. Tüm içerikleri getir ve göster
     if (allElementsContents && loadingIndicator) {
       fetchAllContents();
     }
     
-    // Animasyon gözlemcisi ekle
+    // 9. Animasyon gözlemcisi ekle
     addAnimationObserver();
     
-    // İlk kart boyutlarını ayarla
+    // 10. İlk kart boyutlarını ayarla
     adjustCardSizes();
     
-    console.log('Sayfa başarıyla yüklendi ve hazır.');
+    // 11. İlk filtreleme yap (dropdown için)
+    setTimeout(() => {
+      filterPersonalizedContents();
+    }, 500);
+    
+    console.log('✅ Sayfa başarıyla yüklendi ve hazır.');
+    console.log('🔄 Dropdown filtre sistemi aktif');
   }
   
   // ========================================================================
   // SAYFA BAŞLATMA
   // ========================================================================
   
-  // Sayfa yüklendiğinde tüm işlemleri başlat
   initPage();
   
 });
