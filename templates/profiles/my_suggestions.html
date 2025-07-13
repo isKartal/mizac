@@ -18,13 +18,13 @@
         <div class="result-card-left">
           <div class="element-icon-compact">
             {% if dominant_element == "Ateş" %}
-              <img src="{% static 'images/fire-newicon.png' %}" alt="Fire" class="fire-icon">
+              <img src="{% static 'images/fire-iconend.png' %}" alt="Fire" class="fire-icon">
             {% elif dominant_element == "Hava" %}
-              <img src="{% static 'images/air-icon.png' %}" alt="Air" class="air-icon">
+              <img src="{% static 'images/air-testend.png' %}" alt="Air" class="air-icon">
             {% elif dominant_element == "Su" %}
-              <img src="{% static 'images/water-icon.png' %}" alt="Water" class="water-icon">
+              <img src="{% static 'images/water-iconend.png' %}" alt="Water" class="water-icon">
             {% elif dominant_element == "Toprak" %}
-              <img src="{% static 'images/earth-icon.png' %}" alt="Earth" class="earth-icon">
+              <img src="{% static 'images/earth-iconend.png' %}" alt="Earth" class="earth-icon">
             {% endif %}
           </div>
           
@@ -108,27 +108,43 @@
             <h2>{{ dominant_element }} Mizacınız İçin Öneriler</h2>
             <p>Kişisel mizacınıza özel olarak seçilmiş içerikler</p>
           </div>
-        </div>
-        
-        <!-- Filtreleme Alanı -->
-        <div class="filter-container modern-filter" id="filterContainer">
-          <div class="filter-bar">
-            <!-- Kategori Filtresi -->
-            <div class="filter-group">
-              <span class="filter-label"><i class="fas fa-layer-group"></i> Kategori:</span>
-              <div class="filter-options" id="categoryFilter">
-                <button class="filter-option active" data-category="all">Tümü</button>
-                {% for category in categories %}
-                  <button class="filter-option" data-category="{{ category.id }}">{{ category.name }}</button>
-                {% endfor %}
-              </div>
-            </div>
+          
+          <!-- Kategori Dropdown Filtre Sistemi - Sağ Tarafta -->
+          <div class="category-dropdown-container">
+            <button class="category-dropdown-btn" id="categoryDropdownBtn" type="button" aria-expanded="false" aria-haspopup="menu">
+              <i class="fas fa-layer-group" aria-hidden="true"></i>
+              <span class="selected-category">Kategoriler</span>
+              <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
+            </button>
             
-            <!-- Sıralama Filtresi -->
-            <div class="filter-group">
-              <span class="filter-label"><i class="fas fa-sort-amount-down"></i> Sırala:</span>
-              <div class="filter-options" id="sortFilter">
-                <button class="filter-option active" data-sort="newest">En Yeni</button>
+            <!-- Küçük Çekmece -->
+            <div class="category-dropdown" id="categoryDropdown" role="menu" aria-label="Kategori seçenekleri">
+              <div class="category-dropdown-list">
+                <button class="category-option active" 
+                        data-category="all" 
+                        role="menuitem" 
+                        type="button">
+                  <i class="fas fa-globe" aria-hidden="true"></i>
+                  <span>Tüm Kategoriler</span>
+                </button>
+                
+                {% for category in categories %}
+                  <button class="category-option" 
+                          data-category="{{ category.id }}" 
+                          role="menuitem" 
+                          type="button">
+                    {% if category.icon %}
+                      <i class="{{ category.icon }}" aria-hidden="true"></i>
+                    {% else %}
+                      <i class="fas fa-folder" aria-hidden="true"></i>
+                    {% endif %}
+                    <span>{{ category.name }}</span>
+                  </button>
+                {% empty %}
+                  <div class="no-categories" role="status">
+                    <p>Henüz kategori eklenmemiş.</p>
+                  </div>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -140,26 +156,44 @@
         {% if contents %}
           <div class="content-slider-container">
             <!-- Kaydırma Butonları -->
-            <button class="slider-nav-button prev-button glass-effect" id="prevSlideButton">
-              <i class="fas fa-chevron-left"></i>
+            <button class="slider-nav-button prev-button glass-effect" 
+                    id="prevSlideButton" 
+                    type="button" 
+                    aria-label="Önceki içerikler">
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
-            <button class="slider-nav-button next-button glass-effect" id="nextSlideButton">
-              <i class="fas fa-chevron-right"></i>
+            <button class="slider-nav-button next-button glass-effect" 
+                    id="nextSlideButton" 
+                    type="button" 
+                    aria-label="Sonraki içerikler">
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </button>
             
             <!-- İçerik Slider -->
-            <div class="content-slider improved-slider" id="contentSlider">
+            <div class="content-slider improved-slider" 
+                 id="contentSlider" 
+                 role="region" 
+                 aria-label="Önerilen içerikler">
               {% for content in contents %}
-                <div class="slider-card premium-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                <div class="slider-card premium-card" 
+                     data-content-id="{{ content.id }}" 
+                     data-category="{{ content.category.id }}"
+                     role="article"
+                     aria-label="{{ content.title }}">
                   <div class="premium-card-inner">
                     {% if content.image %}
-                      <div class="premium-card-image" style="background-image: url('{{ content.image.url }}')">
+                      <div class="premium-card-image" 
+                           style="background-image: url('{{ content.image.url }}')"
+                           role="img"
+                           aria-label="{{ content.title }} görseli">
                         <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
                         <div class="content-category">{{ content.category.name }}</div>
                       </div>
                     {% else %}
-                      <div class="premium-card-image placeholder-image">
-                        <i class="fas fa-book-open"></i>
+                      <div class="premium-card-image placeholder-image" 
+                           role="img"
+                           aria-label="Varsayılan içerik görseli">
+                        <i class="fas fa-book-open" aria-hidden="true"></i>
                         <div class="content-element {{ dominant_element|lower }}">{{ dominant_element }}</div>
                         <div class="content-category">{{ content.category.name }}</div>
                       </div>
@@ -170,8 +204,10 @@
                       <h3 class="content-title">{{ content.title }}</h3>
                       <button class="save-button-header {% if content.is_saved %}saved{% endif %}" 
                               data-content-id="{{ content.id }}"
-                              title="{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}">
-                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                              type="button"
+                              title="{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}"
+                              aria-label="{% if content.is_saved %}İçerik kaydedildi{% else %}İçeriği kaydet{% endif %}">
+                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark" aria-hidden="true"></i>
                       </button>
                     </div>
                   </div>
@@ -181,8 +217,8 @@
           </div>
         {% else %}
           <div class="container">
-            <div class="empty-state">
-              <div class="empty-icon"><i class="fas fa-inbox"></i></div>
+            <div class="empty-state" role="status">
+              <div class="empty-icon"><i class="fas fa-inbox" aria-hidden="true"></i></div>
               <p class="empty-text">{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
             </div>
           </div>
@@ -198,7 +234,7 @@
     <!-- Diğer Mizaçlar İçin İçerikler Bölümü -->
     <div class="content-section">
       <div class="section-title-wrapper">
-        <i class="fas fa-compass"></i>
+        <i class="fas fa-compass" aria-hidden="true"></i>
         <div class="section-title-content">
           <h2>Keşfedilecek Diğer İçerikler</h2>
           <p>Farklı mizaç tipleri için hazırlanmış, keşfetmeniz için önerilen içerikler</p>
@@ -206,54 +242,117 @@
       </div>
       
       <!-- Element Sekmesi Filtresi -->
-      <div class="element-tabs modern-tabs" id="elementTabs">
-        <button class="filter-option active" data-element="all">
-          <i class="fas fa-globe"></i> Tümü
+      <div class="element-tabs modern-tabs" 
+           id="elementTabs" 
+           role="tablist" 
+           aria-label="Mizaç tipi filtreleri">
+        <button class="filter-option active" 
+                data-element="all" 
+                role="tab" 
+                aria-selected="true"
+                type="button">
+          <i class="fas fa-globe" aria-hidden="true"></i> Tümü
         </button>
-        <button class="filter-option" data-element="Ateş">
-          <img src="{% static 'images/fire-icon.png' %}" alt="Fire" class="small-icon"> Ateş
+        <button class="filter-option" 
+                data-element="Ateş" 
+                role="tab" 
+                aria-selected="false"
+                type="button">
+          <img src="{% static 'images/fire-icon.png' %}" alt="Ateş" class="small-icon"> Ateş
         </button>
-        <button class="filter-option" data-element="Hava">
-          <img src="{% static 'images/air-icon.png' %}" alt="Air" class="small-icon"> Hava
+        <button class="filter-option" 
+                data-element="Hava" 
+                role="tab" 
+                aria-selected="false"
+                type="button">
+          <img src="{% static 'images/air-icon.png' %}" alt="Hava" class="small-icon"> Hava
         </button>
-        <button class="filter-option" data-element="Su">
-          <img src="{% static 'images/water-icon.png' %}" alt="Water" class="small-icon"> Su
+        <button class="filter-option" 
+                data-element="Su" 
+                role="tab" 
+                aria-selected="false"
+                type="button">
+          <img src="{% static 'images/water-icon.png' %}" alt="Su" class="small-icon"> Su
         </button>
-        <button class="filter-option" data-element="Toprak">
-          <img src="{% static 'images/earth-icon.png' %}" alt="Earth" class="small-icon"> Toprak
+        <button class="filter-option" 
+                data-element="Toprak" 
+                role="tab" 
+                aria-selected="false"
+                type="button">
+          <img src="{% static 'images/earth-icon.png' %}" alt="Toprak" class="small-icon"> Toprak
         </button>
       </div>
       
       <!-- Yükleniyor Göstergesi -->
-      <div class="loading-indicator" id="loadingIndicator">
-        <div class="loading-spinner"></div>
+      <div class="loading-indicator" 
+           id="loadingIndicator" 
+           role="status" 
+           aria-live="polite">
+        <div class="loading-spinner" aria-hidden="true"></div>
         <p class="loading-text">İçerikler yükleniyor...</p>
       </div>
       
       <!-- Diğer Mizaçlar İçerik Alanı -->
-      <div class="content-grid modern-grid" id="allElementsContents" style="display: none;">
+      <div class="content-grid modern-grid" 
+           id="allElementsContents" 
+           style="display: none;"
+           role="region"
+           aria-label="Tüm mizaç içerikleri">
         <!-- İçerikler JavaScript ile yüklenecek -->
       </div>
       
       <!-- Sayfalama Kontrolleri -->
-      <div class="pagination-controls modern-pagination" id="allContentsPagination" style="display: none;">
-        <button class="page-button" id="allPrevPage" disabled><i class="fas fa-chevron-left"></i></button>
-        <div class="page-numbers" id="allPageNumbers">
+      <div class="pagination-controls modern-pagination" 
+           id="allContentsPagination" 
+           style="display: none;"
+           role="navigation"
+           aria-label="Sayfa navigasyonu">
+        <button class="page-button" 
+                id="allPrevPage" 
+                disabled 
+                type="button"
+                aria-label="Önceki sayfa">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <div class="page-numbers" 
+             id="allPageNumbers" 
+             role="list"
+             aria-label="Sayfa numaraları">
           <!-- Sayfa numaraları JavaScript ile oluşturulacak -->
         </div>
-        <button class="page-button" id="allNextPage"><i class="fas fa-chevron-right"></i></button>
+        <button class="page-button" 
+                id="allNextPage" 
+                type="button"
+                aria-label="Sonraki sayfa">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- İçerik Detay Modal -->
-<div class="content-modal modern-modal" id="contentModal">
+<div class="content-modal modern-modal" 
+     id="contentModal" 
+     role="dialog" 
+     aria-modal="true" 
+     aria-labelledby="modalTitle"
+     aria-hidden="true">
   <div class="modal-container">
     <div class="modal-header">
-      <button class="modal-nav-button" id="prevModalContent"><i class="fas fa-chevron-left"></i></button>
+      <button class="modal-nav-button" 
+              id="prevModalContent" 
+              type="button"
+              aria-label="Önceki içerik">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
       <h2 id="modalTitle"></h2>
-      <button class="modal-close-button" id="closeModal"><i class="fas fa-times"></i></button>
+      <button class="modal-close-button" 
+              id="closeModal" 
+              type="button"
+              aria-label="Modalı kapat">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
     </div>
     <div class="modal-body">
       <div class="modal-category" id="modalCategory"></div>
@@ -263,15 +362,19 @@
     </div>
     <div class="modal-footer">
       <div class="modal-actions">
-        <!-- Beğeni butonu kaldırıldı -->
-        <button class="modal-action-btn" id="modalSaveBtn">
-          <i class="far fa-bookmark"></i> Kaydet
+        <button class="modal-action-btn" 
+                id="modalSaveBtn" 
+                type="button">
+          <i class="far fa-bookmark" aria-hidden="true"></i> Kaydet
         </button>
       </div>
       <div class="modal-element" id="modalElement"></div>
     </div>
   </div>
 </div>
+
+<!-- CSRF Token for JavaScript -->
+{% csrf_token %}
 {% endblock %}
 
 {% block extra_js %}

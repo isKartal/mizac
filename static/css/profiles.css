@@ -559,69 +559,509 @@
    4. ÖNERİLERİM SAYFASI (ve ilişkili bileşenler)
    ========================================================================== */
 
-/* -------- Filtre Konteyner -------- */
-.filter-container, 
-.secondary-filter-container {
-  z-index: 50;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  margin-bottom: 15px;
-  transition: box-shadow 0.3s ease;
+/* ==========================================================================
+   MİZAÇ TEMALI KATEGORİ DROPDOWN TASARIMI
+   Sitenizin doğal, organik tasarım diline uygun
+   ========================================================================== */
+
+/* Ana Container - Minimal ve Temiz */
+
+/* Ana Container - Manuel pozisyon kontrollü */
+.category-dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: inherit;
+  
+  /* Manuel pozisyon ayarları - İhtiyacınıza göre değiştirin */
+  top: 0px;           /* Yukarı/aşağı hareket için */
+  right: 0px;         /* Sol/sağ hareket için */
+  margin-top: 0px;    /* Üst boşluk */
+  margin-right: 0px;  /* Sağ boşluk */
+  
+  /* Z-index kontrolü */
+  z-index: 100;
 }
 
-.filter-container.scrolled, 
-.secondary-filter-container.scrolled {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+/* Premium section title içindeki özel konumlandırma */
+.premium-section-title .category-dropdown-container {
+  /* Başlık içindeki pozisyon ayarları */
+  position: relative;
+  top: 10px;          /* Başlık içinde dikey pozisyon */
+  right: 0px;         /* Başlık içinde yatay pozisyon */
+  margin-left: auto;  /* Sağa yaslamak için */
+  margin-top: 0px;    /* Üst margin */
+  margin-bottom: 0px; /* Alt margin */
 }
 
-/* -------- Filtre Çubuğu -------- */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  padding: 15px;
-  background-color: var(--secondary-color);
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.filter-group {
+/* Ana Buton - Doğal ve Sade Tasarım */
+.category-dropdown-btn {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.filter-label {
-  font-weight: 600;
-  color: var(--primary-color);
-}
-
-.filter-options {
-  display: flex;
-  gap: 10px;
-}
-
-.filter-option {
-  padding: 8px 16px;
-  background-color: white;
-  border-radius: 20px;
+  padding: 12px 18px;
+  background: var(--secondary-color, #ece9e3);
+  border: 1px solid rgba(41, 35, 33, 0.1);
+  border-radius: 25px;
   cursor: pointer;
-  font-weight: 500;
-  transition: var(--transition);
-  border: none;
   font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary-color, #292321);
+  transition: all 0.3s ease;
+  min-width: 160px;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
 }
 
-.filter-option:hover { 
-  background-color: #f1f1f1; 
+/* Subtle glow efekti */
+.category-dropdown-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(233, 180, 76, 0.05) 0%, 
+    rgba(233, 180, 76, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 25px;
 }
 
-.filter-option.active {
-  background-color: var(--primary-color);
+.category-dropdown-btn:hover::before {
+  opacity: 1;
+}
+
+.category-dropdown-btn:hover {
+  border-color: var(--accent-color, #e9b44c);
+  color: var(--primary-color, #292321);
+  box-shadow: 0 2px 8px rgba(233, 180, 76, 0.15);
+}
+
+/* Aktif durum - Mizaç renklerini yansıtan */
+.category-dropdown-btn.active {
+  background: var(--accent-color, #e9b44c);
+  color: var(--primary-color, #292321);
+  border-color: var(--accent-color, #e9b44c);
+  box-shadow: 0 3px 12px rgba(233, 180, 76, 0.25);
+}
+
+/* İkon - Minimal stil */
+.category-dropdown-btn i:first-child {
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.category-dropdown-btn:hover i:first-child,
+.category-dropdown-btn.active i:first-child {
+  opacity: 1;
+}
+
+/* Seçili kategori metni */
+.selected-category {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Ok ikonu - Subtle */
+.category-dropdown-btn .arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  opacity: 0.6;
+}
+
+.category-dropdown-btn.active .arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Dropdown Menü - Kart tarzı */
+.category-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.category-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown Liste - Temiz scroll */
+.category-dropdown-list {
+  padding: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color, #e9b44c) transparent;
+}
+
+.category-dropdown-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.category-dropdown-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.category-dropdown-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color, #e9b44c);
+  border-radius: 2px;
+}
+
+/* Kategori Seçenekleri - Organik hissiyat */
+.category-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  text-align: left;
+  margin-bottom: 2px;
+  position: relative;
+}
+
+/* Hover efekti - Subtle ve doğal */
+.category-option:hover {
+  background: var(--secondary-color, #ece9e3);
+  color: var(--primary-color, #292321);
+  transform: translateX(2px);
+}
+
+/* Aktif kategori - Vurgulu ama uyumlu */
+.category-option.active {
+  background: linear-gradient(135deg, 
+    var(--accent-color, #e9b44c) 0%, 
+    rgba(233, 180, 76, 0.9) 100%);
+  color: var(--primary-color, #292321);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(233, 180, 76, 0.2);
+}
+
+/* Kategori ikonları - Dengeli boyut */
+.category-option i {
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.category-option:hover i,
+.category-option.active i {
+  opacity: 1;
+}
+
+/* Kategori metni */
+.category-option span {
+  flex: 1;
+  letter-spacing: 0.1px;
+}
+
+/* Boş durum - Uyumlu stil */
+.no-categories {
+  padding: 20px 15px;
+  text-align: center;
+  color: #888;
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Subtle border separator */
+.category-dropdown-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.05) 50%, 
+    transparent 100%);
+}
+
+/* ==========================================================================
+   RESPONSIVE TASARIM - Sitenizin breakpoint'leriyle uyumlu
+   ========================================================================== */
+
+/* Tablet ve küçük laptop (max-width: 991px) */
+@media (max-width: 991px) {
+.category-dropdown-container {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  
+  /* Manuel pozisyon ayarları - İhtiyacınıza göre değiştirin */
+  top: -80px !important;           /* Yukarı/aşağı hareket için */
+  right: 0px;         /* Sol/sağ hareket için */
+  margin-top: 0px;    /* Üst boşluk */
+  margin-right: 0px;  /* Sağ boşluk */
+  
+  /* Z-index kontrolü */
+  z-index: 100;
+}
+  /* Dropdown sağ tarafa yaslanmış şekilde */
+  .premium-section-title .category-dropdown-container {
+    align-self: flex-end;
+  }
+  .category-dropdown-btn {
+    min-width: 150px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+  }
+  
+  .category-dropdown {
+    border-radius: 12px;
+  }
+  
+  .category-option {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Büyük mobil (max-width: 768px) */
+@media (max-width: 768px) {
+  .category-dropdown-container {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 15px;
+  }
+  
+  .category-dropdown-btn {
+    width: 100%;
+    min-width: auto;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    border-radius: 18px;
+  }
+  
+  .category-dropdown {
+    border-radius: 10px;
+  }
+  
+  .category-dropdown-list {
+    max-height: 200px;
+    padding: 6px;
+  }
+  
+  .category-option {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  
+  .category-option i {
+    font-size: 0.8rem;
+    width: 14px;
+  }
+}
+
+/* Standart mobil (max-width: 576px) */
+@media (max-width: 576px) {
+  .category-dropdown-container {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  
+  /* Manuel pozisyon ayarları - İhtiyacınıza göre değiştirin */
+  top: -90px !important;           /* Yukarı/aşağı hareket için */
+  right: -20px !important;         /* Sol/sağ hareket için */
+  margin-top: 0px;    /* Üst boşluk */
+  margin-right: 0px;  /* Sağ boşluk */
+  
+  /* Z-index kontrolü */
+  z-index: 100;
+}
+  .category-dropdown-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+  
+  .selected-category {
+    font-size: 0.75rem;
+  }
+  
+  .category-dropdown-list {
+    max-height: 180px;
+    padding: 5px;
+  }
+  
+  .category-option {
+    padding: 5px 6px;
+    font-size: 0.7rem;
+    margin-bottom: 1px;
+  }
+}
+
+/* Küçük mobil (max-width: 480px) */
+@media (max-width: 480px) {
+  .category-dropdown-container {
+    max-width: 160px;
+  }
+  
+  .category-dropdown-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    min-width: auto;
+  }
+  
+  .category-option {
+    padding: 4px 5px;
+    font-size: 0.65rem;
+  }
+  
+  .category-option i {
+    font-size: 0.7rem;
+    width: 12px;
+  }
+}
+  @media (max-width: 380px) {
+      .category-dropdown-container {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  
+  /* Manuel pozisyon ayarları - İhtiyacınıza göre değiştirin */
+  top: -10px !important;           /* Yukarı/aşağı hareket için */
+  right: -20px !important;         /* Sol/sağ hareket için */
+  margin-top: 0px;    /* Üst boşluk */
+  margin-right: 0px;  /* Sağ boşluk */
+  
+  /* Z-index kontrolü */
+  z-index: 100;
+}
+
+}
+
+/* ==========================================================================
+   MİZAÇ RENKLER İLE UYUMLU TEMA VAR
+   ========================================================================== */
+
+/* Ateş mizacı sayfasında */
+.element-section.ateş .category-dropdown-btn.active {
+  background: linear-gradient(135deg, #e74c3c 0%, #f08080 100%);
   color: white;
+}
+
+.element-section.ateş .category-option.active {
+  background: linear-gradient(135deg, #e74c3c 0%, rgba(231, 76, 60, 0.9) 100%);
+  color: white;
+}
+
+/* Hava mizacı sayfasında */
+.element-section.hava .category-dropdown-btn.active {
+  background: linear-gradient(135deg, #78909c 0%, #a8c8d0 100%);
+  color: white;
+}
+
+.element-section.hava .category-option.active {
+  background: linear-gradient(135deg, #78909c 0%, rgba(120, 144, 156, 0.9) 100%);
+  color: white;
+}
+
+/* Su mizacı sayfasında */
+.element-section.su .category-dropdown-btn.active {
+  background: linear-gradient(135deg, #2980b9 0%, #5dade2 100%);
+  color: white;
+}
+
+.element-section.su .category-option.active {
+  background: linear-gradient(135deg, #2980b9 0%, rgba(41, 128, 185, 0.9) 100%);
+  color: white;
+}
+
+/* Toprak mizacı sayfasında */
+.element-section.toprak .category-dropdown-btn.active {
+  background: linear-gradient(135deg, #8d6e63 0%, #bcaaa4 100%);
+  color: white;
+}
+
+.element-section.toprak .category-option.active {
+  background: linear-gradient(135deg, #8d6e63 0%, rgba(141, 110, 99, 0.9) 100%);
+  color: white;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY VE PERFORMANS
+   ========================================================================== */
+
+/* Focus stilleri - Sitenizin genel stiline uygun */
+.category-dropdown-btn:focus,
+.category-option:focus {
+  outline: 2px solid var(--accent-color, #e9b44c);
+  outline-offset: 2px;
+}
+
+/* Touch optimizasyonu */
+@media (hover: none) and (pointer: coarse) {
+  .category-dropdown-btn:hover,
+  .category-option:hover {
+    transform: none;
+  }
+  
+  .category-option:active {
+    background: var(--secondary-color, #ece9e3);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .category-dropdown-btn,
+  .category-dropdown,
+  .category-option {
+    transition: none !important;
+  }
+  
+  .category-dropdown-btn.active .arrow {
+    transform: none !important;
+  }
+}
+
+/* Performance optimization */
+.category-dropdown {
+  will-change: opacity, visibility, transform;
+}
+
+.category-option {
+  will-change: transform, background-color;
+}
+
+/* Print stilleri */
+@media print {
+  .category-dropdown-container {
+    display: none;
+  }
 }
 
 /* -------- İçerik Bölümü -------- */
@@ -1435,7 +1875,7 @@
 .premium-content-section {
   position: relative;
   border-radius: 20px;
-    overflow: hidden !important; /* Background taşmalarını engelle */
+  overflow: hidden !important; /* Background taşmalarını engelle */
 
 }
 
@@ -1472,26 +1912,26 @@
 
 /* Ateş mizacı - Sol ve sağ */
 .premium-content-section.ateş::before {
-  background-image: url('/static/images/ates-background.png');
+  background-image: url('/static/images/fire-back.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .premium-content-section.ateş::after {
-  background-image: url('/static/images/fire-icon.png'); /* İkinci ateş görseli */
+  background-image: url('/static/images/fire-back2.png'); /* İkinci ateş görseli */
 }
 
 /* Hava mizacı - Sol ve sağ */
 .premium-content-section.hava::before {
-  background-image: url('/static/images/hava-background.png');
+  background-image: url('/static/images/air-back.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .premium-content-section.hava::after {
-  background-image: url('/static/images/air-icon.png'); /* İkinci hava görseli */
+  background-image: url('/static/images/air-back2.png'); /* İkinci hava görseli */
 }
 
 /* Su mizacı - Sol ve sağ */
@@ -1508,14 +1948,14 @@
 
 /* Toprak mizacı - Sol ve sağ */
 .premium-content-section.toprak::before {
-  background-image: url('/static/images/toprak-background.png');
+  background-image: url('/static/images/earth-back.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .premium-content-section.toprak::after {
-  background-image: url('/static/images/earth-icon.png'); /* İkinci toprak görseli */
+  background-image: url('/static/images/earth-back2.png'); /* İkinci toprak görseli */
 }
 
 /* İçeriklerin ikonların üstünde kalması */
@@ -1950,7 +2390,37 @@
   transform: translateY(-5px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
+/* Ateş İkonu - Desktop */
+.result-card-inner.ateş .element-icon-compact {
+  width: 320px !important;
+  height: 320px !important;
+  top: 80px !important;
+  right: -150px !important;
+}
 
+/* Hava İkonu - Desktop (Mevcut ayarlar) */
+.result-card-inner.hava .element-icon-compact {
+  width: 450px !important;
+  height: 450px !important;
+  top: 90px !important;
+  right: -180px !important;
+}
+
+/* Su İkonu - Desktop */
+.result-card-inner.su .element-icon-compact {
+  width: 420px !important;
+  height: 420px !important;
+  top: 100px !important;
+  right: -160px !important;
+}
+
+/* Toprak İkonu - Desktop */
+.result-card-inner.toprak .element-icon-compact {
+  width: 350px !important;
+  height: 350px !important;
+  top: 105px !important;
+  right: -190px !important;
+}
 
 .result-card-inner {
   padding: 25px;
@@ -1972,10 +2442,10 @@
 .element-icon-compact {
   position: absolute !important;
   top: 90px !important;
-  right: -80px !important;
+  right: -180px !important;
   left: auto !important;
-  width: 300px !important;
-  height: 300px !important;
+  width: 450px !important;
+  height: 450px !important;
   z-index: 10 !important;
   background: none !important;
   background-color: transparent !important;
@@ -2188,11 +2658,47 @@ input[type="email"] {
 
 /* -------- XL LAPTOPLAR (max-width: 1400px) -------- */
 @media (max-width: 1400px) {
-   .element-icon-compact {
-    top: 50px !important;
-    right: 30px !important;
-    width: 280px !important;
-    height: 280px !important;
+      .test-result-compact {
+    position: relative !important;
+    overflow: hidden !important; /* İkon container dışına çıkmasın */
+  }
+.element-icon-compact {
+   width: 420px !important; /* İkon boyutu */
+   height: 420px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+  position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+  .result-card-inner.ateş .element-icon-compact {
+    width: 280px !important; /* İkon boyutu */
+   height: 280px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+   width: 420px !important; /* İkon boyutu */
+   height: 420px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+   width: 385px !important; /* İkon boyutu */
+   height: 385px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+   width: 290px !important; /* İkon boyutu */
+   height: 290px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
   }
   .premium-content-container {
     padding: 20px 30px 30px;
@@ -2231,23 +2737,61 @@ input[type="email"] {
   .premium-section-title h2 {
     font-size: 1.7rem;
   }
-  .element-icon-compact {
-    top: 45px !important;
-    right: 25px !important;
-    width: 260px !important;
-    height: 260px !important;
+      .test-result-compact {
+    position: relative !important;
+    overflow: hidden !important; /* İkon container dışına çıkmasın */
+  }
+.element-icon-compact {
+   width: 410px !important; /* İkon boyutu */
+   height: 410px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -180px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+  position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+
+  .result-card-inner.ateş .element-icon-compact {
+   width: 280px !important; /* İkon boyutu */
+   height: 280px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+     width: 410px !important; /* İkon boyutu */
+   height: 410px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -180px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+    width: 370px !important; /* İkon boyutu */
+   height: 370px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -180px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+     width: 300px !important; /* İkon boyutu */
+   height: 300px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -180px !important; /* İkon yatay konum */
   }
   
   .element-meta-compact {
     max-width: calc(100% - 285px);
   }
-    .premium-content-section::before,
+  .premium-content-section::before,
   .premium-content-section::after {
    width: 150vw !important; /* Viewport width'in 1.5 katı */  }
 }
 
 /* -------- KÜÇÜK LAPTOPLAR (max-width: 1024px) -------- */
 @media (max-width: 1024px) {
+  
   
   .suggestions-container {
     padding: 0 15px;
@@ -2257,11 +2801,48 @@ input[type="email"] {
     gap: 30px;
   }
   
-  .element-icon-compact {
-    top: 40px !important;
-    right: 20px !important;
-    width: 240px !important;
-    height: 240px !important;
+      .test-result-compact {
+    position: relative !important;
+    overflow: hidden !important; /* İkon container dışına çıkmasın */
+  }
+.element-icon-compact {
+   width: 380px !important; /* İkon boyutu */
+   height: 380px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+  position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+
+  .result-card-inner.ateş .element-icon-compact {
+  width: 270px !important; /* İkon boyutu */
+   height: 270px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -120px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+     width: 380px !important; /* İkon boyutu */
+   height: 380px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+   width: 355px !important; /* İkon boyutu */
+   height: 355px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+     width: 280px !important; /* İkon boyutu */
+   height: 280px !important; /* İkon boyutu */
+   top: 130px !important; /* İkon dikey konum */
+   right: -170px !important; /* İkon yatay konum */
   }
   
   .element-meta-compact {
@@ -2288,11 +2869,11 @@ input[type="email"] {
   .next-button {
     right: -35px;
   }
-  .premium-content-section::before,
-  .premium-content-section::after {
-    width: 150vw !important;
-    opacity: 0.5 !important;
-  }
+ .premium-content-section::before,
+.premium-content-section::after {
+      width: 150vw !important;
+    transform: scale(1.0, 1.0); /* İlk değer genişlik (daralt), ikinci değer yükseklik (büyüt) */
+}
   
 }
 
@@ -2309,10 +2890,12 @@ input[type="email"] {
   
   /* Premium İçerik */
   .premium-section-title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    text-align: left;
+flex-direction: row; /* Alt alta yerine yan yana sıralamak için */
+    align-items: center; /* İkon ve metni dikeyde ortalamak için */
+    gap: 15px; /* İkon ve metin arasındaki boşluk */
+    text-align: left; /* Metin hizalaması */
+      margin-bottom: 0px !important; /* Alt boşluğu sıfırla */
+
   }
   
   .premium-section-title i {
@@ -2327,7 +2910,7 @@ input[type="email"] {
   }
   
   .premium-content-container {
-    padding: 40px 0 30px;
+    padding: 0px 0 0px;
   }
   
   /* Test Sonucu */
@@ -2338,12 +2921,48 @@ input[type="email"] {
   .result-card-left {
     gap: 25px;
   }
-  
-  .element-icon-compact {
-    top: 35px !important;
-    right: 15px !important;
-    width: 220px !important;
-    height: 220px !important;
+      .test-result-compact {
+    position: relative !important;
+    overflow: hidden !important; /* İkon container dışına çıkmasın */
+  }
+.element-icon-compact {
+   width: 340px !important; /* İkon boyutu */
+   height: 340px !important; /* İkon boyutu */
+   top: 120px !important; /* İkon dikey konum */
+   right: -170px !important; /* İkon yatay konum */
+   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
+  position: absolute !important; /* Tamamen serbest konumlandırma */
+ }
+ 
+  .result-card-inner.ateş .element-icon-compact {
+   width: 270px !important; /* İkon boyutu */
+   height: 270px !important; /* İkon boyutu */
+   top: 120px !important; /* İkon dikey konum */
+   right: -140px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+    width: 340px !important; /* İkon boyutu */
+   height: 340px !important; /* İkon boyutu */
+   top: 120px !important; /* İkon dikey konum */
+   right: -170px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+    width: 340px !important; /* İkon boyutu */
+   height: 340px !important; /* İkon boyutu */
+   top: 120px !important; /* İkon dikey konum */
+   right: -220px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+ width: 260px !important; /* İkon boyutu */
+   height: 260px !important; /* İkon boyutu */
+   top: 120px !important; /* İkon dikey konum */
+   right: -150px !important; /* İkon yatay konum */
   }
   
   .element-meta-compact {
@@ -2401,11 +3020,11 @@ input[type="email"] {
     margin: 20px auto;
     padding: 0 12px;
   }
-    .premium-content-section::before,
-  .premium-content-section::after {
-    width: 120vw !important;
-    opacity: 0.3 !important;
-  }
+ .premium-content-section::before,
+.premium-content-section::after {
+      width: 150vw !important;
+    transform: scale(1.3, 1); /* İlk değer genişlik (daralt), ikinci değer yükseklik (büyüt) */
+}
   .test-result-compact {
     border-radius: 20px;
     margin-bottom: 25px;
@@ -2481,10 +3100,22 @@ input[type="email"] {
   .result-card-inner {
     padding: 18px;
   }
-
+  /* Premium İçerik */
+  .premium-section-title {
+flex-direction: row; /* Alt alta yerine yan yana sıralamak için */
+    align-items: center; /* İkon ve metni dikeyde ortalamak için */
+    gap: 15px; /* İkon ve metin arasındaki boşluk */
+    text-align: left; /* Metin hizalaması */
+    margin-top: -60px;
+        margin-bottom: 0px !important; /* Alt boşluğu sıfırla */
+    padding-bottom: 0px !important; /* Alt padding'i sıfırla */
+  }
+  
+  
   
 
-/* Test sonucu kartında layout düzeltmesi */
+/* Test sonucu kartında layout düze
+ltmesi */
   .result-card-left {
     display: flex !important;
     flex-direction: row !important;
@@ -2503,21 +3134,8 @@ input[type="email"] {
     max-width: calc(100% - 120px) !important;
   }
   
-  /* Element icon sağda */
-  .element-icon-compact {
-    position: relative !important;
-    top: 0 !important;
-    right: 0 !important;
-    left: auto !important;
-    width: 100px !important;
-    height: 100px !important;
-    margin: 0 !important;
-    display: block !important;
-    flex-shrink: 0 !important;
-    order: 2 !important;
-    z-index: 1 !important;
-  }
-  
+
+
   /* Yazı hizalamaları solda */
   .dominant-title-compact {
     text-align: left !important;
@@ -2687,19 +3305,26 @@ input[type="email"] {
     padding: 0 10px;
     margin: 15px auto;
   }
-  
+   .premium-content-section::before,
+.premium-content-section::after {
+      width: 150vw !important;
+    transform: scale(1.3, 1.1); /* İlk değer genişlik (daralt), ikinci değer yükseklik (büyüt) */
+}
   .test-result-compact {
     margin-bottom: 20px;
   }
-  
+    .premium-section-title {
+    flex-direction: row; /* Alt alta yerine yan yana sıralamak için */
+    align-items: center; /* İkon ve metni dikeyde ortalamak için */
+    gap: 15px; /* İkon ve metin arasındaki boşluk */
+    text-align: left; /* Metin hizalaması */
+    margin-top: -40px;
+  }
   /* Test Sonucu */
   .result-card-inner {
     padding: 15px;
   }
-    .element-icon-compact {
-    width: 80px !important;
-    height: 80px !important;
-  }
+
   
   .element-meta-compact {
     max-width: calc(100% - 100px) !important;
@@ -2842,7 +3467,13 @@ input[type="email"] {
     padding: 12px;
   }
   
-
+    .premium-section-title {
+    flex-direction: row; /* Alt alta yerine yan yana sıralamak için */
+    align-items: center; /* İkon ve metni dikeyde ortalamak için */
+    gap: 15px; /* İkon ve metin arasındaki boşluk */
+    text-align: left; /* Metin hizalaması */
+    margin-top: -20px;
+  }
   .element-meta-compact {
     max-width: calc(100% - 90px) !important;
   }
@@ -2971,12 +3602,23 @@ input[type="email"] {
   .suggestions-container {
     padding: 0 5px;
   }
+     .premium-content-section::before,
+.premium-content-section::after {
+      width: 150vw !important;
+    transform: scale(1.3, 1.3); /* İlk değer genişlik (daralt), ikinci değer yükseklik (büyüt) */
+}
   
   .result-card-inner {
     padding: 10px;
   }
 
-  
+     .premium-section-title {
+    flex-direction: row; /* Alt alta yerine yan yana sıralamak için */
+    align-items: center; /* İkon ve metni dikeyde ortalamak için */
+    gap: 15px; /* İkon ve metin arasındaki boşluk */
+    text-align: left; /* Metin hizalaması */
+    margin-top: -10px;
+  }
 
   
   .premium-section-title h2 {
@@ -3058,13 +3700,45 @@ input[type="email"] {
   }
   
 .element-icon-compact {
-   width: 210px !important; /* İkon boyutu */
-   height: 210px !important; /* İkon boyutu */
-   top: 40px !important; /* İkon dikey konum */
-   right: -120px !important; /* İkon yatay konum */
+   width: 280px !important; /* İkon boyutu */
+   height: 280px !important; /* İkon boyutu */
+   top: 70px !important; /* İkon dikey konum */
+   right: -200px !important; /* İkon yatay konum */
    transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
   position: absolute !important; /* Tamamen serbest konumlandırma */
  }
+ .result-card-inner.ateş .element-icon-compact {
+   width: 190px !important; /* İkon boyutu */
+   height: 190px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -100px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+   width: 240px !important; /* İkon boyutu */
+   height: 240px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+   width: 240px !important; /* İkon boyutu */
+   height: 240px !important; /* İkon boyutu */
+   top: 80px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+   width: 200px !important; /* İkon boyutu */
+   height: 200px !important; /* İkon boyutu */
+   top: 90px !important; /* İkon dikey konum */
+   right: -140px !important; /* İkon yatay konum */
+  }
+ 
+  
  
  .element-meta-compact {
    max-width: calc(150% - 80px) !important;
@@ -3094,14 +3768,37 @@ input[type="email"] {
 }
 
 @media (max-width: 576px) {
-.element-icon-compact {
-   width: 190px !important; /* İkon boyutu */
-   height: 190px !important; /* İkon boyutu */
-   top: 40px !important; /* İkon dikey konum */
-   right: -120px !important; /* İkon yatay konum */
-   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
-      position: absolute !important; /* Tamamen serbest konumlandırma */
- }
+
+ .result-card-inner.ateş .element-icon-compact {
+   width: 180px !important; /* İkon boyutu */
+   height: 180px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+   width: 240px !important; /* İkon boyutu */
+   height: 240px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+   width: 220px !important; /* İkon boyutu */
+   height: 220px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+   width: 170px !important; /* İkon boyutu */
+   height: 170px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
  
  .element-meta-compact {
    max-width: calc(150% - 80px) !important;
@@ -3132,15 +3829,37 @@ input[type="email"] {
 
 
 @media (max-width: 480px) {
- .element-icon-compact {
-   width: 170px !important; /* İkon boyutu */
-   height: 170px !important; /* İkon boyutu */
-   top: 40px !important; /* İkon dikey konum */
-   right: -120px !important; /* İkon yatay konum */
-   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
-      position: absolute !important; /* Tamamen serbest konumlandırma */
- }
- 
+
+  .result-card-inner.ateş .element-icon-compact {
+   width: 165px !important; /* İkon boyutu */
+   height: 165px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -100px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+   width: 240px !important; /* İkon boyutu */
+   height: 240px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+   width: 210px !important; /* İkon boyutu */
+   height: 210px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -160px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+   width: 160px !important; /* İkon boyutu */
+   height: 160px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
  .element-meta-compact {
    max-width: calc(150% - 80px) !important;
     margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
@@ -3170,15 +3889,37 @@ input[type="email"] {
 
 
 @media (max-width: 360px) {
- .element-icon-compact {
-   width: 150px !important; /* İkon boyutu */
+
+  .result-card-inner.ateş .element-icon-compact {
+    width: 165px !important; /* İkon boyutu */
+   height: 165px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -110px !important; /* İkon yatay konum */
+  }
+
+  /* Hava İkonu */
+  .result-card-inner.hava .element-icon-compact {
+     width: 210px !important; /* İkon boyutu */
+   height: 210px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -150px !important; /* İkon yatay konum */
+  }
+
+  /* Su İkonu */
+  .result-card-inner.su .element-icon-compact {
+    width: 200px !important; /* İkon boyutu */
+   height: 200px !important; /* İkon boyutu */
+   top: 60px !important; /* İkon dikey konum */
+   right: -150px !important; /* İkon yatay konum */
+  }
+
+  /* Toprak İkonu */
+  .result-card-inner.toprak .element-icon-compact {
+    width: 150px !important; /* İkon boyutu */
    height: 150px !important; /* İkon boyutu */
-   top: 40px !important; /* İkon dikey konum */
+   top: 60px !important; /* İkon dikey konum */
    right: -100px !important; /* İkon yatay konum */
-   transform: translateX(0px) translateY(0px) !important; /* İnce ayar */
-      position: absolute !important; /* Tamamen serbest konumlandırma */
- }
- 
+  }
  .element-meta-compact {
    max-width: calc(150% - 80px) !important;
     margin-left: 20px !important; /* Yazıyı 20px sağa kaydır */
@@ -3204,5 +3945,212 @@ input[type="email"] {
     align-items: stretch !important; /* Hizalama sınırlaması kaldırıldı */
     justify-content: flex-start !important; /* Yazıları sola yasla */
  }
+}
+
+@media (max-width: 991px) {
+  .premium-section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+        margin-bottom: 0px !important; /* ALT BOŞLUĞU SIFIRLA */
+    padding-bottom: 0px !important;
+  }
+  
+  .premium-section-title i {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+  
+  .section-title-content h2 {
+    font-size: 1.6rem;
+  }
+  
+  .section-title-content p {
+    font-size: 0.95rem;
+  }
+  
+  
+}
+
+/* Büyük mobil (max-width: 768px) */
+@media (max-width: 768px) {
+  .premium-section-title {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  /* İkon ve başlık yan yana kalır */
+  .premium-section-title-left {
+    gap: 12px;
+  }
+  
+  .premium-section-title i {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  
+  .section-title-content h2 {
+    font-size: 1.4rem;
+  }
+  
+  .section-title-content p {
+    font-size: 0.9rem;
+  }
+  
+  /* Dropdown full width */
+  .premium-section-title .category-dropdown-container {
+    align-self: stretch;
+    margin-top: 5px;
+  }
+  
+  .premium-section-title .category-dropdown-btn {
+    width: 100%;
+    max-width: 250px;
+    margin-left: auto;
+  }
+}
+
+/* Standart mobil (max-width: 576px) */
+@media (max-width: 576px) {
+  .premium-section-title {
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  
+  .premium-section-title-left {
+    gap: 10px;
+  }
+  
+  .premium-section-title i {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .section-title-content h2 {
+    font-size: 1.2rem;
+  }
+  
+  .section-title-content p {
+    font-size: 0.85rem;
+  }
+  
+  .premium-section-title .category-dropdown-btn {
+    max-width: 200px;
+  }
+}
+
+/* Küçük mobil (max-width: 480px) */
+@media (max-width: 480px) {
+  .premium-section-title {
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .premium-section-title i {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .section-title-content h2 {
+    font-size: 1.1rem;
+  }
+  
+  .section-title-content p {
+    font-size: 0.8rem;
+  }
+  
+  .premium-section-title .category-dropdown-btn {
+    max-width: 180px;
+  }
+}
+
+/* ==========================================================================
+   ALTERNATİF LAYOUT - TEK SATIRDA (Opsiyonel)
+   ========================================================================== */
+
+/* Eğer her zaman tek satırda kalmalarını istiyorsanız */
+.premium-section-title.single-row {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.premium-section-title.single-row .section-title-content h2 {
+  font-size: 1.5rem;
+}
+
+.premium-section-title.single-row .section-title-content p {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .premium-section-title.single-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ==========================================================================
+   DROPDOWN POZİSYON DÜZELTMESİ
+   ========================================================================== */
+
+/* Dropdown sağ tarafa yaslandığında pozisyon düzeltmesi */
+.premium-section-title .category-dropdown {
+  right: 0;
+  left: auto;
+}
+
+@media (max-width: 768px) {
+  .premium-section-title .category-dropdown {
+    right: 0;
+    left: auto;
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-section-title .category-dropdown {
+    width: 180px;
+  }
+}
+
+/* ==========================================================================
+   GRID ALTERNATİFİ (Daha karmaşık layoutlar için)
+   ========================================================================== */
+
+.premium-section-title.grid-layout {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.premium-section-title.grid-layout .premium-section-title i {
+  grid-column: 1;
+}
+
+.premium-section-title.grid-layout .section-title-content {
+  grid-column: 2;
+}
+
+.premium-section-title.grid-layout .category-dropdown-container {
+  grid-column: 3;
+}
+
+@media (max-width: 768px) {
+  .premium-section-title.grid-layout {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .premium-section-title.grid-layout .category-dropdown-container {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: end;
+  }
 }
 
