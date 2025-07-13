@@ -63,13 +63,20 @@ def google_login(request):
 
 def google_callback(request):
     """Google OAuth callback"""
+    
+    # Kullanıcı yetkilendirmeyi reddetti mi kontrol et
+    if request.GET.get('error') == 'access_denied':
+        messages.info(request, "Google ile giriş iptal edildi.")
+        return redirect('login')
+    
     # State kontrolü
     state = request.session.get('oauth_state')
-    flow = get_google_auth_flow()
-    flow.fetch_token(authorization_response=request.build_absolute_uri())
     
-    # Kullanıcı bilgilerini al
     try:
+        flow = get_google_auth_flow()
+        flow.fetch_token(authorization_response=request.build_absolute_uri())
+        
+        # Kullanıcı bilgilerini al
         credentials = flow.credentials
         user_info = get_user_info(credentials)
         
@@ -102,31 +109,38 @@ def google_callback(request):
                     extra_data=user_info
                 )
                 messages.success(request, "Google hesabınız başarıyla bağlandı.")
+            
+            # Session'ı temizle
+            request.session.pop('oauth_state', None)
+            request.session.pop('connecting_social', None)
+            
             return redirect('social_accounts')
         
-        # Normal giriş/kayıt akışı
+        # Giriş yapmamış kullanıcı - normal giriş/kayıt işlemi
         if social_account:
-            # Daha önce bu sosyal hesapla giriş yapılmış
+            # Mevcut sosyal hesap - giriş yap
             user = social_account.user
             login(request, user)
-            messages.success(request, f"Hoş geldiniz, {user.username}!")
+            messages.success(request, f"Hoş geldiniz, {user.first_name or user.username}!")
         else:
-            # İlk kez giriş yapılıyor, önce email kontrolü yap
-            user = User.objects.filter(email=email).first()
+            # Yeni sosyal hesap - kullanıcı oluştur
+            # Aynı email'le normal hesap var mı kontrol et
+            existing_user = User.objects.filter(email=email).first()
             
-            if user:
-                # Bu email'e sahip kullanıcı var, sosyal hesabı bağla
+            if existing_user:
+                # Mevcut hesaba sosyal hesap bağla
                 SocialAccount.objects.create(
-                    user=user,
+                    user=existing_user,
                     provider='google',
                     uid=google_uid,
                     email=email,
                     extra_data=user_info
                 )
-                login(request, user)
-                messages.success(request, f"Google hesabınız mevcut profilinize bağlandı. Hoş geldiniz, {user.username}!")
+                login(request, existing_user)
+                messages.success(request, f"Google hesabınız mevcut hesabınıza bağlandı. Hoş geldiniz, {existing_user.first_name or existing_user.username}!")
             else:
                 # Yeni kullanıcı oluştur
+                # Username'in benzersiz olduğundan emin ol
                 base_username = username
                 counter = 1
                 while User.objects.filter(username=username).exists():
@@ -139,10 +153,10 @@ def google_callback(request):
                     first_name=first_name,
                     last_name=last_name
                 )
-                user.set_unusable_password()  # Google ile giriş yaptığı için şifre yok
+                user.set_unusable_password()  # Sosyal hesap için şifre yok
                 user.save()
                 
-                # Sosyal hesabı bağla
+                # Sosyal hesap kaydı oluştur
                 SocialAccount.objects.create(
                     user=user,
                     provider='google',
@@ -151,14 +165,23 @@ def google_callback(request):
                     extra_data=user_info
                 )
                 
+                # Kullanıcıyı giriş yap
                 login(request, user)
-                messages.success(request, f"Hesabınız Google ile başarıyla oluşturuldu. Hoş geldiniz, {username}!")
+                messages.success(request, f"Hoş geldiniz, {username}!")
                 messages.info(request, "İsterseniz daha sonra profil ayarlarından normal şifre de belirleyebilirsiniz.")
+        
+        # Session'ı temizle
+        request.session.pop('oauth_state', None)
+        request.session.pop('connecting_social', None)
         
         # Ana sayfaya yönlendir
         return redirect('index')
     
     except Exception as e:
+        # Session'ı temizle
+        request.session.pop('oauth_state', None)
+        request.session.pop('connecting_social', None)
+        
         messages.error(request, f"Google ile giriş yapılırken hata oluştu: {str(e)}")
         return redirect('login')
     
