@@ -22,7 +22,7 @@ def index(request):
                 is_active=True
             ).annotate(
                 like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-            ).order_by('-like_count', '-created_at')[:3]  # Maksimum 3 içerik
+            ).order_by('order', '-created_at')[:3]
             
             # Kullanıcının etkileşimlerini al
             user_interactions = UserContentInteraction.objects.filter(user=request.user)

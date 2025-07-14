@@ -37,7 +37,7 @@ def fire_more(request):
         is_active=True
     ).annotate(
         like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('-like_count', '-created_at')[:3]
+    ).order_by('order', '-created_at')[:3]
     
     # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
     if request.user.is_authenticated:
@@ -96,7 +96,7 @@ def water_more(request):
         is_active=True
     ).annotate(
         like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('-like_count', '-created_at')[:3]
+    ).order_by('order', '-created_at')[:3]
     
     # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
     if request.user.is_authenticated:
@@ -155,7 +155,7 @@ def air_more(request):
         is_active=True
     ).annotate(
         like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('-like_count', '-created_at')[:3]  
+    ).order_by('order', '-created_at')[:3] 
     
     # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
     if request.user.is_authenticated:
@@ -214,7 +214,7 @@ def earth_more(request):
         is_active=True
     ).annotate(
         like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('-like_count', '-created_at')[:3]
+    ).order_by('order', '-created_at')[:3]
     
     # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
     if request.user.is_authenticated:
