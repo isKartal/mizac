@@ -973,3 +973,18 @@ document.addEventListener('DOMContentLoaded', function() {
   initPage();
   
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // URL'de #kesfedin hash'i varsa otomatik scroll yap
+  if (window.location.hash === '#kesfedin') {
+    setTimeout(() => {
+      const targetSection = document.getElementById('kesfedin');
+      if (targetSection) {
+        targetSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 1000); // 1 saniye bekle
+  }
+});

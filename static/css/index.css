@@ -58,7 +58,140 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background-color: var(--accent-color);
+  background-color: var(--accent-color, #e9b44c);
+  color: var(--primary-color, #292321);
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+}
+
+.premium-content-section .more-link:hover {
+  background-color: var(--primary-color, #292321);
+  color: var(--accent-color, #e9b44c);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.premium-content-section .more-link i {
+  transition: transform 0.3s ease;
+}
+
+.premium-content-section .more-link:hover i {
+  transform: translateX(5px);
+}
+
+/* Mobil için more-link düzenlemesi */
+@media (max-width: 767px) {
+  .premium-content-section .more-link {
+    width: 90%;
+    max-width: 280px;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+
+/* ==========================================================================
+   ELEMENT RENK UYUMLULUĞU
+   ========================================================================== */
+
+/* Ateş elementi */
+.premium-content-section.ateş .content-element.ateş {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+/* Hava elementi */
+.premium-content-section.hava .content-element.hava {
+  background-color: rgba(120, 144, 156, 0.2);
+  color: #78909c;
+  border-color: rgba(120, 144, 156, 0.3);
+}
+
+/* Su elementi */
+.premium-content-section.su .content-element.su {
+  background-color: rgba(41, 128, 185, 0.2);
+  color: #2980b9;
+  border-color: rgba(41, 128, 185, 0.3);
+}
+
+/* Toprak elementi */
+.premium-content-section.toprak .content-element.toprak {
+  background-color: rgba(141, 110, 99, 0.2);
+  color: #513226;
+  border-color: rgba(141, 110, 99, 0.3);
+}
+
+/* ==========================================================================
+   ANİMASYON İYİLEŞTİRMELERİ
+   ========================================================================== */
+
+/* Kartlar için fade-in animasyonu */
+.premium-content-section .premium-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.premium-content-section .premium-card:nth-child(1) { animation-delay: 0.1s; }
+.premium-content-section .premium-card:nth-child(2) { animation-delay: 0.2s; }
+.premium-content-section .premium-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Kartlara hover geçiş efektleri */
+.premium-content-section .premium-card-inner {
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY İYİLEŞTİRMELERİ
+   ========================================================================== */
+
+/* Focus stilleri */
+.premium-content-section .save-button-header:focus,
+.premium-content-section .premium-card:focus,
+.premium-content-section .more-link:focus {
+  outline: 2px solid var(--accent-color, #e9b44c);
+  outline-offset: 2px;
+}
+
+/* Touch cihazlar için minimum dokunma alanı */
+@media (max-width: 767px) {
+  .premium-content-section .save-button-header {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .premium-content-section .slider-nav-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Reduced motion desteği */
+@media (prefers-reduced-motion: reduce) {
+  .premium-content-section .premium-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .premium-content-section .premium-card-inner,
+  .premium-content-section .save-button-header,
+  .premium-content-section .slider-nav-button {
+    transition: none;
+  }
+}accent-color);
   color: var(--light-text);
   padding: 16px 36px;
   text-decoration: none;
@@ -622,117 +755,6 @@
   }
 }
 
-/* ===== ÖNERİLER SECTION RESPONSIVE (Giriş yapmış kullanıcılar için) ===== */
-
-/* Tablet görünüm */
-@media (max-width: 768px) {
-  .temperament-suggestions {
-    margin: 50px 0;
-    padding: 30px 0;
-  }
-  
-  .suggestions-header h2 {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-  }
-  
-  .suggestions-header p {
-    font-size: 0.95rem;
-  }
-  
-  .suggestions-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .suggestion-card {
-    margin: 0 10px;
-  }
-  
-  .suggestion-image {
-    height: 160px;
-  }
-  
-  .suggestion-title {
-    font-size: 1.05rem;
-    margin: 16px 16px 8px;
-  }
-  
-  .suggestion-description {
-    padding: 0 16px;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-  }
-  
-  .suggestion-actions {
-    padding: 12px 16px;
-  }
-  
-  .suggestion-button {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Mobil görünüm */
-@media (max-width: 480px) {
-  .temperament-suggestions {
-    margin: 40px 0;
-    padding: 25px 0;
-  }
-  
-  .suggestions-header h2 {
-    font-size: 1.4rem;
-    margin-bottom: 6px;
-  }
-  
-  .suggestions-header p {
-    font-size: 0.9rem;
-  }
-  
-  .suggestions-grid {
-    gap: 15px;
-    max-width: 100%;
-  }
-  
-  .suggestion-card {
-    margin: 0 5px;
-  }
-  
-  .suggestion-image {
-    height: 140px;
-  }
-  
-  .suggestion-title {
-    font-size: 1rem;
-    margin: 14px 14px 6px;
-  }
-  
-  .suggestion-description {
-    padding: 0 14px;
-    font-size: 0.85rem;
-    margin-bottom: 14px;
-  }
-  
-  .suggestion-actions {
-    padding: 10px 14px;
-  }
-  
-  .suggestion-button {
-    padding: 5px 8px;
-    font-size: 0.8rem;
-  }
-  
-  .more-link {
-    width: 90%;
-    max-width: 280px;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-}
-
 /* ===== LANDSCAPE MOBİL ÖZEL DÜZENLEMELERİ ===== */
 
 /* Mobil landscape (yatay) görünüm */
@@ -845,14 +867,13 @@
 }
 
 /* ==========================================================================
-   ANASAYFA MİZAÇ ÖNERİLERİ - RESPONSİVE GÜNCELLEME
-   Büyük ekranlarda grid, küçük ekranlarda slider
+   ANASAYFA SLIDER SİSTEMİ - TÜM EKRANLARDA SLIDER
    ========================================================================== */
 
-/* Ana konteyner - büyük ekranlar için grid, küçük ekranlar için slider */
+/* Ana konteyner */
 .premium-content-section .content-slider-wrapper {
   width: 100%;
-  overflow: visible; /* Büyük ekranlarda overflow gizli olmasın */
+  overflow: visible;
 }
 
 .premium-content-section .content-slider-container {
@@ -862,134 +883,123 @@
   padding: 0 20px;
 }
 
-/* Büyük ekranlar - Grid düzeni (768px ve üzeri) */
+/* TÜM EKRANLAR İÇİN SLIDER DÜZENİ */
+.premium-content-section .improved-slider {
+  display: flex !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  gap: 20px !important;
+  padding: 20px 10px !important;
+  margin: 0 -10px !important;
+}
+
+.premium-content-section .improved-slider::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Slider butonları - TÜM EKRANLARDA GÖSTER */
+.premium-content-section .slider-nav-button {
+  display: flex !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: none;
+  color: var(--primary-color);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.premium-content-section .slider-nav-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.premium-content-section .prev-button {
+  left: -5px;
+}
+
+.premium-content-section .next-button {
+  right: -5px;
+}
+
+/* Kartlar için slider düzeni */
+.premium-content-section .premium-card {
+  flex: 0 0 auto !important;
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: 320px !important;
+  margin: 0 !important;
+  scroll-snap-align: center !important;
+  display: block !important;
+}
+
+/* Büyük ekranlar için kart boyutu artırma */
 @media (min-width: 768px) {
-  .premium-content-section .improved-slider {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    overflow: visible !important;
-    scroll-snap-type: none !important;
-    padding: 20px 0;
-    margin: 0;
-    max-width: 100%;
-  }
-  
-  /* Slider butonlarını büyük ekranlarda gizle */
-  .premium-content-section .slider-nav-button {
-    display: none !important;
-  }
-  
-  /* Kartları büyük ekranlarda sabit genişlik */
   .premium-content-section .premium-card {
-    width: 100% !important;
-    min-width: auto !important;
-    max-width: none !important;
-    margin: 0 !important;
-    flex: none !important;
+    width: 350px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
   }
   
-  /* 3 kart sınırlaması - sadece ilk 3 kartı göster */
-  .premium-content-section .premium-card:nth-child(n+4) {
-    display: none;
-  }
-}
-
-/* Orta ekranlar için özel düzenleme */
-@media (min-width: 768px) and (max-width: 991px) {
-  .premium-content-section .improved-slider {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  /* 2 kart sınırlaması orta ekranlar için */
-  .premium-content-section .premium-card:nth-child(n+3) {
-    display: none;
-  }
-}
-
-/* Küçük ekranlar - Slider düzeni korunuyor (767px ve altı) */
-@media (max-width: 767px) {
-  .premium-content-section .improved-slider {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    padding: 20px 10px !important;
-    margin: 0 -10px !important;
-    gap: 15px !important;
-  }
-  
-  .premium-content-section .improved-slider::-webkit-scrollbar {
-    display: none !important;
-  }
-  
-  /* Slider butonları küçük ekranlarda göster */
   .premium-content-section .slider-nav-button {
-    display: flex !important;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-    color: var(--primary-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .premium-content-section .slider-nav-button:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-50%) scale(1.1);
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
   }
   
   .premium-content-section .prev-button {
-    left: -5px;
+    left: 0px;
   }
   
   .premium-content-section .next-button {
-    right: -5px;
-  }
-  
-  /* Kartlar slider düzeninde */
-  .premium-content-section .premium-card {
-    flex: 0 0 auto !important;
-    width: calc(100% - 30px) !important;
-    min-width: 280px !important;
-    max-width: 350px !important;
-    margin: 0 !important;
-    scroll-snap-align: start !important;
-  }
-  
-  /* Tüm kartları küçük ekranlarda göster */
-  .premium-content-section .premium-card {
-    display: block !important;
+    right: 0px;
   }
 }
 
-/* Çok küçük ekranlar için özel düzenleme */
-@media (max-width: 480px) {
+/* Çok büyük ekranlar için */
+@media (min-width: 1200px) {
   .premium-content-section .premium-card {
-    min-width: 260px !important;
-    width: calc(100% - 20px) !important;
-  }
-  
-  .premium-content-section .slider-nav-button {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 0.8rem !important;
+    width: 380px !important;
+    min-width: 380px !important;
+    max-width: 380px !important;
   }
   
   .premium-content-section .improved-slider {
-    gap: 10px !important;
+    gap: 25px !important;
+    padding: 25px 15px !important;
+    margin: 0 -15px !important;
+  }
+}
+
+/* Küçük ekranlar için optimizasyon */
+@media (max-width: 480px) {
+  .premium-content-section .premium-card {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+  }
+  
+  .premium-content-section .slider-nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  
+  .premium-content-section .improved-slider {
+    gap: 15px !important;
     padding: 15px 5px !important;
     margin: 0 -5px !important;
   }
@@ -1107,6 +1117,16 @@
   padding: 0 20px;
 }
 
+/* ==========================================================================
+   DAHA FAZLA ÖNERİLER BUTONU
+   ========================================================================== */
+
+.premium-content-section .suggestions-more {
+  text-align: center;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
 .premium-content-section .more-link {
   display: inline-flex;
   align-items: center;
@@ -1135,294 +1155,4 @@
 
 .premium-content-section .more-link:hover i {
   transform: translateX(5px);
-}
-
-/* Mobil için more-link düzenlemesi */
-@media (max-width: 767px) {
-  .premium-content-section .more-link {
-    width: 90%;
-    max-width: 280px;
-    justify-content: center;
-    font-size: 0.9rem;
-    padding: 10px 20px;
-  }
-}
-
-/* ==========================================================================
-   ELEMENT RENK UYUMLULUĞU
-   ========================================================================== */
-
-/* Ateş elementi */
-.premium-content-section.ateş .content-element.ateş {
-  background-color: rgba(231, 76, 60, 0.2);
-  color: #e74c3c;
-  border-color: rgba(231, 76, 60, 0.3);
-}
-
-/* Hava elementi */
-.premium-content-section.hava .content-element.hava {
-  background-color: rgba(120, 144, 156, 0.2);
-  color: #78909c;
-  border-color: rgba(120, 144, 156, 0.3);
-}
-
-/* Su elementi */
-.premium-content-section.su .content-element.su {
-  background-color: rgba(41, 128, 185, 0.2);
-  color: #2980b9;
-  border-color: rgba(41, 128, 185, 0.3);
-}
-
-/* Toprak elementi */
-.premium-content-section.toprak .content-element.toprak {
-  background-color: rgba(141, 110, 99, 0.2);
-  color: #513226;
-  border-color: rgba(141, 110, 99, 0.3);
-}
-
-/* ==========================================================================
-   ANİMASYON İYİLEŞTİRMELERİ
-   ========================================================================== */
-
-/* Kartlar için fade-in animasyonu */
-.premium-content-section .premium-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.premium-content-section .premium-card:nth-child(1) { animation-delay: 0.1s; }
-.premium-content-section .premium-card:nth-child(2) { animation-delay: 0.2s; }
-.premium-content-section .premium-card:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Kartlara hover geçiş efektleri */
-.premium-content-section .premium-card-inner {
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* ==========================================================================
-   ACCESSIBILITY İYİLEŞTİRMELERİ
-   ========================================================================== */
-
-/* Focus stilleri */
-.premium-content-section .save-button-header:focus,
-.premium-content-section .premium-card:focus,
-.premium-content-section .more-link:focus {
-  outline: 2px solid var(--accent-color, #e9b44c);
-  outline-offset: 2px;
-}
-
-/* Touch cihazlar için minimum dokunma alanı */
-@media (max-width: 767px) {
-  .premium-content-section .save-button-header {
-    min-width: 44px;
-    min-height: 44px;
-  }
-  
-  .premium-content-section .slider-nav-button {
-    min-width: 44px;
-    min-height: 44px;
-  }
-}
-
-/* Reduced motion desteği */
-@media (prefers-reduced-motion: reduce) {
-  .premium-content-section .premium-card {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-  
-  .premium-content-section .premium-card-inner,
-  .premium-content-section .save-button-header,
-  .premium-content-section .slider-nav-button {
-    transition: none;
-  }
-}
-
-/* ==========================================================================
-   SABİT KART GENİŞLİĞİ DÜZELTMESİ
-   Kart sayısı az olsa bile boyutlar sabit kalacak
-   ========================================================================== */
-
-/* Büyük ekranlar - Grid düzeni güncellemesi */
-@media (min-width: 768px) {
-  .premium-content-section .improved-slider {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* 3 eşit sütun */
-    gap: 25px;
-    overflow: visible !important;
-    scroll-snap-type: none !important;
-    padding: 20px 0;
-    margin: 0;
-    max-width: 1200px;
-    justify-content: flex-start; /* Sol tarafa hizala */
-  }
-  
-  /* Kartları sabit genişlikte tut */
-  .premium-content-section .premium-card {
-    width: 100% !important;
-    min-width: 300px !important; /* Minimum genişlik */
-    max-width: 380px !important; /* Maksimum genişlik */
-    margin: 0 !important;
-    flex: none !important;
-  }
-  
-  /* Slider butonlarını büyük ekranlarda gizle */
-  .premium-content-section .slider-nav-button {
-    display: none !important;
-  }
-  
-  /* 3 kart sınırlaması - sadece ilk 3 kartı göster */
-  .premium-content-section .premium-card:nth-child(n+4) {
-    display: none;
-  }
-}
-
-/* Orta ekranlar için özel düzenleme */
-@media (min-width: 768px) and (max-width: 991px) {
-  .premium-content-section .improved-slider {
-    grid-template-columns: repeat(2, 1fr) !important; /* 2 eşit sütun */
-    gap: 20px;
-    max-width: 800px;
-  }
-  
-  .premium-content-section .premium-card {
-    min-width: 280px !important;
-    max-width: 350px !important;
-  }
-}
-
-/* Büyük masaüstü ekranlar için */
-@media (min-width: 1200px) {
-  .premium-content-section .improved-slider {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 30px;
-    max-width: 1200px;
-  }
-  
-  .premium-content-section .premium-card {
-    min-width: 320px !important;
-    max-width: 400px !important;
-  }
-}
-
-/* Container hizalaması */
-.premium-content-section .content-slider-container {
-  display: flex;
-  justify-content: center; /* Kartları ortala */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Grid container'ı için ek stiller */
-@media (min-width: 768px) {
-  .premium-content-section .content-slider-container {
-    display: block; /* Grid için block yap */
-  }
-  
-  /* 1 kart varsa sol tarafa hizala */
-  .premium-content-section .improved-slider:has(.premium-card:first-child:nth-last-child(1)) {
-    justify-content: flex-start;
-    grid-template-columns: 380px !important; /* Tek kart için sabit genişlik */
-  }
-  
-  /* 2 kart varsa sol tarafa hizala */
-  .premium-content-section .improved-slider:has(.premium-card:first-child:nth-last-child(2)) {
-    justify-content: flex-start;
-    grid-template-columns: repeat(2, 380px) !important; /* İki kart için sabit genişlik */
-  }
-}
-
-/* Alternatif yaklaşım - CSS :has() desteklenmiyorsa */
-@media (min-width: 768px) {
-  /* Kartlar için flexbox yaklaşımı */
-  .premium-content-section .improved-slider.flex-approach {
-    display: flex !important;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 25px;
-  }
-  
-  .premium-content-section .improved-slider.flex-approach .premium-card {
-    flex: 0 0 380px !important; /* Sabit genişlik */
-    width: 380px !important;
-    min-width: 380px !important;
-    max-width: 380px !important;
-  }
-}
-
-/* Küçük ekranlar - Slider düzeni (değişiklik yok) */
-@media (max-width: 767px) {
-  .premium-content-section .improved-slider {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    padding: 20px 10px !important;
-    margin: 0 -10px !important;
-    gap: 15px !important;
-  }
-  
-  .premium-content-section .improved-slider::-webkit-scrollbar {
-    display: none !important;
-  }
-  
-  /* Slider butonları küçük ekranlarda göster */
-  .premium-content-section .slider-nav-button {
-    display: flex !important;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-    color: var(--primary-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .premium-content-section .slider-nav-button:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-50%) scale(1.1);
-  }
-  
-  .premium-content-section .prev-button {
-    left: -5px;
-  }
-  
-  .premium-content-section .next-button {
-    right: -5px;
-  }
-  
-  /* Kartlar slider düzeninde */
-  .premium-content-section .premium-card {
-    flex: 0 0 auto !important;
-    width: calc(100% - 30px) !important;
-    min-width: 280px !important;
-    max-width: 350px !important;
-    margin: 0 !important;
-    scroll-snap-align: start !important;
-  }
-  
-  /* Tüm kartları küçük ekranlarda göster */
-  .premium-content-section .premium-card {
-    display: block !important;
-  }
 }
