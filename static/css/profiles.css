@@ -1580,7 +1580,6 @@
   background-repeat: no-repeat;
   background-position: right center;
 }
-
 .premium-content-section.ateş::before { background-image: url('/static/images/fire-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
 .premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.png'); }
 
@@ -1589,8 +1588,7 @@
 
 .premium-content-section.su::before { background-image: url('/static/images/water-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
 .premium-content-section.su::after { background-image: url('/static/images/wate-back2.png'); }
-
-.premium-content-section.toprak::before { background-image: url('/static/images/earth-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+  .premium-content-section.toprak::before { background-image: url('/static/images/earth-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
 .premium-content-section.toprak::after { background-image: url('/static/images/earth-back2.png'); }
 
 .premium-content-container {
@@ -2222,6 +2220,19 @@
   .result-card-inner.su .element-icon-compact { width: 385px !important; height: 385px !important; top: 130px !important; right: -200px !important; }
   .result-card-inner.toprak .element-icon-compact { width: 290px !important; height: 290px !important; top: 130px !important; right: -160px !important; }
   
+   .premium-content-section.toprak::before {background-image: none !important;}
+.premium-content-section.toprak::after { background-image: url('/static/images/earth-back3.png'); }
+
+  .premium-content-section.su::after { background-image: url('/static/images/wate-back2.png'); }
+  .premium-content-section.su::before {background-image: none !important;}
+
+  .premium-content-section.hava::before {background-image: none !important;}
+.premium-content-section.hava::after { background-image: url('/static/images/air-back2.png'); }
+
+  .premium-content-section.ateş::before { background-image: none !important;}
+.premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.png'); 
+ }
+
   .element-meta-compact {
     max-width: calc(100% - 310px);
   }
