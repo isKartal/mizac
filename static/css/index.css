@@ -54,20 +54,119 @@
   opacity: 0.95;
 }
 
+/* TESTE BAŞLA butonu boyut ayarları */
 .start-test-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   background-color: var(--accent-color, #e9b44c);
   color: var(--primary-color, #292321);
   text-decoration: none;
   border-radius: 30px;
   font-weight: 600;
-  font-size: 1rem;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+  
+  /* BOYUT KONTROL PARAMETRELERİ */
+  padding: 16px 32px;           /* İç boşluk: dikey x yatay */
+  font-size: 18px;              /* Yazı boyutu */
+  min-width: 200px;             /* Minimum genişlik */
+  max-width: 400px;             /* Maksimum genişlik */
+  height: auto;                 /* Yükseklik otomatik */
+  width: auto;                  /* Genişlik otomatik */
 }
 
+/* Hover efekti */
+.start-test-button:hover {
+  background-color: var(--primary-color, #292321);
+  color: var(--accent-color, #e9b44c);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* EKRAN BOYUTUNA GÖRE AYARLAR */
+
+/* Çok büyük ekranlar (1200px+) */
+@media (min-width: 1200px) {
+  .start-test-button {
+    padding: 20px 40px;         /* Büyük padding */
+    font-size: 22px;            /* Büyük yazı */
+    min-width: 280px;           /* Geniş buton */
+    max-width: 450px;
+  }
+}
+
+/* Büyük ekranlar (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .start-test-button {
+    padding: 18px 36px;         /* Orta padding */
+    font-size: 20px;            /* Orta yazı */
+    min-width: 250px;           /* Orta genişlik */
+    max-width: 400px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .start-test-button {
+    padding: 16px 32px;         /* Küçük padding */
+    font-size: 18px;            /* Küçük yazı */
+    min-width: 220px;           /* Küçük genişlik */
+    max-width: 350px;
+  }
+}
+
+/* Mobil (480px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .start-test-button {
+    padding: 14px 28px;         /* Daha küçük padding */
+    font-size: 16px;            /* Daha küçük yazı */
+    min-width: 200px;           /* Daha küçük genişlik */
+    max-width: 300px;
+    width: 100%;                /* Tam genişlik */
+  }
+}
+
+/* Küçük mobil (480px ve altı) */
+@media (max-width: 480px) {
+  .start-test-button {
+    padding: 12px 24px;         /* En küçük padding */
+    font-size: 15px;            /* En küçük yazı */
+    min-width: 180px;           /* En küçük genişlik */
+    max-width: 280px;
+    width: 90%;                 /* %90 genişlik */
+  }
+}
+
+/* ÖZELLEŞTİRME SEÇENEKLERİ */
+
+/* Eğer butonu daha BÜYÜK istiyorsanız: */
+.start-test-button.large {
+  padding: 24px 48px !important;
+  font-size: 24px !important;
+  min-width: 320px !important;
+}
+
+/* Eğer butonu daha KÜÇÜK istiyorsanız: */
+.start-test-button.small {
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  min-width: 160px !important;
+}
+
+/* Eğer butonu tam genişlik istiyorsanız: */
+.start-test-button.full-width {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Eğer butonu sabit boyut istiyorsanız: */
+.start-test-button.fixed-size {
+  width: 250px !important;
+  height: 60px !important;
+  padding: 0 !important;
+}
 .premium-content-section .more-link:hover {
   background-color: var(--primary-color, #292321);
   color: var(--accent-color, #e9b44c);
