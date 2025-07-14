@@ -86,38 +86,6 @@
         </div>
       </div>
       
-      <div class="account-stats">
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="fas fa-eye"></i>
-          </div>
-          <div class="stat-info">
-            <h4>Görüntülenen İçerikler</h4>
-            <p class="stat-value">{{ viewed_count|default:"0" }}</p>
-          </div>
-        </div>
-        
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="fas fa-heart"></i>
-          </div>
-          <div class="stat-info">
-            <h4>Beğenilen İçerikler</h4>
-            <p class="stat-value">{{ liked_count|default:"0" }}</p>
-          </div>
-        </div>
-        
-        <div class="stat-item">
-          <div class="stat-icon">
-            <i class="fas fa-bookmark"></i>
-          </div>
-          <div class="stat-info">
-            <h4>Kaydedilen İçerikler</h4>
-            <p class="stat-value">{{ saved_count|default:"0" }}</p>
-          </div>
-        </div>
-      </div>
-      
       <div class="logout-section">
         <a href="{% url 'logout' %}" class="btn btn-logout">
           <i class="fas fa-sign-out-alt"></i> Çıkış Yap
