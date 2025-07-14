@@ -127,7 +127,7 @@
                             <ul>
                                 <li><a href="{% url 'temperament' %}#faq-section">SSS</a></li>
                                 <li><a href="{% url 'privacypolicy' %}">Gizlilik Politikası</a></li>
-                                <li><a href="{% url 'about' %}">İletişim</a></li>
+                                <li><a href="{% url 'about' %}#contact-section">İletişim</a></li>
                             </ul>
                         </div>
                     </div>
@@ -147,7 +147,145 @@
     </div>
 
     <script>
+        // ==========================================================================
+        // TIKLAMA EFEKTLERİNİ JAVASCRIPT İLE KALDIR (Düzeltilmiş Versiyon)
+        // ==========================================================================
+
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // Tüm tıklama efektlerini kaldır
+            function removeClickEffects() {
+                // Tüm elementleri seç
+                const allElements = document.querySelectorAll('*');
+                
+                allElements.forEach(element => {
+                    // Outline'ı kaldır
+                    element.style.outline = 'none';
+                    element.style.outlineWidth = '0';
+                    element.style.outlineStyle = 'none';
+                    
+                    // Webkit tap highlight'ı kaldır
+                    element.style.webkitTapHighlightColor = 'transparent';
+                    element.style.webkitTouchCallout = 'none'; // iOS uzun basma menüsünü kaldırır
+                });
+            }
+            
+            // Focus eventlerini yakala ve kaldır
+            document.addEventListener('focusin', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                }
+            });
+            
+            // Active eventlerini yakala ve kaldır
+            document.addEventListener('mousedown', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                }
+            });
+            
+            // Touch eventlerini yakala ve kaldır
+            document.addEventListener('touchstart', function(e) {
+                if (e.target) {
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = 'none';
+                    e.target.style.webkitTapHighlightColor = 'transparent';
+                }
+            });
+            
+            // Sayfa yüklendiğinde çalıştır
+            removeClickEffects();
+            
+            // Dinamik içerik için observer
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        removeClickEffects();
+                    }
+                });
+            });
+            
+            // DOM değişikliklerini gözlemle
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            // Keyboard navigation tespiti (accessibility için)
+            let keyboardNavigation = false;
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    keyboardNavigation = true;
+                    document.body.classList.add('keyboard-navigation');
+                }
+            });
+            
+            document.addEventListener('mousedown', function() {
+                keyboardNavigation = false;
+                document.body.classList.remove('keyboard-navigation');
+            });
+            
+            console.log('Tıklama efektleri kaldırıldı (Düzeltilmiş Versiyon)');
+        });
+
+        // CSS ile kaldırılamayan durumlar için ek fonksiyon
+        function forceRemoveOutlines() {
+            const style = document.createElement('style');
+            style.textContent = `
+                * { 
+                    outline: none !important; 
+                    -webkit-tap-highlight-color: transparent !important;
+                    -webkit-touch-callout: none !important;
+                }
+                *:focus { 
+                    outline: none !important; 
+                    box-shadow: none !important;
+                }
+                *:active { 
+                    outline: none !important; 
+                    box-shadow: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        window.addEventListener('load', forceRemoveOutlines);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profil dropdown menüsü
+            const profileButton = document.querySelector('.profile-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+        
+            if (profileButton) {
+                profileButton.addEventListener('click', function(event) {
+                    dropdownContent.classList.toggle('show');
+                    event.stopPropagation();
+                });
+        
+                // Dropdown dışına tıklandığında kapansın
+                document.addEventListener('click', function() {
+                    if (dropdownContent && dropdownContent.classList.contains('show')) {
+                        dropdownContent.classList.remove('show');
+                    }
+                });
+            }
+        
+            // Header scroll efekti
+            const header = document.querySelector('.nav-container');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        
             const hamburgerButton = document.querySelector('.hamburger-button');
             const sideMenu = document.querySelector('.side-menu');
             const menuOverlay = document.querySelector('.menu-overlay');
@@ -195,27 +333,6 @@
                     menuIcon.classList.remove('fa-times');
                     menuIcon.classList.add('fa-bars');
                     body.style.overflow = '';
-                });
-            });
-
-            // SSS linklerine tıklandığında smooth scroll
-            const faqLinks = document.querySelectorAll('a[href*="#faq-section"]');
-            faqLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Eğer farklı bir sayfadaysa, normal yönlendirme yapsın
-                    if (!window.location.pathname.includes('temperament')) {
-                        return; // Normal link davranışı
-                    }
-                    
-                    // Aynı sayfadaysa smooth scroll yap
-                    e.preventDefault();
-                    const targetSection = document.querySelector('#faq-section');
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
                 });
             });
         });
