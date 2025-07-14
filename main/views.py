@@ -87,3 +87,9 @@ def contact_view(request):
         send_mail(subject, message_body, settings.EMAIL_HOST_USER, ['4mizacinfo@gmail.com'])
         return JsonResponse({'success': 'Mesajınız başarıyla gönderilmiştir.'})
     return JsonResponse({'error': 'Geçersiz istek.'}, status=400)
+
+def temperament(request):
+    return render(request, 'main/temperament.html')
+
+def privacypolicy(request):
+    return render(request, 'main/privacypolicy.html')

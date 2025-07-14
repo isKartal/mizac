@@ -29,6 +29,7 @@
                 </button>
             
                 <nav class="nav-links">
+                    <a href="{% url 'temperament' %}" class="nav-item">Mizac Nedir?</a>
                     <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
                     <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
                     <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
@@ -122,7 +123,7 @@
                         <div class="footer-column">
                             <h3>Destek</h3>
                             <ul>
-                                <li><a href="#">Gizlilik Politikası</a></li>
+                                <li><a href="{% url 'privacypolicy' %}">Gizlilik Politikası</a></li>
                                 <li><a href="{% url 'about' %}">İletişim</a></li>
                             </ul>
                         </div>
