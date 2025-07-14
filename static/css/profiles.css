@@ -1024,25 +1024,610 @@
   z-index: 5;
 }
 
+/* ==========================================================================
+   DİNAMİK BAŞLIK BOYUTUNA GÖRE HEADER DÜZENLEMESİ
+   Başlık uzunluğuna göre header boyutu otomatik ayarlanır
+   ========================================================================== */
+
 /* -------- İçerik Başlık ve Açıklama -------- */
 .content-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 15px;
-  padding: 20px;
-  flex: 1;
+  padding: 15px 20px !important; /* Varsayılan padding azaltıldı */
+  flex: 0 0 auto !important; /* Sabit boyut, içeriğe göre büyüsün */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: auto !important; /* Minimum yükseklik yok */
 }
 
 .content-title {
   margin: 0;
   flex: 1;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  /* Eski overflow ve line-clamp ayarlarını kaldır */
+  overflow: visible !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  
+  /* Metin sarma özellikleri */
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+  
+  /* Layout özellikleri */
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  line-height: 1.3 !important;
+  
+  /* Yazı tipi düzenlemeleri */
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0 !important;
 }
+
+/* -------- Header Container Düzenlemeleri -------- */
+
+/* İçerik header'ları için flex düzenlemeleri */
+.content-header,
+.premium-card .content-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 15px !important;
+  padding: 15px 20px !important; /* Kompakt padding */
+  flex: 0 0 auto !important; /* İçeriğe göre boyutlansın */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-wrap: nowrap !important; /* Tek satırda kal */
+  min-height: auto !important;
+}
+
+/* -------- KISA BAŞLIKLAR İÇİN KOMPAKT HEADER -------- */
+
+/* Kısa başlıklar için daha az padding */
+.content-header:has(.content-title:not([data-long])) {
+  padding: 12px 20px !important; /* Kısa başlık için minimal padding */
+}
+
+/* Alternatif yaklaşım - JavaScript ile kontrol edilecek sınıflar */
+.content-header.short-title {
+  padding: 12px 20px !important; /* Kısa başlık */
+}
+
+.content-header.medium-title {
+  padding: 15px 20px !important; /* Orta başlık */
+}
+
+.content-header.long-title {
+  padding: 18px 20px !important; /* Uzun başlık */
+}
+
+/* -------- TÜM İÇERİKLER SAYFASINDAKİ ÖZEL DÜZENLEME -------- */
+
+/* Tüm içerikler sayfasında kaydet butonunun yanında kalması için */
+.suggestions-container .content-header,
+.content-section .content-header,
+.all-contents .content-header {
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  padding: 15px 20px !important; /* Standart padding */
+}
+
+.suggestions-container .content-title,
+.content-section .content-title,
+.all-contents .content-title {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 60px) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+.suggestions-container .save-button-header,
+.content-section .save-button-header,
+.all-contents .save-button-header {
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+  align-self: flex-start !important;
+}
+
+/* Kısa başlıklar için tüm içerikler bölümünde de kompakt */
+.suggestions-container .content-header.short-title,
+.content-section .content-header.short-title,
+.all-contents .content-header.short-title {
+  padding: 12px 20px !important;
+}
+
+/* -------- Responsive Düzenlemeler -------- */
+
+/* Mobil cihazlar için */
+@media (max-width: 480px) {
+  .content-title {
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+  }
+  
+  .content-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 10px 16px !important; /* Mobilde daha kompakt */
+  }
+  
+  .content-header.short-title {
+    padding: 8px 16px !important; /* Mobilde kısa başlık için minimal */
+  }
+  
+  .save-button-header {
+    align-self: flex-end !important;
+    margin-top: -28px !important;
+  }
+  
+  /* Tüm içerikler bölümünde mobilde bile yan yana kalsın */
+  .suggestions-container .content-header,
+  .content-section .content-header,
+  .all-contents .content-header {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    padding: 10px 16px !important;
+  }
+  
+  .suggestions-container .content-header.short-title,
+  .content-section .content-header.short-title,
+  .all-contents .content-header.short-title {
+    padding: 8px 16px !important;
+  }
+  
+  .suggestions-container .save-button-header,
+  .content-section .save-button-header,
+  .all-contents .save-button-header {
+    margin-top: 0 !important;
+    align-self: flex-start !important;
+  }
+}
+
+/* Tablet boyutları için */
+@media (max-width: 768px) and (min-width: 481px) {
+  .content-title {
+    font-size: 1.05rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .content-header {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    flex-wrap: nowrap !important;
+    padding: 12px 18px !important;
+  }
+  
+  .content-header.short-title {
+    padding: 10px 18px !important;
+  }
+}
+
+/* -------- KART İÇERİSİNDEKİ BAŞLIKLAR -------- */
+
+/* Premium kartlar içindeki başlıklar */
+.premium-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.premium-card .content-title {
+  max-width: calc(100% - 60px) !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* Öneriler kartları için */
+.suggestion-card .suggestion-title {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  line-height: 1.3 !important;
+  margin: 16px 16px 8px !important;
+  max-width: 100% !important;
+}
+
+/* -------- ADMIN SAYFASI DÜZENLEMELERİ -------- */
+
+/* Django admin sayfaları için */
+.admin-content .content-title,
+.admin-form input[type="text"],
+.admin-form textarea,
+input[name*="title"],
+textarea[name*="title"] {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.field-title input,
+.form-row .field-title input {
+  width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+/* -------- Grid ve Flex Layout Düzenlemeleri -------- */
+
+/* Grid container'lar için */
+.premium-cards-grid,
+.suggestions-grid,
+.content-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 20px !important;
+}
+
+/* Flex container'lar için */
+.premium-content-container,
+.suggestions-container {
+  overflow-wrap: break-word !important;
+}
+
+/* -------- Özel Durumlar -------- */
+
+/* Eğer başlık çok uzunsa ve 3 satırdan fazla oluyorsa, line-clamp uygula */
+.content-title.limit-lines {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Hover efekti sırasında tam başlığı göster */
+.content-title.limit-lines:hover {
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  position: relative;
+}
+
+/* -------- MODAL BAŞLIK DÜZELTMELERİ -------- */
+
+/* Modal header düzenlemeleri */
+.modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important; /* Üstten hizala */
+  gap: 15px !important;
+  padding: 20px !important;
+  background-color: var(--primary-color);
+  color: white;
+  flex-wrap: nowrap !important; /* Tek satırda kal ama esnek ol */
+}
+
+/* Modal başlığı için özel düzenlemeler */
+.modal-header h2,
+#modalTitle {
+  /* Metin sarma özellikleri */
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  
+  /* Layout özellikleri */
+  flex: 1 1 auto !important;
+  min-width: 0 !important; /* Flex item'ın küçülebilmesi için kritik */
+  max-width: calc(100% - 120px) !important; /* Butonlara yer bırak */
+  
+  /* Typography */
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  color: white !important;
+  
+  /* Display ayarları */
+  overflow: visible !important;
+  white-space: normal !important; /* Çok önemli: alt satıra geçsin */
+}
+
+/* Modal navigasyon ve kapatma butonları */
+.modal-nav-button,
+.modal-close-button {
+  flex-shrink: 0 !important; /* Butonlar küçülmesin */
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  align-self: flex-start !important; /* Başlığın en üstüne hizala */
+}
+
+/* Modal container genişlik ayarları */
+.modal-container {
+  width: 90% !important;
+  max-width: 900px !important;
+  max-height: 90vh !important;
+  overflow: hidden !important;
+}
+
+/* Modal body içindeki içerik başlıkları için */
+.modal-body h1,
+.modal-body h2,
+.modal-body h3,
+.modal-body h4,
+.modal-body h5,
+.modal-body h6 {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+  line-height: 1.4 !important;
+}
+/* ==========================================================================
+   MODAL İÇERİK SATIR ATLAMA DÜZELTMESİ
+   Enter'ları ve paragrafları düzgün göstermek için CSS ayarları
+   ========================================================================== */
+
+/* -------- Modal Body ve Content Düzenlemeleri -------- */
+
+.modal-body {
+  padding: 30px;
+  overflow-y: auto;
+  max-height: calc(90vh - 150px);
+}
+
+.modal-content,
+#modalContent {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  
+  /* SATIR ATLAMA DÜZELTMESİ - Bu kısım çok önemli */
+  white-space: pre-wrap !important; /* Enter'ları ve boşlukları koru */
+  word-wrap: break-word !important; /* Uzun kelimeleri böl */
+  overflow-wrap: break-word !important; /* Tarayıcı uyumluluğu */
+}
+
+/* Alternatif yaklaşım - eğer pre-wrap çok fazla boşluk bırakıyorsa */
+.modal-content.formatted,
+#modalContent.formatted {
+  white-space: pre-line !important; /* Sadece enter'ları koru, fazla boşlukları yok say */
+}
+
+/* -------- Paragraf ve Liste Düzenlemeleri -------- */
+
+/* Modal içindeki paragraflar için */
+.modal-content p,
+#modalContent p {
+  margin-bottom: 15px !important;
+  line-height: 1.6 !important;
+}
+
+.modal-content p:last-child,
+#modalContent p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Modal içindeki listeler için */
+.modal-content ul,
+.modal-content ol,
+#modalContent ul,
+#modalContent ol {
+  margin: 15px 0 !important;
+  padding-left: 25px !important;
+}
+
+.modal-content li,
+#modalContent li {
+  margin-bottom: 8px !important;
+  line-height: 1.5 !important;
+}
+
+/* Modal içindeki başlıklar için */
+.modal-content h1,
+.modal-content h2,
+.modal-content h3,
+.modal-content h4,
+.modal-content h5,
+.modal-content h6,
+#modalContent h1,
+#modalContent h2,
+#modalContent h3,
+#modalContent h4,
+#modalContent h5,
+#modalContent h6 {
+  margin: 20px 0 10px 0 !important;
+  line-height: 1.3 !important;
+  color: var(--primary-color) !important;
+}
+
+/* İlk başlık için üst margin yok */
+.modal-content h1:first-child,
+.modal-content h2:first-child,
+.modal-content h3:first-child,
+.modal-content h4:first-child,
+.modal-content h5:first-child,
+.modal-content h6:first-child,
+#modalContent h1:first-child,
+#modalContent h2:first-child,
+#modalContent h3:first-child,
+#modalContent h4:first-child,
+#modalContent h5:first-child,
+#modalContent h6:first-child {
+  margin-top: 0 !important;
+}
+
+/* -------- Madde İşaretleri için Özel Düzenlemeler -------- */
+
+/* Manuel madde işaretleri (- ile başlayanlar) */
+.modal-content,
+#modalContent {
+  /* Dash ile başlayan satırları madde işareti gibi göster */
+}
+
+/* Satır başındaki dash'leri madde işaretine çevir */
+.modal-content br + text,
+#modalContent br + text {
+  display: block;
+}
+
+/* -------- Responsive Düzenlemeler -------- */
+
+/* Mobil cihazlar için */
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 20px;
+    max-height: calc(90vh - 120px);
+  }
+  
+  .modal-content,
+  #modalContent {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  .modal-content p,
+  #modalContent p {
+    margin-bottom: 12px !important;
+  }
+  
+  .modal-content ul,
+  .modal-content ol,
+  #modalContent ul,
+  #modalContent ol {
+    padding-left: 20px !important;
+    margin: 12px 0 !important;
+  }
+}
+
+/* Çok küçük ekranlar için */
+@media (max-width: 480px) {
+  .modal-body {
+    padding: 15px;
+  }
+  
+  .modal-content,
+  #modalContent {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .modal-content ul,
+  .modal-content ol,
+  #modalContent ul,
+  #modalContent ol {
+    padding-left: 18px !important;
+  }
+}
+
+
+/* Modal content alanı için */
+.modal-content,
+#modalContent {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  overflow-y: auto !important;
+  max-height: calc(90vh - 200px) !important;
+  padding-right: 10px !important; /* Scroll bar için yer */
+}
+
+/* -------- RESPONSIVE MODAL DÜZENLEMELERİ -------- */
+
+/* Tablet boyutları için */
+@media (max-width: 768px) {
+  .modal-container {
+    width: 95% !important;
+    max-height: 85vh !important;
+  }
+  
+  .modal-header {
+    padding: 16px !important;
+    flex-direction: row !important; /* Butonlar yan yana kalsın */
+    align-items: flex-start !important;
+  }
+  
+  .modal-header h2,
+  #modalTitle {
+    font-size: 1.3rem !important;
+    max-width: calc(100% - 100px) !important; /* Daha az alan */
+    line-height: 1.25 !important;
+  }
+  
+  .modal-nav-button,
+  .modal-close-button {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+  }
+  
+  .modal-body {
+    padding: 20px !important;
+    max-height: calc(85vh - 120px) !important;
+  }
+}
+
+/* Mobil cihazlar için */
+@media (max-width: 480px) {
+  .modal-container {
+    width: 98% !important;
+    max-height: 90vh !important;
+  }
+  
+  .modal-header {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+  
+  .modal-header h2,
+  #modalTitle {
+    font-size: 1.1rem !important;
+    max-width: calc(100% - 80px) !important;
+    line-height: 1.2 !important;
+  }
+  
+  .modal-nav-button,
+  .modal-close-button {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    font-size: 14px !important;
+  }
+  
+  .modal-body {
+    padding: 15px !important;
+    max-height: calc(90vh - 100px) !important;
+  }
+  
+  .modal-content,
+  #modalContent {
+    font-size: 0.95rem !important;
+    max-height: calc(90vh - 140px) !important;
+  }
+}
+
+/* Çok uzun başlıklar için özel durum */
+.modal-header h2.extra-long,
+#modalTitle.extra-long {
+  font-size: 1.2rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Modal footer düzenlemesi */
+.modal-footer {
+  padding: 12px 20px !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  flex-shrink: 0 !important;
+}
+
+
 
 .content-description {
   display: none; /* Gizli */
