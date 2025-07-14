@@ -13,16 +13,15 @@ def index(request):
         test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
         if test_result:
             # Test sonucundan kullanıcının elementini al
-            user_element = test_result.dominant_element
+            dominant_element_name = test_result.dominant_element  # String olarak al
             
-            # Kullanıcının mizacına uygun önerileri getir (maksimum 3 tane)
-            # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
+            # Kullanıcının mizacına uygun önerileri getir (sınırsız - [:3] kaldırıldı)
             user_suggestions = RecommendedContent.objects.filter(
-                related_element_name=user_element.name,
+                related_element_name=dominant_element_name,  # String kullan
                 is_active=True
             ).annotate(
                 like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-            ).order_by('order', '-created_at')[:3]
+            ).order_by('order', '-created_at')
             
             # Kullanıcının etkileşimlerini al
             user_interactions = UserContentInteraction.objects.filter(user=request.user)
@@ -31,22 +30,37 @@ def index(request):
             # İçerikler için etkileşim bilgilerini hazırla
             for content in user_suggestions:
                 if content.id in interactions_dict:
-                    # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
                     interaction = interactions_dict[content.id]
                     content.is_liked = interaction.liked
                     content.is_saved = interaction.saved
                     content.is_viewed = interaction.viewed
                 else:
-                    # Etkileşim yoksa, varsayılan değerleri ayarla
                     content.is_liked = False
                     content.is_saved = False
                     content.is_viewed = False
+                    
+                    # Yeni etkileşim oluştur
+                    UserContentInteraction.objects.create(
+                        user=request.user,
+                        content=content,
+                        liked=False,
+                        saved=False,
+                        viewed=False
+                    )
             
+            # Template'in beklediği yapıda gönder
             context = {
-                'user_element': user_element,
-                'user_suggestions': user_suggestions,
+                'user_element': {
+                    'name': dominant_element_name,      # Template: {{ user_element.name }}
+                    'contents': user_suggestions,       # Template: {{ user_element.contents }}
+                },
                 'has_test_result': True
             }
+            
+            # Debug için
+            print(f"DEBUG - Element: {dominant_element_name}")
+            print(f"DEBUG - İçerik sayısı: {user_suggestions.count()}")
+            
         else:
             context = {
                 'has_test_result': False
