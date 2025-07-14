@@ -1,6 +1,316 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}MİZAÇ HAKKINDA | Sıkça Sorulan Sorular{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% endblock %}
+
 {% block content %}
+
+<!-- Giriş Hero Bölümü -->
+<section class="faq-hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Kendinize Doğru Bir Yolculuğa Hoş Geldiniz!</h1>
+      <p class="hero-description">
+        Hiç merak ettiniz mi? Neden bazı insanlar anında karar verirken, bazıları günlerce düşünür? 
+        Neden kimileri kalabalıkta enerji bulurken, kimileri yalnızlıkta huzur bulur? 
+        Bu soruların cevabı, sizin en temel, en eşsiz ve en derin yapınızda saklı: <strong>Mizacınızda.</strong>
+      </p>
+      <div class="hero-highlight">
+        <i class="fas fa-compass"></i>
+        <p>Her birimiz dünyaya eşsiz bir "kullanım kılavuzu" ile geliriz. İşte bu kılavuzun sırlarını çözmek, 
+        kendinizle barışmak ve potansiyelinizi ortaya çıkarmak için doğru yerdesiniz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sıkça Sorulan Sorular Bölümü -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+      <p class="section-description">Gelin, sıkça sorulan sorularla bu kadim bilgelik kapısını birlikte aralayalım.</p>
+    </div>
+
+    <div class="faq-container">
+      
+      <!-- Soru 1 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizaç Nedir? Kısaca Anlatır Mısınız?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Mizaç, en basit tanımıyla sizin biyolojik ve psikolojik <strong>"fabrika ayarlarınızdır"</strong>. Doğuştan gelen, size özel, fıtratınızın bir parçası olan bu yapı, bedensel ve ruhsal eğilimlerinizin temelini oluşturur.</p>
+          <p>Geleneksel tıpta ve felsefede kökleri dört elemente (Ateş, Hava, Su, Toprak) dayanan mizaç; nasıl düşündüğünüzün, nasıl hissettiğinizin, olaylara nasıl tepki verdiğinizin ve hatta hangi hastalıklara yatkın olduğunuzun anahtarıdır. O, sizin değişmez özünüzdür.</p>
+        </div>
+      </div>
+
+      <!-- Soru 2 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizaç ile Karakter Aynı Şey midir?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Hayır, tam olarak değil. Bu ikisini bir binanın temeli ve kendisi gibi düşünebilirsiniz.</p>
+          <div class="comparison-cards">
+            <div class="comparison-card foundation">
+              <i class="fas fa-foundation"></i>
+              <h4>Mizaç - Binanın Temeli</h4>
+              <p>Sağlam, sarsılmaz ve üzerine her şeyin inşa edildiği kısımdır.</p>
+            </div>
+            <div class="comparison-card building">
+              <i class="fas fa-building"></i>
+              <h4>Karakter - Binanın Kendisi</h4>
+              <p>O temel üzerine sizin hayat tecrübelerinizle, seçimlerinizle, öğrendiklerinizle inşa ettiğiniz yapıdır.</p>
+            </div>
+          </div>
+          <p>Temeliniz (mizacınız) değişmez ama üzerine inşa ettiğiniz binayı (karakterinizi) zamanla güzelleştirebilir, geliştirebilirsiniz.</p>
+        </div>
+      </div>
+
+      <!-- Soru 3 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizacımı Bilmek Bana Ne Kazandırır?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Mizacınızı bilmek, elinizde hayatınızın haritasının olması gibidir.</p>
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <i class="fas fa-heart"></i>
+              <h4>Kendinizle Barışırsınız</h4>
+              <p>"Neden böyleyim?" diye kendinizi yormak yerine, "Benim yapım bu ve bu harika bir şey!" demeye başlarsınız. Örneğin, Safravî mizaçlı biri, midesinin neden hassas olduğunu anlar ve beslenmesini buna göre düzenleyerek yaşam kalitesini artırır.</p>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-users"></i>
+              <h4>İlişkilerinizde Usta Bir Tercüman Olursunuz</h4>
+              <p>Eşinizin, çocuğunuzun veya arkadaşınızın davranışlarının altındaki "neden"i anlarsınız. Onların sevgi dilini, iletişim tarzını ve ihtiyaçlarını çözersiniz.</p>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-star"></i>
+              <h4>Gizli Yeteneklerinizi Keşfedersiniz</h4>
+              <p>Hangi mesleklerin, hangi hobilerin size daha uygun olduğunu anlar, enerjinizi doğru alana yönlendirirsiniz.</p>
+            </div>
+            <div class="benefit-card">
+              <i class="fas fa-shield-alt"></i>
+              <h4>Sağlığınızı Korursunuz</h4>
+              <p>Vücudunuzun sinyallerini daha iyi duyar, size neyin iyi neyin kötü geldiğini bilir ve önleyici bir yaşam tarzı benimsersiniz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 4 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizacımı Bilmezsem Ne Olur? Hayat Böyle de Devam Etmiyor mu?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Elbette eder. Tıpkı elinizde harita olmadan, yabancı bir şehirde yol bulmaya çalışmak gibi. Elbette bir yerlere varırsınız ama yolda kaybolur, gereksiz yere yorulur, yanlış yollara sapar ve çok zaman kaybedersiniz.</p>
+          <div class="warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="warning-content">
+              <h4>Mizacınızı bilmemek şunlara neden olabilir:</h4>
+              <ul>
+                <li>Sürekli kendinizle veya çevrenizle savaş halinde olmanız</li>
+                <li>Potansiyelinizi fark edememek</li>
+                <li>İlişkilerde sürekli aynı sorunları yaşamak</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 5 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizaçların Birbirine Üstünlüğü Var mıdır? "En İyi" Mizaç Hangisi?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p><strong>Kesinlikle hayır.</strong> Bu, "Bir orkestrada keman mı daha iyidir, piyano mu?" diye sormak gibidir.</p>
+          <div class="orchestra-metaphor">
+            <i class="fas fa-music"></i>
+            <p>Her mizacın kendine has güçlü yönleri, hassas noktaları ve dünyaya kattığı eşsiz bir renk vardır. Ateş mizaçlı birinin liderliği olmadan harekete geçemeyiz, Toprak mizaçlı birinin sabrı olmadan hiçbir şeyi tamamlayamayız.</p>
+          </div>
+          <div class="highlight-box">
+            <p>Önemli olan "en iyi" mizaca sahip olmak değil, kendi mizacınızı en iyi şekilde yaşamak ve dengelemektir.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 6 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizacımı Nasıl Öğrenebilirim?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Bu yolculuk, bir kendini gözlemleme sanatıdır. Fiziksel yapınızdan uyku düzeninize, yemek tercihlerinizden sosyal davranışlarınıza kadar her şey birer ipucudur.</p>
+          <div class="observation-points">
+            <div class="observation-item">
+              <i class="fas fa-body"></i>
+              <span>Fiziksel yapınız</span>
+            </div>
+            <div class="observation-item">
+              <i class="fas fa-bed"></i>
+              <span>Uyku düzeniniz</span>
+            </div>
+            <div class="observation-item">
+              <i class="fas fa-utensils"></i>
+              <span>Yemek tercihleriniz</span>
+            </div>
+            <div class="observation-item">
+              <i class="fas fa-users"></i>
+              <span>Sosyal davranışlarınız</span>
+            </div>
+          </div>
+          <div class="cta-box">
+            <p>İşte bu noktada biz devreye girerek bu kadim sanatı sizin için kolaylaştırıyoruz. Sitemizde yer alan detaylı mizaç analizleri, rehberler ve elbette, size yol göstermesi için özenle hazırladığımız <strong>mizaç testi</strong>, bu süreçte en büyük yardımcınız olacak.</p>
+            <a href="{% url 'test_list' %}" class="cta-button">
+              <i class="fas fa-play-circle"></i>
+              Mizaç Testini Başlat
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 7 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizaç Testleri Ne Kadar Güvenilir?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Mizaç testleri, size nihai ve değişmez bir etiket yapıştırmaz. Onları, doğru yolda olduğunuzu gösteren bir <strong>pusula</strong> gibi düşünün.</p>
+          <div class="compass-metaphor">
+            <i class="fas fa-compass"></i>
+            <div class="compass-content">
+              <h4>Mizaç Testleri Nasıl Çalışır?</h4>
+              <ul>
+                <li>Size keşif yolculuğunuz için güçlü bir başlangıç noktası sunarlar</li>
+                <li>Test sonucunuzu, sitemizdeki mizaç profillerini okuyarak birleştirirsiniz</li>
+                <li>Kendi içgörülerinizle harmanlayarak bütünsel bir resim elde edersiniz</li>
+              </ul>
+            </div>
+          </div>
+          <p><strong>Mizacını öğrenmek</strong> için testler harika bir ilk adımdır.</p>
+        </div>
+      </div>
+
+      <!-- Soru 8 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <h3><i class="fas fa-question-circle"></i> Mizacımı Öğrenmek İnsanlarla İlişkilerimi Nasıl Etkiler?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p><strong>Devrim yaratır!</strong> Çünkü çevrenizdeki insanların aslında sizden farklı bir "dil" konuştuğunu fark edersiniz.</p>
+          <div class="language-example">
+            <div class="example-scenario">
+              <div class="scenario-before">
+                <h4>Öncesi</h4>
+                <p>Siz bir olayı coşkuyla anlatırken (Demevî), karşınızdakinin neden daha sakin ve mesafeli (Sovdavî) olduğunu anlamıyordunuz.</p>
+                <div class="thought-bubble negative">
+                  <i class="fas fa-frown"></i>
+                  <span>"Beni anlamıyor"</span>
+                </div>
+              </div>
+              <div class="scenario-after">
+                <h4>Sonrası</h4>
+                <p>Onun doğasını anlarsınız ve bunu kişisel algılamak yerine, onun anlama şeklinin farklı olduğunu kabul edersiniz.</p>
+                <div class="thought-bubble positive">
+                  <i class="fas fa-smile"></i>
+                  <span>"Onun anlama şekli farklı"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relationship-benefits">
+            <div class="relationship-benefit">
+              <i class="fas fa-handshake"></i>
+              <h4>Çatışmaları Azaltır</h4>
+            </div>
+            <div class="relationship-benefit">
+              <i class="fas fa-heart"></i>
+              <h4>Empatiyi Artırır</h4>
+            </div>
+            <div class="relationship-benefit">
+              <i class="fas fa-link"></i>
+              <h4>İlişkileri Daha Sağlam Yapar</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Sonuç ve Çağrı Bölümü -->
+<section class="conclusion-section">
+  <div class="container">
+    <div class="conclusion-content">
+      <div class="wisdom-quote">
+        <i class="fas fa-quote-left"></i>
+        <blockquote>"Kendini bilen, Rabbini bilir"</blockquote>
+        <p>sözü, binlerce yıllık bir bilgeliği özetler. Kendini bilmenin ilk ve en temel adımı ise mizacı bilmektir.</p>
+      </div>
+      
+      <div class="call-to-action">
+        <h3>Hazırsanız, kendinize doğru bu eşsiz yolculuğa başlayalım!</h3>
+        <p>İlk adım olarak mizaç testimizi çözebilir veya aşağıdaki mizaç türlerini inceleyerek keşfe başlayabilirsiniz.</p>
+        
+        <div class="action-buttons">
+          <a href="{% url 'test_list' %}" class="primary-button">
+            <i class="fas fa-play-circle"></i>
+            Mizaç Testini Başlat
+          </a>
+          <a href="{% url 'temperaments' %}" class="secondary-button">
+            <i class="fas fa-compass"></i>
+            Mizaç Türlerini İncele
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(element) {
+  const faqItem = element.parentElement;
+  const answer = faqItem.querySelector('.faq-answer');
+  const icon = element.querySelector('.faq-icon');
+  
+  // Diğer açık FAQ'ları kapat
+  document.querySelectorAll('.faq-item.active').forEach(item => {
+    if (item !== faqItem) {
+      item.classList.remove('active');
+      item.querySelector('.faq-answer').style.maxHeight = null;
+      item.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+    }
+  });
+  
+  // Seçili FAQ'ı aç/kapat
+  faqItem.classList.toggle('active');
+  
+  if (faqItem.classList.contains('active')) {
+    answer.style.maxHeight = answer.scrollHeight + "px";
+    icon.style.transform = 'rotate(180deg)';
+  } else {
+    answer.style.maxHeight = null;
+    icon.style.transform = 'rotate(0deg)';
+  }
+}
+</script>
 
 {% endblock %}
