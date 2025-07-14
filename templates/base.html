@@ -79,9 +79,15 @@
             {% endif %}
             
             <nav class="side-menu-nav">
+                <a href="{% url 'temperament' %}" class="side-menu-item"><i class="fas fa-question-circle"></i> Mizaç Nedir?</a>
                 <a href="{% url 'about' %}" class="side-menu-item"><i class="fas fa-info-circle"></i> HAKKINDA</a>
                 <a href="{% url 'temperaments' %}" class="side-menu-item"><i class="fas fa-balance-scale"></i> MİZAÇLAR</a>
                 <a href="{% url 'test_list' %}" class="side-menu-item"><i class="fas fa-tasks"></i> TESTE BAŞLA</a>
+                
+                <div class="side-menu-section">
+                    <div class="section-title">DESTEK</div>
+                    <a href="{% url 'temperament' %}#faq-section" class="side-menu-item"><i class="fas fa-question-circle"></i> SSS</a>
+                </div>
                 
                 {% if user.is_authenticated %}
                 <div class="side-menu-section">
@@ -123,6 +129,7 @@
                         <div class="footer-column">
                             <h3>Destek</h3>
                             <ul>
+                                <li><a href="{% url 'temperament' %}#faq-section">SSS</a></li>
                                 <li><a href="{% url 'privacypolicy' %}">Gizlilik Politikası</a></li>
                                 <li><a href="{% url 'about' %}">İletişim</a></li>
                             </ul>
@@ -155,47 +162,29 @@
                 // Tüm elementleri seç
                 const allElements = document.querySelectorAll('*');
                 
-                allElements.forEach(element => {
-                    // Outline'ı kaldır
-                    element.style.outline = 'none';
-                    element.style.outlineWidth = '0';
-                    element.style.outlineStyle = 'none';
+                allElements.forEach(el => {
+                    // CSS ile kaldırılamayan outline ve border vb. efektleri JS ile kaldır
+                    el.style.outline = 'none';
+                    el.style.border = 'none';
+                    el.style.boxShadow = 'initial';
                     
-                    // Webkit tap highlight'ı kaldır
-                    element.style.webkitTapHighlightColor = 'transparent';
-                    element.style.webkitTouchCallout = 'none'; // iOS uzun basma menüsünü kaldırır
+                    // Blur eventi ekle (mobil odaklanma engelleme)
+                    el.addEventListener('focus', function() {
+                        this.blur();
+                    });
+                    
+                    // Touch start ve end olayları (mobil için)
+                    el.addEventListener('touchstart', function(e) {
+                        // Varsayılan touch davranışları
+                        e.preventDefault();
+                    });
                 });
             }
-            
-            // Focus eventlerini yakala ve kaldır
-            document.addEventListener('focusin', function(e) {
-                if (e.target) {
-                    e.target.style.outline = 'none';
-                    e.target.style.boxShadow = 'none';
-                }
-            });
-            
-            // Active eventlerini yakala ve kaldır
-            document.addEventListener('mousedown', function(e) {
-                if (e.target) {
-                    e.target.style.outline = 'none';
-                    e.target.style.boxShadow = 'none';
-                }
-            });
-            
-            // Touch eventlerini yakala ve kaldır
-            document.addEventListener('touchstart', function(e) {
-                if (e.target) {
-                    e.target.style.outline = 'none';
-                    e.target.style.boxShadow = 'none';
-                    e.target.style.webkitTapHighlightColor = 'transparent';
-                }
-            });
-            
-            // Sayfa yüklendiğinde çalıştır
+        
+            // Sayfa yüklendiğinde efektleri kaldır
             removeClickEffects();
             
-            // Dinamik içerik için observer
+            // Yeni eklenen elementler için de kaldır (AJAX vb.)
             const observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
                     if (mutation.addedNodes.length) {
@@ -203,84 +192,10 @@
                     }
                 });
             });
-            
-            // DOM değişikliklerini gözlemle
+        
             observer.observe(document.body, {
                 childList: true,
                 subtree: true
-            });
-            
-            // Keyboard navigation tespiti (accessibility için)
-            let keyboardNavigation = false;
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    keyboardNavigation = true;
-                    document.body.classList.add('keyboard-navigation');
-                }
-            });
-            
-            document.addEventListener('mousedown', function() {
-                keyboardNavigation = false;
-                document.body.classList.remove('keyboard-navigation');
-            });
-            
-            console.log('Tıklama efektleri kaldırıldı (Düzeltilmiş Versiyon)');
-        });
-
-        // CSS ile kaldırılamayan durumlar için ek fonksiyon
-        function forceRemoveOutlines() {
-            const style = document.createElement('style');
-            style.textContent = `
-                * { 
-                    outline: none !important; 
-                    -webkit-tap-highlight-color: transparent !important;
-                    -webkit-touch-callout: none !important;
-                }
-                *:focus { 
-                    outline: none !important; 
-                    box-shadow: none !important;
-                }
-                *:active { 
-                    outline: none !important; 
-                    box-shadow: none !important;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // Sayfa yüklendiğinde çalıştır
-        window.addEventListener('load', forceRemoveOutlines);
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Profil dropdown menüsü
-            const profileButton = document.querySelector('.profile-button');
-            const dropdownContent = document.querySelector('.dropdown-content');
-        
-            if (profileButton) {
-                profileButton.addEventListener('click', function(event) {
-                    dropdownContent.classList.toggle('show');
-                    event.stopPropagation();
-                });
-        
-                // Dropdown dışına tıklandığında kapansın
-                document.addEventListener('click', function() {
-                    if (dropdownContent && dropdownContent.classList.contains('show')) {
-                        dropdownContent.classList.remove('show');
-                    }
-                });
-            }
-        
-            // Header scroll efekti
-            const header = document.querySelector('.nav-container');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
             });
         
             const hamburgerButton = document.querySelector('.hamburger-button');
@@ -330,6 +245,27 @@
                     menuIcon.classList.remove('fa-times');
                     menuIcon.classList.add('fa-bars');
                     body.style.overflow = '';
+                });
+            });
+
+            // SSS linklerine tıklandığında smooth scroll
+            const faqLinks = document.querySelectorAll('a[href*="#faq-section"]');
+            faqLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Eğer farklı bir sayfadaysa, normal yönlendirme yapsın
+                    if (!window.location.pathname.includes('temperament')) {
+                        return; // Normal link davranışı
+                    }
+                    
+                    // Aynı sayfadaysa smooth scroll yap
+                    e.preventDefault();
+                    const targetSection = document.querySelector('#faq-section');
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
         });
