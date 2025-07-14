@@ -83,11 +83,7 @@
                 <a href="{% url 'about' %}" class="side-menu-item"><i class="fas fa-info-circle"></i> HAKKINDA</a>
                 <a href="{% url 'temperaments' %}" class="side-menu-item"><i class="fas fa-balance-scale"></i> MİZAÇLAR</a>
                 <a href="{% url 'test_list' %}" class="side-menu-item"><i class="fas fa-tasks"></i> TESTE BAŞLA</a>
-                
-                <div class="side-menu-section">
-                    <div class="section-title">DESTEK</div>
-                    <a href="{% url 'temperament' %}#faq-section" class="side-menu-item"><i class="fas fa-question-circle"></i> SSS</a>
-                </div>
+                <a href="{% url 'temperament' %}#faq-section" class="side-menu-item"><i class="fas fa-question-circle"></i> SSS</a>
                 
                 {% if user.is_authenticated %}
                 <div class="side-menu-section">
