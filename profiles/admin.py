@@ -14,6 +14,7 @@ class RecommendedContentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'short_description', 'content')
     list_editable = ('is_active', 'order')
     date_hierarchy = 'created_at'
+    ordering = ['order', '-created_at']
     
     # Mizaç elementi için sabit değerler belirliyoruz
     ELEMENT_CHOICES = [
@@ -36,16 +37,17 @@ class RecommendedContentAdmin(admin.ModelAdmin):
         return super().formfield_for_dbfield(db_field, **kwargs)
     
     fieldsets = (
-        ('Temel Bilgiler', {
-            'fields': ('title', 'short_description', 'content', 'image')
-        }),
-        ('Kategorizasyon', {
-            'fields': ('category', 'related_element_name')
-        }),
-        ('Ayarlar', {
-            'fields': ('is_active', 'order')
-        }),
-    )
+    ('Temel Bilgiler', {
+        'fields': ('title', 'short_description', 'content', 'image')
+    }),
+    ('Kategorizasyon', {
+        'fields': ('category', 'related_element_name')
+    }),
+    ('Ayarlar', {
+        'fields': ('is_active', 'order'),
+        'description': 'Sıralama: Küçük sayı = Önce gösterilir. 0 = En üstte, 1 = İkinci sırada...'
+    }),
+)
 
 @admin.register(UserContentInteraction)
 class UserContentInteractionAdmin(admin.ModelAdmin):

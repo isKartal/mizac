@@ -75,11 +75,11 @@ def my_suggestions(request):
     # SADECE kullanıcının baskın elementine göre içerik önerilerini al
     # Popüler içerikleri dahil etmiyoruz, SADECE mizaç tipine uygun olanlar gösterilecek
     recommended_contents = RecommendedContent.objects.filter(
-        is_active=True, 
-        related_element_name=dominant_element_name
-    ).annotate(
-        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('order', '-created_at')
+    is_active=True, 
+    related_element_name=dominant_element_name
+).annotate(
+    like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+).order_by('order', '-created_at')
     
     # İçerikler için etkileşim bilgilerini hazırla
     for content in recommended_contents:
@@ -139,10 +139,10 @@ def api_all_contents(request):
     
     # Tüm aktif içerikleri al
     all_contents = RecommendedContent.objects.filter(
-        is_active=True
+    is_active=True
     ).annotate(
-        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-    ).order_by('related_element_name', 'order', '-created_at')
+    like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('order', '-created_at')
     
     # İçerik listesini hazırla
     contents_list = []
@@ -179,10 +179,192 @@ def api_all_contents(request):
             'category_name': content.category.name,
             'related_element_name': content.related_element_name,
             'like_count': content.like_count,
+            'order': content.order,  # BUNU EKLEYİN
+            'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
             'is_liked': is_liked,
             'is_saved': is_saved,
             'is_viewed': is_viewed,
-        }
+}       
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
+        content_dict = {
+    'id': content.id,
+    'title': content.title,
+    'short_description': content.short_description,
+    'image': content.image.url if content.image else None,
+    'category_id': content.category.id,
+    'category_name': content.category.name,
+    'related_element_name': content.related_element_name,
+    'like_count': content.like_count,
+    'order': content.order,  # BUNU EKLEYİN
+    'created_at': content.created_at.isoformat(),  # BUNU DA EKLEYİN
+    'is_liked': is_liked,
+    'is_saved': is_saved,
+    'is_viewed': is_viewed,
+}
         
         contents_list.append(content_dict)
     
