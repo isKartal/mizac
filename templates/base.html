@@ -151,53 +151,7 @@
     </div>
 
     <script>
-        // ==========================================================================
-        // TIKLAMA EFEKTLERİNİ JAVASCRIPT İLE KALDIR (Düzeltilmiş Versiyon)
-        // ==========================================================================
-
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // Tüm tıklama efektlerini kaldır
-            function removeClickEffects() {
-                // Tüm elementleri seç
-                const allElements = document.querySelectorAll('*');
-                
-                allElements.forEach(el => {
-                    // CSS ile kaldırılamayan outline ve border vb. efektleri JS ile kaldır
-                    el.style.outline = 'none';
-                    el.style.border = 'none';
-                    el.style.boxShadow = 'initial';
-                    
-                    // Blur eventi ekle (mobil odaklanma engelleme)
-                    el.addEventListener('focus', function() {
-                        this.blur();
-                    });
-                    
-                    // Touch start ve end olayları (mobil için)
-                    el.addEventListener('touchstart', function(e) {
-                        // Varsayılan touch davranışları
-                        e.preventDefault();
-                    });
-                });
-            }
-        
-            // Sayfa yüklendiğinde efektleri kaldır
-            removeClickEffects();
-            
-            // Yeni eklenen elementler için de kaldır (AJAX vb.)
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.addedNodes.length) {
-                        removeClickEffects();
-                    }
-                });
-            });
-        
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-        
             const hamburgerButton = document.querySelector('.hamburger-button');
             const sideMenu = document.querySelector('.side-menu');
             const menuOverlay = document.querySelector('.menu-overlay');
