@@ -222,11 +222,12 @@
 
 <section class="advantage-section">
     <div class="container">
-        <h2 class="section-title">Kendini Keşfetmenin Yeni Yoluna Hoş Geldiniz</h2>
-        <p class="section-description">Hiç merak ettiniz mi? Neden bazı insanlar anında karar verirken, bazıları günlerce düşünür? Neden kimileri kalabalıkta enerji bulurken, kimileri yalnızlıkta huzur bulur? Neden bir olay sizi üzerken, arkadaşınız aynı olayı umursamaz?
-Bu soruların cevabı, sizin en temel, en eşsiz ve en derin yapınızda saklı: Mizacınızda.
-Her birimiz dünyaya eşsiz bir "kullanım kılavuzu" ile geliriz. İşte bu kılavuzun sırlarını çözmek, kendinizle barışmak ve potansiyelinizi ortaya çıkarmak için doğru yerdesiniz. Gelin, sıkça sorulan sorularla bu kadim bilgelik kapısını birlikte aralayalım.
-</p>
+        <h2 class="section-title">Mizaç Bilgisinin Hayatınıza Katkıları</h2>
+        <p class="section-description">
+            Kendinizi tanımanın en güçlü yolu mizacınızı anlamaktır. 
+            İşte mizaç bilgisinin hayatınıza katacağı değerli faydalar:
+        </p>
+        
         <div class="advantage-grid">
             <div class="advantage-card">
                 <div class="advantage-icon">
@@ -250,20 +251,53 @@ Her birimiz dünyaya eşsiz bir "kullanım kılavuzu" ile geliriz. İşte bu kı
                 <p>Mizacınıza uygun kariyer seçeneklerini belirleyerek çalışma hayatınızda daha başarılı ve mutlu olun.</p>
             </div>
         </div>
-    </div>
-</section>
-
-{% if not has_test_result %}
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Mizacınızı Keşfetmeye Hazır Mısınız?</h2>
-            <p>Ücretsiz mizaç testimiz ile kendinizi daha iyi tanıyın ve kişisel gelişiminize yön verin.</p>
-            <a href="{% url 'test_list' %}" class="cta-button">ŞİMDİ TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
+        
+        <!-- Ek bilgi bölümü -->
+        <div class="wisdom-section">
+            <div class="wisdom-content">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Neden Mizaç Bu Kadar Önemli?</h3>
+                <p>
+                    Hiç merak ettiniz mi? Neden bazı insanlar anında karar verirken, bazıları günlerce düşünür? 
+                    Neden kimileri kalabalıkta enerji bulurken, kimileri yalnızlıkta huzur bulur? 
+                    Bu soruların cevabı, sizin en temel yapınızda saklı: <strong>Mizacınızda</strong>.
+                </p>
+                <p>
+                    Her birimiz dünyaya eşsiz bir "kullanım kılavuzu" ile geliriz. 
+                    Bu kılavuzun sırlarını çözmek, kendinizle barışmak ve potansiyelinizi ortaya çıkarmak için doğru yerdesiniz.
+                </p>
+            </div>
         </div>
     </div>
 </section>
-{% endif %}
+
+<section class="final-section">
+  <div class="container">
+    <div class="final-content">
+      <div class="final-quote">
+        <i class="fas fa-quote-left"></i>
+        <blockquote>"Kendini bilen, Rabbini bilir"</blockquote>
+        <p>sözü, binlerce yıllık bir bilgeliği özetler. Kendini bilmenin ilk ve en temel adımı ise mizacı bilmektir.</p>
+      </div>
+      
+      <div class="final-action">
+        <h3>Hazırsanız, kendinize doğru bu eşsiz yolculuğa başlayalım!</h3>
+        <p>İlk adım olarak mizaç testimizi çözebilir veya aşağıdaki mizaç türlerini inceleyerek keşfe başlayabilirsiniz.</p>
+        
+        <div class="final-buttons">
+          <a href="{% url 'test_list' %}" class="btn-primary">
+            <i class="fas fa-play-circle"></i>
+            Mizaç Testini Başlat
+          </a>
+          <a href="{% url 'temperaments' %}" class="btn-secondary">
+            <i class="fas fa-compass"></i>
+            Mizaç Türlerini İncele
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
 
 {% block extra_js %}
