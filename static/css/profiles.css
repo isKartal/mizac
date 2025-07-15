@@ -1780,16 +1780,16 @@ textarea[name*="title"] {
 {
      .modal-container {
       width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
-       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
-      max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
+       max-width: 900px !important; /* Belirlenen maksimum genişlik */
+      max-height: 70vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
   } 
 }
 /* -------- RESPONSIVE MODAL DÜZENLEMELERİ -------- */
 @media (max-width: 1025px) {
    .modal-container {
       width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
-       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
-      max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
+       max-width: 900px !important; /* Belirlenen maksimum genişlik */
+      max-height: 80vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
   } 
  
   
@@ -1798,7 +1798,7 @@ textarea[name*="title"] {
 @media (max-width: 768px) {
   .modal-container {
     width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
-       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
+       max-width: 900px !important; /* Belirlenen maksimum genişlik */
       max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
   }
   

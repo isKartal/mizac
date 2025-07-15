@@ -734,7 +734,72 @@
 .modal-element.su, .modal-element.water { background-color: var(--water-bg); color: var(--water-color); }
 .modal-element.toprak, .modal-element.earth { background-color: var(--earth-bg); color: var(--earth-color); }
 
+/* Flip Indicator Stilleri */
+.flip-indicator {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #DAA520; /* Altın rengi */
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
 
+.flip-indicator i {
+  font-size: 0.8rem;
+  color: #DAA520; /* Altın rengi */
+}
+
+.flip-indicator span {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Hover/touch durumlarında gizle */
+.flip-card:hover .flip-indicator,
+.flip-card.touched .flip-indicator {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Responsive ayarları */
+@media (max-width: 991px) {
+  .flip-indicator {
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.65rem;
+  }
+  
+  .flip-indicator i {
+    font-size: 0.75rem;
+  }
+  
+  .flip-indicator span {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .flip-indicator {
+    bottom: 8px;
+    right: 8px;
+    font-size: 0.6rem;
+  }
+  
+  .flip-indicator i {
+    font-size: 0.7rem;
+  }
+  
+  .flip-indicator span {
+    font-size: 0.55rem;
+  }
+}
 /* ==========================================================================
    7. RESPONSIVE TASARIM STİLLERİ (Masaüstünden Mobile)
    ========================================================================== */
@@ -805,7 +870,29 @@
     display: none;
   }
 }
-
+@media (max-width: 1333px) {
+  .temperament-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  
+  .temperament-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .flip-card {
+    width: 100%;
+    max-width: 260px;
+    height: 340px;
+  }
+}
 /* --------------------------------------------------------------------------
    Büyük Telefonlar ve Dikey Tabletler (max-width: 767px)
    -------------------------------------------------------------------------- */

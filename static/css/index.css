@@ -253,6 +253,344 @@
 }
 
 /* ==========================================================================
+   ANA SAYFAYA UYUMLU ADVANTAGE SECTION STİLLERİ - index.css'e eklenecek/güncellenecek
+   ========================================================================== */
+
+/* SADECE ADVANTAGE SECTION BAŞLIĞI İÇİN - Diğerlerini etkilemez */
+
+/* Önceki genel section-title kurallarını iptal et */
+.section-title {
+  border: none !important; /* Debug çerçevelerini kaldır */
+}
+
+.container {
+  border: none !important; /* Debug çerçevelerini kaldır */
+}
+
+/* Sadece advantage section'daki başlık için spesifik kurallar */
+section.advantage-section .section-title {
+  font-size: clamp(2rem, 4vw, 2.5rem) !important;
+  font-weight: 700 !important;
+  color: var(--primary-color) !important;
+  text-align: center !important;
+  margin: 0 auto 20px auto !important;
+  position: relative !important;
+  padding-bottom: 20px !important;
+  display: block !important;
+  width: 100% !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+section.advantage-section .section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  width: 80px !important;
+  height: 3px !important;
+  background-color: var(--accent-color) !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  border-radius: 2px !important;
+}
+
+/* Sadece advantage section container'ı */
+section.advantage-section .container {
+  text-align: center !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+/* Sadece advantage section açıklaması */
+section.advantage-section .section-description {
+  text-align: center !important;
+  max-width: 800px !important;
+  margin: 0 auto 40px auto !important;
+  font-size: 18px !important;
+  color: #666 !important;
+  line-height: 1.6 !important;
+}
+
+/* Hero section başlığının orijinal stillerini koru */
+.mizac-nedir-title {
+  font-family: 'Poppins', serif !important;
+  font-size: clamp(40px, 5vw, 64px) !important;
+  font-weight: 800 !important;
+  margin-bottom: 24px !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+  letter-spacing: -0.5px !important;
+  text-align: center !important;
+  color: var(--light-text) !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Elements section başlığını da koru */
+section.elements-section .section-title {
+  text-align: center !important;
+  font-size: 1.8rem !important;
+  font-weight: 600 !important;
+  color: var(--primary-color) !important;
+  margin-bottom: 40px !important;
+  position: relative !important;
+  padding-bottom: 15px !important;
+}
+
+section.elements-section .section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  width: 80px !important;
+  height: 3px !important;
+  background-color: var(--accent-color) !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  border-radius: 2px !important;
+}
+
+/* Grid düzeni - ana sayfa element-grid ile uyumlu */
+.advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Kart tasarımı - element-card ile aynı tarz */
+.advantage-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.advantage-card.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.advantage-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* İkon tasarımı - element-icon ile aynı tarz */
+.advantage-icon {
+  font-size: 48px;
+  color: var(--accent-color);
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 50%;
+  background-color: rgba(233, 180, 76, 0.1);
+  transition: var(--transition);
+}
+
+.advantage-card:hover .advantage-icon {
+  transform: scale(1.1);
+}
+
+/* Başlık ve metin - element-card ile aynı tarz */
+.advantage-card h3 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+}
+
+.advantage-card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Wisdom Section - ana sayfa tarzında */
+.wisdom-section {
+  margin-top: 60px;
+  padding: 40px 0;
+  background: linear-gradient(135deg, rgba(233, 180, 76, 0.05), rgba(233, 180, 76, 0.1));
+  border-radius: 20px;
+  border: 1px solid rgba(233, 180, 76, 0.1);
+}
+
+.wisdom-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.wisdom-content i {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.wisdom-content h3 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.wisdom-content p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.wisdom-content p:last-child {
+  margin-bottom: 0;
+}
+
+.wisdom-content strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Responsive ayarları - ana sayfa ile uyumlu */
+@media (max-width: 768px) {
+  .advantage-section {
+    padding: 80px 0;
+  }
+  
+  .advantage-section .container {
+    padding: 0 15px;
+  }
+  
+  .advantage-section .section-description {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .advantage-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .advantage-card {
+    padding: 30px 25px;
+    margin: 0 10px;
+  }
+  
+  .advantage-icon {
+    font-size: 42px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .advantage-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  
+  .advantage-card p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .wisdom-section {
+    margin-top: 40px;
+    padding: 30px 0;
+  }
+  
+  .wisdom-content {
+    padding: 0 15px;
+  }
+  
+  .wisdom-content i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .wisdom-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .wisdom-content p {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .advantage-section {
+    padding: 60px 0;
+  }
+  
+  .advantage-section .container {
+    padding: 0 10px;
+  }
+  
+  .advantage-section .section-description {
+    font-size: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .advantage-grid {
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .advantage-card {
+    padding: 25px 20px;
+    margin: 0 5px;
+  }
+  
+  .advantage-icon {
+    font-size: 36px;
+    padding: 15px;
+    margin-bottom: 16px;
+  }
+  
+  .advantage-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .advantage-card p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .wisdom-section {
+    margin-top: 30px;
+    padding: 25px 0;
+    border-radius: 15px;
+  }
+  
+  .wisdom-content {
+    padding: 0 10px;
+  }
+  
+  .wisdom-content i {
+    font-size: 2rem;
+  }
+  
+  .wisdom-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .wisdom-content p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+/* ==========================================================================
    ACCESSIBILITY İYİLEŞTİRMELERİ
    ========================================================================== */
 
@@ -290,14 +628,6 @@
   .premium-content-section .slider-nav-button {
     transition: none;
   }
-}accent-color);
-  color: var(--light-text);
-  padding: 16px 36px;
-  text-decoration: none;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  font-size: 18px;
-  transition: var(--transition);
 }
 
 .start-test-button:hover {
@@ -1254,4 +1584,177 @@
 
 .premium-content-section .more-link:hover i {
   transform: translateX(5px);
+}
+
+/* ==========================================================================
+   FINAL SECTION - Index sayfasına özel, çakışmasız
+   ========================================================================== */
+
+.final-section {
+  background: linear-gradient(135deg, #292321 0%, #3d362f 100%);
+  color: white;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="finalpattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23finalpattern)"/></svg>');
+  pointer-events: none;
+}
+
+.final-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+.final-quote {
+  margin-bottom: 50px;
+}
+
+.final-quote .fa-quote-left {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.final-quote blockquote {
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.final-quote p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.final-action h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.final-action p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+}
+
+.final-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #e9b44c 0%, #f1c666 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(233, 180, 76, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(233, 180, 76, 0.5);
+  text-decoration: none;
+  color: white;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: white;
+}
+
+/* Responsive ayarları */
+@media (max-width: 991px) {
+  .final-quote blockquote {
+    font-size: 1.5rem;
+  }
+  
+  .final-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .final-section {
+    padding: 60px 0;
+  }
+  
+  .final-content {
+    padding: 0 15px;
+  }
+  
+  .final-quote blockquote {
+    font-size: 1.3rem;
+  }
+  
+  .final-action h3 {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 15px 25px;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .final-content {
+    padding: 0 10px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    min-width: 160px;
+    padding: 12px 20px;
+  }
 }

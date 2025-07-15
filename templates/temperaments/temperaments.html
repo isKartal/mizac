@@ -27,7 +27,10 @@
               <img src="/static/images/fire-icon.png" alt="Fire" class="fire-icon element-icon">
           </div>
               <h3>Ateş</h3>
-              <p>Enerjik, tutkulu, lider ruhlu</p>
+                 <div class="flip-indicator">
+    <i class="fas fa-hand-pointer"></i>
+    <span>Dokun</span>
+  </div>
             </div>
             <div class="flip-card-back">
               <h3>Ateş Mizacı</h3>
@@ -48,7 +51,10 @@
   <img src="/static/images/air-icon.png" alt="Air" class="air-icon element-icon">
 </div>
               <h3>Hava</h3>
-              <p>İletişim, analitik, sosyal</p>
+                 <div class="flip-indicator">
+    <i class="fas fa-hand-pointer"></i>
+    <span>Dokun</span>
+  </div>
             </div>
             <div class="flip-card-back">
               <h3>Hava Mizacı</h3>
@@ -69,7 +75,10 @@
   <img src="/static/images/water-icon.png" alt="Water" class="element-icon water-icon">
 </div>
               <h3>Su</h3>
-              <p>Duygusal, empatik, sakin</p>
+               <div class="flip-indicator">
+    <i class="fas fa-hand-pointer"></i>
+    <span>Dokun</span>
+  </div>
             </div>
             <div class="flip-card-back">
               <h3>Su Mizacı</h3>
@@ -82,27 +91,29 @@
         </div>
       </div>
       
-      <div class="temperament-card-container">
-        <div class="flip-card earth">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-             <div class="card-circle earth">
-  <img src="/static/images/earth-icon.png" alt="Earth" class="earth-icon element-icon">
-</div>
-              <h3>Toprak</h3>
-              <p>Güvenilir, sabırlı, disiplinli</p>
-            </div>
-            <div class="flip-card-back">
-              <h3>Toprak Mizacı</h3>
-              <p>Toprak mizaçlı kişiler, güvenilirlik, sabır ve pratik yaklaşımlarıyla tanınır. Kararlı ve düzenli yapılarıyla dikkat çekerler.</p>
-              <a href="{% url 'earth_more' %}" class="card-link">
-                Daha Fazlası <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+<div class="temperament-card-container">
+  <div class="flip-card earth">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-circle earth">
+          <img src="/static/images/earth-icon.png" alt="Earth" class="earth-icon element-icon">
+        </div>
+        <h3>Toprak</h3>
+        <div class="flip-indicator">
+          <i class="fas fa-hand-pointer"></i>
+          <span>Dokun</span>
         </div>
       </div>
+      <div class="flip-card-back">
+        <h3>Toprak Mizacı</h3>
+        <p>Toprak mizaçlı kişiler, güvenilirlik, sabır ve pratik yaklaşımlarıyla tanınır. Kararlı ve düzenli yapılarıyla dikkat çekerler.</p>
+        <a href="{% url 'earth_more' %}" class="card-link">
+          Daha Fazlası <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
+  </div>
+</div>
 </section>
 {% endblock %}
 
