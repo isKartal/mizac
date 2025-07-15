@@ -29,7 +29,7 @@
                 </button>
             
                 <nav class="nav-links">
-                    <a href="{% url 'temperament' %}" class="nav-item">Mizac Nedir?</a>
+                    <a href="{% url 'temperament' %}" class="nav-item">MİZAÇ NEDİR?</a>
                     <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
                     <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
                     <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
@@ -79,11 +79,10 @@
             {% endif %}
             
             <nav class="side-menu-nav">
-                <a href="{% url 'temperament' %}" class="side-menu-item"><i class="fas fa-question-circle"></i> Mizaç Nedir?</a>
+                <a href="{% url 'temperament' %}" class="side-menu-item"><i class="fas fa-question-circle"></i> MİZAÇ NEDİR?</a>
                 <a href="{% url 'about' %}" class="side-menu-item"><i class="fas fa-info-circle"></i> HAKKINDA</a>
                 <a href="{% url 'temperaments' %}" class="side-menu-item"><i class="fas fa-balance-scale"></i> MİZAÇLAR</a>
                 <a href="{% url 'test_list' %}" class="side-menu-item"><i class="fas fa-tasks"></i> TESTE BAŞLA</a>
-                <a href="{% url 'temperament' %}#faq-section" class="side-menu-item"><i class="fas fa-question-circle"></i> SSS</a>
                 
                 {% if user.is_authenticated %}
                 <div class="side-menu-section">
