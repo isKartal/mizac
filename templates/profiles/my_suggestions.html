@@ -331,7 +331,6 @@
   </div>
 </div>
 
-<!-- İçerik Detay Modal -->
 <div class="content-modal modern-modal" 
      id="contentModal" 
      role="dialog" 
@@ -340,39 +339,28 @@
      aria-hidden="true">
   <div class="modal-container">
     <div class="modal-header">
-      <button class="modal-nav-button" 
-              id="prevModalContent" 
-              type="button"
-              aria-label="Önceki içerik">
-        <i class="fas fa-chevron-left" aria-hidden="true"></i>
-      </button>
-      <h2 id="modalTitle"></h2>
-      <button class="modal-close-button" 
-              id="closeModal" 
-              type="button"
-              aria-label="Modalı kapat">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="modal-body">
+      <div class="modal-element" id="modalElement"></div>
       <div class="modal-category" id="modalCategory"></div>
-      <div class="modal-content" id="modalContent">
-        <!-- İçerik buraya yüklenecek -->
-      </div>
-    </div>
-    <div class="modal-footer">
+      <h2 id="modalTitle"></h2>
+      
       <div class="modal-actions">
-        <button class="modal-action-btn" 
-                id="modalSaveBtn" 
-                type="button">
+        <button class="modal-action-btn" id="modalSaveBtn" type="button">
           <i class="far fa-bookmark" aria-hidden="true"></i> Kaydet
         </button>
       </div>
-      <div class="modal-element" id="modalElement"></div>
+      <button class="modal-close-button" id="closeModal" type="button" aria-label="Modalı kapat">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <button class="modal-nav-button" id="prevModalContent" style="display: none;" type="button" aria-label="Önceki içerik">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+        <div id="modalContent"></div> 
     </div>
   </div>
 </div>
-
 <!-- CSRF Token for JavaScript -->
 {% csrf_token %}
 {% endblock %}

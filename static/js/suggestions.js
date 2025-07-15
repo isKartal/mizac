@@ -652,51 +652,84 @@ document.addEventListener('DOMContentLoaded', function() {
   
   let currentModalContentId = null;
   
-  function openContentModal(contentId) {
-    currentModalContentId = contentId;
-    
-    fetch(`/profiles/content/${contentId}/detail/`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('İçerik yüklenirken hata oluştu');
+function openContentModal(contentId) {
+  currentModalContentId = contentId;
+  
+  fetch(`/profiles/content/${contentId}/detail/`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('İçerik yüklenirken hata oluştu');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Mevcut modal doldurma kodları...
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalCategory').textContent = data.category;
+      document.getElementById('modalContent').innerHTML = data.content;
+      document.getElementById('modalElement').textContent = data.related_element;
+      document.getElementById('modalElement').className = `modal-element ${data.related_element.toLowerCase()}`;
+      
+      // ✅ YENİ: Header'a görsel ekleme
+      const modalHeader = document.querySelector('.modal-header');
+      if (modalHeader) {
+        if (data.image) {
+          modalHeader.style.backgroundImage = `url('${data.image}')`;
+          modalHeader.classList.add('has-image');
+        } else {
+          modalHeader.style.backgroundImage = '';
+          modalHeader.classList.remove('has-image');
         }
-        return response.json();
-      })
-      .then(data => {
-        populateModal(data, contentId);
-        showModal();
-      })
-      .catch(error => {
-        console.error('Hata:', error);
-        alert('İçerik yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
-      });
-  }
+      }
+      
+      // Kaydet butonunu güncelle
+      updateModalSaveButton(contentId, data.saved);
+      
+      // Modal'ı göster
+      showModal();
+    })
+    .catch(error => {
+      console.error('Hata:', error);
+      alert('İçerik yüklenirken bir hata oluştu.');
+    });
+}
   
   function populateModal(data, contentId) {
-    const modalTitle = document.getElementById('modalTitle');
-    if (modalTitle) {
-      modalTitle.textContent = data.title;
-    }
-    
-    const modalCategory = document.getElementById('modalCategory');
-    if (modalCategory) {
-      modalCategory.textContent = data.category;
-    }
-    
-    const modalContent = document.getElementById('modalContent');
-    if (modalContent) {
-      modalContent.innerHTML = data.content;
-    }
-    
-    const modalElement = document.getElementById('modalElement');
-    if (modalElement) {
-      modalElement.textContent = data.related_element;
-      modalElement.className = `modal-element ${data.related_element.toLowerCase()}`;
-    }
-    
-    updateModalSaveButton(contentId, data.saved);
+  const modalTitle = document.getElementById('modalTitle');
+  if (modalTitle) {
+    modalTitle.textContent = data.title;
   }
   
+  const modalCategory = document.getElementById('modalCategory');
+  if (modalCategory) {
+    modalCategory.textContent = data.category;
+  }
+  
+  const modalContent = document.getElementById('modalContent');
+  if (modalContent) {
+    modalContent.innerHTML = data.content;
+  }
+  
+  const modalElement = document.getElementById('modalElement');
+  if (modalElement) {
+    modalElement.textContent = data.related_element;
+    modalElement.className = `modal-element ${data.related_element.toLowerCase()}`;
+  }
+  
+  // ✅ YENİ: Header'a görsel ekleme
+  const modalHeader = document.querySelector('.modal-header');
+  if (modalHeader) {
+    if (data.image) {
+      modalHeader.style.backgroundImage = `url('${data.image}')`;
+      modalHeader.classList.add('has-image');
+    } else {
+      modalHeader.style.backgroundImage = '';
+      modalHeader.classList.remove('has-image');
+    }
+  }
+  
+  updateModalSaveButton(contentId, data.saved);
+}
   function updateModalSaveButton(contentId, saved) {
     const saveBtn = document.getElementById('modalSaveBtn');
     if (!saveBtn) return;

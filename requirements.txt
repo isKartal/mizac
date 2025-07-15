@@ -9,3 +9,4 @@ google-api-python-client
 Pillow
 google-auth>=2.3.2
 google-auth-oauthlib>=0.5.0
+Pillow>=8.0.0

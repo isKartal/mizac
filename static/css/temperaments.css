@@ -697,8 +697,10 @@
 }
 
 .modal-actions {
-  display: flex;
-  gap: 15px;
+  bottom: 25px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
 }
 
 .modal-action-btn {
@@ -1001,7 +1003,8 @@
   .modal-header h2 { font-size: 1.1rem; }
   .modal-body { padding: 15px; max-height: calc(90vh - 100px); }
   .modal-content { font-size: 0.95rem; }
-  .modal-actions { flex-direction: column; width: 100%; gap: 8px; }
+  .modal-actions { flex-direction: column;  bottom: 15px !important;
+    right: 15px !important; }
 }
 
 

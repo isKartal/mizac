@@ -1148,7 +1148,7 @@
 /* Mobil cihazlar için */
 @media (max-width: 480px) {
   .content-title {
-    font-size: 1rem !important;
+    font-size: 0.8rem !important;
     line-height: 1.25 !important;
   }
   
@@ -1195,7 +1195,7 @@
 /* Tablet boyutları için */
 @media (max-width: 768px) and (min-width: 481px) {
   .content-title {
-    font-size: 1.05rem !important;
+    font-size: 0.9rem !important;
     line-height: 1.3 !important;
   }
   
@@ -1300,16 +1300,211 @@ textarea[name*="title"] {
 
 /* -------- MODAL BAŞLIK DÜZELTMELERİ -------- */
 
-/* Modal header düzenlemeleri */
+/* ==========================================================================
+   YENİ MODAL HEADER TASARIMI
+   ========================================================================== */
+
+/* 1. Ana Header Konteyneri */
 .modal-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important; /* Üstten hizala */
-  gap: 15px !important;
-  padding: 20px !important;
-  background-color: var(--primary-color);
-  color: white;
-  flex-wrap: nowrap !important; /* Tek satırda kal ama esnek ol */
+  /* Sadece arka plan görselinin içeriğe göre ayarlanması */
+  background-size: cover;    /* Görseli, oranını bozmadan ve tüm alanı kaplayacak şekilde ayarlar */
+  background-position: center; /* Görseli yatay ve dikey olarak ortalar */
+  background-repeat: no-repeat; /* Görselin tekrar etmesini engeller */
+
+  /* Başlık içeriğinin yüksekliğine uyum sağlaması için minimum yükseklik. */
+  /* Eğer içerik daha kısa olursa bile görselin belli bir alanı kaplamasını sağlar. */
+  /* Eğer header'ın yüksekliği tamamen içeriğe bağlı olsun isterseniz bu satırı silebilirsiniz. */
+  min-height: 250px; /* Örnek bir başlangıç yüksekliği, ihtiyaca göre ayarlayabilirsiniz */
+
+  /* İçeriğinizi (başlık, kategori vb.) görsel üzerinde ortalamak için Flexbox (mevcutsa koruyun) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px; /* İçeriğe yeterli boşluk bırakın */
+  position: relative; /* İçerideki elemanların konumlandırılması için */
+  overflow: hidden; /* Taşmaları gizle */
+  /* Bu kısımlar, modal-header'ın mevcut düzenini korumak içindir, 
+     eğer bu ayarlar zaten varsa ve memnuniyetinizi sağlıyorsa dokunmayın. */
+}
+/* 2. Header'daki Tüm Elemanları Konumlandırma İçin Hazırla */
+.modal-header > * {
+  position: absolute !important; /* Tüm elemanları mutlak konuma getir */
+  z-index: 2 !important;         /* Arka plan görselinin üstünde kalmalarını sağla */
+}
+
+/* 3. Arka Plan Görseli İçin Karartma Efekti (Mevcut stil korunuyor ve geliştiriliyor) */
+.modal-header.has-image::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(29, 29, 29, 0.95) 0%,   /* Alttan daha koyu */
+    rgba(29, 29, 29, 0.7) 40%,
+    rgba(29, 29, 29, 0.2) 80%,   /* Üste doğru şeffaflaşır */
+    rgba(29, 29, 29, 0.1) 100%
+  ) !important;
+  z-index: 1;
+}
+
+/* 4. İstenmeyen Butonu Gizle */
+#prevModalContent {
+  display: none !important;
+}
+
+/* 5. Mizaç Yazısı (Sol Üst) */
+#modalElement {
+  top: 20px !important;
+  left: 20px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  /* Elementlere özel arkaplan renkleri korunur */
+}
+
+/* 6. Kategori Yazısı (Sol Alt - Başlığın Üstü) */
+#modalCategory {
+  bottom: 70px !important; /* Başlığın üstünde konumlanır */
+  left: 20px !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #ddd !important;
+  background: none !important; /* Arka planını kaldır */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 7. Başlık (Sol Alt) */
+#modalTitle {
+  bottom: 25px !important;
+  left: 20px !important;
+  right: auto !important; /* Ortalamayı kaldır */
+  top: auto !important;
+  text-align: left !important; /* Ortalamayı kaldır */
+  max-width: calc(100% - 140px) !important; /* Sağdaki butona yer bırak */
+  font-size: 1.8rem !important;
+  line-height: 1.3 !important;
+}
+
+/* 8. Kaydet Butonu (Sağ Alt) */
+.modal-actions {
+  bottom: 25px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+#modalSaveBtn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  color: white !important;
+}
+
+#modalSaveBtn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: white !important;
+}
+
+#modalSaveBtn.saved {
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--primary-color) !important;
+}
+
+/* 9. Kapat Butonu (Sağ Üst) */
+#closeModal {
+  top: 20px !important;
+  right: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+}
+
+/* 10. Eski Footer'ı Tamamen Gizle */
+.modal-footer {
+  display: none !important;
+}
+
+/* 11. Modal Body'e Üstten Boşluk Ver */
+/* Bu, içeriğin yeni tasarlanan başlığın altına girmesini engeller. */
+.modal-body {
+  flex-grow: 1; /* Modal içindeki kalan dikey alanı doldurur */
+  padding: 30px; /* Genel iç boşluk (sağ, sol, alt) */
+  max-height: calc(90vh - 150px); /* Ekran yüksekliğinden header ve diğer sabit elemanların yüksekliğini çıkarır, body'nin maksimum yüksekliğini sınırlar */
+  overflow-y: auto; /* İçerik taştığında dikey kaydırma çubuğunu gösterir. Eğer kaydırma çubuğunun her zaman görünmesini isterseniz bunu 'scroll' olarak değiştirebilirsiniz. */
+  
+  padding-top: 25px !important; /* Üst kısım için özel iç boşluk. !important etiketi, diğer padding değerlerini ezer. */
+
+  /* Webkit tarayıcılar (Chrome, Safari, Edge) için kaydırma çubuğu özelleştirmeleri */
+  &::-webkit-scrollbar {
+    width: 8px; /* Kaydırma çubuğunun genişliği */
+    height: 8px; /* Yatay kaydırma çubuğu için yükseklik */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Kaydırma çubuğu izinin arka plan rengi */
+    border-radius: 10px; /* Köşeleri yuvarlak */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888; /* Kaydırma çubuğu tutamacının rengi */
+    border-radius: 10px; /* Köşeleri yuvarlak */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Fare üzerine gelince kaydırma çubuğu rengi */
+  }
+}
+
+/* Modalın aktif hale geldiğinde görünürlüğünü kontrol eden blok */
+.content-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* -------- Mobil Cihazlar İçin Ayarlamalar -------- */
+@media (max-width: 768px) {
+  .modal-header {
+    min-height: 200px !important;
+  }
+  #modalTitle {
+    font-size: 1.5rem !important;
+    max-width: calc(100% - 130px) !important;
+    bottom: 20px !important;
+  }
+  #modalCategory {
+    bottom: 60px !important;
+  }
+  .modal-actions {
+    bottom: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    min-height: 180px !important;
+  }
+  #modalElement, #closeModal {
+    top: 15px !important;
+  }
+  #modalElement { left: 15px !important; }
+  #closeModal { right: 15px !important; }
+
+  #modalTitle {
+    font-size: 1.3rem !important;
+    left: 15px !important;
+    bottom: 15px !important;
+    max-width: calc(100% - 110px) !important;
+  }
+  #modalCategory {
+    left: 15px !important;
+    bottom: 50px !important;
+    font-size: 0.85rem !important;
+  }
+  .modal-actions {
+    bottom: 15px !important;
+    right: 15px !important;
+  }
 }
 
 /* Modal başlığı için özel düzenlemeler */
@@ -1350,12 +1545,7 @@ textarea[name*="title"] {
 }
 
 /* Modal container genişlik ayarları */
-.modal-container {
-  width: 90% !important;
-  max-width: 900px !important;
-  max-height: 90vh !important;
-  overflow: hidden !important;
-}
+
 
 /* Modal body içindeki içerik başlıkları için */
 .modal-body h1,
@@ -1378,11 +1568,6 @@ textarea[name*="title"] {
 
 /* -------- Modal Body ve Content Düzenlemeleri -------- */
 
-.modal-body {
-  padding: 30px;
-  overflow-y: auto;
-  max-height: calc(90vh - 150px);
-}
 
 .modal-content,
 #modalContent {
@@ -1540,12 +1725,21 @@ textarea[name*="title"] {
 }
 
 /* -------- RESPONSIVE MODAL DÜZENLEMELERİ -------- */
-
+@media (max-width: 1025px) {
+   .modal-container {
+      width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
+       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
+      max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
+  } 
+ 
+  
+}
 /* Tablet boyutları için */
 @media (max-width: 768px) {
   .modal-container {
-    width: 95% !important;
-    max-height: 85vh !important;
+    width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
+       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
+      max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
   }
   
   .modal-header {
@@ -1577,8 +1771,9 @@ textarea[name*="title"] {
 /* Mobil cihazlar için */
 @media (max-width: 480px) {
   .modal-container {
-    width: 98% !important;
-    max-height: 90vh !important;
+    width: 85% !important; /* Ekran genişliğinin %100'ünü kaplasın */
+       max-width: 1000px !important; /* Belirlenen maksimum genişlik */
+      max-height: 90vh !important; /* Ekran yüksekliğinin %90'ını geçmesin */
   }
   
   .modal-header {
@@ -1752,20 +1947,29 @@ textarea[name*="title"] {
 
 /* -------- Modal Konteyner -------- */
 .modal-container {
-  width: 90%;
-  max-width: 900px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: modalFadeIn 0.4s forwards;
-}
+  width: 100%; /* Ekran genişliğinin %100'ünü kaplasın */
+  max-width: 1200px; /* Belirlenen maksimum genişlik */
+  max-height: 90vh; /* Ekran yüksekliğinin %90'ını geçmesin */
+  
+  display: flex; /* İçindeki öğeleri (header, body, footer) esnek bir şekilde düzenle */
+  flex-direction: column; /* İçindeki öğeleri dikey olarak sırala */
+  
+  background-color: white; /* Modalın arka plan rengi */
+  border-radius: 20px; /* Köşeleri yuvarla */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Hafif bir gölge ekle */
+  overflow: hidden; /* İçerik taşmasını kontrol eder, taşan içeriği gizler */
+  
+  opacity: 0; /* Animasyon başlangıç durumu: tamamen şeffaf */
+  transform: translateY(20px); /* Animasyon başlangıç durumu: 20px aşağıda */
+  animation: modalFadeIn 0.4s forwards; /* Modalın görünür olma animasyonu */
 
+  /* Not: !important etiketlerini bu birleşik koda dahil etmedim. 
+     Eğer bu kod çalışmazsa ve başka bir yerden gelen bir stil 
+     bu değerleri eziyorsa, o zaman ilgili özelliğe !important eklemeniz gerekebilir 
+     (örn: max-width: 1200px !important;). 
+     Ancak genellikle, daha spesifik bir selector kullanarak veya CSS dosyasında 
+     daha sonra tanımlayarak bu tür çakışmaların önüne geçilebilir. */
+}
 .content-modal.active .modal-container {
   opacity: 1;
   transform: translateY(0);
@@ -1811,11 +2015,7 @@ textarea[name*="title"] {
 }
 
 /* -------- Modal İçeriği -------- */
-.modal-body {
-  padding: 30px;
-  max-height: calc(90vh - 150px);
-  overflow-y: auto;
-}
+
 
 .modal-body img {
   max-width: 100%;
@@ -2260,7 +2460,6 @@ textarea[name*="title"] {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
   z-index: 1;
 }
 
@@ -2271,10 +2470,9 @@ textarea[name*="title"] {
   left: 0;
   width: 100%;
   height: 80px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent); /* ← BU FİLTRE */
   z-index: 2;
 }
-
 .premium-card .content-element {
   position: absolute;
   top: 15px;
@@ -3147,10 +3345,10 @@ textarea[name*="title"] {
   .modern-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
   
   .premium-card {
-    width: calc(80% - 15px);
-    max-width: 350px;
-    min-width: 220px;
-    margin: 8px;
+    width: calc(40% - 15px) !important;         /* 80% → 50% */
+    max-width: 280px;                /* 350px → 280px */
+    min-width: 200px;                /* 220px → 200px */
+    margin: 8px;                     
   }
   .premium-card-image { height: 140px; }
   .premium-card-title { font-size: 1.1rem; }
@@ -3233,7 +3431,7 @@ textarea[name*="title"] {
   .action-buttons-compact { gap: 8px; justify-content: center; }
   
   .premium-card {
-    width: calc(100% - 10px);
+    width: calc(30% - 15px) !important;
     min-width: 200px;
     margin: 5px;
   }
