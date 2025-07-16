@@ -6,25 +6,54 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
 <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
+
+<!-- Hero Bölümü -->
+<section class="faq-hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <i class="fas fa-question-circle"></i> Mizaç Hakkında
+      </h1>
+      <p class="hero-description">
+        Gelin, sıkça sorulan sorularla bu kadim bilgelik kapısını birlikte aralayalım.
+      </p>
+      <div class="hero-highlight">
+        <i class="fas fa-compass"></i>
+        <p>
+          <strong>Kendini Bilmek:</strong> Mizacı bilmek, hayatınızın haritasına sahip olmak gibidir. 
+          Her adımda sizi doğru yöne yönlendirir.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Sıkça Sorulan Sorular Bölümü -->
 <section class="faq-section" id="faq-section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Sıkça Sorulan Sorular</h2>
-      <p class="section-description">Gelin, sıkça sorulan sorularla bu kadim bilgelik kapısını birlikte aralayalım.</p>
+      <p class="section-description">
+        Mizaç dünyasına dair merak ettiklerinizin cevapları burada.
+      </p>
     </div>
 
     <div class="faq-container">
       
       <!-- Soru 1 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizaç Nedir? Kısaca Anlatır Mısınız?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-question-circle"></i> 
+            Mizaç Nedir? Kısaca Anlatır Mısınız?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Mizaç, en basit tanımıyla sizin biyolojik ve psikolojik <strong>"fabrika ayarlarınızdır"</strong>. Doğuştan gelen, size özel, fıtratınızın bir parçası olan bu yapı, bedensel ve ruhsal eğilimlerinizin temelini oluşturur.</p>
@@ -34,9 +63,14 @@
 
       <!-- Soru 2 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizaç ile Karakter Aynı Şey midir?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-balance-scale"></i> 
+            Mizaç ile Karakter Aynı Şey midir?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Hayır, tam olarak değil. Bu ikisini bir binanın temeli ve kendisi gibi düşünebilirsiniz.</p>
@@ -58,9 +92,14 @@
 
       <!-- Soru 3 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizacımı Bilmek Bana Ne Kazandırır?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-lightbulb"></i> 
+            Mizacımı Bilmek Bana Ne Kazandırır?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Mizacınızı bilmek, elinizde hayatınızın haritasının olması gibidir.</p>
@@ -91,9 +130,14 @@
 
       <!-- Soru 4 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizacımı Bilmezsem Ne Olur? Hayat Böyle de Devam Etmiyor mu?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-exclamation-triangle"></i> 
+            Mizacımı Bilmezsem Ne Olur? Hayat Böyle de Devam Etmiyor mu?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Elbette eder. Tıpkı elinizde harita olmadan, yabancı bir şehirde yol bulmaya çalışmak gibi. Elbette bir yerlere varırsınız ama yolda kaybolur, gereksiz yere yorulur, yanlış yollara sapar ve çok zaman kaybedersiniz.</p>
@@ -113,9 +157,14 @@
 
       <!-- Soru 5 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizaçların Birbirine Üstünlüğü Var mıdır? "En İyi" Mizaç Hangisi?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-crown"></i> 
+            Mizaçların Birbirine Üstünlüğü Var mıdır? "En İyi" Mizaç Hangisi?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p><strong>Kesinlikle hayır.</strong> Bu, "Bir orkestrada keman mı daha iyidir, piyano mu?" diye sormak gibidir.</p>
@@ -131,9 +180,14 @@
 
       <!-- Soru 6 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizacımı Nasıl Öğrenebilirim?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-search"></i> 
+            Mizacımı Nasıl Öğrenebilirim?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Bu yolculuk, bir kendini gözlemleme sanatıdır. Fiziksel yapınızdan uyku düzeninize, yemek tercihlerinizden sosyal davranışlarınıza kadar her şey birer ipucudur.</p>
@@ -157,7 +211,7 @@
           </div>
           <div class="cta-box">
             <p>İşte bu noktada biz devreye girerek bu kadim sanatı sizin için kolaylaştırıyoruz. Sitemizde yer alan detaylı mizaç analizleri, rehberler ve elbette, size yol göstermesi için özenle hazırladığımız <strong>mizaç testi</strong>, bu süreçte en büyük yardımcınız olacak.</p>
-            <a href="{% url 'test_list' %}" class="cta-button">
+            <a href="#" class="cta-button">
               <i class="fas fa-play-circle"></i>
               Mizaç Testini Başlat
             </a>
@@ -167,9 +221,14 @@
 
       <!-- Soru 7 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizaç Testleri Ne Kadar Güvenilir?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-clipboard-check"></i> 
+            Mizaç Testleri Ne Kadar Güvenilir?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p>Mizaç testleri, size nihai ve değişmez bir etiket yapıştırmaz. Onları, doğru yolda olduğunuzu gösteren bir <strong>pusula</strong> gibi düşünün.</p>
@@ -190,9 +249,14 @@
 
       <!-- Soru 8 -->
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3><i class="fas fa-question-circle"></i> Mizacımı Öğrenmek İnsanlarla İlişkilerimi Nasıl Etkiler?</h3>
-          <i class="fas fa-chevron-down faq-icon"></i>
+        <div class="faq-question">
+          <h3>
+            <i class="fas fa-handshake"></i> 
+            Mizacımı Öğrenmek İnsanlarla İlişkilerimi Nasıl Etkiler?
+          </h3>
+          <span class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
+          </span>
         </div>
         <div class="faq-answer">
           <p><strong>Devrim yaratır!</strong> Çünkü çevrenizdeki insanların aslında sizden farklı bir "dil" konuştuğunu fark edersiniz.</p>
@@ -248,15 +312,18 @@
       </div>
       
       <div class="call-to-action">
-        <h3>Hazırsanız, kendinize doğru bu eşsiz yolculuğa başlayalım!</h3>
+        <h3>
+          <i class="fas fa-rocket"></i>
+          Hazırsanız, kendinize doğru bu eşsiz yolculuğa başlayalım!
+        </h3>
         <p>İlk adım olarak mizaç testimizi çözebilir veya aşağıdaki mizaç türlerini inceleyerek keşfe başlayabilirsiniz.</p>
         
         <div class="action-buttons">
-          <a href="{% url 'test_list' %}" class="primary-button">
+          <a href="#" class="primary-button">
             <i class="fas fa-play-circle"></i>
             Mizaç Testini Başlat
           </a>
-          <a href="{% url 'temperaments' %}" class="secondary-button">
+          <a href="#" class="secondary-button">
             <i class="fas fa-compass"></i>
             Mizaç Türlerini İncele
           </a>
@@ -267,31 +334,34 @@
 </section>
 
 <script>
-function toggleFaq(element) {
-  const faqItem = element.parentElement;
-  const answer = faqItem.querySelector('.faq-answer');
-  const icon = element.querySelector('.faq-icon');
+// FAQ Accordion İşlevselliği
+document.addEventListener('DOMContentLoaded', function() {
+  const faqItems = document.querySelectorAll('.faq-item');
   
-  // Diğer açık FAQ'ları kapat
-  document.querySelectorAll('.faq-item.active').forEach(item => {
-    if (item !== faqItem) {
-      item.classList.remove('active');
-      item.querySelector('.faq-answer').style.maxHeight = null;
-      item.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
-    }
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon i');
+    
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      
+      // Tüm öğeleri kapat
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+        otherItem.querySelector('.faq-icon i').style.transform = 'rotate(0deg)';
+      });
+      
+      // Tıklanan öğeyi aç/kapat
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
   });
-  
-  // Seçili FAQ'ı aç/kapat
-  faqItem.classList.toggle('active');
-  
-  if (faqItem.classList.contains('active')) {
-    answer.style.maxHeight = answer.scrollHeight + "px";
-    icon.style.transform = 'rotate(180deg)';
-  } else {
-    answer.style.maxHeight = null;
-    icon.style.transform = 'rotate(0deg)';
-  }
-}
+});
 </script>
 
 {% endblock %}
