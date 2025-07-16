@@ -1,3 +1,5 @@
+# profiles/views.py
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -73,7 +75,6 @@ def my_suggestions(request):
     element_characteristics = test_result.dominant_element.characteristics
     
     # SADECE kullanıcının baskın elementine göre içerik önerilerini al
-    # Popüler içerikleri dahil etmiyoruz, SADECE mizaç tipine uygun olanlar gösterilecek
     recommended_contents = RecommendedContent.objects.filter(
         is_active=True, 
         related_element_name=dominant_element_name
@@ -169,7 +170,7 @@ def api_all_contents(request):
             )
             interaction.save()
         
-        # İçerik bilgilerini sözlüğe çevir - TEK TANIMLA
+        # İçerik bilgilerini sözlüğe çevir - TEK KERE TANIMLA
         content_dict = {
             'id': content.id,
             'title': content.title,
@@ -314,7 +315,7 @@ def toggle_like_content(request, content_id):
 
 @login_required
 def toggle_save_content(request, content_id):
-    """ İçeriği kaydetme/kaydetmeme durumunu değiştiren view - GÜNCELLENDİ """
+    """ İçeriği kaydetme/kaydetmeme durumunu değiştiren view """
     if request.method == 'POST':
         content = get_object_or_404(RecommendedContent, id=content_id, is_active=True)
         interaction, created = UserContentInteraction.objects.get_or_create(
@@ -324,13 +325,6 @@ def toggle_save_content(request, content_id):
         
         # Kaydetme durumunu değiştir
         interaction.saved = not interaction.saved
-        
-        # Eğer saved_at alanınız varsa ve eklemek istiyorsanız bu kısmı aktifleştirin:
-        # if interaction.saved:
-        #     interaction.saved_at = timezone.now()
-        # else:
-        #     interaction.saved_at = None
-            
         interaction.save()
         
         return JsonResponse({'success': True, 'saved': interaction.saved})
