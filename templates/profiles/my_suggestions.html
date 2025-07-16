@@ -242,46 +242,55 @@
       </div>
       
       <!-- Element Sekmesi Filtresi -->
-      <div class="element-tabs modern-tabs" 
-           id="elementTabs" 
-           role="tablist" 
-           aria-label="Mizaç tipi filtreleri">
-        <button class="filter-option active" 
-                data-element="all" 
-                role="tab" 
-                aria-selected="true"
-                type="button">
-          <i class="fas fa-globe" aria-hidden="true"></i> Tümü
-        </button>
-        <button class="filter-option" 
-                data-element="Ateş" 
-                role="tab" 
-                aria-selected="false"
-                type="button">
-          <img src="{% static 'images/fire-icon.png' %}" alt="Ateş" class="small-icon"> Ateş
-        </button>
-        <button class="filter-option" 
-                data-element="Hava" 
-                role="tab" 
-                aria-selected="false"
-                type="button">
-          <img src="{% static 'images/air-icon.png' %}" alt="Hava" class="small-icon"> Hava
-        </button>
-        <button class="filter-option" 
-                data-element="Su" 
-                role="tab" 
-                aria-selected="false"
-                type="button">
-          <img src="{% static 'images/water-icon.png' %}" alt="Su" class="small-icon"> Su
-        </button>
-        <button class="filter-option" 
-                data-element="Toprak" 
-                role="tab" 
-                aria-selected="false"
-                type="button">
-          <img src="{% static 'images/earth-icon.png' %}" alt="Toprak" class="small-icon"> Toprak
-        </button>
-      </div>
+   <div class="element-tabs modern-tabs" 
+     id="elementTabs" 
+     role="tablist" 
+     aria-label="Mizaç tipi filtreleri">
+  <button class="filter-option active" 
+          data-element="all" 
+          role="tab" 
+          aria-selected="true"
+          type="button">
+    <i class="fas fa-globe" aria-hidden="true"></i> Tümü
+  </button>
+  <button class="filter-option" 
+          data-element="Ateş" 
+          role="tab" 
+          aria-selected="false"
+          type="button">
+    <img src="{% static 'images/fire-icon.png' %}" alt="Ateş" class="small-icon"> Ateş
+  </button>
+  <button class="filter-option" 
+          data-element="Hava" 
+          role="tab" 
+          aria-selected="false"
+          type="button">
+    <img src="{% static 'images/air-icon.png' %}" alt="Hava" class="small-icon"> Hava
+  </button>
+  <button class="filter-option" 
+          data-element="Su" 
+          role="tab" 
+          aria-selected="false"
+          type="button">
+    <img src="{% static 'images/water-icon.png' %}" alt="Su" class="small-icon"> Su
+  </button>
+  <button class="filter-option" 
+          data-element="Toprak" 
+          role="tab" 
+          aria-selected="false"
+          type="button">
+    <img src="{% static 'images/earth-icon.png' %}" alt="Toprak" class="small-icon"> Toprak
+  </button>
+  
+  <!-- YENİ EKLEME: Kaydedilmiş içerikler sekmesi -->
+  <button class="filter-option" 
+          data-element="saved" 
+          role="tab" 
+          aria-selected="false"
+          type="button">
+    <i class="fas fa-bookmark" aria-hidden="true"></i> Kaydedilenler
+  </button>
+</div>
       
       <!-- Yükleniyor Göstergesi -->
       <div class="loading-indicator" 
@@ -293,12 +302,20 @@
       </div>
       
       <!-- Diğer Mizaçlar İçerik Alanı -->
-      <div class="content-grid modern-grid" 
+   <div class="content-grid modern-grid" 
            id="allElementsContents" 
            style="display: none;"
            role="region"
            aria-label="Tüm mizaç içerikleri">
         <!-- İçerikler JavaScript ile yüklenecek -->
+      </div>
+
+        <div class="empty-state" id="savedEmptyState" style="display: none;" role="status">
+        <div class="empty-icon">
+          <i class="fas fa-bookmark" aria-hidden="true"></i>
+        </div>
+        <p class="empty-text">Henüz kaydedilmiş içeriğiniz bulunmuyor.</p>
+        <p class="empty-subtext">İlginizi çeken içerikleri kaydetmek için <i class="far fa-bookmark"></i> simgesine tıklayın.</p>
       </div>
       
       <!-- Sayfalama Kontrolleri -->

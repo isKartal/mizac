@@ -206,21 +206,248 @@ document.addEventListener('DOMContentLoaded', function() {
   /**
    * Element sekmesi filtre butonlarına olay dinleyicilerini ekler
    */
-  function initElementFilters() {
-    const elementTabs = document.querySelectorAll('#elementTabs .filter-option');
-    
-    elementTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        elementTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        
-        activeElement = this.dataset.element;
-        filterAllContents();
-        addContentAnimation();
+function initElementFilters() {
+  const elementTabs = document.querySelectorAll('#elementTabs .filter-option');
+  
+  elementTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      elementTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
       });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      
+      activeElement = this.dataset.element;
+      
+      // ✅ YENİ: Her sekme değişiminde önce tüm durumları temizle
+      clearAllStates();
+      
+      // YENİ: Kaydedilmiş içerikler sekmesi kontrolü
+      if (activeElement === 'saved') {
+        loadSavedContents();
+      } else {
+        filterAllContents();
+      }
+      
+      addContentAnimation();
     });
+  });
+}
+function clearAllStates() {
+  const contentGrid = document.getElementById('allElementsContents');
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const savedEmptyState = document.getElementById('savedEmptyState');
+  const pagination = document.getElementById('allContentsPagination');
+  
+  // Tüm durumları sıfırla
+  if (contentGrid) {
+    contentGrid.innerHTML = '';
+    contentGrid.style.display = 'none';
   }
   
+  if (loadingIndicator) {
+    loadingIndicator.style.display = 'none';
+    loadingIndicator.classList.remove('active');
+  }
+  
+  if (savedEmptyState) {
+    savedEmptyState.style.display = 'none';
+  }
+  
+  if (pagination) {
+    pagination.style.display = 'none';
+  }
+}
+
+function loadSavedContents() {
+  showLoadingIndicator();
+  
+  fetch('/profiles/api/saved_contents/')
+    .then(response => response.json())
+    .then(data => {
+      hideLoadingIndicator();
+      if (data.success && data.contents.length > 0) {
+        displaySavedContents(data.contents);
+      } else {
+        showSavedEmptyState();
+      }
+    })
+    .catch(error => {
+      console.error('Kaydedilmiş içerikler yüklenirken hata:', error);
+      hideLoadingIndicator();
+      showSavedEmptyState();
+    });
+}
+// YENİ FONKSIYON: Kaydedilmiş içerikleri görüntüle
+function displaySavedContents(contents) {
+  const contentGrid = document.getElementById('allElementsContents');
+  const pagination = document.getElementById('allContentsPagination');
+  
+  // Grid'i temizle ve göster
+  contentGrid.innerHTML = '';
+  contentGrid.style.display = 'grid';
+  
+  // Sayfalama'yı gizle (kaydedilmiş içeriklerde sayfalama yok)
+  if (pagination) {
+    pagination.style.display = 'none';
+  }
+  
+  contents.forEach(content => {
+    const contentCard = createSavedContentCard(content);
+    contentGrid.appendChild(contentCard);
+  });
+  
+  // Event listener'ları yeniden ekle
+  addSavedContentEventListeners();
+}
+
+
+
+// YENİ FONKSIYON: Kaydedilmiş içerik kartı oluştur
+// YENİ FONKSIYON: Kaydedilmiş içerik kartı oluştur - createContentCard ile aynı görünüm
+function createSavedContentCard(content) {
+  const contentCard = document.createElement('div');
+  contentCard.className = 'content-card animated-card';
+  contentCard.setAttribute('data-content-id', content.id);
+  contentCard.setAttribute('data-element', content.related_element_name);
+  
+  // ✅ createContentCard ile aynı element sınıfı sistemi
+  const elementClass = content.related_element_name.toLowerCase();
+  
+  // ✅ createContentCard ile AYNI HTML yapısı
+  contentCard.innerHTML = `
+    <div class="content-image ${content.image ? '' : 'placeholder-image'}" 
+         ${content.image ? `style="background-image: url('${content.image}')"` : ''}>
+      ${content.image ? '' : '<i class="fas fa-book-open"></i>'}
+      <div class="content-element ${elementClass}">
+        ${content.related_element_name}
+      </div>
+      <div class="content-category">
+        ${content.category_name}
+      </div>
+    </div>
+    
+    <div class="content-header">
+      <h3 class="content-title">${content.title}</h3>
+      <button class="save-button-header saved" 
+              data-content-id="${content.id}"
+              type="button"
+              title="Kaydedildi - Kaldırmak için tıklayın"
+              aria-label="İçerik kaydedildi, kaldırmak için tıklayın">
+        <i class="fas fa-bookmark" aria-hidden="true"></i>
+      </button>
+    </div>
+  `;
+  
+  return contentCard;
+}
+// YENİ FONKSIYON: Element sınıfı belirle
+function getElementClass(elementName) {
+  const elementMap = {
+    'Ateş': 'element-ates',
+    'Hava': 'element-hava', 
+    'Su': 'element-su',
+    'Toprak': 'element-toprak'
+  };
+  return elementMap[elementName] || '';
+}
+// YENİ FONKSIYON: Kaydedilmiş içerikler için event listener'ları ekle
+function addSavedContentEventListeners() {
+  // İçerik kartlarına tıklama olayı
+  document.querySelectorAll('#allElementsContents .content-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (!e.target.closest('.save-button-header')) {
+        const contentId = this.dataset.contentId;
+        openContentModal(contentId);
+      }
+    });
+  });
+  
+  // Kaydet butonlarına olay (kaydedilmiş içeriklerde kaldırma işlemi)
+  document.querySelectorAll('#allElementsContents .save-button-header').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const contentId = this.dataset.contentId;
+      toggleSaveFromSavedList(contentId, this);
+    });
+  });
+}
+
+// YENİ FONKSIYON: Kaydedilmiş listeden içerik kaldırma
+function toggleSaveFromSavedList(contentId, button) {
+  // Onay dialogu göster
+  if (confirm('Bu içeriği kaydedilmiş listesinden kaldırmak istediğinizden emin misiniz?')) {
+    fetch(`/profiles/content/${contentId}/toggle_save/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success && !data.saved) {
+        // İçeriği listeden kaldır
+        const card = button.closest('.content-card');
+        if (card) {
+          // Animasyonlu kaldırma
+          card.style.transition = 'all 0.3s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-20px)';
+          
+          setTimeout(() => {
+            card.remove();
+            
+            // Eğer hiç içerik kalmadıysa boş durum göster
+            const remainingCards = document.querySelectorAll('#allElementsContents .content-card');
+            if (remainingCards.length === 0) {
+              showSavedEmptyState();
+            }
+          }, 300);
+        }
+      } else if (data.success && data.saved) {
+        // Beklenmedik durum - tekrar kaydedildi
+        updateSaveStatus(contentId, true);
+      }
+    })
+    .catch(error => {
+      console.error('Kaydetme işlemi hatası:', error);
+      alert('İşlem sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+    });
+  }
+}
+
+function showSavedEmptyState() {
+  const contentGrid = document.getElementById('allElementsContents');
+  let savedEmptyState = document.getElementById('savedEmptyState');
+  
+  // Grid'i gizle
+  contentGrid.style.display = 'none';
+  contentGrid.innerHTML = '';
+  
+  // Eğer savedEmptyState yoksa oluştur
+  if (!savedEmptyState) {
+    savedEmptyState = document.createElement('div');
+    savedEmptyState.id = 'savedEmptyState';
+    savedEmptyState.className = 'empty-state';
+    savedEmptyState.setAttribute('role', 'status');
+    savedEmptyState.innerHTML = `
+      <div class="empty-icon">
+        <i class="fas fa-bookmark" aria-hidden="true"></i>
+      </div>
+      <p class="empty-text">Henüz kaydedilmiş içeriğiniz bulunmuyor.</p>
+      <p class="empty-subtext">İlginizi çeken içerikleri kaydetmek için <i class="far fa-bookmark"></i> simgesine tıklayın.</p>
+    `;
+    
+    // Grid'den sonra ekle
+    contentGrid.parentNode.insertBefore(savedEmptyState, contentGrid.nextSibling);
+  }
+  
+  // Boş durumu göster
+  savedEmptyState.style.display = 'block';
+}
   /**
    * Slider için animasyon efekti ekler
    */
@@ -356,7 +583,12 @@ document.addEventListener('DOMContentLoaded', function() {
   /**
    * Tüm mizaçlar için içerikleri filtreler
    */
-  function filterAllContents() {
+function filterAllContents() {
+  // ✅ Önce loading göster
+  showLoadingIndicator();
+  
+  // Kısa bir gecikme ile filtreleme yap (UI daha smooth görünür)
+  setTimeout(() => {
     allCurrentPage = 1;
     
     if (activeElement === 'all') {
@@ -368,11 +600,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     allTotalPages = Math.ceil(filteredContents.length / allItemsPerPage);
+    
+    // ✅ Loading'i gizle ve içerikleri göster
+    hideLoadingIndicator();
     renderAllContents();
     updateAllPageNumbers();
     updateAllPaginationButtons();
     updatePaginationVisibility();
-  }
+  }, 300);
+}
   
   /**
    * Sayfalama kontrollerinin görünürlüğünü günceller
@@ -492,51 +728,71 @@ document.addEventListener('DOMContentLoaded', function() {
   // AJAX İLE İÇERİK ALMA FONKSİYONLARI (Değişiklik yok)
   // ========================================================================
   
-  function fetchAllContents() {
-    showLoadingIndicator();
-    
-    fetch('/profiles/api/all_contents/')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('İçerikler alınırken hata oluştu');
-        }
-        return response.json();
-      })
-      .then(data => {
-        hideLoadingIndicator();
-        allContents = data.contents;
+function fetchAllContents() {
+  console.log('📡 fetchAllContents çağrıldı...');
+  console.log('🔍 loadingIndicator:', !!loadingIndicator);
+  console.log('🔍 allElementsContents:', !!allElementsContents);
+  
+  showLoadingIndicator();
+  
+  fetch('/profiles/api/all_contents/')
+    .then(response => {
+      console.log('📡 API Response Status:', response.status);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: İçerikler alınırken hata oluştu`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('📦 API Response Data:', data);
+      console.log('📦 İçerik sayısı:', data.contents ? data.contents.length : 0);
+      
+      hideLoadingIndicator();
+      
+      // Global değişkeni güncelle
+      allContents = data.contents || [];
+      console.log('✅ allContents güncellendi, uzunluk:', allContents.length);
+      
+      // İçerikler yüklendikten sonra filtreleme yap
+      if (allContents.length > 0) {
+        console.log('🔄 İçerikler filtreleniyor...');
         filterAllContents();
-      })
-      .catch(error => {
-        console.error('Hata:', error);
-        hideLoadingIndicator();
-        showErrorMessage();
-      });
+      } else {
+        console.log('⚠️ Hiç içerik bulunamadı');
+        showEmptyContentMessage();
+      }
+    })
+    .catch(error => {
+      console.error('❌ fetchAllContents hatası:', error);
+      hideLoadingIndicator();
+      showErrorMessage();
+    });
+}
+
+  
+function hideLoadingIndicator() {
+  console.log('✅ Loading gizleniyor...');
+  
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const contentGrid = document.getElementById('allElementsContents');
+  const savedEmptyState = document.getElementById('savedEmptyState');
+  
+  if (loadingIndicator) {
+    loadingIndicator.style.display = 'none';
+    loadingIndicator.classList.remove('active');
   }
   
-  function showLoadingIndicator() {
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'flex';
-    }
-    if (allElementsContents) {
-      allElementsContents.style.display = 'none';
-    }
+  // ✅ Sadece normal içerikler için grid'i göster
+  if (contentGrid && activeElement !== 'saved') {
+    contentGrid.style.display = 'grid';
   }
   
-  function hideLoadingIndicator() {
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'none';
-    }
-    if (allElementsContents) {
-      allElementsContents.style.display = 'grid';
-    }
-    
-    const pagination = document.getElementById('allContentsPagination');
-    if (pagination) {
-      pagination.style.display = 'flex';
-    }
+  // ✅ Saved empty state'in gizli olduğundan emin ol
+  if (savedEmptyState) {
+    savedEmptyState.style.display = 'none';
   }
-  
+}
+
   function showErrorMessage() {
     if (allElementsContents) {
       allElementsContents.innerHTML = `
@@ -559,37 +815,47 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================================================
   
   function renderAllContents() {
-    if (!allElementsContents) return;
-    
-    allElementsContents.innerHTML = '';
-    
-    if (filteredContents.length === 0) {
-      showEmptyContentMessage();
-      return;
-    }
-    
-    const start = (allCurrentPage - 1) * allItemsPerPage;
-    const end = start + allItemsPerPage;
-    const pageContents = filteredContents.slice(start, end);
-    
-    pageContents.forEach((content, index) => {
-      const card = createContentCard(content, index);
-      allElementsContents.appendChild(card);
-    });
+  const allElementsContents = document.getElementById('allElementsContents');
+  if (!allElementsContents) return;
+  
+  allElementsContents.innerHTML = '';
+  
+  if (filteredContents.length === 0) {
+    showEmptyContentMessage();
+    return;
   }
   
+  // ✅ Grid'in göründüğünden emin ol
+  allElementsContents.style.display = 'grid';
+  
+  const start = (allCurrentPage - 1) * allItemsPerPage;
+  const end = start + allItemsPerPage;
+  const pageContents = filteredContents.slice(start, end);
+  
+  pageContents.forEach((content, index) => {
+    const card = createContentCard(content, index);
+    allElementsContents.appendChild(card);
+  });
+}
+  
   function showEmptyContentMessage() {
-    allElementsContents.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">
-          <i class="fas fa-search"></i>
-        </div>
-        <p class="empty-text">
-          Bu mizaç tipi için henüz içerik bulunmamaktadır.
-        </p>
+  const allElementsContents = document.getElementById('allElementsContents');
+  if (!allElementsContents) return;
+  
+  allElementsContents.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-search"></i>
       </div>
-    `;
-  }
+      <p class="empty-text">
+        Bu mizaç tipi için henüz içerik bulunmamaktadır.
+      </p>
+    </div>
+  `;
+  
+  // ✅ Grid'i göster
+  allElementsContents.style.display = 'block';
+}
   
   function createContentCard(content, index) {
     const card = document.createElement('div');
@@ -779,25 +1045,74 @@ function openContentModal(contentId) {
     }
   }
   
-  function toggleSave(contentId, button) {
-    fetch(`/profiles/content/${contentId}/toggle_save/`, {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': getCookie('csrftoken'),
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        updateSaveStatus(contentId, data.saved);
+ function toggleSave(contentId, button) {
+  fetch(`/profiles/content/${contentId}/toggle_save/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken'),
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      updateSaveStatus(contentId, data.saved);
+      
+      // YENİ: Eğer kaydedilenler sekmesindeyse ve içerik kaldırıldıysa
+      if (activeElement === 'saved' && !data.saved) {
+        const card = button.closest('.content-card');
+        if (card) {
+          card.style.transition = 'all 0.3s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-20px)';
+          
+          setTimeout(() => {
+            card.remove();
+            
+            const remainingCards = document.querySelectorAll('#allElementsContents .content-card');
+            if (remainingCards.length === 0) {
+              showSavedEmptyState();
+            }
+          }, 300);
+        }
       }
-    })
-    .catch(error => {
-      console.error('Kaydetme işlemi hatası:', error);
-    });
+    }
+  })
+  .catch(error => {
+    console.error('Kaydetme işlemi hatası:', error);
+  });
+}
+
+// YENİ FONKSIYON: Loading göstergesi kontrolleri
+function showLoadingIndicator() {
+  console.log('🔄 Loading gösteriliyor...');
+  
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const contentGrid = document.getElementById('allElementsContents');
+  const savedEmptyState = document.getElementById('savedEmptyState');
+  const pagination = document.getElementById('allContentsPagination');
+  
+  if (loadingIndicator) {
+    loadingIndicator.style.display = 'flex';
+    loadingIndicator.classList.add('active');
   }
+  
+  if (contentGrid) {
+    contentGrid.style.display = 'none';
+    contentGrid.innerHTML = '';
+  }
+  
+  // ✅ Saved empty state'i de gizle
+  if (savedEmptyState) {
+    savedEmptyState.style.display = 'none';
+  }
+  
+  // Pagination'ı da gizle
+  if (pagination) {
+    pagination.style.display = 'none';
+  }
+}
   
   function updateSaveStatus(contentId, isSaved) {
     const saveButtons = document.querySelectorAll(`.save-button-header[data-content-id="${contentId}"]`);
@@ -954,51 +1269,57 @@ function openContentModal(contentId) {
   // SAYFA BAŞLATMA - TEK FONKSİYON
   // ========================================================================
   
-  function initPage() {
-    console.log('Sayfa başlatılıyor...');
-    
-    // 1. Dropdown filtre sistemi (YENİ)
-    initDropdownFilter();
-    
-    // 2. Slider işlevselliği
-    initSliderButtons();
-    initSliderScrollListener();
-    
-    // 3. Element filtre işlevselliği (Diğer mizaçlar için)
-    initElementFilters();
-    
-    // 4. Sayfalama işlevselliği
-    initPaginationButtons();
-    
-    // 5. Modal işlevselliği
-    initModalEventListeners();
-    
-    // 6. Kişisel içerik kartları
-    initPersonalContentCards();
-    
-    // 7. Responsive işlevsellik
-    initResizeListener();
-    
-    // 8. Tüm içerikleri getir ve göster
-    if (allElementsContents && loadingIndicator) {
-      fetchAllContents();
-    }
-    
-    // 9. Animasyon gözlemcisi ekle
-    addAnimationObserver();
-    
-    // 10. İlk kart boyutlarını ayarla
-    adjustCardSizes();
-    
-    // 11. İlk filtreleme yap (dropdown için)
-    setTimeout(() => {
-      filterPersonalizedContents();
-    }, 500);
-    
-    console.log('✅ Sayfa başarıyla yüklendi ve hazır.');
-    console.log('🔄 Dropdown filtre sistemi aktif');
+  // suggestions.js dosyasındaki initPage fonksiyonunu bu şekilde değiştirin:
+
+function initPage() {
+  console.log('🚀 Sayfa başlatılıyor...');
+  
+  // 1. Dropdown filtre sistemi
+  initDropdownFilter();
+  
+  // 2. Slider işlevselliği
+  initSliderButtons();
+  initSliderScrollListener();
+  
+  // 3. Element filtre işlevselliği
+  initElementFilters();
+  
+  // 4. Sayfalama işlevselliği
+  initPaginationButtons();
+  
+  // 5. Modal işlevselliği
+  initModalEventListeners();
+  
+  // 6. Kişisel içerik kartları
+  initPersonalContentCards();
+  
+  // 7. Responsive işlevsellik
+  initResizeListener();
+  
+  // 8. Animasyon gözlemcisi ekle
+  addAnimationObserver();
+  
+  // 9. İlk kart boyutlarını ayarla
+  adjustCardSizes();
+  
+  // 10. ✅ HEMEN TÜM İÇERİKLERİ YÜKLE - GECİKME YOK
+  console.log('📡 API çağrısı başlatılıyor...');
+  if (allElementsContents && loadingIndicator) {
+    fetchAllContents();
+  } else {
+    console.error('❌ Gerekli elementler bulunamadı!', {
+      allElementsContents: !!allElementsContents,
+      loadingIndicator: !!loadingIndicator
+    });
   }
   
+  // 11. Kişisel içerik filtresi - kısa gecikme
+  setTimeout(() => {
+    filterPersonalizedContents();
+  }, 500);
+  
+  console.log('✅ Sayfa başlatma tamamlandı');
+}
   // ========================================================================
   // SAYFA BAŞLATMA
   // ========================================================================
@@ -1021,3 +1342,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000); // 1 saniye bekle
   }
 });
+
+
+// suggestions.js dosyasında bu satırı bulun (satır 375 civarında):
+
+// YENİ FONKSIYON: Kaydedilmiş içerikler için event listener'ları ekle
+function addSavedContentEventListeners() {
+  // İçerik kartlarına tıklama olayı
+  document.querySelectorAll('#allElementsContents .content-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (!e.target.closest('.save-button-header')) {
+        const contentId = this.dataset.contentId;
+        openContentModal(contentId); // ← BU SATIRI DEĞİŞTİRDİK (openContent → openContentModal)
+      }
+    });
+  });
+  
+  // Kaydet butonlarına olay (kaydedilmiş içeriklerde kaldırma işlemi)
+  document.querySelectorAll('#allElementsContents .save-button-header').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const contentId = this.dataset.contentId;
+      toggleSaveFromSavedList(contentId, this);
+    });
+  });
+}
