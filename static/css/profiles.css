@@ -3955,27 +3955,11 @@ textarea[name*="title"] {
     opacity: 0;
   }
 
-  .category-option:hover {
-    background: transparent;
-    color: #666;
-    transform: none;
-  }
 
-  .element-tabs .filter-option:hover {
-    background-color: transparent;
-    color: #777;
-    box-shadow: none;
-  }
-  
   .content-card:hover {
     transform: none;
   }
   
-  #modalSaveBtn:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-  }
-
   .content-title.limit-lines:hover {
     -webkit-line-clamp: 3 !important;
     overflow: hidden !important;
@@ -3996,10 +3980,6 @@ textarea[name*="title"] {
   .modal-close-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transform: none;
-  }
-
-  .modal-action-btn:hover { 
-    background-color: transparent; 
   }
 
   .element-result-card:hover {
@@ -4033,15 +4013,7 @@ textarea[name*="title"] {
     color: var(--primary-color);
   }
 
-  .modern-filter .filter-option:hover {
-    background-color: #f5f5f5;
-    transform: none;
-    box-shadow: none;
-  }
-  
-  .modern-tabs .filter-option:hover {
-    transform: none;
-  }
+
   
   .modern-grid .content-card:hover {
     transform: none;

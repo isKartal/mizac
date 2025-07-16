@@ -1,3 +1,5 @@
+# profiles/models.py
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -34,6 +36,14 @@ class RecommendedContent(models.Model):
         help_text="Ateş, Hava, Su veya Toprak değerlerinden birini seçin"
     )
     is_active = models.BooleanField(default=True, verbose_name="Aktif mi?")
+    
+    # YENİ ALAN - Mizaç sayfasında gösterim için
+    show_on_temperament_page = models.BooleanField(
+        default=False, 
+        verbose_name="Mizaç Sayfasında Göster",
+        help_text="Bu içerik ilgili mizaç detay sayfasında (örn: air_more.html) özel öneriler bölümünde gösterilsin mi? Her mizaç için en fazla 3 adet seçmeniz önerilir."
+    )
+    
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Güncellenme Tarihi")
     order = models.PositiveIntegerField(default=0, verbose_name="Sıralama")
