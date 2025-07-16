@@ -680,35 +680,7 @@ section.elements-section .section-title::after {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
-.element-icon {
-  font-size: 48px;
-  margin-bottom: 24px;
-  display: inline-block;
-  padding: 20px;
-  border-radius: 50%;
-  transition: var(--transition);
-}
 
-/* Element kartları için özel renk tanımları */
-.fire-icon {
-  color: #e74c3c; /* Ateş için kırmızı */
-  background-color: rgba(231, 76, 60, 0.15);
-}
-
-.air-icon {
-  color: #78909c; /* Hava için gri */
-  background-color: rgba(120, 144, 156, 0.15);
-}
-
-.earth-icon {
-  color: #8d6e63; /* Toprak için kahverengi */
-  background-color: rgba(141, 110, 99, 0.15);
-}
-
-.water-icon {
-  color: #2980b9; /* Su için mavi */
-  background-color: rgba(41, 128, 185, 0.15);
-}
 
 .element-card h3 {
   font-size: 26px;
