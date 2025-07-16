@@ -1503,7 +1503,6 @@ section.elements-section .section-title::after {
 /* Kart hover efektleri */
 .premium-content-section .premium-card:hover .premium-card-inner {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Element ve kategori etiketleri */
