@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block title %}Gizlilik Politikası | 4 Mizaç{% endblock %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
 
 <!-- Hero Bölümü -->
 <section class="faq-hero">
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title">📄 Gizlilik Politikası</h1>
+      <h1 class="hero-title">
+        <i class="fas fa-file-contract"></i> Gizlilik Politikası
+      </h1>
       <p class="hero-description">
         Kişisel verilerinizin güvenliği ve gizliliği bizim için öncelikli. 
         4 Mizaç olarak, verilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu şeffaf bir şekilde açıklıyoruz.
@@ -288,9 +296,9 @@
             <p>
               Bu haklarınızı kullanmak için bizimle iletişime geçebilirsiniz:
             </p>
-            <a href="{% url 'about' %}#contact-section" class="cta-button">
-              <i class="fas fa-envelope"></i>
-              İletişime Geç
+            <a href="{% url 'about' %}#contact-section" class="primary-button">
+            <i class="fas fa-envelope"></i>
+            İletişime Geç
             </a>
           </div>
         </div>
@@ -375,6 +383,7 @@
           Gizlilik politikamızla ilgili herhangi bir sorunuz varsa, 
           bizimle iletişime geçmekten çekinmeyin.
         </p>
+
         <div class="action-buttons">
           <a href="{% url 'about' %}#contact-section" class="primary-button">
             <i class="fas fa-envelope"></i>
