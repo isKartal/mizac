@@ -1489,10 +1489,7 @@ section.elements-section .section-title::after {
   transform: scale(1.1);
 }
 
-.premium-content-section .save-button-header.saved {
-  color: var(--su-color, #2980b9);
-  background-color: rgba(41, 128, 185, 0.1);
-}
+
 
 /* Açıklama ve alt eylem butonlarını gizle */
 .premium-content-section .premium-card-description,
@@ -1755,5 +1752,100 @@ section.elements-section .section-title::after {
   .btn-secondary {
     min-width: 160px;
     padding: 12px 20px;
+  }
+}
+
+/* ==========================================================================
+   MOBİL İÇİN HOVER EFEKTLERİNİ DEVRE DIŞI BIRAKMA
+   ========================================================================== */
+
+/* Bu medya sorgusu, yalnızca birincil giriş mekanizması hover özelliğini
+   desteklemeyen cihazlarda (dokunmatik ekranlar gibi) içindeki stilleri uygular. */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Hero Section - Teste Başla Butonu */
+  .start-test-button:hover {
+    background-color: var(--accent-color, #e9b44c);
+    color: var(--primary-color, #292321);
+    transform: none;
+    box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+  }
+
+  /* Premium Content Section - Daha Fazla Öneri Butonu */
+  .premium-content-section .more-link:hover {
+    background-color: var(--accent-color, #e9b44c);
+    color: var(--primary-color, #292321);
+    transform: none;
+    box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+  }
+
+  .premium-content-section .more-link:hover i {
+    transform: none;
+  }
+
+  /* Advantage Section - Kartlar */
+  .advantage-card:hover {
+    transform: none;
+    box-shadow: var(--box-shadow);
+  }
+
+  .advantage-card:hover .advantage-icon {
+    transform: none;
+  }
+
+  /* Element Section - Kartlar */
+  .element-card:hover {
+    transform: none;
+    box-shadow: var(--box-shadow);
+  }
+
+  .element-link:hover {
+    color: var(--accent-color);
+    transform: none;
+  }
+
+  /* CTA Bölümü - Buton */
+  .cta-button:hover {
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Slider Butonları */
+  .premium-content-section .slider-nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Premium Kart Kaydet Butonu */
+  .premium-content-section .save-button-header:hover {
+    background-color: transparent;
+    transform: none;
+  }
+
+  /* Premium Kart Hover Efekti */
+  .premium-content-section .premium-card:hover .premium-card-inner {
+    transform: none;
+  }
+  
+  /* Final Section - Butonlar */
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(233, 180, 76, 0.4);
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    color: white;
   }
 }
