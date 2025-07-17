@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from main import views
 from django.conf.urls.static import static
 
 # Admin panel özelleştirmeleri
@@ -31,6 +32,8 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
     path('testing_algorithm/', include('testing_algorithm.urls')),
     path('nested_admin/', include('nested_admin.urls')),
+    path("google/login/", views.google_login, name="google_login"),
+    path("oauth2callback/", views.google_callback, name="google_callback"),
     # Allauth satırını kaldırdık - çakışma yaratıyordu
 ]
 

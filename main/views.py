@@ -4,7 +4,62 @@ from django.conf import settings
 from testing_algorithm.models import TestResult
 from profiles.models import RecommendedContent, UserContentInteraction
 from django.db.models import Count, Q
+import urllib.parse
+import requests
+from django.http import HttpResponse
+from django.contrib.auth import login
+from django.contrib.auth.models import User
 
+def google_login(request):
+    base_url = "https://accounts.google.com/o/oauth2/v2/auth"
+    params = {
+        "client_id": settings.GOOGLE_OAUTH_CLIENT_ID,
+        "redirect_uri": settings.GOOGLE_OAUTH_REDIRECT_URI,
+        "response_type": "code",
+        "scope": "openid email profile",
+        "access_type": "online",
+        "prompt": "select_account"
+    }
+    url = f"{base_url}?{urllib.parse.urlencode(params)}"
+    return redirect(url)
+def google_callback(request):
+    code = request.GET.get("code")
+    if not code:
+        return HttpResponse("Kod alınamadı.", status=400)
+
+    # Token almak için istek
+    token_url = "https://oauth2.googleapis.com/token"
+    data = {
+        "code": code,
+        "client_id": settings.GOOGLE_OAUTH_CLIENT_ID,
+        "client_secret": settings.GOOGLE_OAUTH_CLIENT_SECRET,
+        "redirect_uri": settings.GOOGLE_OAUTH_REDIRECT_URI,
+        "grant_type": "authorization_code"
+    }
+    token_response = requests.post(token_url, data=data)
+    token_json = token_response.json()
+    access_token = token_json.get("access_token")
+
+    if not access_token:
+        return HttpResponse("Access token alınamadı.", status=400)
+
+    # Kullanıcı bilgilerini al
+    user_info_url = "https://www.googleapis.com/oauth2/v2/userinfo"
+    headers = {"Authorization": f"Bearer {access_token}"}
+    user_info_response = requests.get(user_info_url, headers=headers)
+    user_info = user_info_response.json()
+
+    email = user_info.get("email")
+    name = user_info.get("name")
+
+    if not email:
+        return HttpResponse("Kullanıcı bilgileri alınamadı.", status=400)
+
+    # Kullanıcıyı oluştur veya getir
+    user, created = User.objects.get_or_create(username=email, defaults={"email": email, "first_name": name})
+    login(request, user)
+
+    return redirect("index")  # anasayfaya yönlendir, URL ismi değişebilir
 def index(request):
     context = {}
     
