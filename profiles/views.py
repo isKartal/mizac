@@ -503,3 +503,4 @@ def restart_test(request):
     
     # Test listesi sayfasına yönlendir
     return redirect('test_list')
+
