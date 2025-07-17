@@ -2429,16 +2429,16 @@ textarea[name*="title"] {
   background-repeat: no-repeat;
   background-position: right center;
 }
-.premium-content-section.ateş::before { background-image: url('/static/images/fire-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
-.premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.png'); }
+.premium-content-section.ateş::before { background-image: url('/static/images/fire-back.webp'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+.premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.webp'); }
 
-.premium-content-section.hava::before { background-image: url('/static/images/air-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
-.premium-content-section.hava::after { background-image: url('/static/images/air-back2.png'); }
+.premium-content-section.hava::before { background-image: url('/static/images/air-back.webp'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+.premium-content-section.hava::after { background-image: url('/static/images/air-back2.webp'); }
 
-.premium-content-section.su::before { background-image: url('/static/images/water-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
-.premium-content-section.su::after { background-image: url('/static/images/wate-back2.png'); }
-  .premium-content-section.toprak::before { background-image: url('/static/images/earth-back.png'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
-.premium-content-section.toprak::after { background-image: url('/static/images/earth-back2.png'); }
+.premium-content-section.su::before { background-image: url('/static/images/water-back.webp'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+.premium-content-section.su::after { background-image: url('/static/images/wate-back2.webp'); }
+  .premium-content-section.toprak::before { background-image: url('/static/images/earth-back.webp'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+.premium-content-section.toprak::after { background-image: url('/static/images/earth-back2.webp'); }
 
 .premium-content-container {
   position: relative;
@@ -3051,16 +3051,16 @@ textarea[name*="title"] {
   .result-card-inner.toprak .element-icon-compact { width: 290px !important; height: 290px !important; top: 130px !important; right: -160px !important; }
   
    .premium-content-section.toprak::before {background-image: none !important;}
-.premium-content-section.toprak::after { background-image: url('/static/images/earth-back3.png'); }
+.premium-content-section.toprak::after { background-image: url('/static/images/earth-back3.webp'); }
 
-  .premium-content-section.su::after { background-image: url('/static/images/wate-back2.png'); }
+  .premium-content-section.su::after { background-image: url('/static/images/wate-back2.webp'); }
   .premium-content-section.su::before {background-image: none !important;}
 
   .premium-content-section.hava::before {background-image: none !important;}
-.premium-content-section.hava::after { background-image: url('/static/images/air-back2.png'); }
+.premium-content-section.hava::after { background-image: url('/static/images/air-back2.webp'); }
 
   .premium-content-section.ateş::before { background-image: none !important;}
-.premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.png'); 
+.premium-content-section.ateş::after { background-image: url('/static/images/fire-back2.webp'); 
  }
 
   .element-meta-compact {
@@ -3947,7 +3947,6 @@ textarea[name*="title"] {
   }
 
   .category-dropdown-btn:hover {
-    border-color: rgba(41, 35, 33, 0.1);
     box-shadow: none;
   }
 
